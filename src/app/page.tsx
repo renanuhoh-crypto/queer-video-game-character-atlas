@@ -6,19 +6,15 @@ import VisualAnalytics from "@/components/VisualAnalytics";
 type Character = {
   character_name: string;
   game_title: string;
-  developer: string;
-  identity_category: string[];
-  identity_label: string[];
-  playable: boolean;
-  intersectionality: string[];
-  description: string;
-  character_image?: string;
+  release_year?: number | null;
+  developer?: string;
+  playable?: boolean;
+  identity_label?: string[];
 };
 
 type Message = {
   role: "user" | "assistant";
   content: string;
-  character?: Character | null;
 };
 
 export default function Home() {
@@ -30,11 +26,11 @@ export default function Home() {
     },
   ]);
 
-const [input, setInput] = useState("");
-const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [loadingCharacters, setLoadingCharacters] = useState(true);
 
-const [characters, setCharacters] = useState<Character[]>([]);
-const [loadingCharacters, setLoadingCharacters] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -45,21 +41,20 @@ const [loadingCharacters, setLoadingCharacters] = useState(true);
   }, [messages, loading]);
 
   useEffect(() => {
-  async function loadCharacters() {
-    try {
-      const response = await fetch("/api/characters");
-      const data = await response.json();
-
-      setCharacters(data.characters || []);
-    } catch (error) {
-      console.error("Failed loading characters:", error);
-    } finally {
-      setLoadingCharacters(false);
+    async function loadCharacters() {
+      try {
+        const response = await fetch("/api/characters");
+        const data = await response.json();
+        setCharacters(data.characters || []);
+      } catch (error) {
+        console.error("Failed loading characters:", error);
+      } finally {
+        setLoadingCharacters(false);
+      }
     }
-  }
 
-  loadCharacters();
-}, []);
+    loadCharacters();
+  }, []);
 
   async function sendMessage() {
     if (!input.trim() || loading) return;
@@ -93,7 +88,6 @@ const [loadingCharacters, setLoadingCharacters] = useState(true);
         {
           role: "assistant",
           content: data.reply,
-          character: data.character,
         },
       ]);
     } catch (error) {
@@ -103,7 +97,7 @@ const [loadingCharacters, setLoadingCharacters] = useState(true);
         ...updatedMessages,
         {
           role: "assistant",
-          content: "Error connecting to Atlas.",
+          content: "Error connecting to Atlas AI.",
         },
       ]);
     } finally {
@@ -112,44 +106,48 @@ const [loadingCharacters, setLoadingCharacters] = useState(true);
   }
 
   return (
-    <main className="relative h-screen overflow-hidden bg-[#07071a] text-white">
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,#7c3aed55,transparent_35%),radial-gradient(circle_at_bottom_right,#ec489955,transparent_30%),linear-gradient(180deg,#07071a,#020617)]" />
-      <div className="pointer-events-none fixed inset-0 -z-10 opacity-20 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:48px_48px]" />
-
-      <header className="h-[120px] border-b border-white/10 bg-white/[0.03] backdrop-blur-xl">
-        <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
-          <div>
-            <p className="mb-2 text-xs uppercase tracking-[0.35em] text-cyan-300">
+    <main className="min-h-screen bg-[#05010f] text-white">
+      {/* HEADER */}
+      <header className="border-b border-white/10 bg-white/[0.03] backdrop-blur-xl">
+        <div className="mx-auto flex max-w-[1700px] items-start justify-between px-8 py-8 md:px-14 lg:px-20">
+          <div className="max-w-5xl">
+            <p className="mb-3 text-xs uppercase tracking-[0.45em] text-cyan-300">
               AI-Assisted Archive
             </p>
 
-            <h1 className="text-3xl font-black italic tracking-tight md:text-5xl">
-              Queer Video Game{" "}
+            <h1 className="leading-none text-5xl font-black italic tracking-tight md:text-7xl">
+              <span className="text-white">Queer Video Game </span>
+
               <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
                 Character Atlas
               </span>
             </h1>
 
-            <p className="mt-2 max-w-2xl text-sm text-slate-300 md:text-base">
+            <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-300 md:text-xl">
               Explore queer characters, games, identities, intersectionality,
               and representation through a living research dataset.
             </p>
           </div>
 
-          <div className="hidden rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-right md:block">
-            <p className="text-xs uppercase tracking-widest text-slate-400">
-              Dataset mode
+          <div className="hidden rounded-3xl border border-white/10 bg-white/[0.04] px-6 py-5 text-right md:block">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
+              Dataset Mode
             </p>
-            <p className="mt-1 font-bold text-fuchsia-300">Prototype v1.0</p>
+
+            <p className="mt-2 text-xl font-bold text-fuchsia-300">
+              Prototype v1.0
+            </p>
           </div>
         </div>
       </header>
 
-      <div className="mx-auto grid h-[calc(100vh-120px)] max-w-7xl grid-cols-1 gap-6 px-6 py-6 lg:grid-cols-[360px_1fr]">
-        <aside className="hidden h-full overflow-y-auto rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl lg:block">
-          <h2 className="text-lg font-bold italic">Archive Tools</h2>
+      {/* MAIN LAYOUT */}
+      <div className="grid grid-cols-12 gap-6 px-6 py-6">
+        {/* SIDEBAR */}
+        <aside className="col-span-3 h-[82vh] overflow-y-auto rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+          <h2 className="mb-6 text-4xl font-black italic">Archive Tools</h2>
 
-          <div className="mt-5 space-y-3">
+          <div className="space-y-4">
             {[
               "Queer protagonists",
               "Trans characters",
@@ -160,111 +158,104 @@ const [loadingCharacters, setLoadingCharacters] = useState(true);
               <button
                 key={item}
                 onClick={() => setInput(item)}
-                className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-sm text-slate-200 transition hover:border-fuchsia-400/60 hover:bg-fuchsia-400/10"
+                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-5 text-left text-xl transition hover:border-fuchsia-400/40 hover:bg-fuchsia-500/10"
               >
                 {item}
               </button>
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4">
-            <p className="text-xs uppercase tracking-widest text-cyan-200">
-              Suggested prompt
+          <div className="mt-10 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-6">
+            <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-300">
+              Suggested Prompt
             </p>
-            <p className="mt-2 text-sm text-slate-200">
+
+            <p className="text-xl leading-relaxed text-slate-200">
               Compare Ellie and Lev in terms of identity, role, and
               representation.
             </p>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-10">
             {loadingCharacters ? (
-  <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm text-slate-300">
-    Loading analytics...
-  </div>
-) : (
-  <div className="mt-8">
-    <VisualAnalytics characters={characters} />
-  </div>
-)}
+              <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-slate-300">
+                Loading analytics...
+              </div>
+            ) : (
+              <VisualAnalytics characters={characters} />
+            )}
           </div>
         </aside>
 
-        <section className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20 backdrop-blur-xl">
-          <div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-5 scroll-smooth md:p-8">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  message.role === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
+        {/* CHAT */}
+        <section className="col-span-9 flex h-[82vh] flex-col rounded-3xl border border-white/10 bg-black/20">
+          {/* CHAT MESSAGES */}
+          <div className="flex-1 overflow-y-auto p-10">
+            <div className="mx-auto flex max-w-5xl flex-col gap-8">
+              {messages.map((message, index) => (
                 <div
-                  className={`max-w-3xl rounded-3xl p-5 shadow-2xl ${
-                    message.role === "assistant"
-                      ? "border border-violet-300/20 bg-[#0d0b35]/90"
-                      : "bg-[#f1eee8] text-black"
+                  key={index}
+                  className={`max-w-[78%] rounded-3xl border p-8 ${
+                    message.role === "user"
+                      ? "ml-auto border-white/10 bg-zinc-100 text-black"
+                      : "border-fuchsia-400/20 bg-[#12092f] text-white"
                   }`}
                 >
-                  <div className="mb-3 flex items-center gap-3">
+                  <div className="mb-5 flex items-center gap-4">
                     <div
-                      className={`h-3 w-3 rounded-full ${
-                        message.role === "assistant"
-                          ? "bg-gradient-to-r from-fuchsia-400 to-cyan-300"
-                          : "bg-violet-500"
+                      className={`h-5 w-5 rounded-full ${
+                        message.role === "user"
+                          ? "bg-violet-500"
+                          : "bg-gradient-to-r from-cyan-300 to-fuchsia-400"
                       }`}
                     />
 
-                    <h2 className="text-xl font-black italic">
-                      {message.role === "assistant" ? "Atlas" : "You"}
-                    </h2>
+                    <p className="text-2xl font-black italic">
+                      {message.role === "user" ? "You" : "Atlas"}
+                    </p>
                   </div>
 
-                  <p className="whitespace-pre-wrap text-base leading-8 md:text-lg">
+                  <div
+                    className={`whitespace-pre-wrap text-xl leading-relaxed ${
+                      message.role === "user" ? "text-black" : "text-slate-100"
+                    }`}
+                  >
                     {message.content}
-                  </p>
-
-                  {message.character && (
-                    <CharacterCard character={message.character} />
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {loading && (
-              <div className="flex justify-start">
-                <div className="max-w-3xl rounded-3xl border border-violet-300/20 bg-[#0d0b35]/90 p-5">
-                  <div className="mb-3 flex items-center gap-3">
-                    <div className="h-3 w-3 animate-pulse rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-300" />
-                    <h2 className="text-xl font-black italic">Atlas</h2>
                   </div>
+                </div>
+              ))}
 
-                  <p className="animate-pulse text-slate-300">
-                    Searching the archive...
+              {loading && (
+                <div className="max-w-[78%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-8">
+                  <p className="text-xl text-slate-300">
+                    Atlas is analyzing the dataset...
                   </p>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} />
+            </div>
           </div>
 
-          <div className="shrink-0 border-t border-white/10 bg-[#07071a]/90 p-4 backdrop-blur-xl">
-            <div className="mx-auto flex max-w-4xl gap-3">
+          {/* INPUT */}
+          <div className="border-t border-white/10 bg-[#090313]/90 p-6 backdrop-blur-xl">
+            <div className="mx-auto flex max-w-5xl gap-4">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") sendMessage();
+                  if (e.key === "Enter") {
+                    sendMessage();
+                  }
                 }}
                 placeholder="Ask Atlas about queer game characters..."
-                className="flex-1 rounded-2xl border border-violet-300/30 bg-white/90 px-5 py-4 text-black outline-none transition placeholder:text-slate-500 focus:border-fuchsia-400 focus:ring-4 focus:ring-fuchsia-400/20"
+                className="flex-1 rounded-3xl border border-fuchsia-400/40 bg-zinc-100 px-8 py-6 text-xl text-black outline-none transition focus:border-cyan-300"
               />
 
               <button
                 onClick={sendMessage}
                 disabled={loading}
-                className="rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-7 font-black transition hover:scale-105 disabled:opacity-50"
+                className="rounded-3xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-10 py-6 text-2xl font-black transition hover:scale-105 disabled:opacity-50"
               >
                 GO
               </button>
@@ -274,67 +265,4 @@ const [loadingCharacters, setLoadingCharacters] = useState(true);
       </div>
     </main>
   );
-}
-
-function CharacterCard({ character }: { character: Character }) {
-  return (
-    <div className="mt-6 overflow-hidden rounded-3xl border border-fuchsia-300/20 bg-white/[0.04]">
-      {character.character_image && (
-        <img
-          src={character.character_image}
-          alt={character.character_name}
-          className="h-56 w-full object-cover"
-        />
-      )}
-
-      <div className="p-5">
-        <p className="text-xs uppercase tracking-[0.25em] text-cyan-300">
-          Character Record
-        </p>
-
-        <h3 className="mt-2 text-3xl font-black italic">
-          {character.character_name}
-        </h3>
-
-        <p className="mt-1 text-sm text-slate-300">
-          {character.game_title} · {character.developer}
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {character.identity_label.map((label) => (
-            <span
-              key={label}
-              className="rounded-full border border-fuchsia-300/30 bg-fuchsia-400/10 px-3 py-1 text-xs font-bold text-fuchsia-200"
-            >
-              {formatLabel(label)}
-            </span>
-          ))}
-
-          <span className="rounded-full border border-cyan-300/30 bg-cyan-400/10 px-3 py-1 text-xs font-bold text-cyan-200">
-            {character.playable ? "Playable" : "Non-playable"}
-          </span>
-        </div>
-
-        <p className="mt-4 text-sm leading-7 text-slate-200">
-          {character.description}
-        </p>
-
-        {character.intersectionality?.length > 0 && (
-          <div className="mt-4">
-            <p className="text-xs uppercase tracking-widest text-slate-400">
-              Intersectionality
-            </p>
-
-            <p className="mt-1 text-sm text-slate-200">
-              {character.intersectionality.map(formatLabel).join(", ")}
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function formatLabel(value: string) {
-  return value.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
 }
