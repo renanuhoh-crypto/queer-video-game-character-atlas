@@ -127,6 +127,42 @@ export default function Home() {
               Explore queer characters, games, identities, intersectionality,
               and representation through a living research dataset.
             </p>
+            <nav className="mt-6 flex flex-wrap gap-6 text-sm md:text-base">
+  <a
+    href="/about"
+    className="text-slate-300 transition hover:text-cyan-300"
+  >
+    About
+  </a>
+
+  <a
+    href="/methodology"
+    className="text-slate-300 transition hover:text-cyan-300"
+  >
+    Methodology
+  </a>
+
+  <a
+    href="/dataset"
+    className="text-slate-300 transition hover:text-cyan-300"
+  >
+    Dataset
+  </a>
+
+  <a
+    href="/analytics"
+    className="text-slate-300 transition hover:text-cyan-300"
+  >
+    Analytics
+  </a>
+
+  <a
+    href="/ethics"
+    className="text-slate-300 transition hover:text-cyan-300"
+  >
+    Ethics
+  </a>
+</nav>
           </div>
 
           <div className="hidden rounded-3xl border border-white/10 bg-white/[0.04] px-6 py-5 text-right md:block">
