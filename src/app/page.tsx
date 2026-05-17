@@ -188,9 +188,9 @@ export default function Home() {
         </aside>
 
         {/* CHAT */}
-        <section className="col-span-9 flex h-[82vh] flex-col rounded-3xl border border-white/10 bg-black/20">
+        <section className="col-span-9 flex h-[82vh] min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20">
           {/* CHAT MESSAGES */}
-          <div className="flex-1 overflow-y-auto p-10">
+          <div className="min-h-0 flex-1 overflow-y-auto p-10">
             <div className="mx-auto flex max-w-5xl flex-col gap-8">
               {messages.map((message, index) => (
                 <div
@@ -238,7 +238,7 @@ export default function Home() {
           </div>
 
           {/* INPUT */}
-          <div className="border-t border-white/10 bg-[#090313]/90 p-6 backdrop-blur-xl">
+          <div className="shrink-0 border-t border-white/10 bg-[#090313]/90 p-6 backdrop-blur-xl">
             <div className="mx-auto flex max-w-5xl gap-4">
               <input
                 value={input}
