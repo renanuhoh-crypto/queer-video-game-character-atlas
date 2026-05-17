@@ -207,40 +207,6 @@ export default function Home() {
           </div>
           <div className="mt-10 space-y-3">
 
-  <a
-    href="/about"
-    className="block text-slate-300 transition hover:text-cyan-300"
-  >
-    About
-  </a>
-
-  <a
-    href="/methodology"
-    className="block text-slate-300 transition hover:text-cyan-300"
-  >
-    Methodology
-  </a>
-
-  <a
-    href="/dataset"
-    className="block text-slate-300 transition hover:text-cyan-300"
-  >
-    Dataset
-  </a>
-
-  <a
-    href="/analytics"
-    className="block text-slate-300 transition hover:text-cyan-300"
-  >
-    Analytics
-  </a>
-
-  <a
-    href="/ethics"
-    className="block text-slate-300 transition hover:text-cyan-300"
-  >
-    Ethics & Limitations
-  </a>
 
 </div>
 
