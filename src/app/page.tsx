@@ -159,7 +159,6 @@ export default function Home() {
         ["Home", "/"],
         ["About", "/about"],
         ["Methodology", "/methodology"],
-        ["Dataset", "/dataset"],
         ["Analytics", "/analytics"],
         ["Ethics", "/ethics"],
       ].map(([label, href]) => (
@@ -273,7 +272,7 @@ export default function Home() {
           </div>
 
           {/* FIXED INPUT */}
-          <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 p-5 backdrop-blur-xl">
+          <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-6 pb-8 backdrop-blur-xl">
             <div className="mx-auto flex max-w-5xl gap-4">
               <input
                 value={input}
