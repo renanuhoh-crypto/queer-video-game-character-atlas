@@ -115,7 +115,7 @@ export default function Home() {
               AI-Assisted Archive
             </p>
 
-            <h1 className="text-4xl font-black italic leading-none tracking-tight md:text-6xl">
+            <h1 className="max-w-6xl text-4xl font-black italic leading-[0.95] tracking-tight md:text-5xl xl:text-6xl">
               <span className="text-white">Queer Video Game </span>
 
               <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
@@ -176,15 +176,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-8">
-            {loadingCharacters ? (
-              <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-slate-300">
-                Loading analytics...
-              </div>
-            ) : (
-              <VisualAnalytics characters={characters} />
-            )}
-          </div>
+          <a
+  href="/analytics"
+  className="mt-8 block rounded-3xl border border-fuchsia-400/30 bg-fuchsia-500/10 p-5 text-center text-base font-bold text-fuchsia-200 transition hover:bg-fuchsia-500/20"
+>
+  View Visual Analytics
+</a>
         </aside>
 
         {/* CHAT */}
