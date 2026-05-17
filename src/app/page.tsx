@@ -224,7 +224,7 @@ export default function Home() {
         {/* CHAT */}
         <section className="col-span-9 flex min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20">
           {/* CHAT MESSAGES */}
-          <div className="min-h-0 flex-1 overflow-y-auto p-8">
+          <div className="min-h-0 flex-1 overflow-y-auto p-8 pb-14">
             <div className="mx-auto flex max-w-5xl flex-col gap-6">
               {messages.map((message, index) => (
                 <div
