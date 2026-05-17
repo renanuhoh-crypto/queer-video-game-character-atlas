@@ -141,14 +141,7 @@ export default function Home() {
   >
     Methodology
   </a>
-
-  <a
-    href="/dataset"
-    className="text-slate-300 transition hover:text-cyan-300"
-  >
-    Dataset
-  </a>
-
+  
   <a
     href="/analytics"
     className="text-slate-300 transition hover:text-cyan-300"
