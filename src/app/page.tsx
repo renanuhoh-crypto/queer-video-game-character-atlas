@@ -108,67 +108,79 @@ export default function Home() {
   return (
     <main className="h-screen overflow-hidden bg-[#05010f] text-white">
       {/* HEADER */}
-      <header className="h-[210px] shrink-0 border-b border-white/10 bg-white/[0.03] backdrop-blur-xl">
-        <div className="mx-auto flex h-full max-w-[1700px] items-center justify-between px-8 md:px-14 lg:px-20">
-          <div className="max-w-5xl">
-            <p className="mb-2 text-[11px] uppercase tracking-[0.45em] text-cyan-300">
-              AI-Assisted Archive
-            </p>
+      <header className="border-b border-white/10 bg-[#05010f]">
+  {/* TOP HEADER */}
+  <div className="mx-auto flex max-w-[1700px] items-center justify-between px-8 py-6 md:px-14 lg:px-20">
+    <a href="/" className="group">
+      <p className="text-xs uppercase tracking-[0.45em] text-cyan-300">
+        AI-Assisted Archive
+      </p>
 
-            <h1 className="max-w-6xl text-4xl font-black italic leading-[0.95] tracking-tight md:text-5xl xl:text-6xl">
-              <span className="text-white">Queer Video Game </span>
+      <h1 className="mt-3 text-3xl font-black italic leading-none tracking-tight md:text-5xl">
+        <span className="text-white">Queer Video Game </span>
+        <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
+          Character Atlas
+        </span>
+      </h1>
+    </a>
 
-              <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
-                Character Atlas
-              </span>
-            </h1>
+    <div className="hidden items-center gap-4 md:flex">
+      <a
+        href="/dataset"
+        className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-bold text-slate-200 transition hover:border-cyan-300/40 hover:text-cyan-300"
+      >
+        Dataset
+      </a>
 
-            <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300 md:text-lg">
-              Explore queer characters, games, identities, intersectionality,
-              and representation through a living research dataset.
-            </p>
-            <nav className="mt-6 flex flex-wrap gap-6 text-sm md:text-base">
-  <a
-    href="/about"
-    className="text-slate-300 transition hover:text-cyan-300"
-  >
-    About
-  </a>
+      <a
+        href="/analytics"
+        className="rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-4 text-sm font-black text-white transition hover:scale-105"
+      >
+        Analytics
+      </a>
 
-  <a
-    href="/methodology"
-    className="text-slate-300 transition hover:text-cyan-300"
-  >
-    Methodology
-  </a>
-  
-  <a
-    href="/analytics"
-    className="text-slate-300 transition hover:text-cyan-300"
-  >
-    Analytics
-  </a>
+      <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-right">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-slate-400">
+          Dataset Mode
+        </p>
 
-  <a
-    href="/ethics"
-    className="text-slate-300 transition hover:text-cyan-300"
-  >
-    Ethics
-  </a>
-</nav>
-          </div>
+        <p className="mt-1 text-sm font-bold text-fuchsia-300">
+          Prototype v1.0
+        </p>
+      </div>
+    </div>
+  </div>
 
-          <div className="hidden rounded-3xl border border-white/10 bg-white/[0.04] px-6 py-5 text-right md:block">
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
-              Dataset Mode
-            </p>
+  {/* SUBTITLE */}
+  <div className="mx-auto max-w-[1700px] px-8 pb-6 md:px-14 lg:px-20">
+    <p className="max-w-4xl text-base leading-relaxed text-slate-300 md:text-lg">
+      Explore queer characters, games, identities, intersectionality, and
+      representation through a living research dataset.
+    </p>
+  </div>
 
-            <p className="mt-2 text-lg font-bold text-fuchsia-300">
-              Prototype v1.0
-            </p>
-          </div>
-        </div>
-      </header>
+  {/* NAV BAR */}
+  <nav className="border-t border-white/10 bg-gradient-to-r from-fuchsia-500/20 via-violet-500/20 to-cyan-400/20">
+    <div className="mx-auto flex max-w-[1700px] overflow-x-auto px-8 md:px-14 lg:px-20">
+      {[
+        ["Home", "/"],
+        ["About", "/about"],
+        ["Methodology", "/methodology"],
+        ["Dataset", "/dataset"],
+        ["Analytics", "/analytics"],
+        ["Ethics", "/ethics"],
+      ].map(([label, href]) => (
+        <a
+          key={href}
+          href={href}
+          className="border-r border-white/10 px-5 py-4 text-sm font-bold text-slate-200 transition first:border-l hover:bg-white/10 hover:text-cyan-300 md:text-base"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
 
       {/* MAIN LAYOUT */}
       <div className="grid h-[calc(100vh-210px)] min-h-0 grid-cols-12 gap-6 overflow-hidden px-6 py-6">
