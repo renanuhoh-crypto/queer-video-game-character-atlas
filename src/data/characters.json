@@ -1,0 +1,64 @@
+[
+  {
+    "character_name": "Ellie",
+    "game_title": "The Last of Us Part II",
+    "developer": "Naughty Dog",
+
+    "identity_category": [
+      "sexual_orientation"
+    ],
+
+    "identity_label": [
+      "lesbian"
+    ],
+
+    "playable": true,
+
+    "intersectionality": [
+      "woman",
+      "white"
+    ],
+
+    "representation_quality": "high",
+
+    "identity_confirmation": "explicit_in_game",
+
+    "character_image": "/images/ellie.jpg",
+
+    "description": "Ellie is the protagonist of The Last of Us Part II and is canonically lesbian."
+  },
+  {
+    "character_name": "Lev",
+    "game_title": "The Last of Us Part II",
+    "developer": "Naughty Dog",
+    "identity_category": [
+      "gender_identity"
+    ],
+    "identity_label": [
+      "trans_man"
+    ],
+    "playable": false,
+    "intersectionality": [
+      "trans",
+      "asian"
+    ],
+    "description": "Lev is a trans boy featured in The Last of Us Part II."
+  },
+  {
+    "character_name": "Tyler Ronan",
+    "game_title": "Tell Me Why",
+    "developer": "Dontnod Entertainment",
+    "identity_category": [
+      "gender_identity"
+    ],
+    "identity_label": [
+      "trans_man"
+    ],
+    "playable": true,
+    "intersectionality": [
+      "trans",
+      "indigenous"
+    ],
+    "description": "Tyler Ronan is a trans man and one of the protagonists of Tell Me Why."
+  }
+]
