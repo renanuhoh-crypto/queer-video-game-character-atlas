@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import VisualAnalytics from "@/components/VisualAnalytics";
 
 type Character = {
@@ -9,6 +10,9 @@ type Character = {
   release_year?: number | null;
   developer?: string;
   playable?: boolean;
+  playable_status?: string;
+  gender?: string;
+  sexuality?: string;
   identity_label?: string[];
 };
 
@@ -34,9 +38,9 @@ export default function AnalyticsPage() {
 
   return (
     <main className="min-h-screen bg-[#05010f] px-8 py-10 text-white md:px-16">
-      <a href="/" className="text-sm text-cyan-300 hover:underline">
+      <Link href="/" className="text-sm text-cyan-300 hover:underline">
         ← Back to Atlas
-      </a>
+      </Link>
 
       <h1 className="mt-8 text-5xl font-black italic md:text-7xl">
         Visual{" "}

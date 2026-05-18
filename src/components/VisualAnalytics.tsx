@@ -18,6 +18,7 @@ interface Character {
   release_year?: number | null;
   developer?: string;
 
+  playable?: boolean;
   playable_status?: string;
 
   gender?: string;
@@ -32,17 +33,26 @@ interface Props {
 
 const COLORS = ["#d946ef", "#22d3ee", "#8b5cf6", "#ec4899"];
 
+function normalize(value?: string | null) {
+  return value?.trim().toLowerCase().replace(/\s+/g, "_") || "";
+}
+
 export default function VisualAnalytics({ characters }: Props) {
   const totalCharacters = characters.length;
 
   const playableCount = characters.filter(
-  (c) =>
-    c.playable_status?.toLowerCase() === "playable"
-).length;
+    (c) => c.playable || normalize(c.playable_status) === "playable"
+  ).length;
 
-const transCount = characters.filter((c) =>
-  c.gender?.toLowerCase().includes("trans")
-).length;
+  const transCount = characters.filter((c) => {
+    const labels = [
+      c.gender,
+      c.sexuality,
+      ...(c.identity_label || []),
+    ].map(normalize);
+
+    return labels.some((label) => label.includes("trans"));
+  }).length;
 
   const playableData = [
     {

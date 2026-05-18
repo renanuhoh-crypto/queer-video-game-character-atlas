@@ -27,6 +27,8 @@ export async function GET() {
       narrative_role: row.narrative_role,
       playable: row.playable_status === "playable",
       playable_status: row.playable_status,
+      gender: row.gender,
+      sexuality: row.sexuality,
       identity_category: toArray(row.identity_category),
       identity_label: toArray(row.identity_label),
       identity_confirmation: row.identity_confirmation,
