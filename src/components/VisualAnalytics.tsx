@@ -93,7 +93,13 @@ function countBy(values: string[]) {
 
   values.forEach((value) => {
     const clean = normalize(value);
-    if (!clean || clean === "none" || clean === "no" || clean === "not_registered") {
+
+    if (
+      !clean ||
+      clean === "none" ||
+      clean === "no" ||
+      clean === "not_registered"
+    ) {
       return;
     }
 
@@ -147,6 +153,65 @@ function BreakdownCard({
           })}
         </div>
       )}
+    </div>
+  );
+}
+
+function DonutCard({
+  title,
+  data,
+  percentage,
+  label,
+  count,
+  total,
+  sentence,
+}: {
+  title: string;
+  data: { name: string; value: number }[];
+  percentage: number;
+  label: string;
+  count: number;
+  total: number;
+  sentence: string;
+}) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+      <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
+
+      <div className="relative h-44 min-h-[176px] w-full min-w-0">
+        <ResponsiveContainer width="100%" height={176}>
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="value"
+              innerRadius={45}
+              outerRadius={70}
+              paddingAngle={4}
+            >
+              {data.map((_, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-3xl font-black text-white">{percentage}%</p>
+
+            <p className="mx-auto max-w-[92px] text-[9px] uppercase leading-tight tracking-[0.18em] text-slate-400">
+              {label}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p className="mt-3 text-center text-sm leading-relaxed text-slate-400">
+        Out of {total} registered queer characters,{" "}
+        <span className="font-bold text-white">{count}</span> {sentence}.
+      </p>
     </div>
   );
 }
@@ -264,116 +329,35 @@ export default function VisualAnalytics({ characters }: Props) {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-3">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-          <h3 className="mb-4 text-2xl font-black text-white">
-            Playable Characters
-          </h3>
+        <DonutCard
+          title="Playable Characters"
+          data={playableData}
+          percentage={playablePercentage}
+          label="Playable"
+          count={playableCount}
+          total={totalCharacters}
+          sentence="are playable"
+        />
 
-          <div className="relative h-44 min-h-[176px] w-full min-w-0">
-            <ResponsiveContainer width="100%" height={176}>
-              <PieChart>
-                <Pie
-                  data={playableData}
-                  dataKey="value"
-                  innerRadius={45}
-                  outerRadius={70}
-                  paddingAngle={4}
-                >
-                  {playableData.map((_, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
+        <DonutCard
+          title="Trans Representation"
+          data={transData}
+          percentage={transPercentage}
+          label="Trans"
+          count={transCount}
+          total={totalCharacters}
+          sentence="are trans"
+        />
 
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <p className="text-3xl font-black text-white">
-                  {playablePercentage}%
-                </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400">
-                  playable
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-          <h3 className="mb-4 text-2xl font-black text-white">
-            Trans Representation
-          </h3>
-
-          <div className="relative h-44 min-h-[176px] w-full min-w-0">
-            <ResponsiveContainer width="100%" height={176}>
-              <PieChart>
-                <Pie
-                  data={transData}
-                  dataKey="value"
-                  innerRadius={45}
-                  outerRadius={70}
-                  paddingAngle={4}
-                >
-                  {transData.map((_, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <p className="text-3xl font-black text-white">
-                  {transPercentage}%
-                </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400">
-                  trans
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-          <h3 className="mb-4 text-2xl font-black text-white">
-            Intersectionality
-          </h3>
-
-          <div className="relative h-44 min-h-[176px] w-full min-w-0">
-            <ResponsiveContainer width="100%" height={176}>
-              <PieChart>
-                <Pie
-                  data={intersectionalityData}
-                  dataKey="value"
-                  innerRadius={45}
-                  outerRadius={70}
-                  paddingAngle={4}
-                >
-                  {intersectionalityData.map((_, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <p className="text-3xl font-black text-white">
-                  {intersectionalityPercentage}%
-                </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400">
-                  registered
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <DonutCard
+          title="Intersectionality"
+          data={intersectionalityData}
+          percentage={intersectionalityPercentage}
+          label="Intersectionality"
+          count={intersectionalityCount}
+          total={totalCharacters}
+          sentence="have intersectionality registered"
+        />
       </div>
 
       <BreakdownCard
