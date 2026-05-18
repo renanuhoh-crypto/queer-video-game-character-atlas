@@ -73,6 +73,12 @@ function normalize(value: string) {
     .trim();
 }
 
+function formatLabel(value: string) {
+  return value
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 function loadCharactersFromCSV(): Character[] {
   const filePath = path.join(
     process.cwd(),
@@ -167,8 +173,13 @@ Release Year: ${character.release_year}
 Genre: ${character.genre}
 Narrative Role: ${character.narrative_role}
 Playable: ${character.playable_status}
-Identity Labels: ${character.identity_label?.join(", ")}
-Identity Categories: ${character.identity_category?.join(", ")}
+Identity Labels: ${character.identity_label
+  ?.map(formatLabel)
+  .join(", ")}
+
+Identity Categories: ${character.identity_category
+  ?.map(formatLabel)
+  .join(", ")}
 Queer Status: ${character.queer_status}
 Intersectionality: ${character.intersectionality_present}
 Intersectionality Details: ${character.intersectionality_details}
