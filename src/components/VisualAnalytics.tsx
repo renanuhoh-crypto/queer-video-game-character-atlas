@@ -122,7 +122,7 @@ function BreakdownCard({
   total: number;
 }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
       <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
 
       {data.length === 0 ? (
@@ -175,7 +175,7 @@ function DonutCard({
   sentence: string;
 }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
       <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
 
       <div className="relative mx-auto h-44 min-h-[176px] max-w-[260px]">
@@ -201,9 +201,15 @@ function DonutCard({
           <div className="text-center">
             <p className="text-3xl font-black text-white">{percentage}%</p>
 
-            <p className="mx-auto max-w-[92px] text-[9px] uppercase leading-tight tracking-[0.18em] text-slate-400">
-              {label}
-            </p>
+            <p
+  className={`mx-auto uppercase leading-tight text-slate-400 ${
+    label.length > 12
+      ? "max-w-[70px] text-[6px] tracking-[0.08em]"
+      : "max-w-[90px] text-[9px] tracking-[0.18em]"
+  }`}
+>
+  {label}
+</p>
           </div>
         </div>
       </div>
@@ -313,7 +319,7 @@ export default function VisualAnalytics({ characters }: Props) {
     .slice(0, 8);
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
+    <div className="mx-auto w-full max-w-7xl space-y-6 px-6 py-6">
       <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
           Dataset Overview
@@ -384,7 +390,7 @@ export default function VisualAnalytics({ characters }: Props) {
         total={totalCharacters}
       />
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
         <h3 className="mb-4 text-2xl font-black text-white">
           Characters with Intersectionality Registered
         </h3>
@@ -398,7 +404,7 @@ export default function VisualAnalytics({ characters }: Props) {
         </p>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
         <h3 className="mb-4 text-2xl font-black text-white">
           Representation by year
         </h3>
