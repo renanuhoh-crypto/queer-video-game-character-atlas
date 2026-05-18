@@ -21,6 +21,8 @@ type Character = {
   playable: boolean;
   playable_status?: string;
 
+  gender?: string;
+  sexuality?: string;
   identity_label?: string[];
   identity_category?: string[];
 
@@ -130,6 +132,10 @@ function loadCharactersFromCSV(): Character[] {
 
     playable_status: row.playable_status,
 
+    gender: row.gender,
+
+    sexuality: row.sexuality,
+
     identity_label: [
   row.gender,
   row.sexuality,
@@ -179,9 +185,6 @@ export async function POST(req: Request) {
 
     const characters =
       loadCharactersFromCSV();
-
-    const latestMessage =
-      messages[messages.length - 1]?.content || "";
 
     const datasetSummary = characters
       .map((character) => {
