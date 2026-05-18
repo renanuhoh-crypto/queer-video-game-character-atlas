@@ -21,6 +21,7 @@ interface Character {
   playable_status?: string;
   gender?: string;
   sexuality?: string;
+  identity_category?: string | string[];
   identity_label?: string[];
 }
 
@@ -28,10 +29,117 @@ interface Props {
   characters: Character[];
 }
 
-const COLORS = ["#d946ef", "#22d3ee", "#8b5cf6", "#ec4899"];
+const COLORS = ["#d946ef", "#22d3ee", "#8b5cf6", "#ec4899", "#a78bfa"];
 
 function normalize(value?: string | null) {
   return value?.trim().toLowerCase().replace(/\s+/g, "_") || "";
+}
+
+function formatLabel(value?: string | null) {
+  if (!value) return "Unknown";
+
+  const cleaned = value.replace(/_/g, " ").trim().toLowerCase();
+
+  const aliases: Record<string, string> = {
+    gay: "Gay",
+    lesbian: "Lesbian",
+    bisexual: "Bisexual",
+    bi: "Bisexual",
+    pansexual: "Pansexual",
+    queer: "Queer",
+    none: "None",
+    female: "Female",
+    male: "Male",
+    trans_man: "Trans Man",
+    "trans man": "Trans Man",
+    trans_woman: "Trans Woman",
+    "trans woman": "Trans Woman",
+    "non-binary": "Non-Binary",
+    non_binary: "Non-Binary",
+    nonbinary: "Non-Binary",
+    gender_identity: "Gender Identity",
+    sexual_orientation: "Sexual Orientation",
+  };
+
+  return (
+    aliases[cleaned] ||
+    cleaned.replace(/\b\w/g, (char) => char.toUpperCase())
+  );
+}
+
+function splitValues(value?: string | string[] | null) {
+  if (!value) return [];
+
+  if (Array.isArray(value)) {
+    return value.filter(Boolean);
+  }
+
+  return value
+    .split(";")
+    .flatMap((item) => item.split(","))
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function countBy(values: string[]) {
+  const map: Record<string, number> = {};
+
+  values.forEach((value) => {
+    const clean = normalize(value);
+    if (!clean || clean === "none" || clean === "not_registered") return;
+
+    const label = formatLabel(clean);
+    map[label] = (map[label] || 0) + 1;
+  });
+
+  return Object.entries(map)
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+function BreakdownCard({
+  title,
+  data,
+  total,
+}: {
+  title: string;
+  data: { label: string; count: number }[];
+  total: number;
+}) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+      <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
+
+      {data.length === 0 ? (
+        <p className="text-slate-400">No data registered yet.</p>
+      ) : (
+        <div className="space-y-4">
+          {data.map((item) => {
+            const percentage =
+              total > 0 ? Math.round((item.count / total) * 100) : 0;
+
+            return (
+              <div key={item.label}>
+                <div className="mb-1 flex items-center justify-between text-sm text-slate-300">
+                  <span>{item.label}</span>
+                  <span>
+                    {item.count} · {percentage}%
+                  </span>
+                </div>
+
+                <div className="h-3 overflow-hidden rounded-full bg-white/10">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function VisualAnalytics({ characters }: Props) {
@@ -67,10 +175,27 @@ export default function VisualAnalytics({ characters }: Props) {
     { name: "Non-trans", value: totalCharacters - transCount },
   ];
 
+  const sexualityBreakdown = countBy(
+    characters.flatMap((character) => splitValues(character.sexuality))
+  );
+
+  const genderBreakdown = countBy(
+    characters.flatMap((character) => splitValues(character.gender))
+  );
+
+  const identityCategoryBreakdown = countBy(
+    characters.flatMap((character) =>
+      splitValues(character.identity_category)
+    )
+  );
+
   const yearMap: Record<string, number> = {};
 
   characters.forEach((character) => {
-    const year = character.release_year ? String(character.release_year) : "Unknown";
+    const year = character.release_year
+      ? String(character.release_year)
+      : "Unknown";
+
     yearMap[year] = (yearMap[year] || 0) + 1;
   });
 
@@ -89,7 +214,7 @@ export default function VisualAnalytics({ characters }: Props) {
   const topStudios = Object.entries(studioMap)
     .map(([studio, count]) => ({ studio, count }))
     .sort((a, b) => b.count - a.count)
-    .slice(0, 5);
+    .slice(0, 8);
 
   return (
     <div className="space-y-6">
@@ -107,79 +232,99 @@ export default function VisualAnalytics({ characters }: Props) {
         </p>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-        <h3 className="mb-4 text-2xl font-black text-white">
-          Playable Characters
-        </h3>
+      <div className="grid gap-6 xl:grid-cols-2">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+          <h3 className="mb-4 text-2xl font-black text-white">
+            Playable Characters
+          </h3>
 
-        <div className="relative h-44 min-h-[176px] w-full min-w-0">
-          <ResponsiveContainer width="100%" height={176}>
-            <PieChart>
-              <Pie
-                data={playableData}
-                dataKey="value"
-                innerRadius={45}
-                outerRadius={70}
-                paddingAngle={4}
-              >
-                {playableData.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
+          <div className="relative h-44 min-h-[176px] w-full min-w-0">
+            <ResponsiveContainer width="100%" height={176}>
+              <PieChart>
+                <Pie
+                  data={playableData}
+                  dataKey="value"
+                  innerRadius={45}
+                  outerRadius={70}
+                  paddingAngle={4}
+                >
+                  {playableData.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
 
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
 
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-3xl font-black text-white">
-                {playablePercentage}%
-              </p>
-              <p className="text-xs uppercase tracking-widest text-slate-400">
-                playable
-              </p>
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-3xl font-black text-white">
+                  {playablePercentage}%
+                </p>
+                <p className="text-xs uppercase tracking-widest text-slate-400">
+                  playable
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+          <h3 className="mb-4 text-2xl font-black text-white">
+            Trans Representation
+          </h3>
+
+          <div className="relative h-44 min-h-[176px] w-full min-w-0">
+            <ResponsiveContainer width="100%" height={176}>
+              <PieChart>
+                <Pie
+                  data={transData}
+                  dataKey="value"
+                  innerRadius={45}
+                  outerRadius={70}
+                  paddingAngle={4}
+                >
+                  {transData.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-3xl font-black text-white">
+                  {transPercentage}%
+                </p>
+                <p className="text-xs uppercase tracking-widest text-slate-400">
+                  trans
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-        <h3 className="mb-4 text-2xl font-black text-white">
-          Trans Representation
-        </h3>
+      <BreakdownCard
+        title="Sexuality Breakdown"
+        data={sexualityBreakdown}
+        total={totalCharacters}
+      />
 
-        <div className="relative h-44 min-h-[176px] w-full min-w-0">
-          <ResponsiveContainer width="100%" height={176}>
-            <PieChart>
-              <Pie
-                data={transData}
-                dataKey="value"
-                innerRadius={45}
-                outerRadius={70}
-                paddingAngle={4}
-              >
-                {transData.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
+      <BreakdownCard
+        title="Gender Breakdown"
+        data={genderBreakdown}
+        total={totalCharacters}
+      />
 
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-3xl font-black text-white">
-                {transPercentage}%
-              </p>
-              <p className="text-xs uppercase tracking-widest text-slate-400">
-                trans
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BreakdownCard
+        title="Identity Category Breakdown"
+        data={identityCategoryBreakdown}
+        total={totalCharacters}
+      />
 
       <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
         <h3 className="mb-4 text-2xl font-black text-white">
@@ -198,35 +343,14 @@ export default function VisualAnalytics({ characters }: Props) {
         </div>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-        <h3 className="mb-4 text-2xl font-black text-white">
-          Studios with most queer characters
-        </h3>
-
-        <div className="space-y-4">
-          {topStudios.map((studio) => (
-            <div key={studio.studio}>
-              <div className="mb-1 flex items-center justify-between text-sm text-slate-300">
-                <span>{studio.studio}</span>
-                <span>{studio.count}</span>
-              </div>
-
-              <div className="h-3 overflow-hidden rounded-full bg-white/10">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"
-                  style={{
-                    width: `${
-                      totalCharacters > 0
-                        ? (studio.count / totalCharacters) * 100
-                        : 0
-                    }%`,
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BreakdownCard
+        title="Studios with Most Queer Characters"
+        data={topStudios.map((studio) => ({
+          label: studio.studio,
+          count: studio.count,
+        }))}
+        total={totalCharacters}
+      />
     </div>
   );
 }
