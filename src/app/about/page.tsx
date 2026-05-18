@@ -5,13 +5,13 @@ export default function AboutPage() {
     <main className="min-h-screen bg-[#05010f] px-8 py-10 text-white">
       <div className="mx-auto max-w-6xl">
         <Link href="/" className="text-sm text-cyan-300 hover:underline">
-          ← Back to Atlas
+          ← Back to PRSM
         </Link>
 
         <h1 className="mt-8 text-center text-5xl font-black italic">
-          About the{" "}
+          About{" "}
           <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
-            Atlas
+            PRSM
           </span>
         </h1>
 
@@ -21,8 +21,8 @@ export default function AboutPage() {
 
             <div className="mt-4 space-y-5 text-base leading-relaxed text-slate-300">
               <p>
-                Queer Video Game Character Atlas is an AI-assisted research
-                platform for exploring queer representation in video games.
+                PRSM is an AI-assisted research platform for exploring queer
+                representation in video games.
               </p>
 
               <p>
@@ -33,7 +33,7 @@ export default function AboutPage() {
               </p>
 
               <p>
-                Atlas is designed as a living digital humanities prototype: a
+                PRSM is designed as a living digital humanities prototype: a
                 searchable archive interface that makes patterns of queer game
                 representation easier to explore while keeping the data
                 grounded, structured, and reviewable.
@@ -49,12 +49,12 @@ export default function AboutPage() {
             <div className="space-y-5 text-slate-200">
               <div>
                 <p className="font-black text-white">Name</p>
-                <p>Queer Video Game Character Atlas</p>
+                <p>PRSM</p>
               </div>
 
               <div>
                 <p className="font-black text-white">Project type</p>
-                <p>AI-assisted DH research platform</p>
+                <p>AI-assisted queer game archive</p>
               </div>
 
               <div>
@@ -74,15 +74,23 @@ export default function AboutPage() {
 
         <section>
           <h2 className="text-center text-3xl font-black italic">
-            Project{" "}
-            <span className="text-fuchsia-300">Goals</span>
+            Project <span className="text-fuchsia-300">Goals</span>
           </h2>
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {[
-              ["Representation", "Make queer video game characters more visible through structured, searchable data."],
-              ["Research", "Support analysis of identity, playability, narrative role, intersectionality, and representation quality."],
-              ["Access", "Create a public-facing interface where users can ask questions about queer game characters naturally."],
+              [
+                "Representation",
+                "Make queer video game characters more visible through structured, searchable data.",
+              ],
+              [
+                "Research",
+                "Support analysis of identity, playability, narrative role, intersectionality, and representation quality.",
+              ],
+              [
+                "Access",
+                "Create a public-facing interface where users can ask questions about queer game characters naturally.",
+              ],
             ].map(([title, text]) => (
               <div
                 key={title}
@@ -105,7 +113,7 @@ export default function AboutPage() {
 
           <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-300">
             <p>
-              Atlas is informed by queer game studies, representation studies,
+              PRSM is informed by queer game studies, representation studies,
               and digital humanities approaches to data visualization and
               cultural analysis.
             </p>
@@ -119,7 +127,7 @@ export default function AboutPage() {
 
             <p>
               The AI component answers using only the structured dataset,
-              allowing Atlas to work as a guided research interface rather than
+              allowing PRSM to work as a guided research interface rather than
               an unrestricted chatbot.
             </p>
           </div>
@@ -150,31 +158,6 @@ export default function AboutPage() {
                 tools.
               </p>
             </div>
-          </div>
-        </section>
-
-        <hr className="my-12 border-white/10" />
-
-        <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-          <h2 className="text-center text-3xl font-black italic">History</h2>
-
-          <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-300">
-            <p>
-              Atlas began as a prototype for exploring how AI can support
-              structured research on queer representation in games.
-            </p>
-
-            <p>
-              Early development focused on a small seed dataset to test data
-              structure, visual analytics, natural language questions, and
-              anti-hallucination safeguards.
-            </p>
-
-            <p>
-              The long-term goal is to develop Atlas into a public scholarship
-              and research infrastructure project for game studies, queer media
-              studies, teaching, and data-driven analysis of representation.
-            </p>
           </div>
         </section>
       </div>

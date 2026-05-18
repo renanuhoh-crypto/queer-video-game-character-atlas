@@ -17,12 +17,16 @@ interface Character {
   game_title: string;
   release_year?: number | null;
   developer?: string;
+
   playable?: boolean;
   playable_status?: string;
+
   gender?: string;
   sexuality?: string;
-  identity_category?: string | string[];
+
   identity_label?: string[];
+  identity_category?: string[];
+
   intersectionality_present?: string;
   intersectionality_details?: string;
 }
@@ -31,165 +35,64 @@ interface Props {
   characters: Character[];
 }
 
-const COLORS = ["#d946ef", "#22d3ee", "#8b5cf6", "#ec4899", "#a78bfa"];
+const COLORS = ["#d946ef", "#22d3ee", "#8b5cf6", "#ec4899"];
 
 function normalize(value?: string | null) {
   return value?.trim().toLowerCase().replace(/\s+/g, "_") || "";
 }
 
-function formatLabel(value?: string | null) {
-  if (!value) return "Unknown";
-
-  const cleaned = value.replace(/_/g, " ").trim().toLowerCase();
-
-  const aliases: Record<string, string> = {
-    gay: "Gay",
-    lesbian: "Lesbian",
-    bisexual: "Bisexual",
-    bi: "Bisexual",
-    pansexual: "Pansexual",
-    queer: "Queer",
-    none: "None",
-    female: "Female",
-    male: "Male",
-    trans_man: "Trans Man",
-    "trans man": "Trans Man",
-    trans_woman: "Trans Woman",
-    "trans woman": "Trans Woman",
-    "non-binary": "Non-Binary",
-    non_binary: "Non-Binary",
-    nonbinary: "Non-Binary",
-    gender_identity: "Gender Identity",
-    sexual_orientation: "Sexual Orientation",
-    religion: "Religion",
-    culture: "Culture",
-    race: "Race",
-    ethnicity: "Ethnicity",
-    multiple: "Multiple",
-  };
-
-  return (
-    aliases[cleaned] ||
-    cleaned.replace(/\b\w/g, (char) => char.toUpperCase())
-  );
-}
-
-function splitValues(value?: string | string[] | null) {
-  if (!value) return [];
-
-  if (Array.isArray(value)) {
-    return value.filter(Boolean);
-  }
-
+function formatLabel(value: string) {
   return value
-    .split(";")
-    .flatMap((item) => item.split(","))
-    .map((item) => item.trim())
-    .filter(Boolean);
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function countBy(values: string[]) {
-  const map: Record<string, number> = {};
-
-  values.forEach((value) => {
-    const clean = normalize(value);
-
-    if (
-      !clean ||
-      clean === "none" ||
-      clean === "no" ||
-      clean === "not_registered"
-    ) {
-      return;
-    }
-
-    const label = formatLabel(clean);
-    map[label] = (map[label] || 0) + 1;
-  });
-
-  return Object.entries(map)
-    .map(([label, count]) => ({ label, count }))
-    .sort((a, b) => b.count - a.count);
-}
-
-function BreakdownCard({
+function StatDonut({
   title,
-  data,
-  total,
-}: {
-  title: string;
-  data: { label: string; count: number }[];
-  total: number;
-}) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-      <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
-
-      {data.length === 0 ? (
-        <p className="text-slate-400">No data registered yet.</p>
-      ) : (
-        <div className="mx-auto max-w-3xl space-y-4">
-          {data.map((item) => {
-            const percentage =
-              total > 0 ? Math.round((item.count / total) * 100) : 0;
-
-            return (
-              <div key={item.label}>
-                <div className="mb-1 flex items-center justify-between gap-4 text-sm text-slate-300">
-                  <span>{item.label}</span>
-                  <span>
-                    {item.count} · {percentage}%
-                  </span>
-                </div>
-
-                <div className="h-3 overflow-hidden rounded-full bg-white/10">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"
-                    style={{ width: `${percentage}%` }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function DonutCard({
-  title,
-  data,
-  percentage,
-  label,
   count,
   total,
+  label,
   sentence,
 }: {
   title: string;
-  data: { name: string; value: number }[];
-  percentage: number;
-  label: string;
   count: number;
   total: number;
+  label: string;
   sentence: string;
 }) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-      <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
+  const percentage = total === 0 ? 0 : Math.round((count / total) * 100);
 
-      <div className="relative mx-auto h-44 min-h-[176px] max-w-[260px]">
-        <ResponsiveContainer width="100%" height={176}>
+  const data = [
+    {
+      name: label,
+      value: count,
+    },
+    {
+      name: "Other",
+      value: total - count,
+    },
+  ];
+
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+      <h3 className="text-left text-2xl font-black text-white">{title}</h3>
+
+      <div className="relative mx-auto mt-8 h-[220px] w-[220px]">
+        <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={data}
+              innerRadius={58}
+              outerRadius={82}
+              paddingAngle={2}
               dataKey="value"
-              innerRadius={45}
-              outerRadius={70}
-              paddingAngle={4}
+              stroke="transparent"
             >
               {data.map((_, index) => (
-                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={index}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
 
@@ -199,17 +102,19 @@ function DonutCard({
 
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <p className="text-3xl font-black text-white">{percentage}%</p>
+            <p className="text-3xl font-black text-white">
+              {percentage}%
+            </p>
 
             <p
-  className={`mx-auto uppercase leading-tight text-slate-400 ${
-    label.length > 12
-      ? "max-w-[70px] text-[6px] tracking-[0.08em]"
-      : "max-w-[90px] text-[9px] tracking-[0.18em]"
-  }`}
->
-  {label}
-</p>
+              className={`mx-auto uppercase leading-tight text-slate-400 ${
+                label.length > 12
+                  ? "max-w-[70px] text-[6px] tracking-[0.08em]"
+                  : "max-w-[90px] text-[9px] tracking-[0.18em]"
+              }`}
+            >
+              {label}
+            </p>
           </div>
         </div>
       </div>
@@ -222,104 +127,194 @@ function DonutCard({
   );
 }
 
-export default function VisualAnalytics({ characters }: Props) {
+function BreakdownSection({
+  title,
+  data,
+}: {
+  title: string;
+  data: Record<string, number>;
+}) {
+  const entries = Object.entries(data);
+
+  const total = entries.reduce((acc, [, count]) => acc + count, 0);
+
+  if (entries.length === 0) {
+    return (
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+        <h3 className="text-2xl font-black text-white">{title}</h3>
+
+        <p className="mt-5 text-slate-400">
+          No data registered yet.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+      <h3 className="text-2xl font-black text-white">{title}</h3>
+
+      <div className="mt-8 space-y-5">
+        {entries.map(([label, count], index) => {
+          const percentage = Math.round((count / total) * 100);
+
+          return (
+            <div key={label}>
+              <div className="mb-2 flex items-center justify-between text-sm">
+                <span className="text-slate-200">
+                  {formatLabel(label)}
+                </span>
+
+                <span className="text-white">
+                  {count} · {percentage}%
+                </span>
+              </div>
+
+              <div className="h-3 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${percentage}%`,
+                    background:
+                      COLORS[index % COLORS.length],
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default function VisualAnalytics({
+  characters,
+}: Props) {
   const totalCharacters = characters.length;
 
   const playableCount = characters.filter(
-    (c) => c.playable || normalize(c.playable_status) === "playable"
+    (c) =>
+      c.playable ||
+      normalize(c.playable_status) === "playable"
   ).length;
 
   const transCount = characters.filter((c) => {
-    const labels = [c.gender, c.sexuality, ...(c.identity_label || [])].map(
-      normalize
+    const labels = [
+      c.gender,
+      c.sexuality,
+      ...(c.identity_label || []),
+    ].map(normalize);
+
+    return labels.some((label) =>
+      label.includes("trans")
+    );
+  }).length;
+
+  const intersectionalCount = characters.filter(
+    (c) =>
+      normalize(c.intersectionality_present) !== "no" &&
+      normalize(c.intersectionality_present) !== ""
+  ).length;
+
+  const sexualityMap: Record<string, number> = {};
+  const genderMap: Record<string, number> = {};
+  const identityCategoryMap: Record<string, number> = {};
+  const intersectionalityMap: Record<string, number> = {};
+
+  characters.forEach((character) => {
+    // Sexuality
+    if (
+      character.sexuality &&
+      normalize(character.sexuality) !== "none"
+    ) {
+      const key = normalize(character.sexuality);
+
+      sexualityMap[key] =
+        (sexualityMap[key] || 0) + 1;
+    }
+
+    // Gender
+    if (
+      character.gender &&
+      normalize(character.gender) !== "none"
+    ) {
+      const key = normalize(character.gender);
+
+      genderMap[key] =
+        (genderMap[key] || 0) + 1;
+    }
+
+    // Identity categories
+    (character.identity_category || []).forEach(
+      (category) => {
+        const key = normalize(category);
+
+        identityCategoryMap[key] =
+          (identityCategoryMap[key] || 0) + 1;
+      }
     );
 
-    return labels.some((label) => label.includes("trans"));
-  }).length;
+    // Intersectionality details
+    if (
+      character.intersectionality_details &&
+      normalize(character.intersectionality_details) !==
+        "none"
+    ) {
+      const details =
+        character.intersectionality_details
+          .split(";")
+          .map((item) => item.trim())
+          .filter(Boolean);
 
-  const intersectionalityCount = characters.filter((character) => {
-    const value = normalize(character.intersectionality_present);
-    return value && value !== "none" && value !== "no";
-  }).length;
+      details.forEach((detail) => {
+        const key = normalize(detail);
 
-  const playablePercentage =
-    totalCharacters > 0
-      ? Math.round((playableCount / totalCharacters) * 100)
-      : 0;
+        intersectionalityMap[key] =
+          (intersectionalityMap[key] || 0) + 1;
+      });
+    }
+  });
 
-  const transPercentage =
-    totalCharacters > 0 ? Math.round((transCount / totalCharacters) * 100) : 0;
-
-  const intersectionalityPercentage =
-    totalCharacters > 0
-      ? Math.round((intersectionalityCount / totalCharacters) * 100)
-      : 0;
-
-  const playableData = [
-    { name: "Playable", value: playableCount },
-    { name: "Non-playable", value: totalCharacters - playableCount },
-  ];
-
-  const transData = [
-    { name: "Trans", value: transCount },
-    { name: "Non-trans", value: totalCharacters - transCount },
-  ];
-
-  const intersectionalityData = [
-    { name: "Intersectionality registered", value: intersectionalityCount },
-    {
-      name: "No intersectionality registered",
-      value: totalCharacters - intersectionalityCount,
-    },
-  ];
-
-  const sexualityBreakdown = countBy(
-    characters.flatMap((character) => splitValues(character.sexuality))
-  );
-
-  const genderBreakdown = countBy(
-    characters.flatMap((character) => splitValues(character.gender))
-  );
-
-  const identityCategoryBreakdown = countBy(
-    characters.flatMap((character) => splitValues(character.identity_category))
-  );
-
-  const intersectionalityBreakdown = countBy(
-    characters.flatMap((character) =>
-      splitValues(character.intersectionality_present)
-    )
-  );
-
+  // Year distribution
   const yearMap: Record<string, number> = {};
 
   characters.forEach((character) => {
-    const year = character.release_year
-      ? String(character.release_year)
-      : "Unknown";
+    const year =
+      character.release_year?.toString() ||
+      "Unknown";
 
     yearMap[year] = (yearMap[year] || 0) + 1;
   });
 
-  const yearData = Object.entries(yearMap).map(([year, count]) => ({
-    year,
-    count,
-  }));
+  const yearData = Object.entries(yearMap)
+    .map(([year, count]) => ({
+      year,
+      count,
+    }))
+    .sort((a, b) => Number(a.year) - Number(b.year));
 
+  // Studio distribution
   const studioMap: Record<string, number> = {};
 
   characters.forEach((character) => {
-    const studio = character.developer || "Unknown";
-    studioMap[studio] = (studioMap[studio] || 0) + 1;
+    if (!character.developer) return;
+
+    studioMap[character.developer] =
+      (studioMap[character.developer] || 0) + 1;
   });
 
   const topStudios = Object.entries(studioMap)
-    .map(([studio, count]) => ({ studio, count }))
+    .map(([studio, count]) => ({
+      studio,
+      count,
+    }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 8);
 
   return (
     <div className="mx-auto w-full max-w-7xl space-y-6 px-6 py-6">
+      {/* OVERVIEW */}
       <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
           Dataset Overview
@@ -334,101 +329,121 @@ export default function VisualAnalytics({ characters }: Props) {
         </p>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-3">
-        <DonutCard
+      {/* DONUTS */}
+      <div className="grid gap-6 md:grid-cols-3">
+        <StatDonut
           title="Playable Characters"
-          data={playableData}
-          percentage={playablePercentage}
-          label="Playable"
           count={playableCount}
           total={totalCharacters}
+          label="Playable"
           sentence="are playable"
         />
 
-        <DonutCard
+        <StatDonut
           title="Trans Representation"
-          data={transData}
-          percentage={transPercentage}
-          label="Trans"
           count={transCount}
           total={totalCharacters}
+          label="Trans"
           sentence="are trans"
         />
 
-        <DonutCard
+        <StatDonut
           title="Intersectionality"
-          data={intersectionalityData}
-          percentage={intersectionalityPercentage}
-          label="Intersectionality"
-          count={intersectionalityCount}
+          count={intersectionalCount}
           total={totalCharacters}
+          label="Intersectionality"
           sentence="have intersectionality registered"
         />
       </div>
 
-      <BreakdownCard
+      {/* BREAKDOWNS */}
+      <BreakdownSection
         title="Sexuality Breakdown"
-        data={sexualityBreakdown}
-        total={totalCharacters}
+        data={sexualityMap}
       />
 
-      <BreakdownCard
+      <BreakdownSection
         title="Gender Breakdown"
-        data={genderBreakdown}
-        total={totalCharacters}
+        data={genderMap}
       />
 
-      <BreakdownCard
+      <BreakdownSection
         title="Identity Category Breakdown"
-        data={identityCategoryBreakdown}
-        total={totalCharacters}
+        data={identityCategoryMap}
       />
 
-      <BreakdownCard
+      <BreakdownSection
         title="Intersectionality Breakdown"
-        data={intersectionalityBreakdown}
-        total={totalCharacters}
+        data={intersectionalityMap}
       />
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-        <h3 className="mb-4 text-2xl font-black text-white">
-          Characters with Intersectionality Registered
+      {/* YEAR */}
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+        <h3 className="text-2xl font-black text-white">
+          Representation by Year
         </h3>
 
-        <p className="text-5xl font-black text-fuchsia-300">
-          {intersectionalityCount}
-        </p>
-
-        <p className="mt-2 text-slate-400">
-          out of {totalCharacters} registered characters
-        </p>
-      </div>
-
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-        <h3 className="mb-4 text-2xl font-black text-white">
-          Representation by year
-        </h3>
-
-        <div className="mx-auto h-52 min-h-[208px] max-w-4xl">
-          <ResponsiveContainer width="100%" height={208}>
+        <div className="mt-8 h-[320px]">
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={yearData}>
-              <XAxis dataKey="year" stroke="#94a3b8" fontSize={12} />
-              <YAxis stroke="#94a3b8" fontSize={12} />
+              <XAxis
+                dataKey="year"
+                stroke="#94a3b8"
+              />
+
+              <YAxis stroke="#94a3b8" />
+
               <Tooltip />
-              <Bar dataKey="count" fill="#8b5cf6" radius={[8, 8, 0, 0]} />
+
+              <Bar
+                dataKey="count"
+                radius={[8, 8, 0, 0]}
+                fill="#8b5cf6"
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      <BreakdownCard
-        title="Studios with Most Queer Characters"
-        data={topStudios.map((studio) => ({
-          label: studio.studio,
-          count: studio.count,
-        }))}
-        total={totalCharacters}
-      />
+      {/* STUDIOS */}
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+        <h3 className="text-2xl font-black text-white">
+          Top Studios
+        </h3>
+
+        <div className="mt-8 space-y-5">
+          {topStudios.map((studio, index) => {
+            const percentage = Math.round(
+              (studio.count / totalCharacters) * 100
+            );
+
+            return (
+              <div key={studio.studio}>
+                <div className="mb-2 flex items-center justify-between text-sm">
+                  <span className="text-slate-200">
+                    {studio.studio}
+                  </span>
+
+                  <span className="text-white">
+                    {studio.count} · {percentage}%
+                  </span>
+                </div>
+
+                <div className="h-3 overflow-hidden rounded-full bg-white/10">
+                  <div
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${percentage}%`,
+                      background:
+                        COLORS[index % COLORS.length],
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
