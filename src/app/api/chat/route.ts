@@ -152,8 +152,7 @@ identity_category: toArray(row.identity_category),
     queer_joy_score: toNumber(row.queer_joy_score),
 
     intersectionality_present:
-  row.identity_category?.includes(";") ||
-  row.identity_category?.includes(",")
+  normalize(row.intersectionality_present) === "yes"
     ? "yes"
     : "no",
 
@@ -212,7 +211,7 @@ Identity Categories: ${
     : "Not registered"
 }
 Queer Status: ${character.queer_status}
-Intersectionality: ${character.intersectionality_present}
+Intersectionality Registered: ${character.intersectionality_present}
 Intersectionality Details: ${character.intersectionality_details}
 Representation Score: ${character.total_score}
 Evidence Source: ${character.evidence_source}
@@ -244,6 +243,10 @@ Rules:
 - Always convert database formatting into readable human language.
 - Never invent information
 - Never assume identities or races
+- Always analyze intersectionality_details when identifying race, ethnicity, religion, disability, or intersectional identities.
+- If a character contains "Black" inside intersectionality_details, they should be recognized as a black character.
+- If a character contains "Asian" inside intersectionality_details, they should be recognized as Asian.
+- If a character contains "Indigenous" inside intersectionality_details, they should be recognized as Indigenous.
 - Never speculate
 - Never create lore analysis
 - Never say "the dataset does not specify"
