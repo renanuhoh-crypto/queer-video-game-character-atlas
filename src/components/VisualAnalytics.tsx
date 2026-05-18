@@ -23,6 +23,8 @@ interface Character {
   sexuality?: string;
   identity_category?: string | string[];
   identity_label?: string[];
+  intersectionality_present?: string;
+  intersectionality_details?: string;
 }
 
 interface Props {
@@ -59,6 +61,11 @@ function formatLabel(value?: string | null) {
     nonbinary: "Non-Binary",
     gender_identity: "Gender Identity",
     sexual_orientation: "Sexual Orientation",
+    religion: "Religion",
+    culture: "Culture",
+    race: "Race",
+    ethnicity: "Ethnicity",
+    multiple: "Multiple",
   };
 
   return (
@@ -86,7 +93,9 @@ function countBy(values: string[]) {
 
   values.forEach((value) => {
     const clean = normalize(value);
-    if (!clean || clean === "none" || clean === "not_registered") return;
+    if (!clean || clean === "none" || clean === "no" || clean === "not_registered") {
+      return;
+    }
 
     const label = formatLabel(clean);
     map[label] = (map[label] || 0) + 1;
@@ -157,6 +166,11 @@ export default function VisualAnalytics({ characters }: Props) {
     return labels.some((label) => label.includes("trans"));
   }).length;
 
+  const intersectionalityCount = characters.filter((character) => {
+    const value = normalize(character.intersectionality_present);
+    return value && value !== "none" && value !== "no";
+  }).length;
+
   const playablePercentage =
     totalCharacters > 0
       ? Math.round((playableCount / totalCharacters) * 100)
@@ -164,6 +178,11 @@ export default function VisualAnalytics({ characters }: Props) {
 
   const transPercentage =
     totalCharacters > 0 ? Math.round((transCount / totalCharacters) * 100) : 0;
+
+  const intersectionalityPercentage =
+    totalCharacters > 0
+      ? Math.round((intersectionalityCount / totalCharacters) * 100)
+      : 0;
 
   const playableData = [
     { name: "Playable", value: playableCount },
@@ -175,6 +194,14 @@ export default function VisualAnalytics({ characters }: Props) {
     { name: "Non-trans", value: totalCharacters - transCount },
   ];
 
+  const intersectionalityData = [
+    { name: "Intersectionality registered", value: intersectionalityCount },
+    {
+      name: "No intersectionality registered",
+      value: totalCharacters - intersectionalityCount,
+    },
+  ];
+
   const sexualityBreakdown = countBy(
     characters.flatMap((character) => splitValues(character.sexuality))
   );
@@ -184,8 +211,12 @@ export default function VisualAnalytics({ characters }: Props) {
   );
 
   const identityCategoryBreakdown = countBy(
+    characters.flatMap((character) => splitValues(character.identity_category))
+  );
+
+  const intersectionalityBreakdown = countBy(
     characters.flatMap((character) =>
-      splitValues(character.identity_category)
+      splitValues(character.intersectionality_present)
     )
   );
 
@@ -232,7 +263,7 @@ export default function VisualAnalytics({ characters }: Props) {
         </p>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-3">
         <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
           <h3 className="mb-4 text-2xl font-black text-white">
             Playable Characters
@@ -306,6 +337,43 @@ export default function VisualAnalytics({ characters }: Props) {
             </div>
           </div>
         </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+          <h3 className="mb-4 text-2xl font-black text-white">
+            Intersectionality
+          </h3>
+
+          <div className="relative h-44 min-h-[176px] w-full min-w-0">
+            <ResponsiveContainer width="100%" height={176}>
+              <PieChart>
+                <Pie
+                  data={intersectionalityData}
+                  dataKey="value"
+                  innerRadius={45}
+                  outerRadius={70}
+                  paddingAngle={4}
+                >
+                  {intersectionalityData.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-3xl font-black text-white">
+                  {intersectionalityPercentage}%
+                </p>
+                <p className="text-xs uppercase tracking-widest text-slate-400">
+                  registered
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <BreakdownCard
@@ -325,6 +393,26 @@ export default function VisualAnalytics({ characters }: Props) {
         data={identityCategoryBreakdown}
         total={totalCharacters}
       />
+
+      <BreakdownCard
+        title="Intersectionality Breakdown"
+        data={intersectionalityBreakdown}
+        total={totalCharacters}
+      />
+
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+        <h3 className="mb-4 text-2xl font-black text-white">
+          Characters with Intersectionality Registered
+        </h3>
+
+        <p className="text-5xl font-black text-fuchsia-300">
+          {intersectionalityCount}
+        </p>
+
+        <p className="mt-2 text-slate-400">
+          out of {totalCharacters} registered characters
+        </p>
+      </div>
 
       <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
         <h3 className="mb-4 text-2xl font-black text-white">
