@@ -122,20 +122,20 @@ function BreakdownCard({
   total: number;
 }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
       <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
 
       {data.length === 0 ? (
         <p className="text-slate-400">No data registered yet.</p>
       ) : (
-        <div className="space-y-4">
+        <div className="mx-auto max-w-3xl space-y-4">
           {data.map((item) => {
             const percentage =
               total > 0 ? Math.round((item.count / total) * 100) : 0;
 
             return (
               <div key={item.label}>
-                <div className="mb-1 flex items-center justify-between text-sm text-slate-300">
+                <div className="mb-1 flex items-center justify-between gap-4 text-sm text-slate-300">
                   <span>{item.label}</span>
                   <span>
                     {item.count} · {percentage}%
@@ -175,10 +175,10 @@ function DonutCard({
   sentence: string;
 }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
       <h3 className="mb-4 text-2xl font-black text-white">{title}</h3>
 
-      <div className="relative h-44 min-h-[176px] w-full min-w-0">
+      <div className="relative mx-auto h-44 min-h-[176px] max-w-[260px]">
         <ResponsiveContainer width="100%" height={176}>
           <PieChart>
             <Pie
@@ -313,8 +313,8 @@ export default function VisualAnalytics({ characters }: Props) {
     .slice(0, 8);
 
   return (
-    <div className="space-y-6">
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+    <div className="mx-auto max-w-7xl space-y-6">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
           Dataset Overview
         </p>
@@ -384,7 +384,7 @@ export default function VisualAnalytics({ characters }: Props) {
         total={totalCharacters}
       />
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
         <h3 className="mb-4 text-2xl font-black text-white">
           Characters with Intersectionality Registered
         </h3>
@@ -398,12 +398,12 @@ export default function VisualAnalytics({ characters }: Props) {
         </p>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
         <h3 className="mb-4 text-2xl font-black text-white">
           Representation by year
         </h3>
 
-        <div className="h-52 min-h-[208px] w-full min-w-0">
+        <div className="mx-auto h-52 min-h-[208px] max-w-4xl">
           <ResponsiveContainer width="100%" height={208}>
             <BarChart data={yearData}>
               <XAxis dataKey="year" stroke="#94a3b8" fontSize={12} />
