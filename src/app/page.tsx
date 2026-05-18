@@ -116,7 +116,7 @@ export default function Home() {
         AI-Assisted Archive
       </p>
 
-      <h1 className="mt-3 text-3xl font-black italic leading-none tracking-tight md:text-5xl">
+      <h1 className="mt-3 text-2xl font-black italic leading-[0.95] tracking-tight md:text-4xl lg:text-5xl">
         <span className="text-white">Queer Video Game </span>
         <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
           Character Atlas
@@ -127,17 +127,17 @@ export default function Home() {
     <div className="hidden items-center gap-4 md:flex">
       <a
         href="/analytics"
-        className="rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-4 text-sm font-black text-white transition hover:scale-105"
+        className="rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-3 text-xs font-black text-white transition hover:scale-105"
       >
         Analytics
       </a>
 
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-right">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-right">
         <p className="text-[10px] uppercase tracking-[0.25em] text-slate-400">
           Dataset Mode
         </p>
 
-        <p className="mt-1 text-sm font-bold text-fuchsia-300">
+        <p className="mt-1 text-xs font-bold text-fuchsia-300">
           Prototype v1.0
         </p>
       </div>
@@ -146,7 +146,7 @@ export default function Home() {
 
   {/* SUBTITLE */}
   <div className="mx-auto max-w-[1700px] px-8 pb-6 md:px-14 lg:px-20">
-    <p className="max-w-4xl text-base leading-relaxed text-slate-300 md:text-lg">
+    <p className="max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
       Explore queer characters, games, identities, intersectionality, and
       representation through a living research dataset.
     </p>
@@ -165,7 +165,7 @@ export default function Home() {
         <a
           key={href}
           href={href}
-          className="border-r border-white/10 px-5 py-4 text-sm font-bold text-slate-200 transition first:border-l hover:bg-white/10 hover:text-cyan-300 md:text-base"
+          className="border-r border-white/10 px-4 py-3 text-xs font-bold text-slate-200 transition first:border-l hover:bg-white/10 hover:text-cyan-300 md:text-sm"
         >
           {label}
         </a>
