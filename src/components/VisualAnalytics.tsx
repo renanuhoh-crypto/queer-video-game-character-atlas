@@ -228,7 +228,7 @@ export default function VisualAnalytics({ characters }: Props) {
         </h2>
 
         <p className="mt-2 text-slate-400">
-          queer video game characters registered
+          Queer video game characters registered
         </p>
       </div>
 
