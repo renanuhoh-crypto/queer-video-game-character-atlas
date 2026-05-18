@@ -74,9 +74,23 @@ function normalize(value: string) {
 }
 
 function formatLabel(value: string) {
-  return value
+  const formatted = value
     .replace(/_/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+    .trim()
+    .toLowerCase();
+
+  const aliases: Record<string, string> = {
+    sexual_orientation: "Sexual Orientation",
+    gender_identity: "Gender Identity",
+    trans_man: "Trans Man",
+    trans_woman: "Trans Woman",
+    non_binary: "Non-Binary",
+  };
+
+  return (
+    aliases[formatted] ||
+    formatted.replace(/\b\w/g, (c) => c.toUpperCase())
+  );
 }
 
 function loadCharactersFromCSV(): Character[] {
@@ -173,13 +187,21 @@ Release Year: ${character.release_year}
 Genre: ${character.genre}
 Narrative Role: ${character.narrative_role}
 Playable: ${character.playable_status}
-Identity Labels: ${character.identity_label
-  ?.map(formatLabel)
-  .join(", ")}
+Identity Labels: ${
+  character.identity_label?.length
+    ? character.identity_label
+        .map(formatLabel)
+        .join(", ")
+    : "Not registered"
+}
 
-Identity Categories: ${character.identity_category
-  ?.map(formatLabel)
-  .join(", ")}
+Identity Categories: ${
+  character.identity_category?.length
+    ? character.identity_category
+        .map(formatLabel)
+        .join(", ")
+    : "Not registered"
+}
 Queer Status: ${character.queer_status}
 Intersectionality: ${character.intersectionality_present}
 Intersectionality Details: ${character.intersectionality_details}
@@ -209,6 +231,8 @@ Language rule:
 
 Rules:
 
+- Never display raw database values with underscores.
+- Always convert database formatting into readable human language.
 - Never invent information
 - Never assume identities or races
 - Never speculate
