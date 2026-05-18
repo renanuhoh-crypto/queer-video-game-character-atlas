@@ -2,9 +2,34 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Queer Video Game Character Atlas",
-  description:
-    "AI-assisted archive for queer video game characters",
+  title: "PRSM",
+  description: "AI-assisted archive of queer game representation",
+  keywords: [
+    "queer games",
+    "video game representation",
+    "digital humanities",
+    "queer characters",
+    "game studies",
+    "AI archive",
+    "intersectionality",
+    "LGBTQ games",
+    "representation analytics",
+  ],
+
+  openGraph: {
+    title: "PRSM",
+    description:
+      "AI-assisted archive of queer game representation",
+    siteName: "PRSM",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "PRSM",
+    description:
+      "AI-assisted archive of queer game representation",
+  },
 };
 
 export default function RootLayout({
@@ -14,7 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-[#05010f] text-white antialiased">
+        {children}
+      </body>
     </html>
   );
 }
