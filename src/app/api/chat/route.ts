@@ -130,9 +130,12 @@ function loadCharactersFromCSV(): Character[] {
 
     playable_status: row.playable_status,
 
-    identity_label: toArray(row.identity_label),
+    identity_label: [
+  row.gender,
+  row.sexuality,
+].filter(Boolean),
 
-    identity_category: toArray(row.identity_category),
+identity_category: toArray(row.identity_category),
 
     identity_confirmation: row.identity_confirmation,
 
@@ -143,7 +146,10 @@ function loadCharactersFromCSV(): Character[] {
     queer_joy_score: toNumber(row.queer_joy_score),
 
     intersectionality_present:
-      row.intersectionality_present,
+  row.identity_category?.includes(";") ||
+  row.identity_category?.includes(",")
+    ? "yes"
+    : "no",
 
     intersectionality_details:
       row.intersectionality_details,

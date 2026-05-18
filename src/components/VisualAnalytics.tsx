@@ -17,7 +17,12 @@ interface Character {
   game_title: string;
   release_year?: number | null;
   developer?: string;
-  playable?: boolean;
+
+  playable_status?: string;
+
+  gender?: string;
+  sexuality?: string;
+
   identity_label?: string[];
 }
 
@@ -30,13 +35,14 @@ const COLORS = ["#d946ef", "#22d3ee", "#8b5cf6", "#ec4899"];
 export default function VisualAnalytics({ characters }: Props) {
   const totalCharacters = characters.length;
 
-  const playableCount = characters.filter((c) => c.playable).length;
+  const playableCount = characters.filter(
+  (c) =>
+    c.playable_status?.toLowerCase() === "playable"
+).length;
 
-  const transCount = characters.filter((c) =>
-    c.identity_label?.some((label) =>
-      label.toLowerCase().includes("trans")
-    )
-  ).length;
+const transCount = characters.filter((c) =>
+  c.gender?.toLowerCase().includes("trans")
+).length;
 
   const playableData = [
     {
