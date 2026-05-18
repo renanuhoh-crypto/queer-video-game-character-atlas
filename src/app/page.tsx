@@ -175,9 +175,9 @@ export default function Home() {
 </header>
 
       {/* MAIN LAYOUT */}
-      <div className="grid h-[calc(100vh-210px)] min-h-0 grid-cols-12 gap-6 overflow-hidden px-6 py-6">
+      <div className="grid h-[calc(100vh-210px)] min-h-0 grid-cols-12 gap-6 overflow-hidden px-6 pt-6 pb-10">
         {/* SIDEBAR */}
-        <aside className="col-span-3 min-h-0 overflow-y-auto rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+        <aside className="col-span-3 min-h-0 overflow-y-auto rounded-3xl border border-white/10 bg-white/[0.03] p-5 pb-12">
           <h2 className="mb-5 text-3xl font-black italic">Archive Tools</h2>
 
           <div className="space-y-3">
@@ -222,7 +222,7 @@ export default function Home() {
         </aside>
 
         {/* CHAT */}
-        <section className="col-span-9 flex min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20">
+        <section className="col-span-9 flex min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20 pb-4">
           {/* CHAT MESSAGES */}
           <div className="min-h-0 flex-1 overflow-y-auto p-8 pb-14">
             <div className="mx-auto flex max-w-5xl flex-col gap-6">
@@ -272,7 +272,7 @@ export default function Home() {
           </div>
 
           {/* FIXED INPUT */}
-          <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-6 pb-8 backdrop-blur-xl">
+          <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-6 pb-12 backdrop-blur-xl">
             <div className="mx-auto flex max-w-5xl gap-4">
               <input
                 value={input}
