@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import PrismHeroScene from "@/components/PrismHeroScene";
 
 type Character = {
   character_name: string;
@@ -181,53 +183,46 @@ export default function Home() {
   }).length;
 
   return (
-    <main className="min-h-screen bg-[#03030a] text-white">
+    <main className="min-h-screen bg-[#020207] text-white">
       {/* HERO */}
       <section className="relative min-h-[520px] overflow-hidden border-b border-white/10 bg-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_40%,rgba(34,211,238,0.20),transparent_34%),radial-gradient(circle_at_45%_25%,rgba(217,70,239,0.18),transparent_30%),radial-gradient(circle_at_85%_55%,rgba(250,204,21,0.12),transparent_22%)]" />
-
-        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:40px_40px]" />
-
-        <div className="absolute right-[-8%] top-1/2 h-32 w-[70%] -translate-y-1/2 -rotate-6 animate-pulse bg-gradient-to-r from-transparent via-fuchsia-400/50 via-cyan-300/50 to-yellow-200/60 blur-2xl" />
-
-        <div className="absolute right-[28%] top-1/2 h-32 w-32 -translate-y-1/2 rotate-45 border border-white/20 bg-white/5 backdrop-blur-xl shadow-[0_0_90px_rgba(34,211,238,0.35)]">
-          <div className="absolute inset-3 border border-fuchsia-300/30" />
+        <div className="absolute inset-0 opacity-70">
+          <PrismHeroScene />
         </div>
 
-        <div className="absolute right-[18%] top-[38%] h-2 w-52 rotate-[-18deg] rounded-full bg-cyan-300/70 blur-sm" />
-        <div className="absolute right-[12%] top-[52%] h-2 w-72 rotate-[12deg] rounded-full bg-fuchsia-400/60 blur-sm" />
-        <div className="absolute right-[8%] top-[64%] h-2 w-56 rotate-[-5deg] rounded-full bg-yellow-200/60 blur-sm" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.76)_44%,rgba(0,0,0,0.38)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(217,70,239,0.18),transparent_30%),radial-gradient(circle_at_74%_18%,rgba(34,211,238,0.12),transparent_30%)]" />
 
         <header className="relative z-10 border-b border-white/10">
           <div className="mx-auto flex max-w-[1700px] items-center justify-between px-8 py-6 md:px-14 lg:px-20">
-            <a href="/" className="text-sm font-black tracking-[0.35em] text-white">
+            <Link href="/" className="text-sm font-black tracking-[0.35em] text-white">
               PRSM
-            </a>
+            </Link>
 
             <nav className="hidden items-center gap-8 text-sm font-bold text-slate-300 md:flex">
-              <a href="/about" className="transition hover:text-cyan-300">
+              <Link href="/about" className="transition hover:text-cyan-300">
                 About
-              </a>
-              <a href="/methodology" className="transition hover:text-cyan-300">
+              </Link>
+              <Link href="/methodology" className="transition hover:text-cyan-300">
                 Methodology
-              </a>
-              <a href="/analytics" className="transition hover:text-cyan-300">
+              </Link>
+              <Link href="/analytics" className="transition hover:text-cyan-300">
                 Analytics
-              </a>
-              <a href="/" className="transition hover:text-cyan-300">
+              </Link>
+              <Link href="/" className="transition hover:text-cyan-300">
                 Home
-              </a>
-              <a href="/ethics" className="transition hover:text-cyan-300">
+              </Link>
+              <Link href="/ethics" className="transition hover:text-cyan-300">
                 Ethics
-              </a>
+              </Link>
             </nav>
 
-            <a
+            <Link
               href="/analytics"
               className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-xs font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300"
             >
               Explore Data
-            </a>
+            </Link>
           </div>
         </header>
         <div className="prism-bar relative z-10 h-3 overflow-hidden border-y border-white/10 bg-black">
@@ -237,8 +232,8 @@ export default function Home() {
           <div className="prism-bar__core" />
         </div>
         <div className="relative z-10 mx-auto max-w-[1700px] px-8 py-20 md:px-14 lg:px-20">
-          <p className="text-xs uppercase tracking-[0.45em] text-cyan-300">
-            AI-Assisted Queer Game Archive
+          <p className="font-mono text-xs uppercase tracking-[0.45em] text-cyan-300">
+            Research console
           </p>
 
           <h1 className="mt-6 text-7xl font-black italic leading-none tracking-tight md:text-9xl">
@@ -259,12 +254,12 @@ export default function Home() {
               Ask PRSM
             </a>
 
-            <a
+            <Link
               href="/analytics"
               className="rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300"
             >
               View Analytics
-            </a>
+            </Link>
           </div>
         </div>
       </section>

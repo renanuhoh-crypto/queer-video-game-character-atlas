@@ -1,25 +1,51 @@
-import Link from "next/link";
+import PrismPageHero from "@/components/PrismPageHero";
+
+const PANEL =
+  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-7 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl";
+
+const goals = [
+  {
+    title: "Representation",
+    text: "Make queer video game characters more visible through structured, searchable data.",
+  },
+  {
+    title: "Research",
+    text: "Support analysis of identity, playability, narrative role, intersectionality, and representation quality.",
+  },
+  {
+    title: "Access",
+    text: "Create a public-facing interface where users can ask questions about queer game characters naturally.",
+  },
+];
+
+const quickFacts = [
+  ["Name", "PRSM"],
+  ["Project type", "AI-assisted queer game archive"],
+  ["Focus", "Queer video game characters"],
+  ["Status", "Prototype v1.0"],
+];
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#05010f] px-8 py-10 text-white">
-      <div className="mx-auto max-w-6xl">
-        <Link href="/" className="text-sm text-cyan-300 hover:underline">
-          ← Back to PRSM
-        </Link>
+    <main className="min-h-screen bg-[#020207] text-white">
+      <PrismPageHero
+        eyebrow="Archive identity"
+        title="About"
+        accent="PRSM"
+        description="PRSM is a digital humanities prototype for reading queer game representation through structured data, visual analytics, and AI-assisted querying."
+      />
 
-        <h1 className="mt-8 text-center text-5xl font-black italic">
-          About{" "}
-          <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
-            PRSM
-          </span>
-        </h1>
+      <section className="relative px-8 py-16 md:px-14 lg:px-20">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(217,70,239,0.12),transparent_30%),radial-gradient(circle_at_88%_14%,rgba(34,211,238,0.1),transparent_28%)]" />
 
-        <section className="mt-12 grid gap-10 md:grid-cols-[1fr_340px]">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-            <h2 className="text-xl font-black text-cyan-300">Description</h2>
+        <div className="relative z-10 mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <section className={PANEL}>
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
+            <p className="font-mono text-xs uppercase tracking-[0.34em] text-cyan-300">
+              Description
+            </p>
 
-            <div className="mt-4 space-y-5 text-base leading-relaxed text-slate-300">
+            <div className="mt-6 space-y-5 text-lg leading-relaxed text-slate-300">
               <p>
                 PRSM is an AI-assisted research platform for exploring queer
                 representation in video games.
@@ -33,134 +59,73 @@ export default function AboutPage() {
               </p>
 
               <p>
-                PRSM is designed as a living digital humanities prototype: a
-                searchable archive interface that makes patterns of queer game
-                representation easier to explore while keeping the data
-                grounded, structured, and reviewable.
+                PRSM is designed as a living archive interface: a way to make
+                patterns of queer game representation easier to explore while
+                keeping the data grounded, structured, and reviewable.
               </p>
             </div>
-          </div>
+          </section>
 
-          <aside className="rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-6 text-sm">
-            <h2 className="mb-5 text-lg font-black text-cyan-300">
-              Quick Facts
-            </h2>
-
-            <div className="space-y-5 text-slate-200">
-              <div>
-                <p className="font-black text-white">Name</p>
-                <p>PRSM</p>
-              </div>
-
-              <div>
-                <p className="font-black text-white">Project type</p>
-                <p>AI-assisted queer game archive</p>
-              </div>
-
-              <div>
-                <p className="font-black text-white">Focus</p>
-                <p>Queer video game characters</p>
-              </div>
-
-              <div>
-                <p className="font-black text-white">Status</p>
-                <p>Prototype v1.0</p>
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        <hr className="my-12 border-white/10" />
-
-        <section>
-          <h2 className="text-center text-3xl font-black italic">
-            Project <span className="text-fuchsia-300">Goals</span>
-          </h2>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {[
-              [
-                "Representation",
-                "Make queer video game characters more visible through structured, searchable data.",
-              ],
-              [
-                "Research",
-                "Support analysis of identity, playability, narrative role, intersectionality, and representation quality.",
-              ],
-              [
-                "Access",
-                "Create a public-facing interface where users can ask questions about queer game characters naturally.",
-              ],
-            ].map(([title, text]) => (
-              <div
-                key={title}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-center"
-              >
-                <h3 className="font-black text-white">{title}</h3>
-                <div className="mx-auto mt-6 h-12 w-12 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-300" />
-                <p className="mt-6 leading-relaxed text-slate-300">{text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="my-12 border-white/10" />
-
-        <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-          <h2 className="text-center text-3xl font-black italic">
-            Research Framework
-          </h2>
-
-          <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-300">
-            <p>
-              PRSM is informed by queer game studies, representation studies,
-              and digital humanities approaches to data visualization and
-              cultural analysis.
+          <aside className={PANEL}>
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
+            <p className="font-mono text-xs uppercase tracking-[0.34em] text-fuchsia-300">
+              Quick facts
             </p>
 
+            <div className="mt-7 space-y-6">
+              {quickFacts.map(([label, value]) => (
+                <div key={label}>
+                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-slate-500">
+                    {label}
+                  </p>
+                  <p className="mt-2 text-lg font-black text-white">{value}</p>
+                </div>
+              ))}
+            </div>
+          </aside>
+        </div>
+
+        <div className="relative z-10 mx-auto mt-8 grid max-w-[1500px] gap-6 md:grid-cols-3">
+          {goals.map((goal) => (
+            <section key={goal.title} className={PANEL}>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
+              <p className="font-mono text-xs uppercase tracking-[0.34em] text-cyan-300">
+                Goal
+              </p>
+              <h2 className="mt-4 text-2xl font-black italic text-white">
+                {goal.title}
+              </h2>
+              <p className="mt-5 leading-relaxed text-slate-300">{goal.text}</p>
+            </section>
+          ))}
+        </div>
+
+        <section className={`${PANEL} relative z-10 mx-auto mt-8 max-w-[1500px]`}>
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
+          <p className="font-mono text-xs uppercase tracking-[0.34em] text-yellow-200">
+            Research framework
+          </p>
+          <h2 className="mt-4 text-3xl font-black italic text-white">
+            A guided archive, not an unrestricted chatbot.
+          </h2>
+
+          <div className="mt-6 grid gap-6 text-base leading-relaxed text-slate-300 md:grid-cols-3">
+            <p>
+              PRSM is informed by queer game studies, representation studies,
+              and digital humanities approaches to data visualization.
+            </p>
             <p>
               The dataset includes fields such as character name, game title,
               release year, developer, gender, sexuality, identity category,
-              playability, narrative role, confirmation type,
-              intersectionality, and evidence source.
+              playability, narrative role, intersectionality, and evidence.
             </p>
-
             <p>
               The AI component answers using only the structured dataset,
-              allowing PRSM to work as a guided research interface rather than
-              an unrestricted chatbot.
+              allowing PRSM to work as a focused research interface.
             </p>
           </div>
         </section>
-
-        <hr className="my-12 border-white/10" />
-
-        <section>
-          <h2 className="text-center text-3xl font-black italic">
-            Current <span className="text-cyan-300">Scope</span>
-          </h2>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-              <h3 className="font-black text-fuchsia-300">Included</h3>
-              <p className="mt-5 leading-relaxed text-slate-300">
-                Queer video game characters, identity categories, game metadata,
-                playability, narrative role, evidence sources, and visual
-                analytics.
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-              <h3 className="font-black text-cyan-300">In development</h3>
-              <p className="mt-5 leading-relaxed text-slate-300">
-                Expanded datasets, richer source attribution, advanced filters,
-                stronger intersectionality fields, and character comparison
-                tools.
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
+      </section>
     </main>
   );
 }
