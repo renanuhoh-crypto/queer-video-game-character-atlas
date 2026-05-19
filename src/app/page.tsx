@@ -249,9 +249,9 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200 md:text-2xl">
-              A metallic, prism-cut archive for reading queer video game
-              representation through characters, identity fields, studios, and
-              narrative context.
+              A prism-cut archive for reading queer video game representation
+              through characters, identity fields, studios, and narrative
+              context.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
