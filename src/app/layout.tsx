@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SiteBetaNotice from "@/components/SiteBetaNotice";
 import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#05010f] text-white antialiased">
+        <SiteBetaNotice />
         {children}
         <SiteFooter />
       </body>

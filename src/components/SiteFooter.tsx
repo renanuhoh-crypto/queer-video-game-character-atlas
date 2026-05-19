@@ -5,6 +5,7 @@ const mainLinks = [
   { label: "Methodology", href: "/methodology" },
   { label: "Analytics", href: "/analytics" },
   { label: "Chat", href: "/chat" },
+  { label: "Contribute", href: "/contribute" },
   { label: "Ethics", href: "/ethics" },
 ];
 
@@ -12,6 +13,7 @@ const supportLinks = [
   { label: "Dataset Signal", href: "/" },
   { label: "Research Console", href: "/chat" },
   { label: "Visual Analytics", href: "/analytics" },
+  { label: "Contribute Characters", href: "/contribute" },
   { label: "PRSM Archive", href: "/" },
 ];
 

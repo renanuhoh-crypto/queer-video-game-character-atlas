@@ -199,7 +199,7 @@ export default function Home() {
               PRSM
             </Link>
 
-            <nav className="hidden items-center gap-8 text-sm font-bold text-slate-300 md:flex">
+            <nav className="hidden items-center gap-5 text-sm font-bold text-slate-300 md:flex lg:gap-8">
               <Link href="/about" className="transition hover:text-cyan-300">
                 About
               </Link>
@@ -211,6 +211,9 @@ export default function Home() {
               </Link>
               <Link href="/" className="transition hover:text-cyan-300">
                 Home
+              </Link>
+              <Link href="/contribute" className="transition hover:text-cyan-300">
+                Contribute
               </Link>
               <Link href="/ethics" className="transition hover:text-cyan-300">
                 Ethics

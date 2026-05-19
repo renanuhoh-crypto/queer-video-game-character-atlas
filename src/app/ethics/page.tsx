@@ -22,6 +22,13 @@ const principles = [
   },
 ];
 
+const fairUsePoints = [
+  "PRSM may reference copyrighted screenshots, character images, or source material only for nonprofit educational and research purposes.",
+  "Images should be credited and cited with their original source whenever possible.",
+  "Copyrighted material should be used in a limited, contextual way that supports analysis rather than decoration or redistribution.",
+  "Anyone reusing copyrighted material from PRSM beyond fair use should seek permission from the copyright owner.",
+];
+
 export default function EthicsPage() {
   return (
     <main className="min-h-screen bg-[#020207] text-white">
@@ -65,6 +72,30 @@ export default function EthicsPage() {
             help organize evidence, but representation remains messy, lived,
             historical, and dependent on interpretation.
           </p>
+        </section>
+
+        <section className={`${PANEL} relative z-10 mx-auto mt-8 max-w-[1500px]`}>
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-yellow-200 sm:text-xs sm:tracking-[0.34em]">
+            Fair use statement
+          </p>
+          <h2 className="mt-4 text-2xl font-black italic text-white sm:text-3xl">
+            Images and quoted material are treated as research context.
+          </h2>
+          <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-300 sm:text-lg">
+            PRSM is a nonprofit educational and research prototype. When the
+            archive uses copyrighted material, it should do so under a fair use
+            rationale consistent with 17 U.S.C. Section 107: with credit,
+            citation, limited scope, and clear research purpose.
+          </p>
+
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            {fairUsePoints.map((point) => (
+              <div key={point} className="border border-white/10 bg-black/30 p-4">
+                <p className="leading-relaxed text-slate-300">{point}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </section>
     </main>
