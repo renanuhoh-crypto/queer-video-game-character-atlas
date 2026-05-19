@@ -183,17 +183,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#020207] text-white">
-      <section className="relative min-h-[88vh] overflow-hidden border-b border-white/10 bg-black">
+      <section className="relative min-h-[760px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[88vh]">
         <PrismHeroScene />
 
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.68)_34%,rgba(0,0,0,0.18)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(217,70,239,0.18),transparent_28%),radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.16),transparent_28%)]" />
 
         <header className="relative z-10 border-b border-white/10">
-          <div className="mx-auto flex max-w-[1700px] items-center justify-between px-8 py-6 md:px-14 lg:px-20">
+          <div className="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-5 sm:px-8 md:px-14 md:py-6 lg:px-20">
             <Link
               href="/"
-              className="text-sm font-black tracking-[0.42em] text-white"
+              className="text-sm font-black tracking-[0.28em] text-white sm:tracking-[0.42em]"
             >
               PRSM
             </Link>
@@ -224,7 +224,7 @@ export default function Home() {
 
             <Link
               href="/analytics"
-              className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-xs font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300"
+              className="rounded-full border border-white/15 bg-white/10 px-4 py-2.5 text-[11px] font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300 sm:px-5 sm:py-3 sm:text-xs"
             >
               Explore Data
             </Link>
@@ -238,17 +238,17 @@ export default function Home() {
           <div className="prism-bar__core" />
         </div>
 
-        <div className="relative z-10 mx-auto grid max-w-[1700px] gap-12 px-8 py-16 md:px-14 lg:grid-cols-[1fr_480px] lg:px-20 lg:py-20">
+        <div className="relative z-10 mx-auto grid max-w-[1700px] gap-10 px-5 py-12 sm:px-8 sm:py-14 md:px-14 lg:grid-cols-[1fr_480px] lg:px-20 lg:py-20">
           <div className="max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.45em] text-cyan-300">
+            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-cyan-300 sm:text-xs sm:tracking-[0.45em]">
               AI-assisted queer game archive
             </p>
 
-            <h1 className="mt-6 text-7xl font-black italic leading-none tracking-normal text-white md:text-9xl">
+            <h1 className="mt-6 text-6xl font-black italic leading-none tracking-normal text-white sm:text-7xl md:text-9xl">
               PRSM
             </h1>
 
-            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200 md:text-2xl">
+            <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg md:text-2xl">
               A prism-cut archive for reading queer video game representation
               through characters, identity fields, studios, and narrative
               context.
@@ -257,14 +257,14 @@ export default function Home() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/analytics"
-                className="rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-4 text-sm font-black text-white shadow-[0_0_32px_rgba(34,211,238,0.28)] transition hover:scale-105"
+                className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-4 text-sm font-black text-white shadow-[0_0_32px_rgba(34,211,238,0.28)] transition hover:scale-105 sm:w-auto"
               >
                 View Analytics
               </Link>
 
               <Link
                 href="/chat"
-                className="rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300"
+                className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300 sm:w-auto"
               >
                 Ask PRSM
               </Link>
@@ -277,10 +277,10 @@ export default function Home() {
                 key={stat.label}
                 className="border border-white/10 bg-black/35 p-5 backdrop-blur-xl"
               >
-                <p className="font-mono text-xs uppercase tracking-[0.32em] text-slate-400">
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-400 sm:text-xs sm:tracking-[0.32em]">
                   {stat.label}
                 </p>
-                <p className="mt-3 text-5xl font-black text-white">
+                <p className="mt-3 text-4xl font-black text-white sm:text-5xl">
                   {stat.value}
                 </p>
                 <p className="mt-2 text-sm text-slate-300">{stat.detail}</p>
@@ -290,13 +290,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-white/10 bg-[#05010f] px-8 py-16 md:px-14 lg:px-20">
+      <section className="border-b border-white/10 bg-[#05010f] px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="mx-auto grid max-w-[1700px] gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.4em] text-fuchsia-300">
+            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-fuchsia-300 sm:text-xs sm:tracking-[0.4em]">
               Dataset signal
             </p>
-            <h2 className="mt-4 max-w-2xl text-4xl font-black italic leading-tight md:text-6xl">
+            <h2 className="mt-4 max-w-2xl text-3xl font-black italic leading-tight sm:text-4xl md:text-6xl">
               Representation, measured without flattening the story.
             </h2>
           </div>
@@ -320,17 +320,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#03030a] px-8 py-16 md:px-14 lg:px-20">
+      <section className="bg-[#03030a] px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="mx-auto grid max-w-[1700px] gap-6 lg:grid-cols-3">
           <div className="border border-white/10 bg-white/[0.04] p-6">
-            <p className="font-mono text-xs uppercase tracking-[0.32em] text-cyan-300">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.32em]">
               Top studios
             </p>
             <div className="mt-6 space-y-5">
               {analytics.studios.map((studio) => (
                 <div key={studio.label}>
-                  <div className="mb-2 flex items-center justify-between text-sm text-slate-300">
-                    <span>{studio.label}</span>
+                  <div className="mb-2 flex flex-wrap items-start justify-between gap-2 text-sm text-slate-300">
+                    <span className="min-w-0 break-words">{studio.label}</span>
                     <span>{studio.count}</span>
                   </div>
                   <div className="h-2 overflow-hidden bg-white/10">
@@ -347,14 +347,14 @@ export default function Home() {
           </div>
 
           <div className="border border-white/10 bg-white/[0.04] p-6">
-            <p className="font-mono text-xs uppercase tracking-[0.32em] text-fuchsia-300">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fuchsia-300 sm:text-xs sm:tracking-[0.32em]">
               Genre field
             </p>
             <div className="mt-6 space-y-5">
               {analytics.genres.map((genre) => (
                 <div key={genre.label}>
-                  <div className="mb-2 flex items-center justify-between text-sm text-slate-300">
-                    <span>{genre.label}</span>
+                  <div className="mb-2 flex flex-wrap items-start justify-between gap-2 text-sm text-slate-300">
+                    <span className="min-w-0 break-words">{genre.label}</span>
                     <span>{genre.count}</span>
                   </div>
                   <div className="h-2 overflow-hidden bg-white/10">
@@ -371,10 +371,10 @@ export default function Home() {
           </div>
 
           <div className="border border-white/10 bg-gradient-to-br from-white/[0.08] to-cyan-300/[0.06] p-6">
-            <p className="font-mono text-xs uppercase tracking-[0.32em] text-yellow-200">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-yellow-200 sm:text-xs sm:tracking-[0.32em]">
               Console
             </p>
-            <h3 className="mt-5 text-3xl font-black italic">
+            <h3 className="mt-5 text-2xl font-black italic sm:text-3xl">
               Ask the archive what the numbers mean.
             </h3>
             <p className="mt-4 text-base leading-relaxed text-slate-300">
@@ -383,7 +383,7 @@ export default function Home() {
             </p>
             <Link
               href="/chat"
-              className="mt-8 inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white transition hover:border-cyan-300/50 hover:text-cyan-300"
+              className="mt-8 inline-flex w-full justify-center rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white transition hover:border-cyan-300/50 hover:text-cyan-300 sm:w-auto"
             >
               Open Chat
             </Link>

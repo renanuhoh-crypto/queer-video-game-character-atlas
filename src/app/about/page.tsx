@@ -1,7 +1,7 @@
 import PrismPageHero from "@/components/PrismPageHero";
 
 const PANEL =
-  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-7 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl";
+  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-7";
 
 const goals = [
   {
@@ -35,17 +35,17 @@ export default function AboutPage() {
         description="PRSM is a digital humanities prototype for reading queer game representation through structured data, visual analytics, and AI-assisted querying."
       />
 
-      <section className="relative px-8 py-16 md:px-14 lg:px-20">
+      <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(217,70,239,0.12),transparent_30%),radial-gradient(circle_at_88%_14%,rgba(34,211,238,0.1),transparent_28%)]" />
 
         <div className="relative z-10 mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <section className={PANEL}>
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
-            <p className="font-mono text-xs uppercase tracking-[0.34em] text-cyan-300">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.34em]">
               Description
             </p>
 
-            <div className="mt-6 space-y-5 text-lg leading-relaxed text-slate-300">
+            <div className="mt-5 space-y-5 text-base leading-relaxed text-slate-300 sm:mt-6 sm:text-lg">
               <p>
                 PRSM is an AI-assisted research platform for exploring queer
                 representation in video games.
@@ -68,14 +68,14 @@ export default function AboutPage() {
 
           <aside className={PANEL}>
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
-            <p className="font-mono text-xs uppercase tracking-[0.34em] text-fuchsia-300">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fuchsia-300 sm:text-xs sm:tracking-[0.34em]">
               Quick facts
             </p>
 
             <div className="mt-7 space-y-6">
               {quickFacts.map(([label, value]) => (
                 <div key={label}>
-                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-slate-500">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 sm:text-xs sm:tracking-[0.24em]">
                     {label}
                   </p>
                   <p className="mt-2 text-lg font-black text-white">{value}</p>
@@ -89,7 +89,7 @@ export default function AboutPage() {
           {goals.map((goal) => (
             <section key={goal.title} className={PANEL}>
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
-              <p className="font-mono text-xs uppercase tracking-[0.34em] text-cyan-300">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.34em]">
                 Goal
               </p>
               <h2 className="mt-4 text-2xl font-black italic text-white">
@@ -102,10 +102,10 @@ export default function AboutPage() {
 
         <section className={`${PANEL} relative z-10 mx-auto mt-8 max-w-[1500px]`}>
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
-          <p className="font-mono text-xs uppercase tracking-[0.34em] text-yellow-200">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-yellow-200 sm:text-xs sm:tracking-[0.34em]">
             Research framework
           </p>
-          <h2 className="mt-4 text-3xl font-black italic text-white">
+          <h2 className="mt-4 text-2xl font-black italic text-white sm:text-3xl">
             A guided archive, not an unrestricted chatbot.
           </h2>
 

@@ -35,9 +35,9 @@ const COLORS = ["#ff2df7", "#38e7ff", "#8b5cf6", "#ff9e42", "#f8ff70"];
 const BAR_GRADIENT =
   "linear-gradient(90deg, #ff2df7, #ff9e42, #f8ff70, #38e7ff, #8b5cf6)";
 const PANEL_CLASS =
-  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-6 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl";
+  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-6";
 const EYEBROW_CLASS =
-  "font-mono text-xs uppercase tracking-[0.34em] text-cyan-300";
+  "font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.34em]";
 const TOOLTIP_STYLE = {
   background: "#05010f",
   border: "1px solid rgba(255,255,255,0.16)",
@@ -93,11 +93,11 @@ function StatDonut({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
 
       <p className={EYEBROW_CLASS}>{label}</p>
-      <h3 className="mt-3 text-left text-2xl font-black italic text-white">
+      <h3 className="mt-3 text-left text-xl font-black italic text-white sm:text-2xl">
         {title}
       </h3>
 
-      <div className="relative mx-auto mt-8 h-[220px] w-[220px]">
+      <div className="relative mx-auto mt-7 h-[190px] w-[190px] sm:mt-8 sm:h-[220px] sm:w-[220px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -156,7 +156,9 @@ function BreakdownSection({
     return (
       <div className={PANEL_CLASS}>
         <p className={EYEBROW_CLASS}>Breakdown</p>
-        <h3 className="mt-3 text-2xl font-black italic text-white">{title}</h3>
+        <h3 className="mt-3 text-xl font-black italic text-white sm:text-2xl">
+          {title}
+        </h3>
         <p className="mt-5 text-slate-400">No data registered yet.</p>
       </div>
     );
@@ -167,7 +169,9 @@ function BreakdownSection({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
 
       <p className={EYEBROW_CLASS}>Breakdown</p>
-      <h3 className="mt-3 text-2xl font-black italic text-white">{title}</h3>
+      <h3 className="mt-3 text-xl font-black italic text-white sm:text-2xl">
+        {title}
+      </h3>
 
       <div className="mt-8 space-y-5">
         {entries.map(([label, count]) => {
@@ -175,8 +179,10 @@ function BreakdownSection({
 
           return (
             <div key={label}>
-              <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-                <span className="text-slate-200">{formatLabel(label)}</span>
+              <div className="mb-2 flex flex-wrap items-start justify-between gap-2 text-sm sm:gap-4">
+                <span className="min-w-0 break-words text-slate-200">
+                  {formatLabel(label)}
+                </span>
                 <span className="shrink-0 font-mono text-white">
                   {count} - {percentage}%
                 </span>
@@ -271,13 +277,13 @@ export default function VisualAnalytics({ characters }: Props) {
     .slice(0, 8);
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-6 py-6">
+    <div className="mx-auto w-full max-w-7xl space-y-5 py-4 sm:space-y-6 sm:py-6">
       <div className={`${PANEL_CLASS} text-center`}>
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
 
         <p className={EYEBROW_CLASS}>Dataset Overview</p>
 
-        <h2 className="mt-4 text-7xl font-black italic text-white">
+        <h2 className="mt-4 text-6xl font-black italic text-white sm:text-7xl">
           {totalCharacters}
         </h2>
 
@@ -327,11 +333,11 @@ export default function VisualAnalytics({ characters }: Props) {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
 
         <p className={EYEBROW_CLASS}>Timeline</p>
-        <h3 className="mt-3 text-2xl font-black italic text-white">
+        <h3 className="mt-3 text-xl font-black italic text-white sm:text-2xl">
           Representation by Year
         </h3>
 
-        <div className="mt-8 h-[320px]">
+        <div className="mt-6 h-[260px] sm:mt-8 sm:h-[320px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={yearData}>
               <XAxis dataKey="year" stroke="#94a3b8" />
@@ -347,7 +353,7 @@ export default function VisualAnalytics({ characters }: Props) {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
 
         <p className={EYEBROW_CLASS}>Studios</p>
-        <h3 className="mt-3 text-2xl font-black italic text-white">
+        <h3 className="mt-3 text-xl font-black italic text-white sm:text-2xl">
           Top Studios
         </h3>
 
@@ -357,8 +363,10 @@ export default function VisualAnalytics({ characters }: Props) {
 
             return (
               <div key={studio.studio}>
-                <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-                  <span className="text-slate-200">{studio.studio}</span>
+                <div className="mb-2 flex flex-wrap items-start justify-between gap-2 text-sm sm:gap-4">
+                  <span className="min-w-0 break-words text-slate-200">
+                    {studio.studio}
+                  </span>
                   <span className="shrink-0 font-mono text-white">
                     {studio.count} - {percentage}%
                   </span>

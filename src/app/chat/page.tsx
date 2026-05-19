@@ -80,7 +80,7 @@ export default function Home() {
     {
       role: "assistant",
       content:
-        "Hi! I’m PRSM, your AI-assisted archive guide for queer video game characters. Ask me about characters, identities, representation, games, or intersectionality.",
+        "Hi! I'm PRSM, your AI-assisted archive guide for queer video game characters. Ask me about characters, identities, representation, games, or intersectionality.",
     },
   ]);
 
@@ -185,7 +185,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#020207] text-white">
       {/* HERO */}
-      <section className="relative min-h-[520px] overflow-hidden border-b border-white/10 bg-black">
+      <section className="relative min-h-[560px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[520px]">
         <div className="absolute inset-0 opacity-70">
           <PrismHeroScene />
         </div>
@@ -194,8 +194,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(217,70,239,0.18),transparent_30%),radial-gradient(circle_at_74%_18%,rgba(34,211,238,0.12),transparent_30%)]" />
 
         <header className="relative z-10 border-b border-white/10">
-          <div className="mx-auto flex max-w-[1700px] items-center justify-between px-8 py-6 md:px-14 lg:px-20">
-            <Link href="/" className="text-sm font-black tracking-[0.35em] text-white">
+          <div className="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-5 sm:px-8 md:px-14 md:py-6 lg:px-20">
+            <Link href="/" className="text-sm font-black tracking-[0.28em] text-white sm:tracking-[0.35em]">
               PRSM
             </Link>
 
@@ -219,7 +219,7 @@ export default function Home() {
 
             <Link
               href="/analytics"
-              className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-xs font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300"
+              className="rounded-full border border-white/15 bg-white/10 px-4 py-2.5 text-[11px] font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300 sm:px-5 sm:py-3 sm:text-xs"
             >
               Explore Data
             </Link>
@@ -231,32 +231,32 @@ export default function Home() {
           <div className="prism-bar__shine" />
           <div className="prism-bar__core" />
         </div>
-        <div className="relative z-10 mx-auto max-w-[1700px] px-8 py-20 md:px-14 lg:px-20">
-          <p className="font-mono text-xs uppercase tracking-[0.45em] text-cyan-300">
+        <div className="relative z-10 mx-auto max-w-[1700px] px-5 py-14 sm:px-8 sm:py-20 md:px-14 lg:px-20">
+          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-cyan-300 sm:text-xs sm:tracking-[0.45em]">
             Research console
           </p>
 
-          <h1 className="mt-6 text-7xl font-black italic leading-none tracking-tight md:text-9xl">
+          <h1 className="mt-6 text-6xl font-black italic leading-none tracking-normal sm:text-7xl md:text-9xl">
             <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
               PRSM
             </span>
           </h1>
 
-          <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-300 md:text-2xl">
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg md:text-2xl">
             Mapping queer identities across video game worlds.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="#archive-console"
-              className="rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400 px-6 py-4 text-sm font-black text-white transition hover:scale-105"
+              className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400 px-6 py-4 text-sm font-black text-white transition hover:scale-105 sm:w-auto"
             >
               Ask PRSM
             </a>
 
             <Link
               href="/analytics"
-              className="rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300"
+              className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300 sm:w-auto"
             >
               View Analytics
             </Link>
@@ -266,7 +266,7 @@ export default function Home() {
 
       {/* INFO STRIP */}
       <section className="border-b border-white/10 bg-gradient-to-r from-fuchsia-500/20 via-violet-500/20 to-cyan-400/20">
-        <div className="mx-auto grid max-w-[1700px] gap-4 px-8 py-5 md:grid-cols-3 md:px-14 lg:px-20">
+        <div className="mx-auto grid max-w-[1700px] gap-4 px-5 py-5 sm:grid-cols-2 sm:px-8 md:grid-cols-3 md:px-14 lg:px-20">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
               Dataset
@@ -288,12 +288,12 @@ export default function Home() {
       {/* MAIN */}
       <section
         id="archive-console"
-        className="mx-auto grid max-w-[1700px] gap-6 px-6 py-8 lg:grid-cols-12"
+        className="mx-auto grid max-w-[1700px] gap-6 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-12"
       >
         {/* SIDEBAR */}
         <aside className="lg:col-span-3">
-          <div className="sticky top-6 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-            <h2 className="text-3xl font-black italic">Archive Tools</h2>
+          <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:rounded-[2rem] sm:p-6 lg:sticky lg:top-6">
+            <h2 className="text-2xl font-black italic sm:text-3xl">Archive Tools</h2>
 
             <div className="mt-6 space-y-3">
               {[
@@ -306,7 +306,7 @@ export default function Home() {
                 <button
                   key={item}
                   onClick={() => setInput(item)}
-                  className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-base font-bold text-slate-200 transition hover:border-cyan-300/40 hover:bg-cyan-300/10"
+                  className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-sm font-bold text-slate-200 transition hover:border-cyan-300/40 hover:bg-cyan-300/10 sm:text-base"
                 >
                   {item}
                 </button>
@@ -335,25 +335,25 @@ export default function Home() {
 
         {/* CHAT CONSOLE */}
         <section className="self-start lg:sticky lg:top-6 lg:col-span-9">
-          <div className="flex h-[calc(100vh-14rem)] min-h-[420px] max-h-[720px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
-            <div className="border-b border-white/10 px-8 py-5">
-              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">
+          <div className="flex h-[78svh] min-h-[520px] max-h-[760px] flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl sm:h-[calc(100vh-10rem)] sm:rounded-[2rem] lg:h-[calc(100vh-14rem)] lg:min-h-[420px] lg:max-h-[720px]">
+            <div className="border-b border-white/10 px-5 py-4 sm:px-8 sm:py-5">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.35em]">
                 Research Console
               </p>
-              <h2 className="mt-2 text-2xl font-black italic text-white">
+              <h2 className="mt-2 text-xl font-black italic text-white sm:text-2xl">
                 Ask PRSM about queer game representation
               </h2>
             </div>
 
             <div
               ref={messagesContainerRef}
-              className="min-h-0 flex-1 overflow-y-auto p-8 pb-8"
+              className="min-h-0 flex-1 overflow-y-auto p-4 pb-5 sm:p-8 sm:pb-8"
             >
-              <div className="mx-auto flex max-w-5xl flex-col gap-6">
+              <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:gap-6">
                 {messages.map((message, index) => (
                   <div
                     key={index}
-                    className={`max-w-[78%] rounded-3xl border p-6 ${
+                    className={`max-w-[92%] rounded-3xl border p-5 sm:max-w-[78%] sm:p-6 ${
                       message.role === "user"
                         ? "ml-auto border-white/10 bg-zinc-100 text-black"
                         : "border-fuchsia-400/20 bg-[#12092f] text-white"
@@ -368,7 +368,7 @@ export default function Home() {
                         }`}
                       />
 
-                      <p className="text-xl font-black italic">
+                      <p className="text-lg font-black italic sm:text-xl">
                         {message.role === "user" ? "You" : "PRSM"}
                       </p>
                     </div>
@@ -387,8 +387,8 @@ export default function Home() {
                 ))}
 
                 {loading && (
-                  <div className="max-w-[78%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-6">
-                    <p className="text-lg text-slate-300">
+                  <div className="max-w-[92%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-5 sm:max-w-[78%] sm:p-6">
+                    <p className="text-base text-slate-300 sm:text-lg">
                       {getLoadingMessage(messages)}
                     </p>
                   </div>
@@ -398,8 +398,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-5 pb-5 backdrop-blur-xl">
-              <div className="mx-auto flex max-w-5xl gap-4">
+            <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-4 py-4 backdrop-blur-xl sm:px-5 sm:py-5">
+              <div className="mx-auto flex max-w-5xl gap-3 sm:gap-4">
                 <input
                   ref={inputRef}
                   value={input}
@@ -410,13 +410,13 @@ export default function Home() {
                     }
                   }}
                   placeholder="Ask PRSM about queer game characters..."
-                  className="flex-1 rounded-full border border-fuchsia-400/40 bg-zinc-100 px-6 py-4 text-base text-black outline-none transition focus:border-cyan-300 md:text-lg"
+                  className="min-w-0 flex-1 rounded-full border border-fuchsia-400/40 bg-zinc-100 px-4 py-3 text-sm text-black outline-none transition focus:border-cyan-300 sm:px-6 sm:py-4 sm:text-base md:text-lg"
                 />
 
                 <button
                   onClick={sendMessage}
                   disabled={loading}
-                  className="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-8 py-4 text-xl font-black transition hover:scale-105 disabled:opacity-50"
+                  className="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-base font-black transition hover:scale-105 disabled:opacity-50 sm:px-8 sm:py-4 sm:text-xl"
                 >
                   GO
                 </button>
