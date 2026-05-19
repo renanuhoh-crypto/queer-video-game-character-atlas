@@ -33,6 +33,7 @@ export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const container = messagesContainerRef.current;
@@ -105,6 +106,7 @@ export default function Home() {
       ]);
     } finally {
       setLoading(false);
+      inputRef.current?.focus({ preventScroll: true });
     }
   }
 
@@ -284,8 +286,8 @@ export default function Home() {
         </aside>
 
         {/* CHAT CONSOLE */}
-        <section className="lg:sticky lg:top-6 lg:col-span-9 self-start">
-          <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
+        <section className="self-start lg:sticky lg:top-6 lg:col-span-9">
+          <div className="flex h-[calc(100vh-14rem)] min-h-[420px] max-h-[720px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
             <div className="border-b border-white/10 px-8 py-5">
               <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">
                 Research Console
@@ -348,6 +350,7 @@ export default function Home() {
             <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-5 pb-5 backdrop-blur-xl">
               <div className="mx-auto flex max-w-5xl gap-4">
                 <input
+                  ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => {

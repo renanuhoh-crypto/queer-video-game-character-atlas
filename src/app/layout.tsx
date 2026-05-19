@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#05010f] text-white antialiased">
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
