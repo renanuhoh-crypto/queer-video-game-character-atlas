@@ -19,6 +19,34 @@ type Message = {
   content: string;
 };
 
+function renderMessageContent(content: string, isUser: boolean) {
+  const emphasisClass = isUser
+    ? "font-black text-black"
+    : "font-black text-white";
+
+  return content
+    .split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
+    .map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return (
+          <strong key={index} className={emphasisClass}>
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return (
+          <strong key={index} className={emphasisClass}>
+            {part.slice(1, -1)}
+          </strong>
+        );
+      }
+
+      return <span key={index}>{part}</span>;
+    });
+}
+
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -329,7 +357,10 @@ export default function Home() {
                         message.role === "user" ? "text-black" : "text-slate-100"
                       }`}
                     >
-                      {message.content}
+                      {renderMessageContent(
+                        message.content,
+                        message.role === "user"
+                      )}
                     </div>
                   </div>
                 ))}
@@ -337,7 +368,7 @@ export default function Home() {
                 {loading && (
                   <div className="max-w-[78%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-6">
                     <p className="text-lg text-slate-300">
-                      PRSM is refracting the dataset...
+                      Só um instante, estou conferindo os dados...
                     </p>
                   </div>
                 )}
