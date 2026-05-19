@@ -47,6 +47,32 @@ function renderMessageContent(content: string, isUser: boolean) {
     });
 }
 
+function getLoadingMessage(messages: Message[]) {
+  const latestUserMessage = [...messages]
+    .reverse()
+    .find((message) => message.role === "user")?.content;
+
+  if (!latestUserMessage) {
+    return "One moment, I'm checking the data...";
+  }
+
+  const normalized = latestUserMessage
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  const portuguesePattern =
+    /\b(quantas|quantos|qual|quais|como|sobre|lesbicas|personagens|jogos|dados|espera|oi|ola|voce|tem|sao|pra)\b/;
+  const englishPattern =
+    /\b(wait|what|which|who|where|why|how|can|please|game|games|characters|data|hello|hi)\b/;
+
+  if (portuguesePattern.test(normalized) && !englishPattern.test(normalized)) {
+    return "Um segundo, estou checando os dados...";
+  }
+
+  return "One moment, I'm checking the data...";
+}
+
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -368,7 +394,7 @@ export default function Home() {
                 {loading && (
                   <div className="max-w-[78%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-6">
                     <p className="text-lg text-slate-300">
-                      Só um instante, estou conferindo os dados...
+                      {getLoadingMessage(messages)}
                     </p>
                   </div>
                 )}
