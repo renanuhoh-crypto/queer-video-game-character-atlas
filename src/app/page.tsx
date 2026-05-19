@@ -169,7 +169,13 @@ export default function Home() {
             </a>
           </div>
         </header>
+<div className="relative z-10 h-3 overflow-hidden border-y border-white/10 bg-black">
+  <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 via-orange-300 via-lime-300 via-cyan-300 to-violet-500" />
 
+  <div className="absolute inset-0 opacity-60 mix-blend-screen bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.7)_20%,transparent_40%,rgba(255,255,255,0.5)_60%,transparent_100%)] bg-[length:250%_100%] animate-pulse" />
+
+  <div className="absolute inset-0 blur-lg opacity-60 bg-gradient-to-r from-fuchsia-500 via-cyan-300 to-violet-500" />
+</div>
         <div className="relative z-10 mx-auto max-w-[1700px] px-8 py-20 md:px-14 lg:px-20">
           <p className="text-xs uppercase tracking-[0.45em] text-cyan-300">
             AI-Assisted Queer Game Archive
@@ -220,14 +226,6 @@ export default function Home() {
             </p>
             <p className="mt-1 text-2xl font-black">{playableCount}</p>
             <p className="text-sm text-slate-300">playable characters</p>
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-violet-300">
-              Trans
-            </p>
-            <p className="mt-1 text-2xl font-black">{transCount}</p>
-            <p className="text-sm text-slate-300">trans characters</p>
           </div>
         </div>
       </section>
