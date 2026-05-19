@@ -4,12 +4,13 @@ const mainLinks = [
   { label: "About", href: "/about" },
   { label: "Methodology", href: "/methodology" },
   { label: "Analytics", href: "/analytics" },
+  { label: "Chat", href: "/chat" },
   { label: "Ethics", href: "/ethics" },
 ];
 
 const supportLinks = [
-  { label: "Dataset", href: "/dataset" },
-  { label: "Research Console", href: "/#archive-console" },
+  { label: "Dataset Signal", href: "/" },
+  { label: "Research Console", href: "/chat" },
   { label: "Visual Analytics", href: "/analytics" },
   { label: "PRSM Archive", href: "/" },
 ];
