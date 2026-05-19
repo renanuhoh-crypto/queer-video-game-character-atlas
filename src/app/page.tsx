@@ -279,8 +279,8 @@ export default function Home() {
         </aside>
 
         {/* CHAT CONSOLE */}
-        <section className="lg:col-span-9">
-          <div className="flex h-[760px] min-h-0 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
+        <section className="lg:sticky lg:top-6 lg:col-span-9 self-start">
+          <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
             <div className="border-b border-white/10 px-8 py-5">
               <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">
                 Research Console
