@@ -210,15 +210,7 @@ export default function Home() {
             View Visual Analytics
           </a>
 
-          <div className="mt-8">
-            {loadingCharacters ? (
-              <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-slate-300">
-                Loading analytics...
-              </div>
-            ) : (
-              <VisualAnalytics characters={characters} />
-            )}
-          </div>
+        
         </aside>
 
         <section className="col-span-9 flex min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20 pb-4">
