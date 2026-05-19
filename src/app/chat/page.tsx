@@ -14,6 +14,10 @@ type Character = {
   gender?: string;
   sexuality?: string;
   identity_label?: string[];
+  evidence_source?: string;
+  character_image?: string;
+  image_credit?: string;
+  image_source_url?: string;
 };
 
 type Message = {
@@ -73,6 +77,88 @@ function getLoadingMessage(messages: Message[]) {
   }
 
   return "One moment, I'm checking the data...";
+}
+
+function normalizeForMatch(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function getEvidenceCharacters(content: string, characters: Character[]) {
+  const normalizedContent = normalizeForMatch(content);
+
+  return characters
+    .filter((character) => {
+      if (!character.character_image) return false;
+
+      const characterName = normalizeForMatch(character.character_name);
+      return characterName.length > 1 && normalizedContent.includes(characterName);
+    })
+    .slice(0, 3);
+}
+
+function EvidenceCards({ characters }: { characters: Character[] }) {
+  if (characters.length === 0) return null;
+
+  return (
+    <div className="grid max-w-[92%] gap-3 sm:max-w-[78%] md:grid-cols-2">
+      {characters.map((character) => (
+        <article
+          key={`${character.character_name}-${character.game_title}`}
+          className="overflow-hidden rounded-3xl border border-cyan-300/20 bg-white/[0.04] shadow-[0_0_40px_rgba(34,211,238,0.08)]"
+        >
+          <div className="aspect-[16/10] overflow-hidden bg-black">
+            <img
+              src={character.character_image}
+              alt={`${character.character_name} from ${character.game_title}`}
+              className="h-full w-full object-cover"
+            />
+          </div>
+
+          <div className="space-y-3 p-4">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-300">
+                Evidence card
+              </p>
+              <h3 className="mt-2 text-lg font-black italic text-white">
+                {character.character_name}
+              </h3>
+              <p className="text-sm text-slate-400">{character.game_title}</p>
+            </div>
+
+            {character.image_credit ? (
+              <p className="text-xs leading-relaxed text-slate-400">
+                Image credit:{" "}
+                <span className="text-slate-200">{character.image_credit}</span>
+              </p>
+            ) : null}
+
+            {character.evidence_source ? (
+              <p className="text-xs leading-relaxed text-slate-400">
+                Evidence:{" "}
+                <span className="text-slate-200">
+                  {character.evidence_source}
+                </span>
+              </p>
+            ) : null}
+
+            {character.image_source_url ? (
+              <a
+                href={character.image_source_url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex text-xs font-black uppercase tracking-[0.16em] text-fuchsia-300 transition hover:text-fuchsia-100"
+              >
+                View image source
+              </a>
+            ) : null}
+          </div>
+        </article>
+      ))}
+    </div>
+  );
 }
 
 export default function Home() {
@@ -353,41 +439,61 @@ export default function Home() {
               className="min-h-0 flex-1 overflow-y-auto p-4 pb-5 sm:p-8 sm:pb-8"
             >
               <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:gap-6">
-                {messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`max-w-[92%] rounded-3xl border p-5 sm:max-w-[78%] sm:p-6 ${
-                      message.role === "user"
-                        ? "ml-auto border-white/10 bg-zinc-100 text-black"
-                        : "border-fuchsia-400/20 bg-[#12092f] text-white"
-                    }`}
-                  >
-                    <div className="mb-4 flex items-center gap-3">
+                {messages.map((message, index) => {
+                  const previousUserMessage =
+                    messages
+                      .slice(0, index)
+                      .reverse()
+                      .find((item) => item.role === "user")?.content || "";
+                  const evidenceCharacters =
+                    message.role === "assistant"
+                      ? getEvidenceCharacters(
+                          `${previousUserMessage} ${message.content}`,
+                          characters
+                        )
+                      : [];
+
+                  return (
+                    <div key={index} className="contents">
                       <div
-                        className={`h-4 w-4 rounded-full ${
+                        className={`max-w-[92%] rounded-3xl border p-5 sm:max-w-[78%] sm:p-6 ${
                           message.role === "user"
-                            ? "bg-violet-500"
-                            : "bg-gradient-to-r from-cyan-300 to-fuchsia-400"
+                            ? "ml-auto border-white/10 bg-zinc-100 text-black"
+                            : "border-fuchsia-400/20 bg-[#12092f] text-white"
                         }`}
-                      />
+                      >
+                        <div className="mb-4 flex items-center gap-3">
+                          <div
+                            className={`h-4 w-4 rounded-full ${
+                              message.role === "user"
+                                ? "bg-violet-500"
+                                : "bg-gradient-to-r from-cyan-300 to-fuchsia-400"
+                            }`}
+                          />
 
-                      <p className="text-lg font-black italic sm:text-xl">
-                        {message.role === "user" ? "You" : "PRSM"}
-                      </p>
-                    </div>
+                          <p className="text-lg font-black italic sm:text-xl">
+                            {message.role === "user" ? "You" : "PRSM"}
+                          </p>
+                        </div>
 
-                    <div
-                      className={`whitespace-pre-wrap text-base leading-relaxed md:text-lg ${
-                        message.role === "user" ? "text-black" : "text-slate-100"
-                      }`}
-                    >
-                      {renderMessageContent(
-                        message.content,
-                        message.role === "user"
-                      )}
+                        <div
+                          className={`whitespace-pre-wrap text-base leading-relaxed md:text-lg ${
+                            message.role === "user"
+                              ? "text-black"
+                              : "text-slate-100"
+                          }`}
+                        >
+                          {renderMessageContent(
+                            message.content,
+                            message.role === "user"
+                          )}
+                        </div>
+                      </div>
+
+                      <EvidenceCards characters={evidenceCharacters} />
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 {loading && (
                   <div className="max-w-[92%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-5 sm:max-w-[78%] sm:p-6">
