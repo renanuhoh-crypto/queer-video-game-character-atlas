@@ -1,64 +1,264 @@
 [
   {
+    "character_id": "1",
     "character_name": "Ellie",
     "game_title": "The Last of Us Part II",
+    "release_year": 2020,
     "developer": "Naughty Dog",
-
+    "game_scale": "AAA",
+    "genre": "Action-adventure",
+    "narrative_role": "protagonist",
+    "playable": true,
+    "playable_status": "playable",
+    "identity_label": [],
     "identity_category": [
       "sexual_orientation"
     ],
-
-    "identity_label": [
-      "lesbian"
-    ],
-
-    "playable": true,
-
-    "intersectionality": [
-      "woman",
-      "white"
-    ],
-
-    "representation_quality": "high",
-
     "identity_confirmation": "explicit_in_game",
-
+    "queer_status": "confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
+    "intersectionality": [
+      "no"
+    ],
+    "intersectionality_present": "no",
+    "intersectionality_details": "none",
+    "evidence_source": "Relationship with Dina shown in narrative cutscenes",
+    "notes": "Explicit lesbian protagonist with central romantic storyline",
+    "description": "Explicit lesbian protagonist with central romantic storyline",
     "character_image": "/images/ellie.jpg",
-
-    "description": "Ellie is the protagonist of The Last of Us Part II and is canonically lesbian."
+    "image_credit": "Naughty Dog / Sony Interactive Entertainment",
+    "image_source_url": ""
   },
   {
+    "character_id": "2",
     "character_name": "Lev",
     "game_title": "The Last of Us Part II",
+    "release_year": 2020,
     "developer": "Naughty Dog",
+    "game_scale": "AAA",
+    "genre": "Action-adventure",
+    "narrative_role": "supporting_character",
+    "playable": false,
+    "playable_status": "non_playable",
+    "identity_label": [],
     "identity_category": [
       "gender_identity"
     ],
-    "identity_label": [
-      "trans_man"
-    ],
-    "playable": false,
+    "identity_confirmation": "explicit_in_game",
+    "queer_status": "confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
     "intersectionality": [
-      "trans",
-      "asian"
+      "Race",
+      "Ethnicity",
+      "Asian",
+      "Religion",
+      "Person of Color"
     ],
-    "description": "Lev is a trans boy featured in The Last of Us Part II."
+    "intersectionality_present": "Race; Ethnicity; Asian; Religion; Person of Color",
+    "intersectionality_details": "Trans asian character within a religious community",
+    "evidence_source": "Dialogue referencing identity and deadnaming",
+    "notes": "Identity central to narrative conflict and character arc",
+    "description": "Identity central to narrative conflict and character arc",
+    "character_image": "",
+    "image_credit": "",
+    "image_source_url": ""
   },
   {
+    "character_id": "3",
     "character_name": "Tyler Ronan",
     "game_title": "Tell Me Why",
+    "release_year": 2020,
     "developer": "Dontnod Entertainment",
+    "game_scale": "AA",
+    "genre": "Narrative adventure",
+    "narrative_role": "protagonist",
+    "playable": true,
+    "playable_status": "playable",
+    "identity_label": [],
+    "identity_category": [
+      "gender_identity",
+      "sexual_orientation"
+    ],
+    "identity_confirmation": "explicit_in_game",
+    "queer_status": "confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
+    "intersectionality": [
+      "no"
+    ],
+    "intersectionality_present": "no",
+    "intersectionality_details": "Gay Trans character with socio-economic and family context",
+    "evidence_source": "Narrative and character backstory",
+    "notes": "Highly explicit and integrated trans representation",
+    "description": "Highly explicit and integrated trans representation",
+    "character_image": "",
+    "image_credit": "",
+    "image_source_url": ""
+  },
+  {
+    "character_id": "4",
+    "character_name": "Michael",
+    "game_title": "Tell Me Why",
+    "release_year": 2020,
+    "developer": "Dontnod Entertainment",
+    "game_scale": "AA",
+    "genre": "Narrative adventure",
+    "narrative_role": "supporting_character",
+    "playable": false,
+    "playable_status": "non_playable",
+    "identity_label": [],
+    "identity_category": [
+      "sexual_orientation"
+    ],
+    "identity_confirmation": "explicit_in_game",
+    "queer_status": "confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
+    "intersectionality": [
+      "Race",
+      "Ethnicity",
+      "Indigenous or Two-Spirit",
+      "Person of Color"
+    ],
+    "intersectionality_present": "Race; Ethnicity; Indigenous or Two-Spirit; Person of Color",
+    "intersectionality_details": "Gay indigenous man",
+    "evidence_source": "Narrative and character backstory",
+    "notes": "Highly explicit and integrated trans representation",
+    "description": "Highly explicit and integrated trans representation",
+    "character_image": "",
+    "image_credit": "",
+    "image_source_url": ""
+  },
+  {
+    "character_id": "5",
+    "character_name": "Bloodhound",
+    "game_title": "Apex Legends",
+    "release_year": 2019,
+    "developer": "Respawn Entertainment",
+    "game_scale": "AAA",
+    "genre": "Battle royale; first-person shooter",
+    "narrative_role": "none",
+    "playable": true,
+    "playable_status": "playable",
+    "identity_label": [],
     "identity_category": [
       "gender_identity"
     ],
-    "identity_label": [
-      "trans_man"
-    ],
-    "playable": true,
+    "identity_confirmation": "not_explicit_in_game",
+    "queer_status": "confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
     "intersectionality": [
-      "trans",
-      "indigenous"
+      "no"
     ],
-    "description": "Tyler Ronan is a trans man and one of the protagonists of Tell Me Why."
+    "intersectionality_present": "no",
+    "intersectionality_details": "none",
+    "evidence_source": "according to their official bio, goes by they/them pronouns. The bio says the following: Bloodhound is known across the Outlands as one of the greatest game hunters the Frontier has ever seen - and that's about all anyone knows. Their identity is a mystery wrapped in layers of rumors: they are fabulously wealthy, a bloodthirsty murderer, a Goliath whisperer, a former slave, half bat, and a dozen other things depending on who's doing the whispering.",
+    "notes": "",
+    "description": "according to their official bio, goes by they/them pronouns. The bio says the following: Bloodhound is known across the Outlands as one of the greatest game hunters the Frontier has ever seen - and that's about all anyone knows. Their identity is a mystery wrapped in layers of rumors: they are fabulously wealthy, a bloodthirsty murderer, a Goliath whisperer, a former slave, half bat, and a dozen other things depending on who's doing the whispering.",
+    "character_image": "",
+    "image_credit": "",
+    "image_source_url": ""
+  },
+  {
+    "character_id": "6",
+    "character_name": "Gibraltar",
+    "game_title": "Apex Legends",
+    "release_year": 2019,
+    "developer": "Respawn Entertainment",
+    "game_scale": "AAA",
+    "genre": "Battle royale; first-person shooter",
+    "narrative_role": "none",
+    "playable": true,
+    "playable_status": "playable",
+    "identity_label": [],
+    "identity_category": [
+      "sexual_orientation"
+    ],
+    "identity_confirmation": "not_explicit_in_game",
+    "queer_status": "not confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
+    "intersectionality": [
+      "Race",
+      "Person of color",
+      "Black"
+    ],
+    "intersectionality_present": "Race; Person of color; Black",
+    "intersectionality_details": "Person of color",
+    "evidence_source": "",
+    "notes": "",
+    "description": "",
+    "character_image": "",
+    "image_credit": "",
+    "image_source_url": ""
+  },
+  {
+    "character_id": "7",
+    "character_name": "Chloe Price",
+    "game_title": "Life is Strange",
+    "release_year": 2015,
+    "developer": "Dontnod Entertainment",
+    "game_scale": "AAA; Indie",
+    "genre": "Narrative adventure",
+    "narrative_role": "deuteragonist",
+    "playable": true,
+    "playable_status": "playable",
+    "identity_label": [],
+    "identity_category": [
+      "sexual_orientation"
+    ],
+    "identity_confirmation": "explicit_in_game",
+    "queer_status": "confirmed",
+    "narrative_centrality_score": null,
+    "identity_explicitness_score": null,
+    "player_agency_score": null,
+    "representation_depth_score": null,
+    "stereotype_risk_score": null,
+    "queer_joy_score": null,
+    "total_score": null,
+    "intersectionality": [
+      "no"
+    ],
+    "intersectionality_present": "no",
+    "intersectionality_details": "none",
+    "evidence_source": "Chloe Price is the deuteragonist of Life is Strange. She is also the playable protagonist of Life is Strange: Before the Storm and is mentioned in Life is Strange 2. In both Life is Strange and Life is Strange: Before the Storm, she has possible romantic relationships with another female character. In Life is Strange, Max can romance Chloe, and in Life is Strange: Before the Storm, Chloe can romance Rachel. Although these relationships are determined by the player's choices, there are various parts of both games that hint at Chloe feeling romantic feelings towards Max and Rachel.",
+    "notes": "",
+    "description": "Chloe Price is the deuteragonist of Life is Strange. She is also the playable protagonist of Life is Strange: Before the Storm and is mentioned in Life is Strange 2. In both Life is Strange and Life is Strange: Before the Storm, she has possible romantic relationships with another female character. In Life is Strange, Max can romance Chloe, and in Life is Strange: Before the Storm, Chloe can romance Rachel. Although these relationships are determined by the player's choices, there are various parts of both games that hint at Chloe feeling romantic feelings towards Max and Rachel.",
+    "character_image": "",
+    "image_credit": "",
+    "image_source_url": ""
   }
 ]

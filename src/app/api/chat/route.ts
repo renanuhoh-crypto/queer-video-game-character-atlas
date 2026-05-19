@@ -34,6 +34,8 @@ type Character = {
   notes?: string;
   description?: string;
   character_image?: string;
+  image_credit?: string;
+  image_source_url?: string;
 };
 
 type ChatMessage = {
@@ -141,6 +143,8 @@ function loadCharactersFromCSV(): Character[] {
     notes: row.notes || "",
     description: row.notes || row.evidence_source || "",
     character_image: row.character_image || "",
+    image_credit: row.image_credit || "",
+    image_source_url: row.image_source_url || "",
   }));
 }
 
@@ -167,6 +171,9 @@ Representation Score: ${character.total_score ?? "Not registered"}
 Queer Joy Score: ${character.queer_joy_score ?? "Not registered"}
 Evidence Type: ${formatLabel(character.evidence_type)}
 Evidence Source: ${character.evidence_source || "Not registered"}
+Image Available: ${character.character_image ? "Yes" : "No"}
+Image Credit: ${character.image_credit || "Not registered"}
+Image Source URL: ${character.image_source_url || "Not registered"}
 Notes: ${character.notes || "Not registered"}
 `;
 }
@@ -215,6 +222,7 @@ Grounding rules:
 - If a character contains "Indigenous" inside intersectionality_details, they should be recognized as Indigenous.
 - If information is missing, say that this information is not currently registered in the PRSM dataset, translated into the user's language.
 - Never display raw database values with underscores. Always convert them into readable language.
+- If a character has image information, you may mention that an evidence card is available in the interface, but do not invent image credits or sources.
 
 Tone:
 - Respond in a natural, fluid, conversational academic tone.

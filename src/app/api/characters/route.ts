@@ -43,6 +43,8 @@ export async function GET() {
       notes: row.notes,
       description: row.notes || row.evidence_source || "",
       character_image: row.character_image || "",
+      image_credit: row.image_credit || "",
+      image_source_url: row.image_source_url || "",
     };
   });
 
