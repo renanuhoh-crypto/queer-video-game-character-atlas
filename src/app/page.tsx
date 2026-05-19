@@ -280,7 +280,7 @@ export default function Home() {
 
         {/* CHAT CONSOLE */}
         <section className="lg:sticky lg:top-6 lg:col-span-9 self-start">
-          <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
+          <div className="flex h-[calc(100vh-120px)] min-h-[650px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
             <div className="border-b border-white/10 px-8 py-5">
               <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">
                 Research Console
@@ -290,7 +290,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto p-8 pb-14">
+            <div className="min-h-0 flex-1 overflow-y-auto p-8 pb-8">
               <div className="mx-auto flex max-w-5xl flex-col gap-6">
                 {messages.map((message, index) => (
                   <div
@@ -337,7 +337,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-6 pb-8 backdrop-blur-xl">
+            <div className="sticky bottom-0 z-20 shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-5 pb-5 backdrop-blur-xl">
               <div className="mx-auto flex max-w-5xl gap-4">
                 <input
                   value={input}
