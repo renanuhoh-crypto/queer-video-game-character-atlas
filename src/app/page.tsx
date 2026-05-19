@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import VisualAnalytics from "@/components/VisualAnalytics";
 
 type Character = {
   character_name: string;
@@ -32,8 +31,6 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [loadingCharacters, setLoadingCharacters] = useState(true);
-
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -51,8 +48,6 @@ export default function Home() {
         setCharacters(data.characters || []);
       } catch (error) {
         console.error("Failed loading characters:", error);
-      } finally {
-        setLoadingCharacters(false);
       }
     }
 
@@ -108,184 +103,268 @@ export default function Home() {
     }
   }
 
+  const totalCharacters = characters.length;
+
+  const playableCount = characters.filter(
+    (c) =>
+      c.playable ||
+      c.playable_status?.trim().toLowerCase() === "playable"
+  ).length;
+
+  const transCount = characters.filter((c) => {
+    const values = [c.gender, c.sexuality, ...(c.identity_label || [])]
+      .filter(Boolean)
+      .map((value) => value!.toLowerCase());
+
+    return values.some((value) => value.includes("trans"));
+  }).length;
+
   return (
-    <main className="h-screen overflow-hidden bg-[#05010f] text-white">
-      <header className="border-b border-white/10 bg-[#05010f]">
-        <div className="mx-auto flex max-w-[1700px] items-center justify-between px-8 py-6 md:px-14 lg:px-20">
-          <a href="/" className="group">
-            <p className="text-xs uppercase tracking-[0.45em] text-cyan-300">
-              AI-Assisted Queer Game Archive
-            </p>
+    <main className="min-h-screen bg-[#03030a] text-white">
+      {/* HERO */}
+      <section className="relative min-h-[520px] overflow-hidden border-b border-white/10 bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_40%,rgba(34,211,238,0.20),transparent_34%),radial-gradient(circle_at_45%_25%,rgba(217,70,239,0.18),transparent_30%),radial-gradient(circle_at_85%_55%,rgba(250,204,21,0.12),transparent_22%)]" />
 
-            <h1 className="mt-3 text-5xl font-black italic leading-none tracking-tight md:text-7xl">
-              <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
-                PRSM
-              </span>
-            </h1>
+        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:40px_40px]" />
 
-            <p className="mt-4 max-w-4xl text-base leading-relaxed text-slate-300 md:text-lg">
-              Mapping queer identities across video game worlds.
-            </p>
-          </a>
+        <div className="absolute right-[-8%] top-1/2 h-32 w-[70%] -translate-y-1/2 -rotate-6 animate-pulse bg-gradient-to-r from-transparent via-fuchsia-400/50 via-cyan-300/50 to-yellow-200/60 blur-2xl" />
 
-          <div className="hidden items-center gap-4 md:flex">
-            <a
-              href="/analytics"
-              className="rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-3 text-xs font-black text-white transition hover:scale-105"
-            >
-              Analytics
-            </a>
-
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-right">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-slate-400">
-                Dataset Mode
-              </p>
-
-              <p className="mt-1 text-xs font-bold text-fuchsia-300">
-                Prototype v1.0
-              </p>
-            </div>
-          </div>
+        <div className="absolute right-[28%] top-1/2 h-32 w-32 -translate-y-1/2 rotate-45 border border-white/20 bg-white/5 backdrop-blur-xl shadow-[0_0_90px_rgba(34,211,238,0.35)]">
+          <div className="absolute inset-3 border border-fuchsia-300/30" />
         </div>
 
-        <nav className="border-t border-white/10 bg-gradient-to-r from-fuchsia-500/20 via-violet-500/20 to-cyan-400/20">
-          <div className="mx-auto flex max-w-[1700px] overflow-x-auto px-8 md:px-14 lg:px-20">
-            {[
-              ["Home", "/"],
-              ["About", "/about"],
-              ["Methodology", "/methodology"],
-              ["Analytics", "/analytics"],
-              ["Dataset", "/dataset"],
-              ["Ethics", "/ethics"],
-            ].map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className="border-r border-white/10 px-4 py-3 text-xs font-bold text-slate-200 transition first:border-l hover:bg-white/10 hover:text-cyan-300 md:text-sm"
-              >
-                {label}
+        <div className="absolute right-[18%] top-[38%] h-2 w-52 rotate-[-18deg] rounded-full bg-cyan-300/70 blur-sm" />
+        <div className="absolute right-[12%] top-[52%] h-2 w-72 rotate-[12deg] rounded-full bg-fuchsia-400/60 blur-sm" />
+        <div className="absolute right-[8%] top-[64%] h-2 w-56 rotate-[-5deg] rounded-full bg-yellow-200/60 blur-sm" />
+
+        <header className="relative z-10 border-b border-white/10">
+          <div className="mx-auto flex max-w-[1700px] items-center justify-between px-8 py-6 md:px-14 lg:px-20">
+            <a href="/" className="text-sm font-black tracking-[0.35em] text-white">
+              PRSM
+            </a>
+
+            <nav className="hidden items-center gap-8 text-sm font-bold text-slate-300 md:flex">
+              <a href="/about" className="transition hover:text-cyan-300">
+                About
               </a>
-            ))}
+              <a href="/methodology" className="transition hover:text-cyan-300">
+                Methodology
+              </a>
+              <a href="/analytics" className="transition hover:text-cyan-300">
+                Analytics
+              </a>
+              <a href="/dataset" className="transition hover:text-cyan-300">
+                Dataset
+              </a>
+              <a href="/ethics" className="transition hover:text-cyan-300">
+                Ethics
+              </a>
+            </nav>
+
+            <a
+              href="/analytics"
+              className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-xs font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300"
+            >
+              Explore Data
+            </a>
           </div>
-        </nav>
-      </header>
+        </header>
 
-      <div className="grid h-[calc(100vh-214px)] min-h-0 grid-cols-12 gap-6 overflow-hidden px-6 pt-6 pb-10">
-        <aside className="col-span-3 min-h-0 overflow-y-auto rounded-3xl border border-white/10 bg-white/[0.03] p-5 pb-12">
-          <h2 className="mb-5 text-3xl font-black italic">Archive Tools</h2>
+        <div className="relative z-10 mx-auto max-w-[1700px] px-8 py-20 md:px-14 lg:px-20">
+          <p className="text-xs uppercase tracking-[0.45em] text-cyan-300">
+            AI-Assisted Queer Game Archive
+          </p>
 
-          <div className="space-y-3">
-            {[
-              "Queer protagonists",
-              "Trans characters",
-              "Playable characters",
-              "Intersectionality",
-              "Compare games",
-            ].map((item) => (
-              <button
-                key={item}
-                onClick={() => setInput(item)}
-                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left text-base transition hover:border-fuchsia-400/40 hover:bg-fuchsia-500/10"
-              >
-                {item}
-              </button>
-            ))}
+          <h1 className="mt-6 text-7xl font-black italic leading-none tracking-tight md:text-9xl">
+            <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
+              PRSM
+            </span>
+          </h1>
+
+          <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-300 md:text-2xl">
+            Mapping queer identities across video game worlds.
+          </p>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#archive-console"
+              className="rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400 px-6 py-4 text-sm font-black text-white transition hover:scale-105"
+            >
+              Ask PRSM
+            </a>
+
+            <a
+              href="/analytics"
+              className="rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300"
+            >
+              View Analytics
+            </a>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-5">
-            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-cyan-300">
-              Suggested Prompt
+      {/* INFO STRIP */}
+      <section className="border-b border-white/10 bg-gradient-to-r from-fuchsia-500/20 via-violet-500/20 to-cyan-400/20">
+        <div className="mx-auto grid max-w-[1700px] gap-4 px-8 py-5 md:grid-cols-3 md:px-14 lg:px-20">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+              Dataset
             </p>
-
-            <p className="text-base leading-relaxed text-slate-200">
-              Compare Ellie and Lev in terms of identity, role, and
-              representation.
-            </p>
+            <p className="mt-1 text-2xl font-black">{totalCharacters}</p>
+            <p className="text-sm text-slate-300">registered characters</p>
           </div>
 
-          <a
-            href="/analytics"
-            className="mt-8 block rounded-3xl border border-fuchsia-400/30 bg-fuchsia-500/10 p-5 text-center text-base font-bold text-fuchsia-200 transition hover:bg-fuchsia-500/20"
-          >
-            View Visual Analytics
-          </a>
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-fuchsia-300">
+              Playable
+            </p>
+            <p className="mt-1 text-2xl font-black">{playableCount}</p>
+            <p className="text-sm text-slate-300">playable characters</p>
+          </div>
 
-        
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-violet-300">
+              Trans
+            </p>
+            <p className="mt-1 text-2xl font-black">{transCount}</p>
+            <p className="text-sm text-slate-300">trans characters</p>
+          </div>
+        </div>
+      </section>
+
+      {/* MAIN */}
+      <section
+        id="archive-console"
+        className="mx-auto grid max-w-[1700px] gap-6 px-6 py-8 lg:grid-cols-12"
+      >
+        {/* SIDEBAR */}
+        <aside className="lg:col-span-3">
+          <div className="sticky top-6 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+            <h2 className="text-3xl font-black italic">Archive Tools</h2>
+
+            <div className="mt-6 space-y-3">
+              {[
+                "Queer protagonists",
+                "Trans characters",
+                "Playable characters",
+                "Intersectionality",
+                "Compare games",
+              ].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => setInput(item)}
+                  className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-base font-bold text-slate-200 transition hover:border-cyan-300/40 hover:bg-cyan-300/10"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-5">
+              <p className="mb-2 text-xs uppercase tracking-[0.25em] text-cyan-300">
+                Suggested Prompt
+              </p>
+
+              <p className="text-base leading-relaxed text-slate-200">
+                Compare Ellie and Lev in terms of identity, role, and
+                representation.
+              </p>
+            </div>
+
+            <a
+              href="/analytics"
+              className="mt-8 block rounded-3xl border border-fuchsia-400/30 bg-fuchsia-500/10 p-5 text-center text-base font-black text-fuchsia-200 transition hover:bg-fuchsia-500/20"
+            >
+              View Visual Analytics
+            </a>
+          </div>
         </aside>
 
-        <section className="col-span-9 flex min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/20 pb-4">
-          <div className="min-h-0 flex-1 overflow-y-auto p-8 pb-14">
-            <div className="mx-auto flex max-w-5xl flex-col gap-6">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`max-w-[78%] rounded-3xl border p-6 ${
-                    message.role === "user"
-                      ? "ml-auto border-white/10 bg-zinc-100 text-black"
-                      : "border-fuchsia-400/20 bg-[#12092f] text-white"
-                  }`}
-                >
-                  <div className="mb-4 flex items-center gap-3">
-                    <div
-                      className={`h-4 w-4 rounded-full ${
-                        message.role === "user"
-                          ? "bg-violet-500"
-                          : "bg-gradient-to-r from-cyan-300 to-fuchsia-400"
-                      }`}
-                    />
+        {/* CHAT CONSOLE */}
+        <section className="lg:col-span-9">
+          <div className="flex h-[760px] min-h-0 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-[0_0_80px_rgba(217,70,239,0.08)] backdrop-blur-xl">
+            <div className="border-b border-white/10 px-8 py-5">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">
+                Research Console
+              </p>
+              <h2 className="mt-2 text-2xl font-black italic text-white">
+                Ask PRSM about queer game representation
+              </h2>
+            </div>
 
-                    <p className="text-xl font-black italic">
-                      {message.role === "user" ? "You" : "PRSM"}
-                    </p>
-                  </div>
-
+            <div className="min-h-0 flex-1 overflow-y-auto p-8 pb-14">
+              <div className="mx-auto flex max-w-5xl flex-col gap-6">
+                {messages.map((message, index) => (
                   <div
-                    className={`whitespace-pre-wrap text-base leading-relaxed md:text-lg ${
-                      message.role === "user" ? "text-black" : "text-slate-100"
+                    key={index}
+                    className={`max-w-[78%] rounded-3xl border p-6 ${
+                      message.role === "user"
+                        ? "ml-auto border-white/10 bg-zinc-100 text-black"
+                        : "border-fuchsia-400/20 bg-[#12092f] text-white"
                     }`}
                   >
-                    {message.content}
+                    <div className="mb-4 flex items-center gap-3">
+                      <div
+                        className={`h-4 w-4 rounded-full ${
+                          message.role === "user"
+                            ? "bg-violet-500"
+                            : "bg-gradient-to-r from-cyan-300 to-fuchsia-400"
+                        }`}
+                      />
+
+                      <p className="text-xl font-black italic">
+                        {message.role === "user" ? "You" : "PRSM"}
+                      </p>
+                    </div>
+
+                    <div
+                      className={`whitespace-pre-wrap text-base leading-relaxed md:text-lg ${
+                        message.role === "user" ? "text-black" : "text-slate-100"
+                      }`}
+                    >
+                      {message.content}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
-              {loading && (
-                <div className="max-w-[78%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-6">
-                  <p className="text-lg text-slate-300">
-                    PRSM is analyzing the dataset...
-                  </p>
-                </div>
-              )}
+                {loading && (
+                  <div className="max-w-[78%] rounded-3xl border border-fuchsia-400/20 bg-[#12092f] p-6">
+                    <p className="text-lg text-slate-300">
+                      PRSM is refracting the dataset...
+                    </p>
+                  </div>
+                )}
 
-              <div ref={messagesEndRef} />
+                <div ref={messagesEndRef} />
+              </div>
             </div>
-          </div>
 
-          <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-6 pb-12 backdrop-blur-xl">
-            <div className="mx-auto flex max-w-5xl gap-4">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    sendMessage();
-                  }
-                }}
-                placeholder="Ask PRSM about queer game characters..."
-                className="flex-1 rounded-3xl border border-fuchsia-400/40 bg-zinc-100 px-6 py-4 text-base text-black outline-none transition focus:border-cyan-300 md:text-lg"
-              />
+            <div className="shrink-0 border-t border-white/10 bg-[#090313]/95 px-5 pt-6 pb-8 backdrop-blur-xl">
+              <div className="mx-auto flex max-w-5xl gap-4">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      sendMessage();
+                    }
+                  }}
+                  placeholder="Ask PRSM about queer game characters..."
+                  className="flex-1 rounded-full border border-fuchsia-400/40 bg-zinc-100 px-6 py-4 text-base text-black outline-none transition focus:border-cyan-300 md:text-lg"
+                />
 
-              <button
-                onClick={sendMessage}
-                disabled={loading}
-                className="rounded-3xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-8 py-4 text-xl font-black transition hover:scale-105 disabled:opacity-50"
-              >
-                GO
-              </button>
+                <button
+                  onClick={sendMessage}
+                  disabled={loading}
+                  className="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-8 py-4 text-xl font-black transition hover:scale-105 disabled:opacity-50"
+                >
+                  GO
+                </button>
+              </div>
             </div>
           </div>
         </section>
-      </div>
+      </section>
     </main>
   );
 }
