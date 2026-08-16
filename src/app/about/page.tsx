@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const PANEL =
-  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-7";
+  "pq-panel relative overflow-hidden p-5 sm:p-7";
 
 const goals = [
   {
@@ -34,7 +34,7 @@ const quickFacts = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#020207] text-white">
+    <main className="pq-page min-h-screen bg-[#f7f7fb] text-[#12152b]">
       <PrismPageHero
         eyebrow="Archive identity"
         title="About"

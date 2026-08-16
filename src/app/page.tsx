@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import PrismHeroScene from "@/components/PrismHeroScene";
+import QuiuFlightGame from "@/components/QuiuFlightGame";
 
 type Character = {
   character_name: string;
@@ -182,124 +183,90 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#020207] text-white">
-      <section className="relative min-h-[760px] overflow-hidden border-b border-white/10 bg-black sm:min-h-[88vh]">
-        <PrismHeroScene />
+    <main className="min-h-screen overflow-hidden bg-[#f7f7fb] text-[#12152b]">
+      <section className="space-landing relative isolate min-h-[860px] overflow-hidden text-white">
+        <div className="space-landing-stars" aria-hidden="true" />
+        <div className="space-comet space-comet--one" aria-hidden="true" />
+        <div className="space-comet space-comet--two" aria-hidden="true" />
 
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.68)_34%,rgba(0,0,0,0.18)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(217,70,239,0.18),transparent_28%),radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.16),transparent_28%)]" />
-
-        <header className="relative z-10 border-b border-white/10">
-          <div className="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-5 sm:px-8 md:px-14 md:py-6 lg:px-20">
-            <Link
-              href="/"
-              className="text-sm font-black tracking-[0.28em] text-white sm:tracking-[0.42em]"
-            >
-              Press Q
+        <header className="relative z-40 px-4 pt-4 sm:px-7 sm:pt-6 lg:px-10">
+          <div className="space-topbar mx-auto flex max-w-[1700px] items-center justify-between gap-4 px-4 py-3 sm:px-5">
+            <Link href="/" aria-label="Press Q home" className="flex items-center gap-3 rounded-full pr-3 text-white">
+              <Image
+                src="/press-q-icon.png"
+                alt=""
+                width={624}
+                height={667}
+                priority
+                className="h-11 w-auto sm:h-14"
+              />
+              <span className="text-sm font-black uppercase tracking-[0.18em] sm:text-base">
+                Press Q
+              </span>
             </Link>
 
-            <nav className="hidden items-center gap-5 text-sm font-bold text-slate-300 md:flex lg:gap-8">
-              <Link href="/about" className="transition hover:text-cyan-300">
-                About
-              </Link>
-              <Link
-                href="/methodology"
-                className="transition hover:text-cyan-300"
-              >
-                Methodology
-              </Link>
-              <Link
-                href="/analytics"
-                className="transition hover:text-cyan-300"
-              >
-                Analytics
-              </Link>
-              <Link href="/chat" className="transition hover:text-cyan-300">
-                Chat
-              </Link>
-              <Link
-                href="/contribute"
-                className="transition hover:text-cyan-300"
-              >
-                Contribute
-              </Link>
-              <Link href="/ethics" className="transition hover:text-cyan-300">
-                Ethics
-              </Link>
+            <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.12em] text-white/78 md:flex xl:gap-8">
+              <Link href="/about">About</Link>
+              <Link href="/methodology">Methodology</Link>
+              <Link href="/analytics">Analytics</Link>
+              <Link href="/contribute">Contribute</Link>
+              <Link href="/ethics">Ethics</Link>
             </nav>
 
-            <Link
-              href="/analytics"
-              className="rounded-full border border-white/15 bg-white/10 px-4 py-2.5 text-[11px] font-black text-white backdrop-blur-xl transition hover:border-cyan-300/50 hover:text-cyan-300 sm:px-5 sm:py-3 sm:text-xs"
-            >
-              Explore Data
+            <Link href="/chat" className="space-nav-button px-4 py-2.5 text-[10px] sm:px-6 sm:py-3 sm:text-xs">
+              Ask Quiu
             </Link>
           </div>
         </header>
 
-        <div className="prism-bar relative z-10 h-3 overflow-hidden border-y border-white/10 bg-black">
-          <div className="prism-bar__glow" />
-          <div className="prism-bar__spectrum" />
-          <div className="prism-bar__shine" />
-          <div className="prism-bar__core" />
-        </div>
-
-        <div className="relative z-10 mx-auto grid max-w-[1700px] gap-10 px-5 py-12 sm:px-8 sm:py-14 md:px-14 lg:grid-cols-[1fr_480px] lg:px-20 lg:py-20">
-          <div className="max-w-4xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-cyan-300 sm:text-xs sm:tracking-[0.45em]">
-              AI-Assisted Queer Game Archive
-            </p>
-
-            <h1 className="mt-6 text-6xl font-black italic leading-none tracking-normal text-white sm:text-7xl md:text-9xl">
-              Press Q
+        <div className="relative z-20 mx-auto grid max-w-[1600px] gap-10 px-5 pb-14 pt-10 sm:px-8 sm:pt-14 md:px-14 lg:min-h-[760px] lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14 lg:px-20 lg:py-16">
+          <div className="max-w-2xl">
+            <h1 className="text-[clamp(3.4rem,7.4vw,7.5rem)] font-black leading-[0.85] tracking-[-0.055em] text-white">
+              Press start on queer game history.
             </h1>
-
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg md:text-2xl">
-              A prism-cut archive for reading queer video game representation
-              through characters, identity fields, studios, and narrative
-              context.
+            <p className="mt-7 max-w-xl text-base font-bold leading-relaxed text-white/70 sm:text-lg md:text-xl">
+              Explore characters, identities, evidence, and representation — or
+              warm up with a quick flight through the archive.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/analytics"
-                className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-4 text-sm font-black text-white shadow-[0_0_32px_rgba(34,211,238,0.28)] transition hover:scale-105 sm:w-auto"
-              >
-                View Analytics
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/analytics" className="space-hero-button space-hero-button--primary w-full px-7 py-4 text-sm sm:w-auto">
+                Explore the archive
               </Link>
-
-              <Link
-                href="/chat"
-                className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300 sm:w-auto"
-              >
+              <Link href="/chat" className="space-hero-button space-hero-button--secondary w-full px-7 py-4 text-sm sm:w-auto">
                 Ask Quiu
               </Link>
             </div>
+
+            <div className="mt-10 grid grid-cols-3 gap-2 sm:gap-3">
+              {heroStats.map((stat, index) => (
+                <div key={stat.label} className="space-stat-card px-3 py-4 sm:px-5 sm:py-5">
+                  <p className="text-[8px] font-black uppercase tracking-[0.16em] text-white/50 sm:text-[9px]">
+                    0{index + 1} · {stat.label}
+                  </p>
+                  <p className="mt-2 text-2xl font-black text-white sm:text-4xl">{stat.value}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid content-end gap-4">
-            {heroStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="border border-white/10 bg-black/35 p-5 backdrop-blur-xl"
-              >
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-400 sm:text-xs sm:tracking-[0.32em]">
-                  {stat.label}
-                </p>
-                <p className="mt-3 text-4xl font-black text-white sm:text-5xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-slate-300">{stat.detail}</p>
-              </div>
-            ))}
+          <div className="min-w-0">
+            <QuiuFlightGame />
+          </div>
+        </div>
+
+        <div className="relative z-20 border-t border-white/10 bg-[#151a4a]/35 px-5 py-3 text-[9px] font-black uppercase tracking-[0.18em] text-white/50 backdrop-blur-md sm:px-8 md:px-14 lg:px-20">
+          <div className="mx-auto flex max-w-[1600px] flex-wrap justify-between gap-2">
+            <span>Queer games · evidence · context</span>
+            <span>Press Q dataset / living index</span>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-white/10 bg-[#05010f] px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
+      <section className="iridescent-content border-b border-black/10 px-5 py-12 text-[#17111d] sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="mx-auto grid max-w-[1700px] gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-fuchsia-300 sm:text-xs sm:tracking-[0.4em]">
+            <p className="font-mono text-[11px] font-black uppercase tracking-[0.24em] text-[#4f5fe7] sm:text-xs sm:tracking-[0.4em]">
               Press Q dataset signal
             </p>
             <h2 className="mt-4 max-w-2xl text-3xl font-black italic leading-tight sm:text-4xl md:text-6xl">
@@ -311,25 +278,25 @@ export default function Home() {
             {signalCards.map((card) => (
               <div
                 key={card.label}
-                className="border border-white/10 bg-white/[0.04] p-5"
+                className="holo-light-card p-5"
               >
-                <p className="text-sm font-bold text-slate-300">
+                <p className="text-sm font-bold text-[#392d3f]/70">
                   {card.label}
                 </p>
-                <p className="mt-4 text-4xl font-black text-cyan-300">
+                <p className="iridescent-ink mt-4 text-4xl font-black">
                   {card.value}
                 </p>
-                <p className="mt-2 text-sm text-slate-400">{card.detail}</p>
+                <p className="mt-2 text-sm text-[#392d3f]/65">{card.detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#03030a] px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
+      <section className="iridescent-night px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="mx-auto grid max-w-[1700px] gap-6 lg:grid-cols-3">
-          <div className="border border-white/10 bg-white/[0.04] p-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.32em]">
+          <div className="holo-night-card p-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#a7e1ee] sm:text-xs sm:tracking-[0.32em]">
               Top studios
             </p>
             <div className="mt-6 space-y-5">
@@ -341,7 +308,7 @@ export default function Home() {
                   </div>
                   <div className="h-2 overflow-hidden bg-white/10">
                     <div
-                      className="h-full bg-gradient-to-r from-fuchsia-500 to-cyan-300"
+                      className="h-full bg-gradient-to-r from-[#5f70e9] to-[#8fd9ec]"
                       style={{
                         width: `${percent(studio.count, analytics.total)}%`,
                       }}
@@ -352,8 +319,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border border-white/10 bg-white/[0.04] p-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fuchsia-300 sm:text-xs sm:tracking-[0.32em]">
+          <div className="holo-night-card p-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#b8c3ff] sm:text-xs sm:tracking-[0.32em]">
               Genre field
             </p>
             <div className="mt-6 space-y-5">
@@ -365,7 +332,7 @@ export default function Home() {
                   </div>
                   <div className="h-2 overflow-hidden bg-white/10">
                     <div
-                      className="h-full bg-gradient-to-r from-violet-500 to-yellow-200"
+                      className="h-full bg-gradient-to-r from-[#4f5fe7] to-[#b4a7ef]"
                       style={{
                         width: `${percent(genre.count, analytics.total)}%`,
                       }}
@@ -376,8 +343,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border border-white/10 bg-gradient-to-br from-white/[0.08] to-cyan-300/[0.06] p-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-yellow-200 sm:text-xs sm:tracking-[0.32em]">
+          <div className="holo-night-card p-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#b8c3ff] sm:text-xs sm:tracking-[0.32em]">
               Console
             </p>
             <h3 className="mt-5 text-2xl font-black italic sm:text-3xl">

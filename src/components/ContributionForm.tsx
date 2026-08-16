@@ -124,21 +124,21 @@ export default function ContributionForm() {
       <div className="grid gap-4 md:grid-cols-2">
         {fields.map((field) => (
           <label key={field.id} className="block">
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-300">
+            <span className="font-mono text-[11px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
               {field.label}
             </span>
             <input
               value={values[field.id]}
               onChange={(event) => updateValue(field.id, event.target.value)}
               placeholder={field.placeholder}
-              className="mt-2 w-full border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300"
+              className="mt-2 w-full border border-[#d3d8ed] bg-white px-4 py-3 text-sm text-[#12152b] outline-none transition placeholder:text-[#9da3b9] focus:border-[#4f5fe7]"
             />
           </label>
         ))}
       </div>
 
       <label className="block">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-300">
+        <span className="font-mono text-[11px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
           Evidence / context
         </span>
         <textarea
@@ -146,26 +146,26 @@ export default function ContributionForm() {
           onChange={(event) => updateValue("evidence", event.target.value)}
           placeholder="Describe where the representation appears, how it is confirmed, and any context that helps review the entry."
           rows={5}
-          className="mt-2 w-full resize-y border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300"
+          className="mt-2 w-full resize-y border border-[#d3d8ed] bg-white px-4 py-3 text-sm text-[#12152b] outline-none transition placeholder:text-[#9da3b9] focus:border-[#4f5fe7]"
         />
       </label>
 
       <label className="block">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-300">
+        <span className="font-mono text-[11px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
           Contributor contact
         </span>
         <input
           value={values.contact}
           onChange={(event) => updateValue("contact", event.target.value)}
           placeholder="Optional email, handle, or name for follow-up"
-          className="mt-2 w-full border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300"
+          className="mt-2 w-full border border-[#d3d8ed] bg-white px-4 py-3 text-sm text-[#12152b] outline-none transition placeholder:text-[#9da3b9] focus:border-[#4f5fe7]"
         />
       </label>
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <button
           type="submit"
-          className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-4 text-sm font-black text-white shadow-[0_0_32px_rgba(34,211,238,0.22)] transition hover:scale-[1.01] sm:w-auto"
+          className="pq-primary-button w-full px-6 py-4 text-sm sm:w-auto"
         >
           Build contribution draft
         </button>
@@ -173,7 +173,7 @@ export default function ContributionForm() {
         <button
           type="button"
           onClick={copyDraft}
-          className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white transition hover:border-cyan-300/50 hover:text-cyan-300 sm:w-auto"
+          className="pq-secondary-button w-full px-6 py-4 text-sm sm:w-auto"
         >
           {copied ? "Copied" : "Copy draft"}
         </button>
@@ -181,14 +181,14 @@ export default function ContributionForm() {
 
       {draft ? (
         <label className="block">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-fuchsia-300">
+          <span className="font-mono text-[11px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
             Submission draft
           </span>
           <textarea
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
             rows={12}
-            className="mt-2 w-full resize-y border border-white/10 bg-black/50 px-4 py-3 font-mono text-xs leading-relaxed text-slate-200 outline-none focus:border-fuchsia-300"
+            className="mt-2 w-full resize-y border border-[#d3d8ed] bg-white px-4 py-3 font-mono text-xs leading-relaxed text-[#3f4664] outline-none focus:border-[#4f5fe7]"
           />
         </label>
       ) : null}

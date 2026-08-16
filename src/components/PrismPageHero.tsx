@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import PrismHeroScene from "@/components/PrismHeroScene";
 
 type PrismPageHeroProps = {
   eyebrow: string;
@@ -15,45 +15,65 @@ export default function PrismPageHero({
   description,
 }: PrismPageHeroProps) {
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-black">
-      <div className="absolute inset-0 opacity-65">
-        <PrismHeroScene />
-      </div>
+    <section className="pq-page-hero relative overflow-hidden border-b border-[#dfe3f3]">
+      <header className="relative z-20 px-4 pt-4 sm:px-7 sm:pt-6 lg:px-10">
+        <div className="pq-topbar mx-auto flex max-w-[1700px] items-center justify-between gap-4 px-4 py-3 sm:px-5">
+          <Link href="/" aria-label="Press Q home" className="flex items-center gap-3">
+            <Image
+              src="/press-q-icon.png"
+              alt=""
+              width={624}
+              height={667}
+              className="h-10 w-auto sm:h-12"
+            />
+            <span className="text-sm font-black uppercase tracking-[0.22em] sm:text-base">
+              Press Q
+            </span>
+          </Link>
 
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.76)_44%,rgba(0,0,0,0.38)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(217,70,239,0.18),transparent_30%),radial-gradient(circle_at_74%_18%,rgba(34,211,238,0.12),transparent_30%)]" />
+          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#3b405f] md:flex xl:gap-8">
+            <Link href="/about">About</Link>
+            <Link href="/methodology">Methodology</Link>
+            <Link href="/analytics">Analytics</Link>
+            <Link href="/contribute">Contribute</Link>
+            <Link href="/ethics">Ethics</Link>
+          </nav>
 
-      <div className="relative z-10 mx-auto max-w-[1700px] px-5 pb-12 pt-8 sm:px-8 md:px-14 md:pb-16 md:pt-10 lg:px-20">
-        <Link
-          href="/"
-          className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 transition hover:text-cyan-100 sm:text-xs sm:tracking-[0.32em]"
-        >
-          Back to Press Q
-        </Link>
+          <Link href="/chat" className="pq-primary-button px-4 py-2.5 text-[10px] sm:px-6 sm:py-3 sm:text-xs">
+            Ask Quiu
+          </Link>
+        </div>
+      </header>
 
-        <div className="mt-10 max-w-5xl sm:mt-14">
-          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-fuchsia-300 sm:text-xs sm:tracking-[0.45em]">
+      <div className="pq-spectrum-rule mx-auto mt-4 max-w-[1700px]" />
+
+      <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:grid-cols-[1fr_0.38fr] lg:px-20">
+        <div className="max-w-5xl">
+          <p className="pq-eyebrow">
             {eyebrow}
           </p>
 
-          <h1 className="mt-5 break-words text-5xl font-black italic leading-none tracking-normal sm:text-6xl md:text-8xl">
+          <h1 className="mt-5 break-words text-5xl font-black uppercase leading-[0.88] tracking-[-0.055em] text-[#12152b] sm:text-6xl md:text-8xl">
             {title}{" "}
-            <span className="bg-gradient-to-r from-fuchsia-300 via-cyan-200 to-yellow-100 bg-clip-text text-transparent">
+            <span className="text-[#4f5fe7]">
               {accent}
             </span>
           </h1>
 
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg md:mt-6 md:text-2xl">
+          <p className="mt-5 max-w-3xl text-base font-medium leading-relaxed text-[#5d6480] sm:text-lg md:mt-6 md:text-xl">
             {description}
           </p>
         </div>
-      </div>
 
-      <div className="prism-bar relative z-10 h-3 overflow-hidden border-y border-white/10 bg-black">
-        <div className="prism-bar__glow" />
-        <div className="prism-bar__spectrum" />
-        <div className="prism-bar__shine" />
-        <div className="prism-bar__core" />
+        <div className="pq-page-emblem relative mx-auto hidden aspect-square w-full max-w-[240px] items-center justify-center lg:flex" aria-hidden="true">
+          <Image
+            src="/press-q-icon.png"
+            alt=""
+            width={624}
+            height={667}
+            className="h-auto w-[72%] opacity-90"
+          />
+        </div>
       </div>
     </section>
   );

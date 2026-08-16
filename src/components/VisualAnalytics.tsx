@@ -31,18 +31,18 @@ interface Props {
   characters: Character[];
 }
 
-const COLORS = ["#ff2df7", "#38e7ff", "#8b5cf6", "#ff9e42", "#f8ff70"];
+const COLORS = ["#4f5fe7", "#8192ef", "#8fd9ec", "#b4a7ef", "#6d7de5"];
 const BAR_GRADIENT =
-  "linear-gradient(90deg, #ff2df7, #ff9e42, #f8ff70, #38e7ff, #8b5cf6)";
+  "linear-gradient(90deg, #3545d3, #6172e8 58%, #8fd9ec 82%, #b4a7ef)";
 const PANEL_CLASS =
-  "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-6";
+  "pq-panel relative min-w-0 overflow-hidden p-5 sm:p-6";
 const EYEBROW_CLASS =
-  "font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 sm:text-xs sm:tracking-[0.34em]";
+  "font-mono text-[11px] font-black uppercase tracking-[0.22em] text-[#4f5fe7] sm:text-xs sm:tracking-[0.34em]";
 const TOOLTIP_STYLE = {
-  background: "#05010f",
-  border: "1px solid rgba(255,255,255,0.16)",
+  background: "#ffffff",
+  border: "1px solid #dfe3f3",
   borderRadius: 0,
-  color: "#ffffff",
+  color: "#12152b",
 };
 
 function normalize(value?: string | null) {
@@ -98,7 +98,12 @@ function StatDonut({
       </h3>
 
       <div className="relative mx-auto mt-7 h-[190px] w-[190px] sm:mt-8 sm:h-[220px] sm:w-[220px]">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+          minWidth={0}
+          initialDimension={{ width: 220, height: 220 }}
+        >
           <PieChart>
             <Pie
               data={data}
@@ -338,12 +343,17 @@ export default function VisualAnalytics({ characters }: Props) {
         </h3>
 
         <div className="mt-6 h-[260px] sm:mt-8 sm:h-[320px]">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+            minWidth={0}
+            initialDimension={{ width: 800, height: 320 }}
+          >
             <BarChart data={yearData}>
               <XAxis dataKey="year" stroke="#94a3b8" />
               <YAxis stroke="#94a3b8" />
               <Tooltip contentStyle={TOOLTIP_STYLE} />
-              <Bar dataKey="count" radius={[0, 0, 0, 0]} fill="#38e7ff" />
+              <Bar dataKey="count" radius={[0, 0, 0, 0]} fill="#4f5fe7" />
             </BarChart>
           </ResponsiveContainer>
         </div>

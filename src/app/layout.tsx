@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   },
   description:
     "Press Q is an AI-Assisted Queer Game Archive guided by Quiu.",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   keywords: [
     "Press Q",
     "Quiu",
@@ -48,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#05010f] text-white antialiased">
+      <body className="bg-[#f7f7fb] text-[#12152b] antialiased">
         <SiteBetaNotice />
         {children}
         <SiteFooter />
