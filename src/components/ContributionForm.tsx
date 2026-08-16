@@ -70,7 +70,7 @@ const initialValues: FormValues = {
 
 function buildDraft(values: FormValues) {
   return [
-    "PRSM character contribution",
+    "Press Q character contribution",
     "",
     `Character name: ${values.characterName || "Not provided"}`,
     `Game title: ${values.gameTitle || "Not provided"}`,
@@ -87,7 +87,7 @@ function buildDraft(values: FormValues) {
     "",
     `Contributor contact: ${values.contact || "Not provided"}`,
     "",
-    "Review note: PRSM v1.0 is a beta research prototype. Suggestions should be reviewed before entering the public dataset.",
+    "Review note: Press Q v1.0 is a beta research prototype. Suggestions should be reviewed before entering the public Press Q dataset.",
   ].join("\n");
 }
 

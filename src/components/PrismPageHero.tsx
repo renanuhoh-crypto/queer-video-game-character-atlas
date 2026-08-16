@@ -28,7 +28,7 @@ export default function PrismPageHero({
           href="/"
           className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 transition hover:text-cyan-100 sm:text-xs sm:tracking-[0.32em]"
         >
-          Back to PRSM
+          Back to Press Q
         </Link>
 
         <div className="mt-10 max-w-5xl sm:mt-14">

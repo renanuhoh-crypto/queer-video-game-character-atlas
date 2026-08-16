@@ -195,7 +195,7 @@ export default function Home() {
               href="/"
               className="text-sm font-black tracking-[0.28em] text-white sm:tracking-[0.42em]"
             >
-              PRSM
+              Press Q
             </Link>
 
             <nav className="hidden items-center gap-5 text-sm font-bold text-slate-300 md:flex lg:gap-8">
@@ -247,11 +247,11 @@ export default function Home() {
         <div className="relative z-10 mx-auto grid max-w-[1700px] gap-10 px-5 py-12 sm:px-8 sm:py-14 md:px-14 lg:grid-cols-[1fr_480px] lg:px-20 lg:py-20">
           <div className="max-w-4xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-cyan-300 sm:text-xs sm:tracking-[0.45em]">
-              AI-assisted queer game archive
+              AI-Assisted Queer Game Archive
             </p>
 
             <h1 className="mt-6 text-6xl font-black italic leading-none tracking-normal text-white sm:text-7xl md:text-9xl">
-              PRSM
+              Press Q
             </h1>
 
             <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg md:text-2xl">
@@ -272,7 +272,7 @@ export default function Home() {
                 href="/chat"
                 className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-black text-white backdrop-blur-xl transition hover:border-fuchsia-300/50 hover:text-fuchsia-300 sm:w-auto"
               >
-                Ask PRSM
+                Ask Quiu
               </Link>
             </div>
           </div>
@@ -300,7 +300,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1700px] gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-fuchsia-300 sm:text-xs sm:tracking-[0.4em]">
-              Dataset signal
+              Press Q dataset signal
             </p>
             <h2 className="mt-4 max-w-2xl text-3xl font-black italic leading-tight sm:text-4xl md:text-6xl">
               Representation, measured without flattening the story.
@@ -384,8 +384,9 @@ export default function Home() {
               Ask the archive what the numbers mean.
             </h3>
             <p className="mt-4 text-base leading-relaxed text-slate-300">
-              Use PRSM as a research console for characters, identities,
-              games, intersectionality, and representation patterns.
+              Use Quiu as a research console for exploring characters,
+              identities, games, intersectionality, and representation
+              patterns in the Press Q dataset.
             </p>
             <Link
               href="/chat"

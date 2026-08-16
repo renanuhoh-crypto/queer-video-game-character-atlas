@@ -281,14 +281,14 @@ export default function VisualAnalytics({ characters }: Props) {
       <div className={`${PANEL_CLASS} text-center`}>
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
 
-        <p className={EYEBROW_CLASS}>Dataset Overview</p>
+        <p className={EYEBROW_CLASS}>Press Q Dataset Overview</p>
 
         <h2 className="mt-4 text-6xl font-black italic text-white sm:text-7xl">
           {totalCharacters}
         </h2>
 
         <p className="mt-2 text-slate-400">
-          Queer video game characters registered
+          Queer video game characters registered in the Press Q dataset
         </p>
       </div>
 

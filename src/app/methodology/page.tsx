@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import PrismPageHero from "@/components/PrismPageHero";
+
+export const metadata: Metadata = {
+  title: "Methodology",
+  description:
+    "How the Press Q dataset, visual analytics, and Quiu support research into queer game representation.",
+};
 
 const PANEL =
   "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-7";
@@ -14,7 +21,7 @@ const methods = [
   },
   {
     label: "AI-assisted querying",
-    text: "Responses are constrained to registered dataset information to reduce unsupported claims and keep answers traceable.",
+    text: "Quiu's responses are constrained to information registered in the Press Q dataset to reduce unsupported claims and keep answers traceable.",
   },
   {
     label: "Visual analytics",
@@ -29,7 +36,7 @@ export default function MethodologyPage() {
         eyebrow="Research protocol"
         title="Research"
         accent="Methodology"
-        description="PRSM combines queer game studies, structured archive design, and constrained AI querying to make representation patterns legible without flattening them."
+        description="Press Q combines queer game studies, structured archive design, and constrained AI querying through Quiu to make representation patterns legible without flattening them."
       />
 
       <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
@@ -61,9 +68,10 @@ export default function MethodologyPage() {
             The archive is built for cautious interpretation.
           </h2>
           <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            PRSM uses available fields rather than guessing missing identity
-            information. When details are absent, the system should surface that
-            absence instead of filling the gap with unsupported inference.
+            Press Q uses fields available in the Press Q dataset rather than
+            guessing missing identity information. When details are absent,
+            Quiu should surface that absence instead of filling the gap with
+            unsupported inference.
           </p>
         </section>
       </section>

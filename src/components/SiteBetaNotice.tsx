@@ -8,9 +8,9 @@ export default function SiteBetaNotice() {
           <span className="mr-2 font-mono text-[11px] font-black uppercase tracking-[0.22em] text-fuchsia-300 sm:text-xs">
             Beta v1.0
           </span>
-          PRSM is a research prototype. Current results are provisional and do
-          not reflect the final archive because the dataset is still being
-          populated and reviewed.
+          Press Q is a research prototype. Current results are provisional and
+          do not reflect the final archive because the Press Q dataset is still
+          being populated and reviewed.
         </p>
 
         <Link

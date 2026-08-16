@@ -4,9 +4,16 @@ import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PRSM",
-  description: "AI-assisted archive of queer game representation",
+  applicationName: "Press Q",
+  title: {
+    default: "Press Q | AI-Assisted Queer Game Archive",
+    template: "%s | Press Q",
+  },
+  description:
+    "Press Q is an AI-Assisted Queer Game Archive guided by Quiu.",
   keywords: [
+    "Press Q",
+    "Quiu",
     "queer games",
     "video game representation",
     "digital humanities",
@@ -19,18 +26,18 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "PRSM",
+    title: "Press Q | AI-Assisted Queer Game Archive",
     description:
-      "AI-assisted archive of queer game representation",
-    siteName: "PRSM",
+      "Press Q is an AI-Assisted Queer Game Archive guided by Quiu.",
+    siteName: "Press Q",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "PRSM",
+    title: "Press Q | AI-Assisted Queer Game Archive",
     description:
-      "AI-assisted archive of queer game representation",
+      "Press Q is an AI-Assisted Queer Game Archive guided by Quiu.",
   },
 };
 

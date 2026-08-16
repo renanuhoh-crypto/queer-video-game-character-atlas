@@ -10,11 +10,11 @@ const mainLinks = [
 ];
 
 const supportLinks = [
-  { label: "Dataset Signal", href: "/" },
+  { label: "Press Q Dataset Signal", href: "/" },
   { label: "Research Console", href: "/chat" },
   { label: "Visual Analytics", href: "/analytics" },
   { label: "Contribute Characters", href: "/contribute" },
-  { label: "PRSM Archive", href: "/" },
+  { label: "Press Q Archive", href: "/" },
 ];
 
 const socialLinks = ["X (Twitter)", "Instagram", "LinkedIn"];
@@ -28,7 +28,7 @@ export default function SiteFooter() {
             href="/"
             className="text-sm font-black tracking-[0.28em] transition hover:text-fuchsia-600 sm:tracking-[0.35em]"
           >
-            PRSM
+            Press Q
           </Link>
 
           <nav className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold sm:gap-x-8 md:justify-center">
@@ -71,7 +71,7 @@ export default function SiteFooter() {
             ))}
           </nav>
 
-          <p className="text-black/60">PRSM 2026</p>
+          <p className="text-black/60">Press Q 2026</p>
         </div>
       </div>
     </footer>

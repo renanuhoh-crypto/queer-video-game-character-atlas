@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require("fs");
 const path = require("path");
 
-const inputPath = path.join(__dirname, "../src/data/atlas_seed_dataset.csv");
+const inputPath = path.join(__dirname, "../src/data/pressq_seed_dataset.csv");
 const outputPath = path.join(__dirname, "../src/data/characters.json");
 
 function splitCSVLine(line) {

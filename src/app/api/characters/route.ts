@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), "src/data/atlas_seed_dataset.csv");
+  const filePath = path.join(process.cwd(), "src/data/pressq_seed_dataset.csv");
   const csv = fs.readFileSync(filePath, "utf8");
 
   const lines = csv.trim().split(/\r?\n/);

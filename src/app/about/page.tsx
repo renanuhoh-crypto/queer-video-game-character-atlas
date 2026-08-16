@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import PrismPageHero from "@/components/PrismPageHero";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about Press Q, its research goals, the Press Q dataset, and Quiu.",
+};
 
 const PANEL =
   "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-7";
@@ -19,8 +26,8 @@ const goals = [
 ];
 
 const quickFacts = [
-  ["Name", "PRSM"],
-  ["Project type", "AI-assisted queer game archive"],
+  ["Name", "Press Q"],
+  ["Project type", "AI-Assisted Queer Game Archive"],
   ["Focus", "Queer video game characters"],
   ["Status", "Prototype v1.0"],
 ];
@@ -31,8 +38,8 @@ export default function AboutPage() {
       <PrismPageHero
         eyebrow="Archive identity"
         title="About"
-        accent="PRSM"
-        description="PRSM is a digital humanities prototype for reading queer game representation through structured data, visual analytics, and AI-assisted querying."
+        accent="Press Q"
+        description="Press Q is a digital humanities prototype for reading queer game representation through the Press Q dataset, visual analytics, and AI-assisted querying through Quiu."
       />
 
       <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
@@ -47,8 +54,8 @@ export default function AboutPage() {
 
             <div className="mt-5 space-y-5 text-base leading-relaxed text-slate-300 sm:mt-6 sm:text-lg">
               <p>
-                PRSM is an AI-assisted research platform for exploring queer
-                representation in video games.
+                Press Q is an AI-Assisted Queer Game Archive for exploring
+                queer representation in video games.
               </p>
 
               <p>
@@ -59,9 +66,10 @@ export default function AboutPage() {
               </p>
 
               <p>
-                PRSM is designed as a living archive interface: a way to make
-                patterns of queer game representation easier to explore while
-                keeping the data grounded, structured, and reviewable.
+                Press Q is designed as a living archive interface: a way to
+                make patterns of queer game representation easier to explore
+                while keeping the Press Q dataset grounded, structured, and
+                reviewable.
               </p>
             </div>
           </section>
@@ -111,17 +119,18 @@ export default function AboutPage() {
 
           <div className="mt-6 grid gap-6 text-base leading-relaxed text-slate-300 md:grid-cols-3">
             <p>
-              PRSM is informed by queer game studies, representation studies,
-              and digital humanities approaches to data visualization.
+              Press Q is informed by queer game studies, representation
+              studies, and digital humanities approaches to data visualization.
             </p>
             <p>
-              The dataset includes fields such as character name, game title,
-              release year, developer, gender, sexuality, identity category,
-              playability, narrative role, intersectionality, and evidence.
+              The Press Q dataset includes fields such as character name, game
+              title, release year, developer, gender, sexuality, identity
+              category, playability, narrative role, intersectionality, and
+              evidence.
             </p>
             <p>
-              The AI component answers using only the structured dataset,
-              allowing PRSM to work as a focused research interface.
+              Quiu answers using only the Press Q dataset, allowing the
+              assistant to work as a focused research interface.
             </p>
           </div>
         </section>

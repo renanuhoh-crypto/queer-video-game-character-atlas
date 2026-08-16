@@ -55,7 +55,7 @@ export default function AnalyticsPage() {
             href="/"
             className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300 transition hover:text-cyan-100 sm:text-xs sm:tracking-[0.32em]"
           >
-            Back to PRSM
+            Back to Press Q
           </Link>
 
           <div className="mt-10 max-w-5xl sm:mt-14">
@@ -71,8 +71,9 @@ export default function AnalyticsPage() {
             </h1>
 
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg md:mt-6 md:text-2xl">
-              Read PRSM through playable status, identity categories,
-              intersectionality, release years, and studio patterns.
+              Read the Press Q dataset through playable status, identity
+              categories, intersectionality, release years, and studio
+              patterns.
             </p>
           </div>
         </div>
@@ -91,7 +92,7 @@ export default function AnalyticsPage() {
         <div className="relative z-10 mx-auto w-full max-w-[1500px]">
           {loading ? (
             <div className="border border-white/10 bg-white/[0.04] p-5 text-slate-300 backdrop-blur-xl sm:p-8">
-              Loading analytics signal...
+              Loading Press Q dataset analytics...
             </div>
           ) : (
             <VisualAnalytics characters={characters} />

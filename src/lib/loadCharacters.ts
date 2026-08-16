@@ -20,7 +20,7 @@ export async function loadCharacters(): Promise<Character[]> {
 
   const filePath = path.join(
     process.cwd(),
-    "src/data/atlas_seed_dataset.csv"
+    "src/data/pressq_seed_dataset.csv"
   );
 
   return new Promise((resolve, reject) => {

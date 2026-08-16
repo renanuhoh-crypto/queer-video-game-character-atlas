@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import ContributionForm from "@/components/ContributionForm";
 import PrismPageHero from "@/components/PrismPageHero";
+
+export const metadata: Metadata = {
+  title: "Contribute",
+  description:
+    "Suggest queer video game characters for review and possible inclusion in the Press Q dataset.",
+};
 
 const PANEL =
   "relative overflow-hidden border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.025)_48%,rgba(34,211,238,0.055))] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-7";
@@ -15,11 +22,11 @@ const guidelines = [
   },
   {
     title: "Review first",
-    text: "PRSM v1.0 is still a beta dataset, so suggested characters should be reviewed before they become public archive entries.",
+    text: "The Press Q dataset is still in beta v1.0, so suggested characters should be reviewed before they become public archive entries.",
   },
   {
     title: "Credit images",
-    text: "If you suggest an image, include the original source and credit. PRSM should prefer contextual screenshots, official material, or clearly cited source images over uncited uploads.",
+    text: "If you suggest an image, include the original source and credit. Press Q should prefer contextual screenshots, official material, or clearly cited source images over uncited uploads.",
   },
 ];
 
@@ -27,10 +34,10 @@ export default function ContributePage() {
   return (
     <main className="min-h-screen bg-[#020207] text-white">
       <PrismPageHero
-        eyebrow="Open dataset"
+        eyebrow="Open Press Q dataset"
         title="Contribute"
         accent="Characters"
-        description="Suggest queer video game characters for future PRSM review. During beta v1.0, contributions are treated as research leads while the dataset is still being populated."
+        description="Suggest queer video game characters for future Press Q review. During beta v1.0, contributions are treated as research leads while the Press Q dataset is still being populated."
       />
 
       <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
@@ -49,12 +56,12 @@ export default function ContributePage() {
             <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
                 The current version does not publish submissions automatically.
                 It helps contributors organize character details so the entry
-                can be reviewed before being added to the dataset.
+                can be reviewed before being added to the Press Q dataset.
               </p>
               <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
-                For images, PRSM should treat copyrighted material as research
-                context: credited, cited, nonprofit, and limited to what is
-                needed for educational analysis.
+                For images, Press Q should treat copyrighted material as
+                research context: credited, cited, nonprofit, and limited to
+                what is needed for educational analysis.
               </p>
             </section>
 

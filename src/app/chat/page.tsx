@@ -59,7 +59,7 @@ function getLoadingMessage(messages: Message[]) {
     .find((message) => message.role === "user")?.content;
 
   if (!latestUserMessage) {
-    return "One moment, I'm checking the data...";
+    return "One moment, Quiu is checking the Press Q dataset...";
   }
 
   const normalized = latestUserMessage
@@ -73,10 +73,10 @@ function getLoadingMessage(messages: Message[]) {
     /\b(wait|what|which|who|where|why|how|can|please|game|games|characters|data|hello|hi)\b/;
 
   if (portuguesePattern.test(normalized) && !englishPattern.test(normalized)) {
-    return "Um segundo, estou checando os dados...";
+    return "Um segundo, Quiu está consultando o Press Q dataset...";
   }
 
-  return "One moment, I'm checking the data...";
+  return "One moment, Quiu is checking the Press Q dataset...";
 }
 
 function normalizeForMatch(value: string) {
@@ -166,7 +166,7 @@ export default function Home() {
     {
       role: "assistant",
       content:
-        "Hi! I'm PRSM, your AI-assisted archive guide for queer video game characters. Ask me about characters, identities, representation, games, or intersectionality.",
+        "Hi! I'm Quiu, the conversational AI guide for Press Q, an AI-Assisted Queer Game Archive. Ask me about characters, identities, representation, games, or intersectionality.",
     },
   ]);
 
@@ -243,7 +243,7 @@ export default function Home() {
         ...updatedMessages,
         {
           role: "assistant",
-          content: "Error connecting to PRSM AI.",
+          content: "Error connecting to Quiu.",
         },
       ]);
     } finally {
@@ -260,14 +260,6 @@ export default function Home() {
       c.playable_status?.trim().toLowerCase() === "playable"
   ).length;
 
-  const transCount = characters.filter((c) => {
-    const values = [c.gender, c.sexuality, ...(c.identity_label || [])]
-      .filter(Boolean)
-      .map((value) => value!.toLowerCase());
-
-    return values.some((value) => value.includes("trans"));
-  }).length;
-
   return (
     <main className="min-h-screen bg-[#020207] text-white">
       {/* HERO */}
@@ -282,7 +274,7 @@ export default function Home() {
         <header className="relative z-10 border-b border-white/10">
           <div className="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-5 sm:px-8 md:px-14 md:py-6 lg:px-20">
             <Link href="/" className="text-sm font-black tracking-[0.28em] text-white sm:tracking-[0.35em]">
-              PRSM
+              Press Q
             </Link>
 
             <nav className="hidden items-center gap-5 text-sm font-bold text-slate-300 md:flex lg:gap-8">
@@ -327,7 +319,7 @@ export default function Home() {
 
           <h1 className="mt-6 text-6xl font-black italic leading-none tracking-normal sm:text-7xl md:text-9xl">
             <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
-              PRSM
+              Press Q
             </span>
           </h1>
 
@@ -340,7 +332,7 @@ export default function Home() {
               href="#archive-console"
               className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400 px-6 py-4 text-sm font-black text-white transition hover:scale-105 sm:w-auto"
             >
-              Ask PRSM
+              Ask Quiu
             </a>
 
             <Link
@@ -358,7 +350,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1700px] gap-4 px-5 py-5 sm:grid-cols-2 sm:px-8 md:grid-cols-3 md:px-14 lg:px-20">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-              Dataset
+              Press Q dataset
             </p>
             <p className="mt-1 text-2xl font-black">{totalCharacters}</p>
             <p className="text-sm text-slate-300">registered characters</p>
@@ -430,7 +422,7 @@ export default function Home() {
                 Research Console
               </p>
               <h2 className="mt-2 text-xl font-black italic text-white sm:text-2xl">
-                Ask PRSM about queer game representation
+                Ask Quiu about queer game representation
               </h2>
             </div>
 
@@ -472,7 +464,7 @@ export default function Home() {
                           />
 
                           <p className="text-lg font-black italic sm:text-xl">
-                            {message.role === "user" ? "You" : "PRSM"}
+                            {message.role === "user" ? "You" : "Quiu"}
                           </p>
                         </div>
 
@@ -518,7 +510,7 @@ export default function Home() {
                       sendMessage();
                     }
                   }}
-                  placeholder="Ask PRSM about queer game characters..."
+                  placeholder="Ask Quiu about queer game characters..."
                   className="min-w-0 flex-1 rounded-full border border-fuchsia-400/40 bg-zinc-100 px-4 py-3 text-sm text-black outline-none transition focus:border-cyan-300 sm:px-6 sm:py-4 sm:text-base md:text-lg"
                 />
 
