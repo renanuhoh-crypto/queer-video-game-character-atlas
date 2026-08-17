@@ -266,6 +266,7 @@ export default function Home() {
         title="Ask"
         accent="Quiu"
         description="Use natural language to explore queer identities, characters, games, and representation patterns grounded in the Press Q dataset."
+        hideIntro
       />
 
       {/* INFO STRIP */}

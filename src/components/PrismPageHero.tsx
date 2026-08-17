@@ -6,6 +6,7 @@ type PrismPageHeroProps = {
   title: string;
   accent: string;
   description: string;
+  hideIntro?: boolean;
 };
 
 export default function PrismPageHero({
@@ -13,6 +14,7 @@ export default function PrismPageHero({
   title,
   accent,
   description,
+  hideIntro = false,
 }: PrismPageHeroProps) {
   return (
     <section className="pq-page-hero relative overflow-hidden border-b border-[#dfe3f3]">
@@ -47,34 +49,36 @@ export default function PrismPageHero({
 
       <div className="pq-spectrum-rule mx-auto mt-4 max-w-[1700px]" />
 
-      <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:grid-cols-[1fr_0.38fr] lg:px-20">
-        <div className="max-w-5xl">
-          <p className="pq-eyebrow">
-            {eyebrow}
-          </p>
+      {!hideIntro ? (
+        <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:grid-cols-[1fr_0.38fr] lg:px-20">
+          <div className="max-w-5xl">
+            <p className="pq-eyebrow">
+              {eyebrow}
+            </p>
 
-          <h1 className="mt-5 break-words text-5xl font-black uppercase leading-[0.88] tracking-[-0.055em] text-[#12152b] sm:text-6xl md:text-8xl">
-            {title}{" "}
-            <span className="text-[#4f5fe7]">
-              {accent}
-            </span>
-          </h1>
+            <h1 className="mt-5 break-words text-5xl font-black uppercase leading-[0.88] tracking-[-0.055em] text-[#12152b] sm:text-6xl md:text-8xl">
+              {title}{" "}
+              <span className="text-[#4f5fe7]">
+                {accent}
+              </span>
+            </h1>
 
-          <p className="mt-5 max-w-3xl text-base font-medium leading-relaxed text-[#5d6480] sm:text-lg md:mt-6 md:text-xl">
-            {description}
-          </p>
+            <p className="mt-5 max-w-3xl text-base font-medium leading-relaxed text-[#5d6480] sm:text-lg md:mt-6 md:text-xl">
+              {description}
+            </p>
+          </div>
+
+          <div className="pq-page-emblem relative mx-auto hidden aspect-square w-full max-w-[240px] items-center justify-center lg:flex" aria-hidden="true">
+            <Image
+              src="/press-q-icon.png"
+              alt=""
+              width={624}
+              height={667}
+              className="h-auto w-[72%] opacity-90"
+            />
+          </div>
         </div>
-
-        <div className="pq-page-emblem relative mx-auto hidden aspect-square w-full max-w-[240px] items-center justify-center lg:flex" aria-hidden="true">
-          <Image
-            src="/press-q-icon.png"
-            alt=""
-            width={624}
-            height={667}
-            className="h-auto w-[72%] opacity-90"
-          />
-        </div>
-      </div>
+      ) : null}
     </section>
   );
 }
