@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import PrismPageHero from "@/components/PrismPageHero";
 
@@ -379,13 +380,18 @@ export default function Home() {
                         }`}
                       >
                         <div className="mb-4 flex items-center gap-3">
-                          <div
-                            className={`h-4 w-4 rounded-full ${
-                              message.role === "user"
-                                ? "bg-[#8192ef]"
-                                : "bg-[#4f5fe7]"
-                            }`}
-                          />
+                          {message.role === "assistant" ? (
+                            <span className="quiu-chat-avatar" aria-hidden="true">
+                              <Image
+                                src="/press-q-icon.png"
+                                alt=""
+                                width={624}
+                                height={667}
+                              />
+                            </span>
+                          ) : (
+                            <span className="h-4 w-4 rounded-full bg-[#8192ef]" />
+                          )}
 
                           <p className="text-lg font-black italic sm:text-xl">
                             {message.role === "user" ? "You" : "Quiu"}
@@ -412,10 +418,30 @@ export default function Home() {
                 })}
 
                 {loading && (
-                  <div className="max-w-[92%] border border-[#dfe3f3] bg-white p-5 sm:max-w-[78%] sm:p-6">
-                    <p className="text-base text-[#646b89] sm:text-lg">
-                      {getLoadingMessage(messages)}
-                    </p>
+                  <div className="quiu-thinking-card max-w-[92%] border border-[#dfe3f3] bg-white p-5 sm:max-w-[78%] sm:p-6">
+                    <div className="flex items-center gap-4 sm:gap-5">
+                      <span className="quiu-thinking-avatar" aria-hidden="true">
+                        <Image
+                          src="/quiu-thinking.png"
+                          alt=""
+                          width={1332}
+                          height={1181}
+                          priority
+                        />
+                      </span>
+
+                      <div>
+                        <p className="font-black text-[#12152b]">Quiu</p>
+                        <p className="mt-1 text-base text-[#646b89] sm:text-lg">
+                          {getLoadingMessage(messages)}
+                        </p>
+                        <span className="quiu-thinking-dots mt-3" aria-hidden="true">
+                          <span />
+                          <span />
+                          <span />
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 )}
 

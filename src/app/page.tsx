@@ -221,12 +221,14 @@ export default function Home() {
 
         <div className="relative z-20 mx-auto grid max-w-[1600px] gap-10 px-5 pb-14 pt-10 sm:px-8 sm:pt-14 md:px-14 lg:min-h-[760px] lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14 lg:px-20 lg:py-16">
           <div className="max-w-2xl">
-            <h1 className="text-[clamp(3.4rem,7.4vw,7.5rem)] font-black leading-[0.85] tracking-[-0.055em] text-white">
-              Press start on queer game history.
+            <h1 className="text-[clamp(2.7rem,5.8vw,6.2rem)] font-black leading-[0.9] tracking-[-0.05em] text-white">
+              <span className="block">Press start</span>
+              <span className="block">on queer</span>
+              <span className="block whitespace-nowrap">game history.</span>
             </h1>
             <p className="mt-7 max-w-xl text-base font-bold leading-relaxed text-white/70 sm:text-lg md:text-xl">
               Explore characters, identities, evidence, and representation — or
-              warm up with a quick flight through the archive.
+              warm up with a quick run through the archive.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
