@@ -31,3 +31,17 @@ npm run build
 
 The Press Q dataset is stored in `src/data/pressq_seed_dataset.csv`. The app
 treats it as the source for Quiu and the visual analytics experience.
+
+## Character administration
+
+The private `/admin` page can add, edit, delete, search, and export character
+records. Configure a password in `.env.local` before starting the app:
+
+```dotenv
+ADMIN_PASSWORD=use-a-long-unique-password
+```
+
+The password is checked on the server. Changes made in the admin page are
+written directly to `src/data/pressq_seed_dataset.csv`, so the feature requires
+a persistent, writable filesystem. A database should replace file writes before
+using the editor on a serverless production deployment.

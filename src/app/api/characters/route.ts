@@ -1,22 +1,8 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { readCharacterRows } from "@/lib/characterDataset";
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), "src/data/pressq_seed_dataset.csv");
-  const csv = fs.readFileSync(filePath, "utf8");
-
-  const lines = csv.trim().split(/\r?\n/);
-  const headers = splitCSVLine(lines[0]);
-
-  const characters = lines.slice(1).map((line) => {
-    const values = splitCSVLine(line);
-    const row: Record<string, string> = {};
-
-    headers.forEach((header, index) => {
-      row[header.trim()] = values[index]?.trim() || "";
-    });
-
+  const characters = readCharacterRows().map((row) => {
     return {
       character_id: row.character_id,
       character_name: row.character_name,
@@ -30,15 +16,15 @@ export async function GET() {
       gender: row.gender,
       sexuality: row.sexuality,
       identity_category: toArray(row.identity_category),
-      identity_label: toArray(row.identity_label),
+      identity_label: [row.gender, row.sexuality].filter(Boolean),
       identity_confirmation: row.identity_confirmation,
       queer_status: row.queer_status,
-      total_score: toNumber(row.total_score),
-      queer_joy_score: toNumber(row.queer_joy_score),
+      total_score: null,
+      queer_joy_score: null,
       intersectionality: toArray(row.intersectionality_present),
       intersectionality_present: row.intersectionality_present,
       intersectionality_details: row.intersectionality_details,
-      evidence_type: row.evidence_type,
+      evidence_type: "",
       evidence_source: row.evidence_source,
       notes: row.notes,
       description: row.notes || row.evidence_source || "",
@@ -49,23 +35,6 @@ export async function GET() {
   });
 
   return NextResponse.json({ characters });
-}
-
-function splitCSVLine(line: string) {
-  const result: string[] = [];
-  let current = "";
-  let insideQuotes = false;
-
-  for (const char of line) {
-    if (char === '"') insideQuotes = !insideQuotes;
-    else if (char === "," && !insideQuotes) {
-      result.push(current);
-      current = "";
-    } else current += char;
-  }
-
-  result.push(current);
-  return result;
 }
 
 function toArray(value: string) {

@@ -1,0 +1,54 @@
+import fs from "fs";
+import path from "path";
+import Papa from "papaparse";
+import {
+  CHARACTER_COLUMNS,
+  CharacterRow,
+  sanitizeCharacterRow,
+} from "@/lib/characterSchema";
+
+export type { CharacterRow } from "@/lib/characterSchema";
+
+export function characterDatasetPath() {
+  return path.join(process.cwd(), "src/data/pressq_seed_dataset.csv");
+}
+
+export function readCharacterRows(): CharacterRow[] {
+  const csv = fs.readFileSync(characterDatasetPath(), "utf8");
+  const parsed = Papa.parse<Record<string, string>>(csv, {
+    header: true,
+    skipEmptyLines: "greedy",
+    transformHeader: (header) => header.replace(/^\uFEFF/, "").trim(),
+  });
+
+  if (parsed.errors.length > 0) {
+    const details = parsed.errors
+      .slice(0, 3)
+      .map((error) => `linha ${error.row ?? "?"}: ${error.message}`)
+      .join("; ");
+    throw new Error(`O CSV de personagens é inválido (${details}).`);
+  }
+
+  return parsed.data.map(sanitizeCharacterRow);
+}
+
+export function serializeCharacterRows(rows: CharacterRow[]) {
+  return `${Papa.unparse(rows, {
+    columns: [...CHARACTER_COLUMNS],
+    newline: "\n",
+    header: true,
+  })}\n`;
+}
+
+export function writeCharacterRows(rows: CharacterRow[]) {
+  const filePath = characterDatasetPath();
+  const temporaryPath = `${filePath}.${process.pid}.tmp`;
+
+  fs.writeFileSync(temporaryPath, serializeCharacterRows(rows), "utf8");
+
+  try {
+    fs.copyFileSync(temporaryPath, filePath);
+  } finally {
+    fs.rmSync(temporaryPath, { force: true });
+  }
+}
