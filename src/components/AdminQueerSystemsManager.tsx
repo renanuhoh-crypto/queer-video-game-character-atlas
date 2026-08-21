@@ -30,83 +30,83 @@ type Field = {
 const fields: Field[] = [
   {
     id: "game_title",
-    label: "Título do jogo",
-    placeholder: "Ex.: The Sims 4",
+    label: "Game title",
+    placeholder: "e.g., The Sims 4",
     required: true,
   },
   {
     id: "release_year",
-    label: "Ano de lançamento",
+    label: "Release year",
     placeholder: "2014",
     type: "number",
   },
   {
     id: "system_type",
-    label: "Tipo de sistema",
+    label: "System type",
     type: "select",
     required: true,
     options: [
-      { label: "Selecione", value: "" },
-      { label: "Criação de personagem", value: "character_creation" },
-      { label: "Customização de gênero", value: "gender_customization" },
-      { label: "Seleção de pronomes", value: "pronoun_selection" },
+      { label: "Select", value: "" },
+      { label: "Character creation", value: "character_creation" },
+      { label: "Gender customization", value: "gender_customization" },
+      { label: "Pronoun selection", value: "pronoun_selection" },
       {
-        label: "Customização de sexualidade",
+        label: "Sexuality customization",
         value: "sexuality_customization",
       },
-      { label: "Romance entre mesmo gênero", value: "same_gender_romance" },
+      { label: "Same-gender romance", value: "same_gender_romance" },
       {
-        label: "Romance independente de gênero",
+        label: "Gender-independent romance",
         value: "gender_independent_romance",
       },
-      { label: "Casamento entre mesmo gênero", value: "same_gender_marriage" },
-      { label: "Criação de família queer", value: "queer_family_creation" },
-      { label: "Sistema de relacionamentos", value: "relationship_system" },
-      { label: "Outro", value: "other" },
+      { label: "Same-gender marriage", value: "same_gender_marriage" },
+      { label: "Queer family creation", value: "queer_family_creation" },
+      { label: "Relationship system", value: "relationship_system" },
+      { label: "Other", value: "other" },
     ],
   },
   {
     id: "scope",
-    label: "Escopo",
+    label: "Scope",
     type: "multiselect",
     options: [
-      { label: "Avatar do jogador", value: "player_avatar" },
+      { label: "Player avatar", value: "player_avatar" },
       { label: "NPCs", value: "npc" },
-      { label: "Relacionamentos", value: "relationships" },
-      { label: "Família", value: "family" },
-      { label: "Mundo do jogo", value: "world" },
+      { label: "Relationships", value: "relationships" },
+      { label: "Family", value: "family" },
+      { label: "Game world", value: "world" },
     ],
-    help: "Marque todos os níveis afetados pelo mesmo sistema.",
+    help: "Select every level affected by the same system.",
   },
   {
     id: "player_dependency",
-    label: "Dependência do jogador",
+    label: "Player dependency",
     type: "select",
     options: [
-      { label: "Selecione", value: "" },
-      { label: "Nenhuma", value: "none" },
-      { label: "Parcial", value: "partial" },
-      { label: "Total", value: "full" },
+      { label: "Select", value: "" },
+      { label: "None", value: "none" },
+      { label: "Partial", value: "partial" },
+      { label: "Full", value: "full" },
     ],
-    help: "Use “total” quando a experiência só existe por escolha do jogador.",
+    help: "Use “full” when the experience exists only through a player choice.",
   },
   {
     id: "availability",
-    label: "Disponibilidade",
+    label: "Availability",
     type: "select",
     options: [
-      { label: "Selecione", value: "" },
-      { label: "Padrão", value: "default" },
-      { label: "Opcional", value: "optional" },
-      { label: "Condicional", value: "conditional" },
-      { label: "Expansão / DLC", value: "expansion" },
-      { label: "Somente por mod", value: "mod_only" },
+      { label: "Select", value: "" },
+      { label: "Default", value: "default" },
+      { label: "Optional", value: "optional" },
+      { label: "Conditional", value: "conditional" },
+      { label: "Expansion / DLC", value: "expansion" },
+      { label: "Mods only", value: "mod_only" },
     ],
   },
   {
     id: "system_description",
-    label: "Descrição do sistema",
-    placeholder: "Descreva precisamente o que o jogo permite ao jogador.",
+    label: "System description",
+    placeholder: "Describe precisely what the game allows the player to do.",
     type: "textarea",
     rows: 4,
     required: true,
@@ -114,70 +114,70 @@ const fields: Field[] = [
   },
   {
     id: "limitations",
-    label: "Limitações e condições",
-    placeholder: "Restrições de plataforma, DLC, gênero, personagem ou versão.",
+    label: "Limitations and conditions",
+    placeholder: "Platform, DLC, gender, character, or version restrictions.",
     type: "textarea",
     rows: 3,
     wide: true,
   },
   {
     id: "evidence_source",
-    label: "Fonte / evidência",
-    placeholder: "Documentação oficial, cena, teste do sistema, artigo ou URL.",
+    label: "Source / evidence",
+    placeholder: "Official documentation, scene, system test, article, or URL.",
     type: "textarea",
     rows: 3,
     wide: true,
   },
   {
     id: "notes",
-    label: "Notas curatoriais",
+    label: "Curatorial notes",
     type: "textarea",
     rows: 3,
     wide: true,
   },
   {
     id: "research_status",
-    label: "Status da pesquisa",
+    label: "Research status",
     type: "select",
     options: [
-      { label: "Selecione", value: "" },
-      { label: "Identificado / na fila", value: "identified" },
-      { label: "Em pesquisa", value: "in_progress" },
-      { label: "Revisado", value: "reviewed" },
-      { label: "Precisa de verificação", value: "needs_verification" },
+      { label: "Select", value: "" },
+      { label: "Identified / queued", value: "identified" },
+      { label: "In research", value: "in_progress" },
+      { label: "Reviewed", value: "reviewed" },
+      { label: "Needs verification", value: "needs_verification" },
     ],
   },
   {
     id: "evidence_confidence",
-    label: "Confiança da evidência",
+    label: "Evidence confidence",
     type: "select",
     options: [
-      { label: "Selecione", value: "" },
-      { label: "Baixa", value: "low" },
-      { label: "Média", value: "medium" },
-      { label: "Alta", value: "high" },
+      { label: "Select", value: "" },
+      { label: "Low", value: "low" },
+      { label: "Medium", value: "medium" },
+      { label: "High", value: "high" },
     ],
   },
   {
     id: "source_language",
-    label: "Idioma da fonte",
-    placeholder: "Ex.: en, pt-BR, ja",
-    help: "Registre o idioma para tornar lacunas linguísticas mensuráveis.",
+    label: "Source language",
+    placeholder: "e.g., en, pt-BR, ja",
+    help: "Record the language to make language gaps measurable.",
   },
   {
     id: "platform_version",
-    label: "Plataforma / versão pesquisada",
-    placeholder: "Ex.: PC, patch 1.108 ou expansão específica",
+    label: "Platform / version researched",
+    placeholder: "e.g., PC, patch 1.108, or specific expansion",
   },
   {
     id: "discovery_source",
-    label: "Como o caso foi descoberto",
-    placeholder: "Indicação, lista existente, busca própria, comunidade…",
+    label: "How the case was discovered",
+    placeholder: "Referral, existing list, independent search, community…",
     wide: true,
   },
   {
     id: "last_reviewed",
-    label: "Última revisão",
+    label: "Last reviewed",
     type: "date",
   },
 ];
@@ -258,7 +258,7 @@ export default function AdminQueerSystemsManager({
         } | null;
 
         if (!response.ok) {
-          throw new Error(data?.error || "Falha ao carregar os sistemas.");
+          throw new Error(data?.error || "Could not load systems.");
         }
         if (!active) return;
 
@@ -278,7 +278,7 @@ export default function AdminQueerSystemsManager({
           text:
             error instanceof Error
               ? error.message
-              : "Falha ao carregar os sistemas.",
+              : "Could not load systems.",
         });
       } finally {
         if (active) setBusy(false);
@@ -319,7 +319,7 @@ export default function AdminQueerSystemsManager({
       const body = (await response.json().catch(() => null)) as {
         error?: string;
       } | null;
-      throw new Error(body?.error || "A operação não pôde ser concluída.");
+      throw new Error(body?.error || "The operation could not be completed.");
     }
 
     return response;
@@ -328,7 +328,7 @@ export default function AdminQueerSystemsManager({
   function canDiscardChanges() {
     return (
       !dirty ||
-      window.confirm("Descartar as alterações que ainda não foram salvas?")
+      window.confirm("Discard the unsaved changes?")
     );
   }
 
@@ -375,7 +375,7 @@ export default function AdminQueerSystemsManager({
       if (isNew && selectedSystemTypes.length === 0) {
         setNotice({
           kind: "error",
-          text: "Selecione pelo menos um tipo de sistema.",
+          text: "Select at least one system type.",
         });
         setBusy(false);
         return;
@@ -409,14 +409,14 @@ export default function AdminQueerSystemsManager({
         kind: "success",
         text: isNew
           ? createdSystems.length === 1
-            ? "Sistema queer cadastrado no CSV."
-            : `${createdSystems.length} sistemas queer cadastrados em linhas separadas.`
-          : "Alterações salvas no CSV.",
+            ? "Queer system added to the CSV."
+            : `${createdSystems.length} queer systems added as separate rows.`
+          : "Changes saved to the CSV.",
       });
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha ao salvar.",
+        text: error instanceof Error ? error.message : "Could not save.",
       });
     } finally {
       setBusy(false);
@@ -427,7 +427,7 @@ export default function AdminQueerSystemsManager({
     if (!draft.system_id) return;
     if (
       !window.confirm(
-        `Excluir o sistema “${systemTypeLabels[draft.system_type] || draft.system_type}” de ${draft.game_title}?`,
+        `Delete the “${systemTypeLabels[draft.system_type] || draft.system_type}” system from ${draft.game_title}?`,
       )
     ) {
       return;
@@ -451,11 +451,11 @@ export default function AdminQueerSystemsManager({
       setSelectedSystemTypes(
         remaining[0]?.system_type ? [remaining[0].system_type] : [],
       );
-      setNotice({ kind: "success", text: "Sistema excluído do CSV." });
+      setNotice({ kind: "success", text: "System deleted from the CSV." });
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha ao excluir.",
+        text: error instanceof Error ? error.message : "Could not delete.",
       });
     } finally {
       setBusy(false);
@@ -478,7 +478,7 @@ export default function AdminQueerSystemsManager({
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha no download.",
+        text: error instanceof Error ? error.message : "Could not download.",
       });
     } finally {
       setBusy(false);
@@ -491,9 +491,9 @@ export default function AdminQueerSystemsManager({
         <div className="border-b border-[#e5e8f5] p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="pq-eyebrow">Sistemas queer</p>
+              <p className="pq-eyebrow">Queer systems</p>
               <p className="mt-1 text-sm font-bold text-[#646b89]">
-                {systems.length} registros
+                {systems.length} records
               </p>
             </div>
             <button
@@ -501,7 +501,7 @@ export default function AdminQueerSystemsManager({
               onClick={startNewSystem}
               className="pq-primary-button px-4 py-2.5 text-[10px]"
             >
-              + Novo
+              + New
             </button>
           </div>
 
@@ -509,7 +509,7 @@ export default function AdminQueerSystemsManager({
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Buscar jogo ou sistema"
+            placeholder="Search game or system"
             className="mt-4 w-full rounded-2xl border border-[#d3d8ed] bg-[#f8f9fd] px-4 py-3 text-sm outline-none transition placeholder:text-[#9da3b9] focus:border-[#4f5fe7]"
           />
         </div>
@@ -529,12 +529,12 @@ export default function AdminQueerSystemsManager({
                 }`}
               >
                 <span className="block font-black text-[#12152b]">
-                  {system.game_title || "Jogo não informado"}
+                  {system.game_title || "Game not provided"}
                 </span>
                 <span className="mt-1 block text-xs text-[#646b89]">
                   {systemTypeLabels[system.system_type] ||
                     system.system_type ||
-                    "Sistema não informado"}
+                    "System not provided"}
                 </span>
               </button>
             );
@@ -542,8 +542,8 @@ export default function AdminQueerSystemsManager({
 
           {!busy && filteredSystems.length === 0 ? (
             <p className="px-4 py-8 text-center text-sm leading-relaxed text-[#7b819c]">
-              Nenhum sistema cadastrado. Use “+ Novo” para criar a primeira
-              entrada.
+              No systems have been added. Use “+ New” to create the first
+              entry.
             </p>
           ) : null}
         </div>
@@ -555,7 +555,7 @@ export default function AdminQueerSystemsManager({
             disabled={busy}
             className="pq-secondary-button px-4 py-3 text-[10px] disabled:opacity-50"
           >
-            Baixar backup CSV
+            Download CSV backup
           </button>
           <button
             type="button"
@@ -564,7 +564,7 @@ export default function AdminQueerSystemsManager({
             }}
             className="rounded-full border border-[#dfe3f3] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-[#646b89] transition hover:bg-[#f4f5fb]"
           >
-            Sair
+            Sign out
           </button>
         </div>
       </aside>
@@ -577,16 +577,16 @@ export default function AdminQueerSystemsManager({
           <div>
             <p className="font-mono text-[11px] font-black uppercase tracking-[0.22em] text-[#9be8f5]">
               {draft.system_id
-                ? `Sistema #${draft.system_id}`
-                : "Novo sistema"}
+                ? `System #${draft.system_id}`
+                : "New system"}
             </p>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
-              {draft.game_title || "Nova possibilidade queer"}
+              {draft.game_title || "New queer possibility"}
             </h2>
           </div>
           {dirty ? (
             <span className="w-fit rounded-full bg-[#ffdf70] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-[#584600]">
-              Alterações não salvas
+              Unsaved changes
             </span>
           ) : null}
         </div>
@@ -595,9 +595,9 @@ export default function AdminQueerSystemsManager({
           <SystemNotice notice={notice} />
 
           <section className="rounded-2xl border border-[#dfe3f3] bg-[#f8f9fd] p-4 text-sm leading-relaxed text-[#646b89]">
-            No cadastro, você pode selecionar várias possibilidades de uma vez.
-            O painel criará uma linha independente para cada uma; depois, cada
-            sistema poderá ter evidências e limitações próprias.
+            When adding a record, you can select several possibilities at once.
+            The panel will create a separate row for each one; afterward, each
+            system can have its own evidence and limitations.
           </section>
 
           <div className="grid gap-5 md:grid-cols-2">
@@ -629,7 +629,7 @@ export default function AdminQueerSystemsManager({
                 disabled={busy}
                 className="rounded-full border border-[#f0b6c7] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#b72755] transition hover:bg-[#fff0f5] disabled:opacity-50"
               >
-                Excluir sistema
+                Delete system
               </button>
             ) : null}
           </div>
@@ -639,14 +639,14 @@ export default function AdminQueerSystemsManager({
             disabled={busy || !dirty}
             className="pq-primary-button px-7 py-4 text-xs disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {busy ? "Salvando…" : "Salvar no dataset"}
+            {busy ? "Saving…" : "Save to dataset"}
           </button>
         </div>
       </form>
 
       <p className="text-xs leading-relaxed text-[#7b819c] xl:col-start-2">
-        As alterações são gravadas em <code>src/data/game_queer_systems.csv</code>.
-        Personagens continuam armazenados separadamente no dataset principal.
+        Changes are written to <code>src/data/game_queer_systems.csv</code>.
+        Characters remain stored separately in the primary dataset.
       </p>
     </div>
   );
@@ -662,11 +662,11 @@ function SystemTypeMultiSelect({
   return (
     <fieldset className="md:col-span-2">
       <legend className="font-mono text-[11px] font-black uppercase tracking-[0.16em] text-[#4f5fe7]">
-        Tipos de sistema *
+        System types *
       </legend>
       <p className="mt-1.5 text-xs leading-relaxed text-[#898fa8]">
-        Marque todas as possibilidades presentes no jogo. Os demais campos
-        serão aplicados inicialmente a todas as linhas criadas.
+        Select every possibility present in the game. The remaining fields will
+        initially apply to every created row.
       </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {systemTypeOptions.map((option) => {
@@ -728,8 +728,8 @@ function SystemField({
           <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm marker:hidden">
             <span className={selected.length ? "font-bold text-[#12152b]" : "text-[#9da3b9]"}>
               {selected.length
-                ? `${selected.length} ${selected.length === 1 ? "escopo selecionado" : "escopos selecionados"}`
-                : "Selecione um ou mais escopos"}
+                ? `${selected.length} ${selected.length === 1 ? "scope selected" : "scopes selected"}`
+                : "Select one or more scopes"}
             </span>
             <span className="text-[#4f5fe7] transition group-open:rotate-180" aria-hidden="true">
               ▾

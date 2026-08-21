@@ -28,9 +28,9 @@ export function readQueerSystemRows(): QueerSystemRow[] {
   if (blockingErrors.length > 0) {
     const details = blockingErrors
       .slice(0, 3)
-      .map((error) => `linha ${error.row ?? "?"}: ${error.message}`)
+      .map((error) => `row ${error.row ?? "?"}: ${error.message}`)
       .join("; ");
-    throw new Error(`O CSV de sistemas queer é inválido (${details}).`);
+    throw new Error(`The queer systems CSV is invalid (${details}).`);
   }
 
   return parsed.data.map(sanitizeQueerSystemRow);

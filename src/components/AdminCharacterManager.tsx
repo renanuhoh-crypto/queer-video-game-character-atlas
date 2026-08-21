@@ -37,145 +37,145 @@ type Notice = { kind: "success" | "error"; text: string } | null;
 
 const fieldGroups: FieldGroup[] = [
   {
-    title: "Dados principais",
-    description: "Informações básicas para identificar o registro.",
+    title: "Core data",
+    description: "Basic information used to identify the record.",
     fields: [
       {
         id: "character_name",
-        label: "Nome do personagem",
-        placeholder: "Ex.: Ellie",
+        label: "Character name",
+        placeholder: "e.g., Ellie",
         required: true,
       },
       {
         id: "game_title",
-        label: "Título do jogo",
-        placeholder: "Ex.: The Last of Us Part II",
+        label: "Game title",
+        placeholder: "e.g., The Last of Us Part II",
         required: true,
       },
       {
         id: "release_year",
-        label: "Ano de lançamento",
+        label: "Release year",
         placeholder: "2020",
         type: "number",
       },
-      { id: "developer", label: "Desenvolvedora" },
-      { id: "publisher", label: "Publicadora" },
+      { id: "developer", label: "Developer" },
+      { id: "publisher", label: "Publisher" },
       {
         id: "game_scale",
-        label: "Escala do jogo",
+        label: "Game scale",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
+          { label: "Select", value: "" },
           { label: "AAA", value: "AAA" },
           { label: "AA", value: "AA" },
-          { label: "Independente", value: "Indie" },
+          { label: "Independent", value: "Indie" },
           { label: "Mobile", value: "Mobile" },
           { label: "Browser", value: "Browser" },
-          { label: "Estudantil / amador", value: "Student / amateur" },
-          { label: "Outro", value: "Other" },
+          { label: "Student / amateur", value: "Student / amateur" },
+          { label: "Other", value: "Other" },
         ],
       },
       {
         id: "genre",
-        label: "Gênero do jogo",
-        placeholder: "Separe múltiplos valores com ;",
+        label: "Game genre",
+        placeholder: "Separate multiple values with ;",
       },
       {
         id: "narrative_role",
-        label: "Papel narrativo",
+        label: "Narrative role",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
-          { label: "Protagonista", value: "protagonist" },
-          { label: "Deuteragonista", value: "deuteragonist" },
-          { label: "Coadjuvante", value: "supporting_character" },
-          { label: "Antagonista", value: "antagonist" },
-          { label: "Não definido", value: "none" },
+          { label: "Select", value: "" },
+          { label: "Protagonist", value: "protagonist" },
+          { label: "Deuteragonist", value: "deuteragonist" },
+          { label: "Supporting character", value: "supporting_character" },
+          { label: "Antagonist", value: "antagonist" },
+          { label: "Not specified", value: "none" },
         ],
       },
     ],
   },
   {
-    title: "Representação",
-    description: "Identidade, confirmação e participação no jogo.",
+    title: "Representation",
+    description: "Identity, confirmation, and participation in the game.",
     fields: [
       {
         id: "playable_status",
-        label: "Jogabilidade",
+        label: "Playability",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
-          { label: "Jogável", value: "playable" },
-          { label: "Não jogável", value: "non_playable" },
-          { label: "Opcional", value: "optional" },
-          { label: "Desconhecido", value: "unknown" },
+          { label: "Select", value: "" },
+          { label: "Playable", value: "playable" },
+          { label: "Non-playable", value: "non_playable" },
+          { label: "Optional", value: "optional" },
+          { label: "Unknown", value: "unknown" },
         ],
       },
       {
         id: "gender",
-        label: "Gênero / identidade de gênero",
+        label: "Gender / gender identity",
         type: "multiselect",
         options: [
-          { label: "Mulher", value: "woman" },
-          { label: "Homem", value: "man" },
-          { label: "Mulher trans", value: "trans_woman" },
-          { label: "Homem trans", value: "trans_man" },
-          { label: "Não binárie", value: "non_binary" },
-          { label: "Gênero fluido", value: "genderfluid" },
-          { label: "Agênero", value: "agender" },
+          { label: "Woman", value: "woman" },
+          { label: "Man", value: "man" },
+          { label: "Trans woman", value: "trans_woman" },
+          { label: "Trans man", value: "trans_man" },
+          { label: "Nonbinary", value: "non_binary" },
+          { label: "Genderfluid", value: "genderfluid" },
+          { label: "Agender", value: "agender" },
           { label: "Genderqueer", value: "genderqueer" },
-          { label: "Intersexo", value: "intersex" },
-          { label: "Outro / termo próprio", value: "other" },
-          { label: "Não informado", value: "unknown" },
+          { label: "Intersex", value: "intersex" },
+          { label: "Other / self-described term", value: "other" },
+          { label: "Not provided", value: "unknown" },
         ],
-        help: "Marque todas as identidades explicitamente documentadas.",
+        help: "Select every explicitly documented identity.",
       },
       {
         id: "sexuality",
-        label: "Sexualidade",
+        label: "Sexuality",
         type: "multiselect",
         options: [
-          { label: "Lésbica", value: "lesbian" },
+          { label: "Lesbian", value: "lesbian" },
           { label: "Gay", value: "gay" },
-          { label: "Bissexual", value: "bisexual" },
+          { label: "Bisexual", value: "bisexual" },
           { label: "Pansexual", value: "pansexual" },
-          { label: "Assexual", value: "asexual" },
-          { label: "Arromântica", value: "aromantic" },
+          { label: "Asexual", value: "asexual" },
+          { label: "Aromantic", value: "aromantic" },
           { label: "Queer", value: "queer" },
-          { label: "Heterossexual", value: "heterosexual" },
-          { label: "Outro / termo próprio", value: "other" },
-          { label: "Não informada", value: "unknown" },
+          { label: "Heterosexual", value: "heterosexual" },
+          { label: "Other / self-described term", value: "other" },
+          { label: "Not provided", value: "unknown" },
         ],
-        help: "A seleção múltipla preserva identidades compostas.",
+        help: "Multiple selection preserves composite identities.",
       },
       {
         id: "identity_category",
-        label: "Categorias de identidade",
+        label: "Identity categories",
         type: "multiselect",
         options: [
-          { label: "Identidade de gênero", value: "gender_identity" },
-          { label: "Orientação sexual", value: "sexual_orientation" },
-          { label: "Orientação romântica", value: "romantic_orientation" },
-          { label: "Variação intersexo", value: "intersex_variation" },
-          { label: "Expressão de gênero", value: "gender_expression" },
-          { label: "Outro", value: "other" },
+          { label: "Gender identity", value: "gender_identity" },
+          { label: "Sexual orientation", value: "sexual_orientation" },
+          { label: "Romantic orientation", value: "romantic_orientation" },
+          { label: "Intersex variation", value: "intersex_variation" },
+          { label: "Gender expression", value: "gender_expression" },
+          { label: "Other", value: "other" },
         ],
-        help: "Categorias analíticas; não substituem os termos usados pelo personagem.",
+        help: "Analytical categories; they do not replace the terms used by the character.",
       },
       {
         id: "identity_confirmation",
-        label: "Confirmação da identidade",
+        label: "Identity confirmation",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
-          { label: "Explícita no jogo", value: "explicit_in_game" },
+          { label: "Select", value: "" },
+          { label: "Explicit in game", value: "explicit_in_game" },
           {
-            label: "Não explícita no jogo",
+            label: "Not explicit in game",
             value: "not_explicit_in_game",
           },
-          { label: "Confirmada pela equipe", value: "developer_confirmed" },
-          { label: "Fonte externa", value: "external_source" },
-          { label: "Ambígua", value: "ambiguous" },
+          { label: "Confirmed by development team", value: "developer_confirmed" },
+          { label: "External source", value: "external_source" },
+          { label: "Ambiguous", value: "ambiguous" },
         ],
       },
       {
@@ -183,58 +183,58 @@ const fieldGroups: FieldGroup[] = [
         label: "Status queer",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
-          { label: "Confirmado", value: "confirmed" },
-          { label: "Não confirmado", value: "not confirmed" },
-          { label: "Ambíguo", value: "ambiguous" },
+          { label: "Select", value: "" },
+          { label: "Confirmed", value: "confirmed" },
+          { label: "Not confirmed", value: "not confirmed" },
+          { label: "Ambiguous", value: "ambiguous" },
         ],
       },
     ],
   },
   {
-    title: "Interseccionalidade e evidências",
-    description: "Contexto necessário para sustentar e interpretar a entrada.",
+    title: "Intersectionality and evidence",
+    description: "Context needed to support and interpret the entry.",
     fields: [
       {
         id: "intersectionality_present",
-        label: "Marcadores interseccionais",
+        label: "Intersectional markers",
         type: "multiselect",
         options: [
-          { label: "Raça", value: "race" },
-          { label: "Etnia", value: "ethnicity" },
-          { label: "Pessoa negra", value: "black" },
-          { label: "Pessoa asiática", value: "asian" },
-          { label: "Pessoa indígena", value: "indigenous" },
-          { label: "Pessoa racializada", value: "person_of_color" },
-          { label: "Deficiência", value: "disability" },
-          { label: "Religião", value: "religion" },
-          { label: "Classe", value: "class" },
-          { label: "Idade", value: "age" },
-          { label: "Nacionalidade / migração", value: "nationality_migration" },
-          { label: "Outro", value: "other" },
-          { label: "Nenhum documentado", value: "no" },
+          { label: "Race", value: "race" },
+          { label: "Ethnicity", value: "ethnicity" },
+          { label: "Black", value: "black" },
+          { label: "Asian", value: "asian" },
+          { label: "Indigenous", value: "indigenous" },
+          { label: "Person of color", value: "person_of_color" },
+          { label: "Disability", value: "disability" },
+          { label: "Religion", value: "religion" },
+          { label: "Class", value: "class" },
+          { label: "Age", value: "age" },
+          { label: "Nationality / migration", value: "nationality_migration" },
+          { label: "Other", value: "other" },
+          { label: "None documented", value: "no" },
         ],
         wide: true,
-        help: "Marque apenas o que a evidência sustenta; detalhe contexto e termos culturais abaixo.",
+        help: "Select only what the evidence supports; describe context and cultural terms below.",
       },
       {
         id: "intersectionality_details",
-        label: "Detalhes de interseccionalidade",
+        label: "Intersectionality details",
         type: "textarea",
         rows: 3,
         wide: true,
       },
       {
         id: "evidence_source",
-        label: "Fonte / evidência",
-        placeholder: "Cena, diálogo, biografia oficial, artigo ou URL",
+        label: "Source / evidence",
+        placeholder: "Scene, dialogue, official biography, article, or URL",
         type: "textarea",
         rows: 4,
         wide: true,
       },
       {
         id: "notes",
-        label: "Notas curatoriais",
+        label: "Curatorial notes",
         type: "textarea",
         rows: 4,
         wide: true,
@@ -242,19 +242,19 @@ const fieldGroups: FieldGroup[] = [
     ],
   },
   {
-    title: "Imagem",
-    description: "Arquivo usado no site e informações de atribuição.",
+    title: "Image",
+    description: "File used on the site and attribution information.",
     fields: [
       {
         id: "character_image",
-        label: "Caminho da imagem",
+        label: "Image path",
         placeholder: "/images/ellie.jpg",
         wide: true,
       },
-      { id: "image_credit", label: "Crédito da imagem", wide: true },
+      { id: "image_credit", label: "Image credit", wide: true },
       {
         id: "image_source_url",
-        label: "URL da fonte da imagem",
+        label: "Image source URL",
         placeholder: "https://…",
         type: "url",
         wide: true,
@@ -262,53 +262,53 @@ const fieldGroups: FieldGroup[] = [
     ],
   },
   {
-    title: "Cobertura e proveniência",
+    title: "Coverage and provenance",
     description:
-      "Metadados para tornar visíveis as lacunas, o idioma e o estágio da pesquisa.",
+      "Metadata that makes research gaps, language, and stage visible.",
     fields: [
       {
         id: "research_status",
-        label: "Status da pesquisa",
+        label: "Research status",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
-          { label: "Identificado / na fila", value: "identified" },
-          { label: "Em pesquisa", value: "in_progress" },
-          { label: "Revisado", value: "reviewed" },
-          { label: "Precisa de verificação", value: "needs_verification" },
+          { label: "Select", value: "" },
+          { label: "Identified / queued", value: "identified" },
+          { label: "In research", value: "in_progress" },
+          { label: "Reviewed", value: "reviewed" },
+          { label: "Needs verification", value: "needs_verification" },
         ],
       },
       {
         id: "evidence_confidence",
-        label: "Confiança da evidência",
+        label: "Evidence confidence",
         type: "select",
         options: [
-          { label: "Selecione", value: "" },
-          { label: "Baixa", value: "low" },
-          { label: "Média", value: "medium" },
-          { label: "Alta", value: "high" },
+          { label: "Select", value: "" },
+          { label: "Low", value: "low" },
+          { label: "Medium", value: "medium" },
+          { label: "High", value: "high" },
         ],
       },
       {
         id: "source_language",
-        label: "Idioma da fonte",
-        placeholder: "Ex.: en, pt-BR, ja",
-        help: "Use o código do idioma para mapear lacunas linguísticas.",
+        label: "Source language",
+        placeholder: "e.g., en, pt-BR, ja",
+        help: "Use the language code to map language gaps.",
       },
       {
         id: "platform_version",
-        label: "Plataforma / versão pesquisada",
-        placeholder: "Ex.: PC, patch 1.108",
+        label: "Platform / version researched",
+        placeholder: "e.g., PC, patch 1.108",
       },
       {
         id: "discovery_source",
-        label: "Como o caso foi descoberto",
-        placeholder: "Indicação, lista existente, busca própria, comunidade…",
+        label: "How the case was discovered",
+        placeholder: "Referral, existing list, independent search, community…",
         wide: true,
       },
       {
         id: "last_reviewed",
-        label: "Última revisão",
+        label: "Last reviewed",
         type: "date",
       },
     ],
@@ -389,7 +389,7 @@ export default function AdminCharacterManager() {
       const body = (await response.json().catch(() => null)) as {
         error?: string;
       } | null;
-      throw ApiError(body?.error || "A operação não pôde ser concluída.");
+      throw ApiError(body?.error || "The operation could not be completed.");
     }
 
     return response;
@@ -418,7 +418,7 @@ export default function AdminCharacterManager() {
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha ao entrar.",
+        text: error instanceof Error ? error.message : "Could not sign in.",
       });
     } finally {
       setBusy(false);
@@ -428,7 +428,7 @@ export default function AdminCharacterManager() {
   function canDiscardChanges() {
     return (
       !dirty ||
-      window.confirm("Descartar as alterações que ainda não foram salvas?")
+      window.confirm("Discard the unsaved changes?")
     );
   }
 
@@ -478,13 +478,13 @@ export default function AdminCharacterManager() {
       setNotice({
         kind: "success",
         text: isNew
-          ? "Personagem cadastrado e CSV atualizado."
-          : "Alterações salvas no CSV.",
+          ? "Character added and CSV updated."
+          : "Changes saved to the CSV.",
       });
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha ao salvar.",
+        text: error instanceof Error ? error.message : "Could not save.",
       });
     } finally {
       setBusy(false);
@@ -495,7 +495,7 @@ export default function AdminCharacterManager() {
     if (!draft.character_id) return;
     if (
       !window.confirm(
-        `Excluir ${draft.character_name || "este personagem"} permanentemente do CSV?`,
+        `Permanently delete ${draft.character_name || "this character"} from the CSV?`,
       )
     ) {
       return;
@@ -515,11 +515,11 @@ export default function AdminCharacterManager() {
       setCharacters(remaining);
       setSelectedId(remaining[0]?.character_id || null);
       setDraft(remaining[0] || createEmptyCharacterRow());
-      setNotice({ kind: "success", text: "Personagem excluído do CSV." });
+      setNotice({ kind: "success", text: "Character deleted from the CSV." });
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha ao excluir.",
+        text: error instanceof Error ? error.message : "Could not delete.",
       });
     } finally {
       setBusy(false);
@@ -544,7 +544,7 @@ export default function AdminCharacterManager() {
     } catch (error) {
       setNotice({
         kind: "error",
-        text: error instanceof Error ? error.message : "Falha no download.",
+        text: error instanceof Error ? error.message : "Could not download.",
       });
     } finally {
       setBusy(false);
@@ -559,7 +559,7 @@ export default function AdminCharacterManager() {
     if (
       hasUnsavedChanges &&
       !window.confirm(
-        "Descartar as alterações desta aba que ainda não foram salvas?",
+        "Discard the unsaved changes in this tab?",
       )
     ) {
       return;
@@ -572,7 +572,7 @@ export default function AdminCharacterManager() {
   function logout() {
     if (
       (dirty || systemsDirty) &&
-      !window.confirm("Sair e descartar as alterações que não foram salvas?")
+      !window.confirm("Sign out and discard the unsaved changes?")
     ) {
       return;
     }
@@ -587,19 +587,19 @@ export default function AdminCharacterManager() {
   if (!authenticated) {
     return (
       <section className="mx-auto max-w-xl overflow-hidden rounded-[2rem] border border-[#dfe3f3] bg-white p-7 shadow-[0_24px_70px_rgba(49,63,145,0.12)] sm:p-10">
-        <p className="pq-eyebrow">Acesso restrito</p>
+        <p className="pq-eyebrow">Restricted access</p>
         <h2 className="mt-3 text-2xl font-black text-[#12152b]">
-          Entre com a senha administrativa
+          Sign in with the admin password
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[#646b89]">
-          A senha é validada somente pelo servidor e não fica salva no
-          navegador.
+          The password is validated only by the server and is not stored in the
+          browser.
         </p>
 
         <form onSubmit={login} className="mt-7 space-y-4">
           <label className="block">
             <span className="font-mono text-[11px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
-              Senha
+              Password
             </span>
             <input
               type="password"
@@ -616,7 +616,7 @@ export default function AdminCharacterManager() {
             disabled={busy || !password}
             className="pq-primary-button w-full px-6 py-4 text-sm disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {busy ? "Entrando…" : "Entrar"}
+            {busy ? "Signing in…" : "Sign in"}
           </button>
         </form>
 
@@ -628,7 +628,7 @@ export default function AdminCharacterManager() {
   return (
     <div className="space-y-6">
       <nav
-        aria-label="Datasets administrativos"
+        aria-label="Admin datasets"
         className="flex flex-col gap-2 rounded-[1.5rem] border border-[#dfe3f3] bg-white p-2 shadow-[0_14px_38px_rgba(49,63,145,0.08)] sm:flex-row"
       >
         <button
@@ -640,7 +640,7 @@ export default function AdminCharacterManager() {
               : "text-[#646b89] hover:bg-[#f4f5fb]"
           }`}
         >
-          <span>Personagens</span>
+          <span>Characters</span>
           <span className="rounded-full bg-white/12 px-2.5 py-1 font-mono text-[10px]">
             {characters.length}
           </span>
@@ -654,7 +654,7 @@ export default function AdminCharacterManager() {
               : "text-[#646b89] hover:bg-[#f4f5fb]"
           }`}
         >
-          <span>Sistemas queer</span>
+          <span>Queer systems</span>
           <span className="rounded-full bg-white/12 px-2.5 py-1 font-mono text-[10px]">
             {systemsCount}
           </span>
@@ -667,9 +667,9 @@ export default function AdminCharacterManager() {
         <div className="border-b border-[#e5e8f5] p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="pq-eyebrow">Personagens</p>
+              <p className="pq-eyebrow">Characters</p>
               <p className="mt-1 text-sm font-bold text-[#646b89]">
-                {characters.length} registros
+                {characters.length} records
               </p>
             </div>
             <button
@@ -677,7 +677,7 @@ export default function AdminCharacterManager() {
               onClick={startNewCharacter}
               className="pq-primary-button px-4 py-2.5 text-[10px]"
             >
-              + Novo
+              + New
             </button>
           </div>
 
@@ -685,7 +685,7 @@ export default function AdminCharacterManager() {
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Buscar personagem ou jogo"
+            placeholder="Search character or game"
             className="mt-4 w-full rounded-2xl border border-[#d3d8ed] bg-[#f8f9fd] px-4 py-3 text-sm outline-none transition placeholder:text-[#9da3b9] focus:border-[#4f5fe7]"
           />
         </div>
@@ -705,10 +705,10 @@ export default function AdminCharacterManager() {
                 }`}
               >
                 <span className="block font-black text-[#12152b]">
-                  {character.character_name || "Sem nome"}
+                  {character.character_name || "Unnamed"}
                 </span>
                 <span className="mt-1 block text-xs text-[#646b89]">
-                  {character.game_title || "Jogo não informado"}
+                  {character.game_title || "Game not provided"}
                 </span>
               </button>
             );
@@ -716,7 +716,7 @@ export default function AdminCharacterManager() {
 
           {filteredCharacters.length === 0 ? (
             <p className="px-4 py-8 text-center text-sm text-[#7b819c]">
-              Nenhum registro encontrado.
+              No records found.
             </p>
           ) : null}
         </div>
@@ -728,14 +728,14 @@ export default function AdminCharacterManager() {
             disabled={busy}
             className="pq-secondary-button px-4 py-3 text-[10px] disabled:opacity-50"
           >
-            Baixar backup CSV
+            Download CSV backup
           </button>
           <button
             type="button"
             onClick={logout}
             className="rounded-full border border-[#dfe3f3] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-[#646b89] transition hover:bg-[#f4f5fb]"
           >
-            Sair
+            Sign out
           </button>
         </div>
       </aside>
@@ -748,16 +748,16 @@ export default function AdminCharacterManager() {
           <div>
             <p className="font-mono text-[11px] font-black uppercase tracking-[0.22em] text-[#9be8f5]">
               {draft.character_id
-                ? `Registro #${draft.character_id}`
-                : "Novo registro"}
+                ? `Record #${draft.character_id}`
+                : "New record"}
             </p>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
-              {draft.character_name || "Novo personagem"}
+              {draft.character_name || "New character"}
             </h2>
           </div>
           {dirty ? (
             <span className="w-fit rounded-full bg-[#ffdf70] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-[#584600]">
-              Alterações não salvas
+              Unsaved changes
             </span>
           ) : null}
         </div>
@@ -797,7 +797,7 @@ export default function AdminCharacterManager() {
                 disabled={busy}
                 className="rounded-full border border-[#f0b6c7] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#b72755] transition hover:bg-[#fff0f5] disabled:opacity-50"
               >
-                Excluir personagem
+                Delete character
               </button>
             ) : null}
           </div>
@@ -807,16 +807,15 @@ export default function AdminCharacterManager() {
             disabled={busy || !dirty}
             className="pq-primary-button px-7 py-4 text-xs disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {busy ? "Salvando…" : "Salvar no dataset"}
+            {busy ? "Saving…" : "Save to dataset"}
           </button>
         </div>
       </form>
 
       <p className="text-xs leading-relaxed text-[#7b819c] xl:col-start-2">
-        As alterações são gravadas em <code>src/data/pressq_seed_dataset.csv</code>.
-        Hospedagens serverless normalmente não oferecem disco persistente; para
-        uso administrativo em produção, o próximo passo é conectar um banco de
-        dados.
+        Changes are written to <code>src/data/pressq_seed_dataset.csv</code>.
+        Serverless hosting usually does not provide persistent disk storage; for
+        production administration, the next step is to connect a database.
       </p>
         </div>
       ) : (
@@ -880,7 +879,7 @@ function CharacterField({
           className={baseClass}
         >
           {value && !hasListedOption ? (
-            <option value={value}>{value} (valor atual)</option>
+            <option value={value}>{value} (current value)</option>
           ) : null}
           {field.options?.map((option) => (
             <option key={option.value} value={option.value}>
@@ -932,7 +931,7 @@ function CharacterMultiSelect({
   const allOptions = [
     ...(field.options || []),
     ...legacyValues.map((item) => ({
-      label: `${item} (valor atual)`,
+      label: `${item} (current value)`,
       value: item,
     })),
   ];
@@ -964,8 +963,8 @@ function CharacterMultiSelect({
         <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm text-[#12152b] marker:hidden">
           <span className={selected.length ? "font-bold" : "text-[#9da3b9]"}>
             {selected.length
-              ? `${selected.length} ${selected.length === 1 ? "opção selecionada" : "opções selecionadas"}`
-              : "Selecione uma ou mais opções"}
+              ? `${selected.length} ${selected.length === 1 ? "option selected" : "options selected"}`
+              : "Select one or more options"}
           </span>
           <span className="text-[#4f5fe7] transition group-open:rotate-180" aria-hidden="true">
             ▾
@@ -998,7 +997,7 @@ function CharacterMultiSelect({
       </details>
 
       {selected.length ? (
-        <div className="mt-2 flex flex-wrap gap-1.5" aria-label="Opções selecionadas">
+        <div className="mt-2 flex flex-wrap gap-1.5" aria-label="Selected options">
           {selected.map((item) => {
             const label = allOptions.find((option) => option.value === item)?.label || item;
             return (
@@ -1007,9 +1006,9 @@ function CharacterMultiSelect({
                 type="button"
                 onClick={() => toggle(item)}
                 className="rounded-full bg-[#eef0ff] px-2.5 py-1 text-[10px] font-black text-[#3545d3] transition hover:bg-[#dfe3ff]"
-                title={`Remover ${label}`}
+                title={`Remove ${label}`}
               >
-                {label.replace(" (valor atual)", "")} ×
+                {label.replace(" (current value)", "")} ×
               </button>
             );
           })}

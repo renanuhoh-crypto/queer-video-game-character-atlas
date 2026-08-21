@@ -46,12 +46,12 @@ function normalizeScopes(value: string) {
 }
 
 function validationError(row: QueerSystemRow) {
-  if (!row.game_title) return "Informe o título do jogo.";
-  if (!row.system_type) return "Selecione o tipo de sistema.";
-  if (!row.system_description) return "Descreva o que o sistema permite.";
+  if (!row.game_title) return "Enter the game title.";
+  if (!row.system_type) return "Select the system type.";
+  if (!row.system_description) return "Describe what the system allows.";
 
   if (row.release_year && !/^\d{4}$/.test(row.release_year)) {
-    return "O ano de lançamento deve conter quatro dígitos.";
+    return "The release year must contain four digits.";
   }
 
   if (
@@ -60,7 +60,7 @@ function validationError(row: QueerSystemRow) {
       row.research_status as (typeof RESEARCH_STATUSES)[number],
     )
   ) {
-    return "O status da pesquisa informado não é válido.";
+    return "The selected research status is invalid.";
   }
 
   if (
@@ -69,11 +69,11 @@ function validationError(row: QueerSystemRow) {
       row.evidence_confidence as (typeof EVIDENCE_CONFIDENCE_LEVELS)[number],
     )
   ) {
-    return "O nível de confiança da evidência não é válido.";
+    return "The selected evidence confidence level is invalid.";
   }
 
   if (row.last_reviewed && !/^\d{4}-\d{2}-\d{2}$/.test(row.last_reviewed)) {
-    return "A data da revisão deve usar o formato AAAA-MM-DD.";
+    return "The review date must use the YYYY-MM-DD format.";
   }
 
   if (
@@ -81,7 +81,7 @@ function validationError(row: QueerSystemRow) {
       row.system_type as (typeof QUEER_SYSTEM_TYPES)[number],
     )
   ) {
-    return "O tipo de sistema informado não é válido.";
+    return "The selected system type is invalid.";
   }
 
   if (
@@ -92,7 +92,7 @@ function validationError(row: QueerSystemRow) {
         ),
     )
   ) {
-    return "O escopo informado não é válido.";
+    return "The selected scope is invalid.";
   }
 
   if (
@@ -101,7 +101,7 @@ function validationError(row: QueerSystemRow) {
       row.player_dependency as (typeof PLAYER_DEPENDENCIES)[number],
     )
   ) {
-    return "A dependência do jogador informada não é válida.";
+    return "The selected player dependency is invalid.";
   }
 
   if (
@@ -110,7 +110,7 @@ function validationError(row: QueerSystemRow) {
       row.availability as (typeof SYSTEM_AVAILABILITIES)[number],
     )
   ) {
-    return "A disponibilidade informada não é válida.";
+    return "The selected availability is invalid.";
   }
 
   for (const [field, value] of Object.entries(row)) {
@@ -200,7 +200,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ systems, count: systems.length });
   } catch (error) {
     console.error("Failed reading queer systems dataset:", error);
-    return responseError("Não foi possível ler o dataset de sistemas queer.", 500);
+    return responseError("Could not read the queer systems dataset.", 500);
   }
 }
 
@@ -210,7 +210,7 @@ export async function POST(request: NextRequest) {
 
   const incomingRows = await readRequestRows(request);
   if (!incomingRows || incomingRows.length === 0) {
-    return responseError("Dados inválidos.", 400);
+    return responseError("Invalid data.", 400);
   }
 
   try {
@@ -229,7 +229,7 @@ export async function POST(request: NextRequest) {
         if (error) throw new DatasetRequestError(error, 400);
         if (isDuplicate([...rows, ...createdRows], row)) {
           throw new DatasetRequestError(
-            `O sistema ${row.system_type} já está cadastrado para o mesmo jogo e escopo.`,
+            `The ${row.system_type} system has already been added for the same game and scope.`,
             409,
           );
         }
@@ -256,9 +256,9 @@ export async function PUT(request: NextRequest) {
 
   const incomingRows = await readRequestRows(request);
   const incomingRow = incomingRows?.[0];
-  if (!incomingRow) return responseError("Dados inválidos.", 400);
+  if (!incomingRow) return responseError("Invalid data.", 400);
   if (!incomingRow.system_id) {
-    return responseError("O identificador do sistema é obrigatório.", 400);
+    return responseError("The system ID is required.", 400);
   }
 
   try {
@@ -269,14 +269,14 @@ export async function PUT(request: NextRequest) {
       );
 
       if (index < 0) {
-        throw new DatasetRequestError("Sistema não encontrado.", 404);
+        throw new DatasetRequestError("System not found.", 404);
       }
 
       const error = validationError(incomingRow);
       if (error) throw new DatasetRequestError(error, 400);
       if (isDuplicate(rows, incomingRow)) {
         throw new DatasetRequestError(
-          "Esse sistema já está cadastrado para o mesmo jogo e escopo.",
+          "This system has already been added for the same game and scope.",
           409,
         );
       }
@@ -299,7 +299,7 @@ export async function DELETE(request: NextRequest) {
 
   const systemId = request.nextUrl.searchParams.get("id")?.trim();
   if (!systemId) {
-    return responseError("Informe o identificador do sistema.", 400);
+    return responseError("Enter the system ID.", 400);
   }
 
   try {
@@ -308,7 +308,7 @@ export async function DELETE(request: NextRequest) {
       const updatedRows = rows.filter((row) => row.system_id !== systemId);
 
       if (updatedRows.length === rows.length) {
-        throw new DatasetRequestError("Sistema não encontrado.", 404);
+        throw new DatasetRequestError("System not found.", 404);
       }
 
       writeQueerSystemRows(updatedRows);
@@ -336,7 +336,7 @@ function handleMutationError(error: unknown) {
 
   console.error("Failed writing queer systems dataset:", error);
   return responseError(
-    "Não foi possível gravar o CSV. Verifique se a hospedagem permite escrita em disco.",
+    "Could not write the CSV. Check whether the hosting environment allows disk writes.",
     500,
   );
 }

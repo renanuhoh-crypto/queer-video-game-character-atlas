@@ -3,7 +3,7 @@ import Link from "next/link";
 import AdminCharacterManager from "@/components/AdminCharacterManager";
 
 export const metadata: Metadata = {
-  title: "Administrar datasets",
+  title: "Manage datasets",
   robots: { index: false, follow: false },
 };
 
@@ -15,11 +15,11 @@ export default function AdminPage() {
           <div>
             <p className="pq-eyebrow">Dataset workspace</p>
             <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] text-[#12152b] sm:text-5xl">
-              Administrar datasets
+              Manage datasets
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#646b89] sm:text-base">
-              Cadastre personagens e possibilidades sistêmicas sem misturar
-              unidades de representação diferentes.
+              Add characters and systemic possibilities without mixing distinct
+              units of representation.
             </p>
           </div>
 
@@ -27,7 +27,7 @@ export default function AdminPage() {
             href="/"
             className="pq-secondary-button w-fit px-5 py-3 text-xs"
           >
-            Voltar ao site
+            Back to site
           </Link>
         </header>
 

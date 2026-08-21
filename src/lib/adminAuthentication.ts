@@ -16,14 +16,14 @@ export function authenticateAdmin(request: NextRequest) {
 
   if (!configuredPassword) {
     return responseError(
-      "A área administrativa ainda não foi configurada. Defina ADMIN_PASSWORD no arquivo .env.local e reinicie o servidor.",
+      "The admin area has not been configured yet. Set ADMIN_PASSWORD in the .env.local file and restart the server.",
       503,
     );
   }
 
   const receivedPassword = request.headers.get("x-admin-password") || "";
   if (!passwordsMatch(receivedPassword, configuredPassword)) {
-    return responseError("Senha administrativa incorreta.", 401);
+    return responseError("Incorrect admin password.", 401);
   }
 
   return null;

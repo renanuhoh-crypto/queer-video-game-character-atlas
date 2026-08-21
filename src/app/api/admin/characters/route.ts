@@ -25,11 +25,11 @@ function normalize(value: string) {
 }
 
 function validationError(row: CharacterRow) {
-  if (!row.character_name) return "Informe o nome do personagem.";
-  if (!row.game_title) return "Informe o título do jogo.";
+  if (!row.character_name) return "Enter the character name.";
+  if (!row.game_title) return "Enter the game title.";
 
   if (row.release_year && !/^\d{4}$/.test(row.release_year)) {
-    return "O ano de lançamento deve conter quatro dígitos.";
+    return "The release year must contain four digits.";
   }
 
   if (
@@ -38,7 +38,7 @@ function validationError(row: CharacterRow) {
       row.research_status as (typeof RESEARCH_STATUSES)[number],
     )
   ) {
-    return "O status da pesquisa informado não é válido.";
+    return "The selected research status is invalid.";
   }
 
   if (
@@ -47,11 +47,11 @@ function validationError(row: CharacterRow) {
       row.evidence_confidence as (typeof EVIDENCE_CONFIDENCE_LEVELS)[number],
     )
   ) {
-    return "O nível de confiança da evidência não é válido.";
+    return "The selected evidence confidence level is invalid.";
   }
 
   if (row.last_reviewed && !/^\d{4}-\d{2}-\d{2}$/.test(row.last_reviewed)) {
-    return "A data da revisão deve usar o formato AAAA-MM-DD.";
+    return "The review date must use the YYYY-MM-DD format.";
   }
 
   for (const [field, value] of Object.entries(row)) {
@@ -119,7 +119,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ characters, count: characters.length });
   } catch (error) {
     console.error("Failed reading character dataset:", error);
-    return responseError("Não foi possível ler o dataset de personagens.", 500);
+    return responseError("Could not read the character dataset.", 500);
   }
 }
 
@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
   if (authenticationError) return authenticationError;
 
   const incomingRow = await readRequestRow(request);
-  if (!incomingRow) return responseError("Dados inválidos.", 400);
+  if (!incomingRow) return responseError("Invalid data.", 400);
 
   try {
     const character = await serializeMutation(() => {
@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
       if (error) throw new DatasetRequestError(error, 400);
       if (isDuplicate(rows, row)) {
         throw new DatasetRequestError(
-          "Esse personagem já está cadastrado para o mesmo jogo.",
+          "This character has already been added for the same game.",
           409,
         );
       }
@@ -159,9 +159,9 @@ export async function PUT(request: NextRequest) {
   if (authenticationError) return authenticationError;
 
   const incomingRow = await readRequestRow(request);
-  if (!incomingRow) return responseError("Dados inválidos.", 400);
+  if (!incomingRow) return responseError("Invalid data.", 400);
   if (!incomingRow.character_id) {
-    return responseError("O identificador do personagem é obrigatório.", 400);
+    return responseError("The character ID is required.", 400);
   }
 
   try {
@@ -172,14 +172,14 @@ export async function PUT(request: NextRequest) {
       );
 
       if (index < 0) {
-        throw new DatasetRequestError("Personagem não encontrado.", 404);
+        throw new DatasetRequestError("Character not found.", 404);
       }
 
       const error = validationError(incomingRow);
       if (error) throw new DatasetRequestError(error, 400);
       if (isDuplicate(rows, incomingRow)) {
         throw new DatasetRequestError(
-          "Esse personagem já está cadastrado para o mesmo jogo.",
+          "This character has already been added for the same game.",
           409,
         );
       }
@@ -202,7 +202,7 @@ export async function DELETE(request: NextRequest) {
 
   const characterId = request.nextUrl.searchParams.get("id")?.trim();
   if (!characterId) {
-    return responseError("Informe o identificador do personagem.", 400);
+    return responseError("Enter the character ID.", 400);
   }
 
   try {
@@ -213,7 +213,7 @@ export async function DELETE(request: NextRequest) {
       );
 
       if (updatedRows.length === rows.length) {
-        throw new DatasetRequestError("Personagem não encontrado.", 404);
+        throw new DatasetRequestError("Character not found.", 404);
       }
 
       writeCharacterRows(updatedRows);
@@ -241,7 +241,7 @@ function handleMutationError(error: unknown) {
 
   console.error("Failed writing character dataset:", error);
   return responseError(
-    "Não foi possível gravar o CSV. Verifique se a hospedagem permite escrita em disco.",
+    "Could not write the CSV. Check whether the hosting environment allows disk writes.",
     500,
   );
 }
