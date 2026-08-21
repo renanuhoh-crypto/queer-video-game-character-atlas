@@ -19,6 +19,9 @@ type Obstacle = {
   hit: boolean;
   scored: boolean;
   destroyed: boolean;
+  health: number;
+  maxHealth: number;
+  damageFlash: number;
 };
 
 type RainbowHeart = {
@@ -28,6 +31,12 @@ type RainbowHeart = {
 };
 
 type SkyRainbow = {
+  id: number;
+  x: number;
+  y: number;
+};
+
+type QueerPowerPickup = {
   id: number;
   x: number;
   y: number;
@@ -46,7 +55,7 @@ type JumpSparkle = {
   dy: number;
   life: number;
   size: number;
-  glyph: "✦" | "•";
+  glyph: "✦" | "•" | "♥";
 };
 
 type GameModel = {
@@ -61,17 +70,30 @@ type GameModel = {
   obstacles: Obstacle[];
   projectiles: RainbowHeart[];
   rainbows: SkyRainbow[];
+  queerPowers: QueerPowerPickup[];
   sparkles: JumpSparkle[];
   spawnClock: number;
   nextSpawn: number;
   rainbowClock: number;
   nextRainbow: number;
+  powerClock: number;
+  nextPower: number;
   invulnerable: number;
+  powerActive: number;
+  fireFlash: number;
+  autoFireClock: number;
+  superPowerCollected: boolean;
 };
 
 type GameView = Omit<
   GameModel,
-  "spawnClock" | "nextSpawn" | "rainbowClock" | "nextRainbow"
+  | "spawnClock"
+  | "nextSpawn"
+  | "rainbowClock"
+  | "nextRainbow"
+  | "powerClock"
+  | "nextPower"
+  | "autoFireClock"
 >;
 
 const PLAYER_X = 18;
@@ -80,6 +102,11 @@ const GROUND_OFFSET = 10;
 const GRAVITY = 86;
 const JUMP_VELOCITY = 62;
 const BASE_SPEED = 23;
+const BASE_LIVES = 3;
+const SUPER_MAX_AMMO = 10;
+const NORMAL_ENEMY_HEALTH = 4;
+const SUPER_ENEMY_HEALTH = 8;
+const RAINBOW_AMMO_BONUS = 3;
 
 const OBSTACLE_DETAILS: Record<
   ObstacleKind,
@@ -93,6 +120,13 @@ const OBSTACLE_DETAILS: Record<
 };
 
 const OBSTACLE_KINDS = Object.keys(OBSTACLE_DETAILS) as ObstacleKind[];
+const ENEMY_PERSONAS = [
+  "tycoon",
+  "author",
+  "techbro",
+  "pundit",
+  "bureaucrat",
+] as const;
 
 function initialModel(status: GameStatus = "ready"): GameModel {
   return {
@@ -100,19 +134,26 @@ function initialModel(status: GameStatus = "ready"): GameModel {
     playerX: PLAYER_X,
     height: 0,
     velocity: 0,
-    lives: 3,
+    lives: BASE_LIVES,
     ammo: 4,
     jumpsLeft: 2,
     distance: 0,
     obstacles: [],
     projectiles: [],
     rainbows: [],
+    queerPowers: [],
     sparkles: [],
     spawnClock: 0,
     nextSpawn: 1.5,
     rainbowClock: 0,
-    nextRainbow: 2.8,
+    nextRainbow: 1.2,
+    powerClock: 0,
+    nextPower: 7,
     invulnerable: 0,
+    powerActive: 0,
+    fireFlash: 0,
+    autoFireClock: 0,
+    superPowerCollected: false,
   };
 }
 
@@ -130,7 +171,11 @@ function toView(model: GameModel): GameView {
     obstacles: model.obstacles.map((obstacle) => ({ ...obstacle })),
     projectiles: model.projectiles.map((projectile) => ({ ...projectile })),
     rainbows: model.rainbows.map((rainbow) => ({ ...rainbow })),
+    queerPowers: model.queerPowers.map((power) => ({ ...power })),
     sparkles: model.sparkles.map((sparkle) => ({ ...sparkle })),
+    powerActive: model.powerActive,
+    fireFlash: model.fireFlash,
+    superPowerCollected: model.superPowerCollected,
   };
 }
 
@@ -140,6 +185,7 @@ export default function QuiuFlightGame() {
   const nextSparkleIdRef = useRef(1);
   const nextProjectileIdRef = useRef(1);
   const nextRainbowIdRef = useRef(1);
+  const nextPowerIdRef = useRef(1);
   const movementRef = useRef({ left: false, right: false });
   const lastFrameRef = useRef<number | null>(null);
   const frameRef = useRef<number | null>(null);
@@ -198,7 +244,8 @@ export default function QuiuFlightGame() {
   const startGame = useCallback(() => {
     nextObstacleIdRef.current = 2;
     nextProjectileIdRef.current = 1;
-    nextRainbowIdRef.current = 2;
+    nextRainbowIdRef.current = 3;
+    nextPowerIdRef.current = 2;
     movementRef.current = { left: false, right: false };
     setScoreSaved(false);
     modelRef.current = {
@@ -213,13 +260,28 @@ export default function QuiuFlightGame() {
           hit: false,
           scored: false,
           destroyed: false,
+          health: NORMAL_ENEMY_HEALTH,
+          maxHealth: NORMAL_ENEMY_HEALTH,
+          damageFlash: 0,
         },
       ],
       rainbows: [
         {
           id: 1,
-          x: 68,
-          y: 23,
+          x: 54,
+          y: 19,
+        },
+        {
+          id: 2,
+          x: 78,
+          y: 29,
+        },
+      ],
+      queerPowers: [
+        {
+          id: 1,
+          x: 92,
+          y: 30,
         },
       ],
     };
@@ -269,13 +331,19 @@ export default function QuiuFlightGame() {
   const fireRainbowHeart = useCallback(() => {
     const model = modelRef.current;
 
-    if (model.status !== "playing" || model.ammo <= 0) return;
+    if (
+      model.status !== "playing" ||
+      (model.ammo <= 0 && model.powerActive <= 0)
+    ) {
+      return;
+    }
 
-    model.ammo -= 1;
+    if (model.powerActive <= 0) model.ammo -= 1;
+    model.fireFlash = 0.18;
     model.projectiles.push({
       id: nextProjectileIdRef.current++,
-      x: model.playerX + 4,
-      y: Math.min(14, model.height + 7),
+      x: model.playerX + PLAYER_WIDTH * 0.52,
+      y: Math.min(38, model.height + 6.5),
     });
     publish();
   }, [publish]);
@@ -348,12 +416,34 @@ export default function QuiuFlightGame() {
         model.distance += worldSpeed * delta * 0.42;
         model.spawnClock += delta;
         model.rainbowClock += delta;
+        model.powerClock += delta;
         model.invulnerable = Math.max(0, model.invulnerable - delta);
+        model.powerActive = Math.max(0, model.powerActive - delta);
+        model.fireFlash = Math.max(0, model.fireFlash - delta);
+
+        if (model.powerActive > 0) {
+          model.autoFireClock += delta;
+          if (model.autoFireClock >= 0.14) {
+            model.autoFireClock = 0;
+            model.fireFlash = 0.13;
+            model.projectiles.push({
+              id: nextProjectileIdRef.current++,
+              x: model.playerX + PLAYER_WIDTH * 0.52,
+              y: Math.min(38, model.height + 6.5),
+            });
+          }
+        } else {
+          model.autoFireClock = 0;
+        }
 
         if (model.spawnClock >= model.nextSpawn) {
           const kind = OBSTACLE_KINDS[
             Math.floor(Math.random() * OBSTACLE_KINDS.length)
           ];
+          const spawnHealth =
+            model.powerActive > 0
+              ? SUPER_ENEMY_HEALTH
+              : NORMAL_ENEMY_HEALTH;
           model.spawnClock = 0;
           model.nextSpawn = Math.max(
             0.95,
@@ -366,12 +456,15 @@ export default function QuiuFlightGame() {
             hit: false,
             scored: false,
             destroyed: false,
+            health: spawnHealth,
+            maxHealth: spawnHealth,
+            damageFlash: 0,
           });
         }
 
         if (model.rainbowClock >= model.nextRainbow) {
           model.rainbowClock = 0;
-          model.nextRainbow = 1.8 + Math.random() * 1.2;
+          model.nextRainbow = 0.75 + Math.random() * 0.8;
           model.rainbows.push({
             id: nextRainbowIdRef.current++,
             x: 108,
@@ -379,10 +472,25 @@ export default function QuiuFlightGame() {
           });
         }
 
+        if (
+          !model.superPowerCollected &&
+          model.queerPowers.length === 0 &&
+          model.powerClock >= model.nextPower
+        ) {
+          model.powerClock = 0;
+          model.nextPower = 8 + Math.random() * 4;
+          model.queerPowers.push({
+            id: nextPowerIdRef.current++,
+            x: 108,
+            y: 24 + Math.random() * 10,
+          });
+        }
+
         model.obstacles = model.obstacles
           .map((obstacle) => ({
             ...obstacle,
             x: obstacle.x - worldSpeed * delta,
+            damageFlash: Math.max(0, obstacle.damageFlash - delta),
           }))
           .filter((obstacle) => obstacle.x > -16);
 
@@ -392,6 +500,13 @@ export default function QuiuFlightGame() {
             x: rainbow.x - worldSpeed * delta,
           }))
           .filter((rainbow) => rainbow.x > -10);
+
+        model.queerPowers = model.queerPowers
+          .map((power) => ({
+            ...power,
+            x: power.x - worldSpeed * delta,
+          }))
+          .filter((power) => power.x > -12);
 
         model.projectiles = model.projectiles
           .map((projectile) => ({
@@ -413,9 +528,17 @@ export default function QuiuFlightGame() {
         model.rainbows = model.rainbows.filter((rainbow) => {
           const touchesHorizontally = Math.abs(rainbow.x - model.playerX) < 7;
           const touchesVertically = Math.abs(rainbow.y - (model.height + 7)) < 9;
+          const ammoLimit = SUPER_MAX_AMMO;
 
-          if (touchesHorizontally && touchesVertically && model.ammo < 5) {
-            model.ammo += 1;
+          if (
+            touchesHorizontally &&
+            touchesVertically &&
+            model.ammo < ammoLimit
+          ) {
+            model.ammo = Math.min(
+              ammoLimit,
+              model.ammo + RAINBOW_AMMO_BONUS,
+            );
 
             for (let index = 0; index < 12; index += 1) {
               model.sparkles.push({
@@ -436,6 +559,36 @@ export default function QuiuFlightGame() {
           return true;
         });
 
+        model.queerPowers = model.queerPowers.filter((power) => {
+          const touchesHorizontally = Math.abs(power.x - model.playerX) < 7.5;
+          const touchesVertically =
+            Math.abs(power.y - (model.height + 7)) < 9.5;
+
+          if (touchesHorizontally && touchesVertically) {
+            model.ammo = Math.min(SUPER_MAX_AMMO, model.ammo + 5);
+            model.powerActive = 6;
+            model.autoFireClock = 0.14;
+            model.superPowerCollected = true;
+
+            for (let index = 0; index < 30; index += 1) {
+              model.sparkles.push({
+                id: nextSparkleIdRef.current++,
+                x: power.x,
+                y: power.y,
+                dx: -18 + Math.random() * 36,
+                dy: 5 + Math.random() * 22,
+                life: 0.7 + Math.random() * 0.7,
+                size: 10 + Math.random() * 17,
+                glyph: index % 3 === 0 ? "♥" : index % 2 === 0 ? "✦" : "•",
+              });
+            }
+
+            return false;
+          }
+
+          return true;
+        });
+
         const spentProjectiles = new Set<number>();
 
         for (const projectile of model.projectiles) {
@@ -446,18 +599,30 @@ export default function QuiuFlightGame() {
           });
 
           if (target) {
-            target.destroyed = true;
             spentProjectiles.add(projectile.id);
 
-            for (let index = 0; index < 15; index += 1) {
+            const resistance =
+              model.powerActive > 0
+                ? SUPER_ENEMY_HEALTH
+                : NORMAL_ENEMY_HEALTH;
+            if (target.maxHealth !== resistance) {
+              target.maxHealth = resistance;
+              target.health = resistance;
+            }
+            target.health -= 1;
+            target.damageFlash = 0.18;
+            target.destroyed = target.health <= 0;
+
+            const sparkleCount = target.destroyed ? 15 : 6;
+            for (let index = 0; index < sparkleCount; index += 1) {
               model.sparkles.push({
                 id: nextSparkleIdRef.current++,
                 x: target.x + 4,
                 y: 7 + Math.random() * 12,
                 dx: -12 + Math.random() * 24,
                 dy: 4 + Math.random() * 16,
-                life: 0.5 + Math.random() * 0.45,
-                size: 8 + Math.random() * 15,
+                life: (target.destroyed ? 0.5 : 0.28) + Math.random() * 0.45,
+                size: 8 + Math.random() * (target.destroyed ? 15 : 8),
                 glyph: index % 4 === 0 ? "✦" : "•",
               });
             }
@@ -567,11 +732,19 @@ export default function QuiuFlightGame() {
           <h2>Quiu Run</h2>
         </div>
 
-        <div className="quiu-runner-stats" aria-label={`${view.lives} lives and ${view.ammo} rainbow hearts remaining`}>
+        <div className="quiu-runner-stats" aria-label={`${view.lives} lives and ${view.ammo} rainbow heart shots remaining`}>
           <span className="quiu-runner-lives" aria-hidden="true">
-            {Array.from({ length: 3 }, (_, index) => (
+            {Array.from({ length: BASE_LIVES }, (_, index) => (
               <span key={index} className={index < view.lives ? "is-active" : ""}>♥</span>
             ))}
+          </span>
+          <span className={`runner-power-pill${view.superPowerCollected ? " is-collected" : ""}`}>
+            <span aria-hidden="true">Q✦</span>{" "}
+            {view.powerActive > 0
+              ? `MG ${Math.ceil(view.powerActive)}s`
+              : view.superPowerCollected
+                ? "Super ammo"
+                : "+5 ammo"}
           </span>
           <span className="runner-ammo-pill" aria-label={`${view.ammo} rainbow heart shots`}>
             <span aria-hidden="true">♥</span> {view.ammo}
@@ -586,7 +759,7 @@ export default function QuiuFlightGame() {
         className="quiu-runner-game"
         role="application"
         tabIndex={0}
-        aria-label="Quiu Run minigame. Jump, move left and right, collect rainbows, and fire rainbow hearts at obstacles."
+        aria-label="Quiu Run minigame. Jump, move left and right, collect rainbows for three shots each until reaching ten, collect the Super Queer Power for five extra shots and six seconds of automatic fire, and fire rainbow hearts from Quiu's heart cannon."
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
         onBlur={() => {
@@ -598,6 +771,13 @@ export default function QuiuFlightGame() {
           jump();
         }}
       >
+        <div className="runner-parallax runner-parallax--far" aria-hidden="true">
+          <i /><i /><i />
+        </div>
+        <div className="runner-parallax runner-parallax--mid" aria-hidden="true">
+          <i /><i /><i /><i />
+        </div>
+        <div className="runner-parallax runner-parallax--near" aria-hidden="true" />
         <div className="runner-aurora runner-aurora--one" aria-hidden="true" />
         <div className="runner-aurora runner-aurora--two" aria-hidden="true" />
         <div className="runner-constellations" aria-hidden="true">
@@ -640,6 +820,22 @@ export default function QuiuFlightGame() {
           </span>
         ))}
 
+        {view.queerPowers.map((power) => (
+          <span
+            key={power.id}
+            className="runner-queer-power"
+            style={{
+              left: `${power.x}%`,
+              bottom: `${GROUND_OFFSET + power.y}%`,
+            }}
+            aria-hidden="true"
+          >
+            <i>Q</i>
+            <strong>+5 shots</strong>
+            <small>Super Queer Machine Gun</small>
+          </span>
+        ))}
+
         {view.rainbows.map((rainbow) => (
           <span
             key={rainbow.id}
@@ -651,19 +847,24 @@ export default function QuiuFlightGame() {
             aria-hidden="true"
           >
             <i />
-            <small>+1</small>
+            <small>+3</small>
           </span>
         ))}
 
         {view.obstacles.map((obstacle) => {
           const details = OBSTACLE_DETAILS[obstacle.kind];
+          const persona = ENEMY_PERSONAS[
+            (obstacle.id - 1) % ENEMY_PERSONAS.length
+          ];
 
           return (
             <div
               key={obstacle.id}
-              className={`runner-obstacle runner-obstacle--${obstacle.kind}${
+              className={`runner-obstacle runner-enemy--${persona} runner-obstacle--${obstacle.kind}${
                 obstacle.hit ? " is-hit" : ""
-              }${obstacle.destroyed ? " is-destroyed" : ""}`}
+              }${obstacle.damageFlash > 0 ? " is-damaged" : ""}${
+                obstacle.destroyed ? " is-destroyed" : ""
+              }`}
               style={{
                 left: `${obstacle.x}%`,
                 width: `${details.width}%`,
@@ -672,13 +873,33 @@ export default function QuiuFlightGame() {
               aria-hidden="true"
             >
               <span className="runner-obstacle-label">{details.label}</span>
-              <span className="runner-obstacle-symbol">{details.symbol}</span>
+              <span className="runner-enemy-shadow" />
+              <span className="runner-enemy-leg runner-enemy-leg--left" />
+              <span className="runner-enemy-leg runner-enemy-leg--right" />
+              <span className="runner-enemy-arm runner-enemy-arm--left" />
+              <span className="runner-enemy-arm runner-enemy-arm--right" />
+              <span className="runner-enemy-body">
+                <span className="runner-obstacle-symbol">{details.symbol}</span>
+                <i className="runner-enemy-accessory" />
+              </span>
+              <span className="runner-enemy-head">
+                <span className="runner-enemy-hair" />
+                <span className="runner-enemy-glasses" />
+                <i /><i /><b />
+              </span>
+              {obstacle.maxHealth > 1 ? (
+                <span className="runner-enemy-health">
+                  {Array.from({ length: obstacle.maxHealth }, (_, index) => (
+                    <i key={index} className={index < obstacle.health ? "is-active" : ""} />
+                  ))}
+                </span>
+              ) : null}
             </div>
           );
         })}
 
         <div
-          className={`runner-player${view.invulnerable > 0 ? " is-hurt" : ""}`}
+          className={`runner-player${view.invulnerable > 0 && view.powerActive <= 0 ? " is-hurt" : ""}${view.powerActive > 0 ? " is-super" : ""}${view.fireFlash > 0 ? " is-firing" : ""}`}
           style={{
             left: `${view.playerX}%`,
             bottom: `${GROUND_OFFSET + view.height}%`,
@@ -688,8 +909,34 @@ export default function QuiuFlightGame() {
           aria-hidden="true"
         >
           <span className="runner-player-aura" />
-          <Image src="/press-q-icon.png" alt="" width={624} height={667} priority />
+          <Image
+            src={
+              view.invulnerable > 0 && view.powerActive <= 0
+                ? "/quiu-sad-transparent.png"
+                : "/press-q-icon.png"
+            }
+            alt=""
+            width={
+              view.invulnerable > 0 && view.powerActive <= 0 ? 1254 : 624
+            }
+            height={
+              view.invulnerable > 0 && view.powerActive <= 0 ? 1254 : 667
+            }
+            priority
+            unoptimized={view.invulnerable > 0 && view.powerActive <= 0}
+          />
+          <span className="runner-heart-cannon">
+            <i aria-hidden="true">{view.powerActive > 0 ? "✦" : "♥"}</i>
+          </span>
         </div>
+
+        {view.powerActive > 4 ? (
+          <div className="runner-super-banner" role="status">
+            <span aria-hidden="true">Q✦</span>
+            <strong>Super Queer Machine Gun!</strong>
+            <small>+5 munições · 6s de disparo automático</small>
+          </div>
+        ) : null}
 
         <div className="runner-ground" aria-hidden="true">
           <span />
@@ -717,7 +964,7 @@ export default function QuiuFlightGame() {
                     <p className="runner-overlay-kicker">Distance · {distance}</p>
                     <p className="runner-overlay-title">Quiu needs another try</p>
                     <p className="runner-overlay-copy">
-                      Three lives down — save your best score, then get back up.
+                      Quiu is out of hearts — save your best score, then get back up.
                     </p>
                   </div>
                   <form className="runner-score-form" onSubmit={saveScore} autoComplete="off">
@@ -765,7 +1012,7 @@ export default function QuiuFlightGame() {
                   <p className="runner-overlay-kicker">Ready player Q?</p>
                   <p className="runner-overlay-title">Help Quiu keep queer stories moving</p>
                   <p className="runner-overlay-copy">
-                    Double jump to collect rainbows, move with A/D or ←/→, and fire hearts with X.
+                    Each rainbow gives +3 shots up to a maximum of 10. The Q✦ power adds +5 shots and activates automatic fire for 6 seconds. Move with A/D or ←/→ and fire normally with X.
                   </p>
                   <button type="button" className="runner-start-pill" onClick={startGame}>
                     Tap to start
@@ -776,14 +1023,18 @@ export default function QuiuFlightGame() {
           </div>
         ) : null}
 
-        <div className="runner-help">
-          <span>Tap twice</span> for double jump · <span>X</span> to fire
-        </div>
         <button
           type="button"
           className="runner-fire-button"
-          aria-label={`Fire rainbow heart. ${view.ammo} shots remaining.`}
-          disabled={view.status !== "playing" || view.ammo <= 0}
+          aria-label={
+            view.powerActive > 0
+              ? `Super Queer Machine Gun active for ${Math.ceil(view.powerActive)} more seconds. Automatic fire does not consume ammo.`
+              : `Fire a rainbow heart from Quiu's heart cannon. ${view.ammo} shots remaining.`
+          }
+          disabled={
+            view.status !== "playing" ||
+            (view.ammo <= 0 && view.powerActive <= 0)
+          }
           onPointerDown={(event) => {
             event.preventDefault();
             event.stopPropagation();
@@ -792,7 +1043,7 @@ export default function QuiuFlightGame() {
           onClick={(event) => event.stopPropagation()}
         >
           <span aria-hidden="true">♥</span>
-          <small>{view.ammo}</small>
+          <small>{view.powerActive > 0 ? "∞" : view.ammo}</small>
         </button>
         <div className="runner-move-controls" aria-label="Horizontal movement controls">
           <button
@@ -829,8 +1080,16 @@ export default function QuiuFlightGame() {
         <p className="sr-only" aria-live="polite">
           {view.status === "gameover"
             ? `Game over. Final distance ${distance}.`
-            : `${view.lives} lives and ${view.ammo} rainbow hearts remaining. Distance ${distance}.`}
+            : view.powerActive > 0
+              ? `Super Queer Machine Gun active for ${Math.ceil(view.powerActive)} seconds. Five reserve shots added. Automatic fire does not consume ammo.`
+              : `${view.lives} lives and ${view.ammo} rainbow heart shots remaining. Distance ${distance}.`}
         </p>
+      </div>
+
+      <div className="runner-help">
+        <span>Rainbows = +3 ammo · cap 10</span>
+        <span>Q✦ = +5 ammo + 6s auto-fire</span>
+        <span>X / F fires</span>
       </div>
 
       <p className="quiu-runner-caption">

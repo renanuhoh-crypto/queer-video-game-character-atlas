@@ -21,6 +21,12 @@ export const CHARACTER_COLUMNS = [
   "character_image",
   "image_credit",
   "image_source_url",
+  "source_language",
+  "discovery_source",
+  "research_status",
+  "evidence_confidence",
+  "platform_version",
+  "last_reviewed",
 ] as const;
 
 export type CharacterColumn = (typeof CHARACTER_COLUMNS)[number];

@@ -3,32 +3,29 @@
 import { useEffect, useState } from "react";
 import PrismPageHero from "@/components/PrismPageHero";
 import VisualAnalytics from "@/components/VisualAnalytics";
-
-type Character = {
-  character_name: string;
-  game_title: string;
-  release_year?: number | null;
-  developer?: string;
-  playable?: boolean;
-  playable_status?: string;
-  gender?: string;
-  sexuality?: string;
-  identity_label?: string[];
-  identity_category?: string[];
-  intersectionality_present?: string;
-  intersectionality_details?: string;
-};
+import type {
+  AnalyticsCharacter,
+  AnalyticsSystem,
+} from "@/components/VisualAnalytics";
 
 export default function AnalyticsPage() {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<AnalyticsCharacter[]>([]);
+  const [systems, setSystems] = useState<AnalyticsSystem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadCharacters() {
+    async function loadAnalytics() {
       try {
-        const response = await fetch("/api/characters");
-        const data = await response.json();
-        setCharacters(data.characters || []);
+        const [charactersResponse, systemsResponse] = await Promise.all([
+          fetch("/api/characters"),
+          fetch("/api/systems"),
+        ]);
+        const [charactersData, systemsData] = await Promise.all([
+          charactersResponse.json(),
+          systemsResponse.json(),
+        ]);
+        setCharacters(charactersData.characters || []);
+        setSystems(systemsData.systems || []);
       } catch (error) {
         console.error("Failed loading analytics data:", error);
       } finally {
@@ -36,7 +33,7 @@ export default function AnalyticsPage() {
       }
     }
 
-    loadCharacters();
+    loadAnalytics();
   }, []);
 
   return (
@@ -45,7 +42,7 @@ export default function AnalyticsPage() {
         eyebrow="Data lens"
         title="Visual"
         accent="Analytics"
-        description="Read the Press Q dataset through playable status, identity categories, intersectionality, release years, and studio patterns."
+        description="Explore personagens, sistemas queer e as próprias lacunas da pesquisa em um arquivo vivo, transparente e exportável."
       />
 
       <section className="relative px-4 py-8 sm:px-6 md:px-10 md:py-10 lg:px-14">
@@ -57,7 +54,7 @@ export default function AnalyticsPage() {
               Loading Press Q dataset analytics...
             </div>
           ) : (
-            <VisualAnalytics characters={characters} />
+            <VisualAnalytics characters={characters} systems={systems} />
           )}
         </div>
       </section>

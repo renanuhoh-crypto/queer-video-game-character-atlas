@@ -21,8 +21,12 @@ export function readCharacterRows(): CharacterRow[] {
     transformHeader: (header) => header.replace(/^\uFEFF/, "").trim(),
   });
 
-  if (parsed.errors.length > 0) {
-    const details = parsed.errors
+  const blockingErrors = parsed.errors.filter(
+    (error) => error.code !== "TooFewFields",
+  );
+
+  if (blockingErrors.length > 0) {
+    const details = blockingErrors
       .slice(0, 3)
       .map((error) => `linha ${error.row ?? "?"}: ${error.message}`)
       .join("; ");
@@ -33,6 +37,8 @@ export function readCharacterRows(): CharacterRow[] {
 }
 
 export function serializeCharacterRows(rows: CharacterRow[]) {
+  if (rows.length === 0) return `${CHARACTER_COLUMNS.join(",")}\n`;
+
   return `${Papa.unparse(rows, {
     columns: [...CHARACTER_COLUMNS],
     newline: "\n",

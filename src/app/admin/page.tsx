@@ -3,7 +3,7 @@ import Link from "next/link";
 import AdminCharacterManager from "@/components/AdminCharacterManager";
 
 export const metadata: Metadata = {
-  title: "Administrar personagens",
+  title: "Administrar datasets",
   robots: { index: false, follow: false },
 };
 
@@ -15,11 +15,11 @@ export default function AdminPage() {
           <div>
             <p className="pq-eyebrow">Dataset workspace</p>
             <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] text-[#12152b] sm:text-5xl">
-              Administrar personagens
+              Administrar datasets
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#646b89] sm:text-base">
-              Cadastre e revise os registros que alimentam o arquivo, as
-              análises e o Quiu.
+              Cadastre personagens e possibilidades sistêmicas sem misturar
+              unidades de representação diferentes.
             </p>
           </div>
 

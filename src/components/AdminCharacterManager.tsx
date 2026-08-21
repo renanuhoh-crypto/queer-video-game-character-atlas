@@ -6,13 +6,21 @@ import {
   CharacterRow,
   createEmptyCharacterRow,
 } from "@/lib/characterSchema";
+import AdminQueerSystemsManager from "@/components/AdminQueerSystemsManager";
 
 type Field = {
   id: CharacterColumn;
   label: string;
   placeholder?: string;
   required?: boolean;
-  type?: "text" | "number" | "url" | "textarea" | "select";
+  type?:
+    | "text"
+    | "number"
+    | "url"
+    | "date"
+    | "textarea"
+    | "select"
+    | "multiselect";
   options?: { label: string; value: string }[];
   wide?: boolean;
   rows?: number;
@@ -55,7 +63,17 @@ const fieldGroups: FieldGroup[] = [
       {
         id: "game_scale",
         label: "Escala do jogo",
-        placeholder: "AAA, AA ou Indie",
+        type: "select",
+        options: [
+          { label: "Selecione", value: "" },
+          { label: "AAA", value: "AAA" },
+          { label: "AA", value: "AA" },
+          { label: "Independente", value: "Indie" },
+          { label: "Mobile", value: "Mobile" },
+          { label: "Browser", value: "Browser" },
+          { label: "Estudantil / amador", value: "Student / amateur" },
+          { label: "Outro", value: "Other" },
+        ],
       },
       {
         id: "genre",
@@ -96,18 +114,53 @@ const fieldGroups: FieldGroup[] = [
       {
         id: "gender",
         label: "Gênero / identidade de gênero",
-        placeholder: "Ex.: female, trans_man, Non-binary",
+        type: "multiselect",
+        options: [
+          { label: "Mulher", value: "woman" },
+          { label: "Homem", value: "man" },
+          { label: "Mulher trans", value: "trans_woman" },
+          { label: "Homem trans", value: "trans_man" },
+          { label: "Não binárie", value: "non_binary" },
+          { label: "Gênero fluido", value: "genderfluid" },
+          { label: "Agênero", value: "agender" },
+          { label: "Genderqueer", value: "genderqueer" },
+          { label: "Intersexo", value: "intersex" },
+          { label: "Outro / termo próprio", value: "other" },
+          { label: "Não informado", value: "unknown" },
+        ],
+        help: "Marque todas as identidades explicitamente documentadas.",
       },
       {
         id: "sexuality",
         label: "Sexualidade",
-        placeholder: "Ex.: lesbian, gay, bisexual",
+        type: "multiselect",
+        options: [
+          { label: "Lésbica", value: "lesbian" },
+          { label: "Gay", value: "gay" },
+          { label: "Bissexual", value: "bisexual" },
+          { label: "Pansexual", value: "pansexual" },
+          { label: "Assexual", value: "asexual" },
+          { label: "Arromântica", value: "aromantic" },
+          { label: "Queer", value: "queer" },
+          { label: "Heterossexual", value: "heterosexual" },
+          { label: "Outro / termo próprio", value: "other" },
+          { label: "Não informada", value: "unknown" },
+        ],
+        help: "A seleção múltipla preserva identidades compostas.",
       },
       {
         id: "identity_category",
         label: "Categorias de identidade",
-        placeholder: "gender_identity; sexual_orientation",
-        help: "Separe múltiplos valores com ponto e vírgula.",
+        type: "multiselect",
+        options: [
+          { label: "Identidade de gênero", value: "gender_identity" },
+          { label: "Orientação sexual", value: "sexual_orientation" },
+          { label: "Orientação romântica", value: "romantic_orientation" },
+          { label: "Variação intersexo", value: "intersex_variation" },
+          { label: "Expressão de gênero", value: "gender_expression" },
+          { label: "Outro", value: "other" },
+        ],
+        help: "Categorias analíticas; não substituem os termos usados pelo personagem.",
       },
       {
         id: "identity_confirmation",
@@ -145,9 +198,24 @@ const fieldGroups: FieldGroup[] = [
       {
         id: "intersectionality_present",
         label: "Marcadores interseccionais",
-        placeholder: "Race; Ethnicity; Disability; Religion",
+        type: "multiselect",
+        options: [
+          { label: "Raça", value: "race" },
+          { label: "Etnia", value: "ethnicity" },
+          { label: "Pessoa negra", value: "black" },
+          { label: "Pessoa asiática", value: "asian" },
+          { label: "Pessoa indígena", value: "indigenous" },
+          { label: "Pessoa racializada", value: "person_of_color" },
+          { label: "Deficiência", value: "disability" },
+          { label: "Religião", value: "religion" },
+          { label: "Classe", value: "class" },
+          { label: "Idade", value: "age" },
+          { label: "Nacionalidade / migração", value: "nationality_migration" },
+          { label: "Outro", value: "other" },
+          { label: "Nenhum documentado", value: "no" },
+        ],
         wide: true,
-        help: "Use “no” quando nenhum marcador estiver documentado.",
+        help: "Marque apenas o que a evidência sustenta; detalhe contexto e termos culturais abaixo.",
       },
       {
         id: "intersectionality_details",
@@ -193,6 +261,58 @@ const fieldGroups: FieldGroup[] = [
       },
     ],
   },
+  {
+    title: "Cobertura e proveniência",
+    description:
+      "Metadados para tornar visíveis as lacunas, o idioma e o estágio da pesquisa.",
+    fields: [
+      {
+        id: "research_status",
+        label: "Status da pesquisa",
+        type: "select",
+        options: [
+          { label: "Selecione", value: "" },
+          { label: "Identificado / na fila", value: "identified" },
+          { label: "Em pesquisa", value: "in_progress" },
+          { label: "Revisado", value: "reviewed" },
+          { label: "Precisa de verificação", value: "needs_verification" },
+        ],
+      },
+      {
+        id: "evidence_confidence",
+        label: "Confiança da evidência",
+        type: "select",
+        options: [
+          { label: "Selecione", value: "" },
+          { label: "Baixa", value: "low" },
+          { label: "Média", value: "medium" },
+          { label: "Alta", value: "high" },
+        ],
+      },
+      {
+        id: "source_language",
+        label: "Idioma da fonte",
+        placeholder: "Ex.: en, pt-BR, ja",
+        help: "Use o código do idioma para mapear lacunas linguísticas.",
+      },
+      {
+        id: "platform_version",
+        label: "Plataforma / versão pesquisada",
+        placeholder: "Ex.: PC, patch 1.108",
+      },
+      {
+        id: "discovery_source",
+        label: "Como o caso foi descoberto",
+        placeholder: "Indicação, lista existente, busca própria, comunidade…",
+        wide: true,
+      },
+      {
+        id: "last_reviewed",
+        label: "Última revisão",
+        type: "date",
+      },
+    ],
+  },
 ];
 
 function normalize(value: string) {
@@ -215,6 +335,11 @@ export default function AdminCharacterManager() {
   const [search, setSearch] = useState("");
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<Notice>(null);
+  const [activeDataset, setActiveDataset] = useState<
+    "characters" | "systems"
+  >("characters");
+  const [systemsDirty, setSystemsDirty] = useState(false);
+  const [systemsCount, setSystemsCount] = useState(0);
 
   const selectedCharacter = useMemo(
     () =>
@@ -426,6 +551,39 @@ export default function AdminCharacterManager() {
     }
   }
 
+  function changeDataset(next: "characters" | "systems") {
+    if (next === activeDataset) return;
+    const hasUnsavedChanges =
+      activeDataset === "characters" ? dirty : systemsDirty;
+
+    if (
+      hasUnsavedChanges &&
+      !window.confirm(
+        "Descartar as alterações desta aba que ainda não foram salvas?",
+      )
+    ) {
+      return;
+    }
+
+    if (activeDataset === "systems") setSystemsDirty(false);
+    setActiveDataset(next);
+  }
+
+  function logout() {
+    if (
+      (dirty || systemsDirty) &&
+      !window.confirm("Sair e descartar as alterações que não foram salvas?")
+    ) {
+      return;
+    }
+
+    setAuthenticated(false);
+    setPassword("");
+    setNotice(null);
+    setActiveDataset("characters");
+    setSystemsDirty(false);
+  }
+
   if (!authenticated) {
     return (
       <section className="mx-auto max-w-xl overflow-hidden rounded-[2rem] border border-[#dfe3f3] bg-white p-7 shadow-[0_24px_70px_rgba(49,63,145,0.12)] sm:p-10">
@@ -468,7 +626,43 @@ export default function AdminCharacterManager() {
   }
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[360px_minmax(0,1fr)]">
+    <div className="space-y-6">
+      <nav
+        aria-label="Datasets administrativos"
+        className="flex flex-col gap-2 rounded-[1.5rem] border border-[#dfe3f3] bg-white p-2 shadow-[0_14px_38px_rgba(49,63,145,0.08)] sm:flex-row"
+      >
+        <button
+          type="button"
+          onClick={() => changeDataset("characters")}
+          className={`flex flex-1 items-center justify-between rounded-[1.1rem] px-5 py-3 text-left text-sm font-black transition ${
+            activeDataset === "characters"
+              ? "bg-[#171d52] text-white shadow-sm"
+              : "text-[#646b89] hover:bg-[#f4f5fb]"
+          }`}
+        >
+          <span>Personagens</span>
+          <span className="rounded-full bg-white/12 px-2.5 py-1 font-mono text-[10px]">
+            {characters.length}
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={() => changeDataset("systems")}
+          className={`flex flex-1 items-center justify-between rounded-[1.1rem] px-5 py-3 text-left text-sm font-black transition ${
+            activeDataset === "systems"
+              ? "bg-[#171d52] text-white shadow-sm"
+              : "text-[#646b89] hover:bg-[#f4f5fb]"
+          }`}
+        >
+          <span>Sistemas queer</span>
+          <span className="rounded-full bg-white/12 px-2.5 py-1 font-mono text-[10px]">
+            {systemsCount}
+          </span>
+        </button>
+      </nav>
+
+      {activeDataset === "characters" ? (
+        <div className="grid gap-6 xl:grid-cols-[360px_minmax(0,1fr)]">
       <aside className="h-fit overflow-hidden rounded-[1.8rem] border border-[#dfe3f3] bg-white shadow-[0_18px_48px_rgba(49,63,145,0.1)] xl:sticky xl:top-6">
         <div className="border-b border-[#e5e8f5] p-5">
           <div className="flex items-center justify-between gap-4">
@@ -538,12 +732,7 @@ export default function AdminCharacterManager() {
           </button>
           <button
             type="button"
-            onClick={() => {
-              if (!canDiscardChanges()) return;
-              setAuthenticated(false);
-              setPassword("");
-              setNotice(null);
-            }}
+            onClick={logout}
             className="rounded-full border border-[#dfe3f3] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-[#646b89] transition hover:bg-[#f4f5fb]"
           >
             Sair
@@ -629,6 +818,15 @@ export default function AdminCharacterManager() {
         uso administrativo em produção, o próximo passo é conectar um banco de
         dados.
       </p>
+        </div>
+      ) : (
+        <AdminQueerSystemsManager
+          password={password}
+          onDirtyChange={setSystemsDirty}
+          onCountChange={setSystemsCount}
+          onLogout={logout}
+        />
+      )}
     </div>
   );
 }
@@ -642,6 +840,16 @@ function CharacterField({
   value: string;
   onChange: (value: string) => void;
 }) {
+  if (field.type === "multiselect") {
+    return (
+      <CharacterMultiSelect
+        field={field}
+        value={value}
+        onChange={onChange}
+      />
+    );
+  }
+
   const baseClass =
     "mt-2 w-full rounded-2xl border border-[#d3d8ed] bg-white px-4 py-3 text-sm text-[#12152b] outline-none transition placeholder:text-[#9da3b9] focus:border-[#4f5fe7] focus:ring-4 focus:ring-[#4f5fe7]/10";
   const hasListedOption = field.options?.some(
@@ -699,6 +907,121 @@ function CharacterField({
         </span>
       ) : null}
     </label>
+  );
+}
+
+function splitMultiValue(value: string) {
+  return value
+    .split(/[;,]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function CharacterMultiSelect({
+  field,
+  value,
+  onChange,
+}: {
+  field: Field;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const selected = splitMultiValue(value);
+  const knownValues = new Set(field.options?.map((option) => option.value));
+  const legacyValues = selected.filter((item) => !knownValues.has(item));
+  const allOptions = [
+    ...(field.options || []),
+    ...legacyValues.map((item) => ({
+      label: `${item} (valor atual)`,
+      value: item,
+    })),
+  ];
+
+  function toggle(optionValue: string) {
+    const isSelected = selected.includes(optionValue);
+    let next = isSelected
+      ? selected.filter((item) => item !== optionValue)
+      : [...selected, optionValue];
+
+    if (field.id === "intersectionality_present") {
+      if (optionValue === "no" && !isSelected) next = ["no"];
+      if (optionValue !== "no" && !isSelected) {
+        next = next.filter((item) => item !== "no");
+      }
+    }
+
+    onChange(next.join("; "));
+  }
+
+  return (
+    <div className={field.wide ? "md:col-span-2" : undefined}>
+      <span className="font-mono text-[11px] font-black uppercase tracking-[0.16em] text-[#4f5fe7]">
+        {field.label}
+        {field.required ? " *" : ""}
+      </span>
+
+      <details className="pq-multi-select group mt-2 rounded-2xl border border-[#d3d8ed] bg-white open:border-[#4f5fe7] open:ring-4 open:ring-[#4f5fe7]/10">
+        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm text-[#12152b] marker:hidden">
+          <span className={selected.length ? "font-bold" : "text-[#9da3b9]"}>
+            {selected.length
+              ? `${selected.length} ${selected.length === 1 ? "opção selecionada" : "opções selecionadas"}`
+              : "Selecione uma ou mais opções"}
+          </span>
+          <span className="text-[#4f5fe7] transition group-open:rotate-180" aria-hidden="true">
+            ▾
+          </span>
+        </summary>
+
+        <div className="grid gap-2 border-t border-[#e5e8f5] p-3 sm:grid-cols-2">
+          {allOptions.map((option) => {
+            const checked = selected.includes(option.value);
+            return (
+              <label
+                key={option.value}
+                className={`flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 text-sm font-bold transition ${
+                  checked
+                    ? "border-[#4f5fe7] bg-[#eef0ff] text-[#2636b5]"
+                    : "border-[#e5e8f5] text-[#646b89] hover:border-[#9ba5ed]"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggle(option.value)}
+                  className="h-4 w-4 accent-[#4f5fe7]"
+                />
+                <span>{option.label}</span>
+              </label>
+            );
+          })}
+        </div>
+      </details>
+
+      {selected.length ? (
+        <div className="mt-2 flex flex-wrap gap-1.5" aria-label="Opções selecionadas">
+          {selected.map((item) => {
+            const label = allOptions.find((option) => option.value === item)?.label || item;
+            return (
+              <button
+                key={item}
+                type="button"
+                onClick={() => toggle(item)}
+                className="rounded-full bg-[#eef0ff] px-2.5 py-1 text-[10px] font-black text-[#3545d3] transition hover:bg-[#dfe3ff]"
+                title={`Remover ${label}`}
+              >
+                {label.replace(" (valor atual)", "")} ×
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {field.help ? (
+        <span className="mt-1.5 block text-xs leading-relaxed text-[#898fa8]">
+          {field.help}
+        </span>
+      ) : null}
+    </div>
   );
 }
 

@@ -4,11 +4,13 @@ import { readCharacterRows } from "@/lib/characterDataset";
 export async function GET() {
   const characters = readCharacterRows().map((row) => {
     return {
+      unit_type: "character" as const,
       character_id: row.character_id,
       character_name: row.character_name,
       game_title: row.game_title,
       release_year: toNumber(row.release_year),
       developer: row.developer,
+      game_scale: row.game_scale,
       genre: row.genre,
       narrative_role: row.narrative_role,
       playable: row.playable_status === "playable",
@@ -31,6 +33,12 @@ export async function GET() {
       character_image: row.character_image || "",
       image_credit: row.image_credit || "",
       image_source_url: row.image_source_url || "",
+      source_language: row.source_language || "",
+      discovery_source: row.discovery_source || "",
+      research_status: row.research_status || "",
+      evidence_confidence: row.evidence_confidence || "",
+      platform_version: row.platform_version || "",
+      last_reviewed: row.last_reviewed || "",
     };
   });
 

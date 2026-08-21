@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import HolographicCharacterCard from "@/components/HolographicCharacterCard";
 import PrismPageHero from "@/components/PrismPageHero";
 
 type Character = {
@@ -105,57 +106,15 @@ function EvidenceCards({ characters }: { characters: Character[] }) {
   return (
     <div className="grid max-w-[92%] gap-3 sm:max-w-[78%] md:grid-cols-2">
       {characters.map((character) => (
-        <article
+        <HolographicCharacterCard
           key={`${character.character_name}-${character.game_title}`}
-          className="overflow-hidden border border-[#dfe3f3] bg-white shadow-[0_18px_45px_rgba(50,64,145,0.1)]"
-        >
-          <div className="aspect-[16/10] overflow-hidden bg-black">
-            <img
-              src={character.character_image}
-              alt={`${character.character_name} from ${character.game_title}`}
-              className="h-full w-full object-cover"
-            />
-          </div>
-
-          <div className="space-y-3 p-4">
-            <div>
-              <p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#4f5fe7]">
-                Evidence card
-              </p>
-              <h3 className="mt-2 text-lg font-black text-[#12152b]">
-                {character.character_name}
-              </h3>
-              <p className="text-sm text-[#707695]">{character.game_title}</p>
-            </div>
-
-            {character.image_credit ? (
-              <p className="text-xs leading-relaxed text-[#707695]">
-                Image credit:{" "}
-                <span className="text-[#3f4664]">{character.image_credit}</span>
-              </p>
-            ) : null}
-
-            {character.evidence_source ? (
-              <p className="text-xs leading-relaxed text-[#707695]">
-                Evidence:{" "}
-                <span className="text-[#3f4664]">
-                  {character.evidence_source}
-                </span>
-              </p>
-            ) : null}
-
-            {character.image_source_url ? (
-              <a
-                href={character.image_source_url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex text-xs font-black uppercase tracking-[0.16em] text-[#4f5fe7] transition hover:text-[#3545d3]"
-              >
-                View image source
-              </a>
-            ) : null}
-          </div>
-        </article>
+          name={character.character_name}
+          game={character.game_title}
+          image={character.character_image || ""}
+          imageCredit={character.image_credit}
+          imageSourceUrl={character.image_source_url}
+          evidence={character.evidence_source}
+        />
       ))}
     </div>
   );

@@ -1,5 +1,8 @@
-import { createHash, timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import {
+  adminResponseError as responseError,
+  authenticateAdmin as authenticate,
+} from "@/lib/adminAuthentication";
 import {
   CharacterRow,
   readCharacterRows,
@@ -7,39 +10,15 @@ import {
   writeCharacterRows,
 } from "@/lib/characterDataset";
 import { sanitizeCharacterRow } from "@/lib/characterSchema";
+import {
+  EVIDENCE_CONFIDENCE_LEVELS,
+  RESEARCH_STATUSES,
+} from "@/lib/researchMetadataSchema";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 let mutationQueue: Promise<unknown> = Promise.resolve();
-
-function responseError(message: string, status: number) {
-  return NextResponse.json({ error: message }, { status });
-}
-
-function passwordsMatch(received: string, expected: string) {
-  const receivedHash = createHash("sha256").update(received).digest();
-  const expectedHash = createHash("sha256").update(expected).digest();
-  return timingSafeEqual(receivedHash, expectedHash);
-}
-
-function authenticate(request: NextRequest) {
-  const configuredPassword = process.env.ADMIN_PASSWORD;
-
-  if (!configuredPassword) {
-    return responseError(
-      "A área administrativa ainda não foi configurada. Defina ADMIN_PASSWORD no arquivo .env.local e reinicie o servidor.",
-      503,
-    );
-  }
-
-  const receivedPassword = request.headers.get("x-admin-password") || "";
-  if (!passwordsMatch(receivedPassword, configuredPassword)) {
-    return responseError("Senha administrativa incorreta.", 401);
-  }
-
-  return null;
-}
 
 function normalize(value: string) {
   return value.trim().toLocaleLowerCase("en");
@@ -51,6 +30,28 @@ function validationError(row: CharacterRow) {
 
   if (row.release_year && !/^\d{4}$/.test(row.release_year)) {
     return "O ano de lançamento deve conter quatro dígitos.";
+  }
+
+  if (
+    row.research_status &&
+    !RESEARCH_STATUSES.includes(
+      row.research_status as (typeof RESEARCH_STATUSES)[number],
+    )
+  ) {
+    return "O status da pesquisa informado não é válido.";
+  }
+
+  if (
+    row.evidence_confidence &&
+    !EVIDENCE_CONFIDENCE_LEVELS.includes(
+      row.evidence_confidence as (typeof EVIDENCE_CONFIDENCE_LEVELS)[number],
+    )
+  ) {
+    return "O nível de confiança da evidência não é válido.";
+  }
+
+  if (row.last_reviewed && !/^\d{4}-\d{2}-\d{2}$/.test(row.last_reviewed)) {
+    return "A data da revisão deve usar o formato AAAA-MM-DD.";
   }
 
   for (const [field, value] of Object.entries(row)) {

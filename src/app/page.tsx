@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import PressQTubesBackdrop from "@/components/PressQTubesBackdrop";
 import QuiuFlightGame from "@/components/QuiuFlightGame";
 
 type Character = {
@@ -185,6 +186,7 @@ export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7f7fb] text-[#12152b]">
       <section className="space-landing relative isolate min-h-[860px] overflow-hidden text-white">
+        <PressQTubesBackdrop />
         <div className="space-landing-stars" aria-hidden="true" />
         <div className="space-comet space-comet--one" aria-hidden="true" />
         <div className="space-comet space-comet--two" aria-hidden="true" />

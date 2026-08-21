@@ -3,6 +3,10 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import Papa from "papaparse";
+import {
+  QueerSystemRow,
+  readQueerSystemRows,
+} from "@/lib/queerSystemDataset";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -36,6 +40,12 @@ type Character = {
   character_image?: string;
   image_credit?: string;
   image_source_url?: string;
+  source_language?: string;
+  discovery_source?: string;
+  research_status?: string;
+  evidence_confidence?: string;
+  platform_version?: string;
+  last_reviewed?: string;
 };
 
 type ChatMessage = {
@@ -145,6 +155,12 @@ function loadCharactersFromCSV(): Character[] {
     character_image: row.character_image || "",
     image_credit: row.image_credit || "",
     image_source_url: row.image_source_url || "",
+    source_language: row.source_language || "",
+    discovery_source: row.discovery_source || "",
+    research_status: row.research_status || "",
+    evidence_confidence: row.evidence_confidence || "",
+    platform_version: row.platform_version || "",
+    last_reviewed: row.last_reviewed || "",
   }));
 }
 
@@ -174,6 +190,12 @@ Evidence Source: ${character.evidence_source || "Not registered"}
 Image Available: ${character.character_image ? "Yes" : "No"}
 Image Credit: ${character.image_credit || "Not registered"}
 Image Source URL: ${character.image_source_url || "Not registered"}
+Source Language: ${character.source_language || "Not registered"}
+Discovery Source: ${character.discovery_source || "Not registered"}
+Research Status: ${formatLabel(character.research_status)}
+Evidence Confidence: ${formatLabel(character.evidence_confidence)}
+Platform or Version: ${character.platform_version || "Not registered"}
+Last Reviewed: ${character.last_reviewed || "Not registered"}
 Notes: ${character.notes || "Not registered"}
 `;
 }
@@ -182,13 +204,41 @@ function buildDatasetContext(characters: Character[]) {
   return characters.map(characterToContext).join("\n---\n");
 }
 
+function queerSystemToContext(system: QueerSystemRow) {
+  return `
+Game: ${system.game_title}
+Release Year: ${system.release_year || "Not registered"}
+System Type: ${formatLabel(system.system_type)}
+Scope: ${formatLabel(system.scope)}
+Player Dependency: ${formatLabel(system.player_dependency)}
+Availability: ${formatLabel(system.availability)}
+System Description: ${system.system_description || "Not registered"}
+Limitations: ${system.limitations || "Not registered"}
+Evidence Source: ${system.evidence_source || "Not registered"}
+Source Language: ${system.source_language || "Not registered"}
+Discovery Source: ${system.discovery_source || "Not registered"}
+Research Status: ${formatLabel(system.research_status)}
+Evidence Confidence: ${formatLabel(system.evidence_confidence)}
+Platform or Version: ${system.platform_version || "Not registered"}
+Last Reviewed: ${system.last_reviewed || "Not registered"}
+Notes: ${system.notes || "Not registered"}
+`;
+}
+
+function buildQueerSystemsContext(systems: QueerSystemRow[]) {
+  if (systems.length === 0) return "No game-system records registered yet.";
+  return systems.map(queerSystemToContext).join("\n---\n");
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const messages: ChatMessage[] = body.messages || [];
     const characters = loadCharactersFromCSV();
+    const queerSystems = readQueerSystemRows();
 
     const datasetContext = buildDatasetContext(characters);
+    const queerSystemsContext = buildQueerSystemsContext(queerSystems);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1-mini",
@@ -209,8 +259,13 @@ Language rule:
 - If you are unsure, prefer the language used by the user's latest message over English.
 
 Grounding rules:
-- Use only information explicitly present in the provided Press Q dataset context.
+- Use only information explicitly present in the provided Press Q dataset contexts.
 - Do not invent facts.
+- Keep character records and game-system records as distinct units of analysis.
+- A game-system record describes what a game permits a player to do or construct. It is not evidence that a specific character has a canonical queer identity.
+- Gender-independent romance must not be used to infer that every compatible NPC is canonically bisexual or pansexual.
+- Counts describe documented Press Q records only. Never present them as the percentage or prevalence of LGBTQ+ content across all published games.
+- When research_status, evidence_confidence, source_language, platform_version, or limitations qualify an entry, preserve those qualifications in the answer.
 - Do not infer race, ethnicity, religion, disability, nationality, sexuality, gender identity, or representation quality unless it appears in the Press Q dataset context.
 - Always analyze intersectionality_details when identifying race, ethnicity, religion, disability, or intersectional identities.
 - If a character contains "Black" inside intersectionality_details, they should be recognized as a Black character.
@@ -239,8 +294,11 @@ Examples of preferred style:
 - Instead of: "The Press Q dataset does not specify..."
 - Say: "That detail is not currently registered in the Press Q dataset."
 
-Press Q dataset context:
+Press Q character-level context:
 ${datasetContext}
+
+Press Q game/system-level context:
+${queerSystemsContext}
 `,
         },
         ...messages.map((message) => ({

@@ -32,10 +32,16 @@ npm run build
 The Press Q dataset is stored in `src/data/pressq_seed_dataset.csv`. The app
 treats it as the source for Quiu and the visual analytics experience.
 
+Game-level affordances such as customizable gender, player-defined characters,
+and gender-independent relationship systems are stored separately in
+`src/data/game_queer_systems.csv`. See `src/data/METHODOLOGY.md` for the unit and
+coverage rules.
+
 ## Character administration
 
 The private `/admin` page can add, edit, delete, search, and export character
-records. Configure a password in `.env.local` before starting the app:
+and queer-system records in separate tabs. Configure a password in `.env.local`
+before starting the app:
 
 ```dotenv
 ADMIN_PASSWORD=use-a-long-unique-password
