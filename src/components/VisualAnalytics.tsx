@@ -66,48 +66,48 @@ const TOOLTIP_STYLE = {
 const LABELS: Record<string, string> = {
   aaa: "AAA",
   aa: "AA",
-  indie: "Independente",
+  indie: "Independent",
   mobile: "Mobile",
   browser: "Browser",
-  reviewed: "Revisado",
-  in_progress: "Em pesquisa",
-  identified: "Identificado / na fila",
-  needs_verification: "Precisa de verificação",
-  high: "Alta",
-  medium: "Média",
-  low: "Baixa",
-  character_creation: "Criação de personagem",
-  gender_customization: "Customização de gênero",
-  pronoun_selection: "Seleção de pronomes",
-  sexuality_customization: "Customização de sexualidade",
-  same_gender_romance: "Romance entre mesmo gênero",
-  gender_independent_romance: "Romance independente de gênero",
-  same_gender_marriage: "Casamento entre mesmo gênero",
-  queer_family_creation: "Criação de família queer",
-  relationship_system: "Sistema de relacionamentos",
-  player_avatar: "Avatar do jogador",
+  reviewed: "Reviewed",
+  in_progress: "In research",
+  identified: "Identified / queued",
+  needs_verification: "Needs verification",
+  high: "High",
+  medium: "Medium",
+  low: "Low",
+  character_creation: "Character creation",
+  gender_customization: "Gender customization",
+  pronoun_selection: "Pronoun selection",
+  sexuality_customization: "Sexuality customization",
+  same_gender_romance: "Same-gender romance",
+  gender_independent_romance: "Gender-independent romance",
+  same_gender_marriage: "Same-gender marriage",
+  queer_family_creation: "Queer family creation",
+  relationship_system: "Relationship system",
+  player_avatar: "Player avatar",
   npc: "NPCs",
-  relationships: "Relacionamentos",
-  family: "Família",
-  world: "Mundo do jogo",
-  none: "Nenhuma",
-  partial: "Parcial",
-  full: "Total",
-  default: "Padrão",
-  optional: "Opcional",
-  conditional: "Condicional",
-  expansion: "Expansão / DLC",
-  mod_only: "Somente por mod",
-  gender_identity: "Identidade de gênero",
-  sexual_orientation: "Orientação sexual",
-  romantic_orientation: "Orientação romântica",
-  intersex_variation: "Variação intersexo",
-  gender_expression: "Expressão de gênero",
-  person_of_color: "Pessoa racializada",
-  nationality_migration: "Nacionalidade / migração",
-  non_binary: "Não binárie",
-  trans_woman: "Mulher trans",
-  trans_man: "Homem trans",
+  relationships: "Relationships",
+  family: "Family",
+  world: "Game world",
+  none: "None",
+  partial: "Partial",
+  full: "Full",
+  default: "Default",
+  optional: "Optional",
+  conditional: "Conditional",
+  expansion: "Expansion / DLC",
+  mod_only: "Mods only",
+  gender_identity: "Gender identity",
+  sexual_orientation: "Sexual orientation",
+  romantic_orientation: "Romantic orientation",
+  intersex_variation: "Intersex variation",
+  gender_expression: "Gender expression",
+  person_of_color: "Person of color",
+  nationality_migration: "Nationality / migration",
+  non_binary: "Nonbinary",
+  trans_woman: "Trans woman",
+  trans_man: "Trans man",
 };
 
 function splitValues(value?: string | null) {
@@ -183,7 +183,7 @@ async function svgToPng(
   await new Promise<void>((resolve, reject) => {
     image.onload = () => resolve();
     image.onerror = () =>
-      reject(new Error("Não foi possível renderizar o gráfico."));
+      reject(new Error("Could not render the chart."));
     image.src = url;
   });
 
@@ -305,7 +305,7 @@ function BarPanel({
         </div>
       ) : (
         <p className="mt-6 rounded-2xl border border-dashed border-white/15 p-5 text-sm text-slate-400">
-          Ainda não há dados documentados para este recorte.
+          No data has been documented for this view yet.
         </p>
       )}
     </section>
@@ -326,7 +326,7 @@ function OrbitOverview({
   const nodes = [
     {
       id: "characters",
-      label: "Personagens",
+      label: "Characters",
       value: characters,
       x: "50%",
       y: "4%",
@@ -334,7 +334,7 @@ function OrbitOverview({
     },
     {
       id: "systems",
-      label: "Sistemas",
+      label: "Systems",
       value: systems,
       x: "88%",
       y: "44%",
@@ -342,7 +342,7 @@ function OrbitOverview({
     },
     {
       id: "reviewed",
-      label: "Revisados",
+      label: "Reviewed",
       value: reviewed,
       x: "67%",
       y: "84%",
@@ -350,7 +350,7 @@ function OrbitOverview({
     },
     {
       id: "languages",
-      label: "Idiomas-fonte",
+      label: "Source languages",
       value: languages,
       x: "13%",
       y: "61%",
@@ -418,7 +418,7 @@ function OrbitOverview({
             {characters + systems}
           </span>
           <span className="font-mono text-[8px] font-black uppercase tracking-[.2em] text-[#83e9f5]">
-            unidades documentadas
+            documented units
           </span>
         </div>
 
@@ -444,18 +444,18 @@ function OrbitOverview({
       </div>
 
       <div className="mt-8 lg:mt-0">
-        <p className={EYEBROW}>Mapa vivo do arquivo</p>
+        <p className={EYEBROW}>Living archive map</p>
         <h2 className="mt-3 text-3xl font-black italic text-white sm:text-4xl">
-          Dados em órbita
+          Data in orbit
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300">
-          Personagens e sistemas são unidades diferentes. O mapa preserva essa
-          distinção e mostra também o estágio da pesquisa — ele não estima a
-          porcentagem de todos os jogos existentes.
+          Characters and systems are different units. The map preserves that
+          distinction and also shows the research stage — it does not estimate
+          the percentage of all existing games.
         </p>
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[.045] p-5">
           <p className="font-mono text-[10px] font-black uppercase tracking-[.2em] text-[#83e9f5]">
-            Recorte selecionado
+            Selected view
           </p>
           <p
             className="mt-2 text-3xl font-black"
@@ -506,7 +506,7 @@ function buildInfographic(
     })
     .join("");
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100"><defs><radialGradient id="bg"><stop stop-color="#242e86"/><stop offset="1" stop-color="#080d30"/></radialGradient></defs><rect width="1600" height="1100" fill="url(#bg)"/><circle cx="1430" cy="110" r="240" fill="#59d8ef" fill-opacity=".08"/><circle cx="120" cy="1040" r="310" fill="#ff6fae" fill-opacity=".07"/><text x="90" y="95" fill="#83e9f5" font-size="20" font-weight="800" letter-spacing="7">PRESS Q · DATA LENS</text><text x="90" y="175" fill="#ffffff" font-size="62" font-style="italic" font-weight="900">${escapeXml(title)}</text><text x="90" y="215" fill="#b8c1eb" font-size="21">${escapeXml(subtitle)}</text>${metricCards}${rows}<text x="90" y="1050" fill="#929cc8" font-size="17">Contagens do corpus documentado · não representam a prevalência em todos os jogos.</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100"><defs><radialGradient id="bg"><stop stop-color="#242e86"/><stop offset="1" stop-color="#080d30"/></radialGradient></defs><rect width="1600" height="1100" fill="url(#bg)"/><circle cx="1430" cy="110" r="240" fill="#59d8ef" fill-opacity=".08"/><circle cx="120" cy="1040" r="310" fill="#ff6fae" fill-opacity=".07"/><text x="90" y="95" fill="#83e9f5" font-size="20" font-weight="800" letter-spacing="7">PRESS Q · DATA LENS</text><text x="90" y="175" fill="#ffffff" font-size="62" font-style="italic" font-weight="900">${escapeXml(title)}</text><text x="90" y="215" fill="#b8c1eb" font-size="21">${escapeXml(subtitle)}</text>${metricCards}${rows}<text x="90" y="1050" fill="#929cc8" font-size="17">Counts from the documented corpus · do not represent prevalence across all games.</text></svg>`;
 }
 
 export default function VisualAnalytics({ characters, systems }: Props) {
@@ -571,20 +571,20 @@ export default function VisualAnalytics({ characters, systems }: Props) {
         : sortedData(data.maps.status);
   const infographic = buildInfographic(
     lens === "characters"
-      ? "Personagens do arquivo"
+      ? "Archive characters"
       : lens === "systems"
-        ? "Sistemas queer"
-        : "Cobertura da pesquisa",
+        ? "Queer systems"
+        : "Research coverage",
     lens === "characters"
-      ? "Identidades e marcadores documentados"
+      ? "Documented identities and markers"
       : lens === "systems"
-        ? "O que os jogos permitem criar, escolher e viver"
-        : "Status, confiança e idiomas das fontes",
+        ? "What games allow players to create, choose, and experience"
+        : "Status, confidence, and source languages",
     [
-      { label: "Personagens", value: characters.length },
-      { label: "Sistemas", value: systems.length },
-      { label: "Jogos únicos", value: data.uniqueGames },
-      { label: "Revisados", value: data.reviewed },
+      { label: "Characters", value: characters.length },
+      { label: "Systems", value: systems.length },
+      { label: "Unique games", value: data.uniqueGames },
+      { label: "Reviewed", value: data.reviewed },
     ],
     lensBars,
   );
@@ -612,10 +612,10 @@ export default function VisualAnalytics({ characters, systems }: Props) {
               }`}
             >
               {item === "characters"
-                ? "Personagens"
+                ? "Characters"
                 : item === "systems"
-                  ? "Sistemas"
-                  : "Cobertura"}
+                  ? "Systems"
+                  : "Coverage"}
             </button>
           ))}
         </div>
@@ -630,7 +630,7 @@ export default function VisualAnalytics({ characters, systems }: Props) {
               )
             }
           >
-            Gerar infográfico SVG ↓
+            Generate SVG infographic ↓
           </button>
           <button
             type="button"
@@ -644,7 +644,7 @@ export default function VisualAnalytics({ characters, systems }: Props) {
               )
             }
           >
-            Gerar PNG ↓
+            Generate PNG ↓
           </button>
         </div>
       </div>
@@ -653,51 +653,51 @@ export default function VisualAnalytics({ characters, systems }: Props) {
         <>
           <div className="grid gap-6 md:grid-cols-3">
             <MetricCard
-              label="Personagens"
+              label="Characters"
               value={characters.length}
-              note="unidades no nível de personagem"
+              note="character-level records"
             />
             <MetricCard
-              label="Jogáveis"
+              label="Playable"
               value={data.playable}
-              note="dentro do corpus de personagens"
+              note="within the documented character corpus"
             />
             <MetricCard
-              label="Jogos"
+              label="Games"
               value={data.uniqueGames}
-              note="títulos únicos nos dois datasets"
+              note="unique titles across both datasets"
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <BarPanel
-              eyebrow="Identidade"
-              title="Gênero / identidade de gênero"
+              eyebrow="Identity"
+              title="Gender / gender identity"
               data={sortedData(data.maps.gender)}
-              filename="pressq-genero"
+              filename="pressq-gender"
             />
             <BarPanel
-              eyebrow="Identidade"
-              title="Sexualidade"
+              eyebrow="Identity"
+              title="Sexuality"
               data={sortedData(data.maps.sexuality)}
-              filename="pressq-sexualidade"
+              filename="pressq-sexuality"
             />
             <BarPanel
-              eyebrow="Categorias"
-              title="Categorias de identidade"
+              eyebrow="Categories"
+              title="Identity categories"
               data={sortedData(data.maps.identity)}
-              filename="pressq-categorias-identidade"
+              filename="pressq-identity-categories"
             />
             <BarPanel
-              eyebrow="Interseccionalidade"
-              title="Marcadores documentados"
+              eyebrow="Intersectionality"
+              title="Documented markers"
               data={sortedData(data.maps.intersectionality)}
-              filename="pressq-interseccionalidade"
+              filename="pressq-intersectionality"
             />
             <BarPanel
-              eyebrow="Produção"
-              title="Escala do jogo"
+              eyebrow="Production"
+              title="Game scale"
               data={sortedData(data.maps.scale)}
-              filename="pressq-escala-jogo"
+              filename="pressq-game-scale"
             />
           </div>
         </>
@@ -707,49 +707,49 @@ export default function VisualAnalytics({ characters, systems }: Props) {
         <>
           <div className="grid gap-6 md:grid-cols-3">
             <MetricCard
-              label="Sistemas"
+              label="Systems"
               value={systems.length}
-              note="linhas de affordances queer"
+              note="queer affordance records"
             />
             <MetricCard
-              label="Jogos"
+              label="Games"
               value={
                 new Set(
                   systems.map((system) => normalize(system.game_title)),
                 ).size
               }
-              note="títulos com sistemas documentados"
+              note="titles with documented systems"
             />
             <MetricCard
-              label="Tipos"
+              label="Types"
               value={Object.keys(data.maps.systemType).length}
-              note="possibilidades distintas"
+              note="distinct possibilities"
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <BarPanel
               eyebrow="Affordances"
-              title="Tipos de sistema"
+              title="System types"
               data={sortedData(data.maps.systemType)}
-              filename="pressq-tipos-sistema"
+              filename="pressq-system-types"
             />
             <BarPanel
-              eyebrow="Múltipla escolha"
-              title="Escopos afetados"
+              eyebrow="Multiple choice"
+              title="Affected scopes"
               data={sortedData(data.maps.scope)}
-              filename="pressq-escopos"
+              filename="pressq-scopes"
             />
             <BarPanel
-              eyebrow="Agência"
-              title="Dependência do jogador"
+              eyebrow="Agency"
+              title="Player dependency"
               data={sortedData(data.maps.dependency)}
-              filename="pressq-dependencia-jogador"
+              filename="pressq-player-dependency"
             />
             <BarPanel
-              eyebrow="Acesso"
-              title="Disponibilidade"
+              eyebrow="Access"
+              title="Availability"
               data={sortedData(data.maps.availability)}
-              filename="pressq-disponibilidade"
+              filename="pressq-availability"
             />
           </div>
         </>
@@ -759,17 +759,17 @@ export default function VisualAnalytics({ characters, systems }: Props) {
         <>
           <div className="grid gap-6 md:grid-cols-3">
             <MetricCard
-              label="Revisados"
+              label="Reviewed"
               value={data.reviewed}
-              note="personagens + sistemas"
+              note="characters + systems"
             />
             <MetricCard
-              label="Idiomas-fonte"
+              label="Source languages"
               value={Object.keys(data.maps.language).length}
-              note="lacunas linguísticas visíveis"
+              note="visible language gaps"
             />
             <MetricCard
-              label="Sem status"
+              label="No status"
               value={
                 characters.length +
                 systems.length -
@@ -778,36 +778,36 @@ export default function VisualAnalytics({ characters, systems }: Props) {
                   0,
                 )
               }
-              note="registros a classificar"
+              note="records awaiting classification"
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <BarPanel
-              eyebrow="Andamento"
-              title="Status da pesquisa"
+              eyebrow="Progress"
+              title="Research status"
               data={sortedData(data.maps.status)}
-              filename="pressq-status-pesquisa"
+              filename="pressq-research-status"
             />
             <BarPanel
-              eyebrow="Evidência"
-              title="Confiança registrada"
+              eyebrow="Evidence"
+              title="Recorded confidence"
               data={sortedData(data.maps.confidence)}
-              filename="pressq-confianca-evidencia"
+              filename="pressq-evidence-confidence"
             />
             <BarPanel
-              eyebrow="Lacunas"
-              title="Idiomas das fontes"
+              eyebrow="Gaps"
+              title="Source languages"
               data={sortedData(data.maps.language)}
-              filename="pressq-idiomas-fontes"
+              filename="pressq-source-languages"
             />
           </div>
         </>
       ) : null}
 
       <p className="rounded-2xl border border-[#8291ff]/25 bg-[#111743] px-5 py-4 text-xs font-medium leading-6 text-[#b5bee3]">
-        As porcentagens e contagens descrevem somente o corpus documentado pelo
-        Press Q. Uma identidade composta conta em cada categoria selecionada,
-        mas continua sendo um único personagem no total geral.
+        Percentages and counts describe only the corpus documented by Press Q.
+        A composite identity is counted in each selected category, while still
+        remaining a single character in the overall total.
       </p>
     </div>
   );

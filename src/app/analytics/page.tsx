@@ -42,7 +42,7 @@ export default function AnalyticsPage() {
         eyebrow="Data lens"
         title="Visual"
         accent="Analytics"
-        description="Explore personagens, sistemas queer e as próprias lacunas da pesquisa em um arquivo vivo, transparente e exportável."
+        description="Explore characters, queer systems, and the gaps in the research itself through a living, transparent, exportable archive."
       />
 
       <section className="relative px-4 py-8 sm:px-6 md:px-10 md:py-10 lg:px-14">
