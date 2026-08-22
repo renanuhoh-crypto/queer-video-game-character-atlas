@@ -5,13 +5,18 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const systems = readQueerSystemRows().map((system) => ({
-    ...system,
-    unit_type: "game_system" as const,
-    release_year: system.release_year
-      ? Number.parseInt(system.release_year, 10)
-      : null,
-  }));
+  const systems = readQueerSystemRows().map((system) => {
+    const { source_language, ...publicSystem } = system;
+    void source_language;
+
+    return {
+      ...publicSystem,
+      unit_type: "game_system" as const,
+      release_year: system.release_year
+        ? Number.parseInt(system.release_year, 10)
+        : null,
+    };
+  });
 
   return NextResponse.json({ systems });
 }

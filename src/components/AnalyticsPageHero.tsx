@@ -5,12 +5,14 @@ import AnalyticsMenu from "@/components/AnalyticsMenu";
 type AnalyticsPageHeroProps = {
   characterCount: number;
   systemCount: number;
+  readingCount: number;
   loading: boolean;
 };
 
 export default function AnalyticsPageHero({
   characterCount,
   systemCount,
+  readingCount,
   loading,
 }: AnalyticsPageHeroProps) {
   return (
@@ -63,8 +65,8 @@ export default function AnalyticsPageHero({
           </h1>
 
           <p className="mt-6 max-w-3xl text-base font-semibold leading-relaxed text-[#d7defd] sm:text-lg md:text-xl">
-            Explore characters, queer systems, and research gaps through a
-            living, transparent, exportable archive.
+            Explore characters, queer systems, critical queer readings, and
+            research gaps through a living, transparent, exportable archive.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -110,8 +112,8 @@ export default function AnalyticsPageHero({
               <span>Queer systems</span>
             </div>
             <div>
-              <strong>∞</strong>
-              <span>Questions</span>
+              <strong>{loading ? "—" : readingCount}</strong>
+              <span>Queer readings</span>
             </div>
           </div>
         </div>

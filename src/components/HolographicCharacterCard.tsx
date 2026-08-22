@@ -57,7 +57,7 @@ export default function HolographicCharacterCard({
       <div className="pq-holo-character-image">
         <Image
           src={image}
-          alt={`${name} de ${game}`}
+          alt={`${name} from ${game}`}
           fill
           unoptimized
           sizes="(max-width: 768px) 92vw, 360px"
@@ -77,13 +77,13 @@ export default function HolographicCharacterCard({
 
         {imageCredit ? (
           <p className="text-[13px] leading-relaxed text-slate-400">
-            Crédito da imagem: <span className="text-slate-200">{imageCredit}</span>
+            Image credit: <span className="text-slate-200">{imageCredit}</span>
           </p>
         ) : null}
 
         {evidence ? (
           <p className="line-clamp-4 text-[13px] leading-relaxed text-slate-400">
-            Evidência: <span className="text-slate-200">{evidence}</span>
+            Evidence: <span className="text-slate-200">{evidence}</span>
           </p>
         ) : null}
 
@@ -94,7 +94,7 @@ export default function HolographicCharacterCard({
             rel="noreferrer"
             className="inline-flex rounded-full border border-[#83e9f5]/30 px-3 py-2 text-[10px] font-black uppercase tracking-[0.14em] text-[#83e9f5] transition hover:bg-[#83e9f5]/10"
           >
-            Ver fonte da imagem
+            View image source
           </a>
         ) : null}
       </div>

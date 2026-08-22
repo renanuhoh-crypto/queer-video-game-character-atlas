@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import ResearchReferences from "@/components/ResearchReferences";
+import { getAnalyticsBucketDefinition } from "@/lib/analyticsBucketDefinitions";
+import { getIntersectionalityMarkers } from "@/lib/analyticsIntersectionality";
 import {
   ANALYTICS_CATEGORIES,
   getAnalyticsCategory,
@@ -27,7 +30,7 @@ type CharacterRecord = {
   evidence_source?: string;
   research_status?: string;
   evidence_confidence?: string;
-  source_language?: string;
+  queer_status?: string;
 };
 
 type SystemRecord = {
@@ -42,12 +45,26 @@ type SystemRecord = {
   limitations?: string;
   research_status?: string;
   evidence_confidence?: string;
-  source_language?: string;
+};
+
+type ReadingRecord = {
+  reading_id: string;
+  game_title: string;
+  release_year?: number | null;
+  subject?: string;
+  subject_type?: string;
+  reading_type?: string;
+  reading_status?: string;
+  reading_summary?: string;
+  counterevidence?: string;
+  notes?: string;
+  research_status?: string;
+  evidence_confidence?: string;
 };
 
 type ExampleRecord = {
   id: string;
-  kind: "Character" | "System";
+  kind: "Character" | "System" | "Queer reading";
   title: string;
   subtitle: string;
   meta: string;
@@ -107,11 +124,23 @@ const VALUE_LABELS: Record<string, string> = {
   medium: "Medium",
   low: "Low",
   person_of_color: "Person of color",
+  race_ethnicity: "Race / ethnicity",
   nationality_migration: "Nationality / migration",
+  other_axis: "Other documented axis",
   non_binary: "Nonbinary",
   trans_woman: "Trans woman",
   trans_man: "Trans man",
+  player_defined: "Player-defined",
+  conditional_or_player_defined: "Conditional or player-defined representation",
+  sexuality: "Sexuality reading",
+  queer_theme: "Queer theme",
+  queerly_read: "Queerly read",
+  contested: "Contested",
+  creator_refuted: "Creator-refuted",
+  en: "English (en)",
 };
+
+const CONDITIONAL_SEXUALITY_KEY = "conditional_or_player_defined";
 
 function normalize(value?: string | null) {
   return value?.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "") || "";
@@ -161,6 +190,35 @@ function systemExample(system: SystemRecord): ExampleRecord {
   };
 }
 
+function readingExample(reading: ReadingRecord): ExampleRecord {
+  const status = normalize(reading.reading_status);
+  const detail = [
+    reading.reading_summary,
+    reading.counterevidence
+      ? `Counterevidence: ${reading.counterevidence}`
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return {
+    id: `reading-${reading.reading_id}`,
+    kind: "Queer reading",
+    title: reading.subject || "Subject not recorded",
+    subtitle: reading.game_title || "Game not recorded",
+    meta: [
+      reading.release_year,
+      status ? labelFor(status) : "",
+      reading.evidence_confidence
+        ? `${labelFor(normalize(reading.evidence_confidence))} confidence`
+        : "",
+    ]
+      .filter(Boolean)
+      .join(" · "),
+    detail: excerpt(detail || reading.notes, 520),
+  };
+}
+
 function addToBuckets(
   buckets: Map<string, ExampleRecord[]>,
   rawValues: string[],
@@ -181,34 +239,11 @@ function addToBuckets(
   });
 }
 
-function intersectionValues(character: CharacterRecord) {
-  const raw = [
-    ...(character.intersectionality || []),
-    ...splitValues(character.intersectionality_present),
-  ];
-  const normalized = raw.map(normalize).filter(Boolean);
-  const explicit = raw.filter((value) => {
-    const key = normalize(value);
-    return key && !["yes", "no", "unknown", "none"].includes(key);
-  });
-
-  if (explicit.length) return explicit;
-  if (normalized.includes("no")) return ["none_documented"];
-
-  if (normalized.includes("yes")) {
-    const details = splitValues(character.intersectionality_details).filter(
-      (value) => !["none", "no"].includes(normalize(value)),
-    );
-    return details.length ? details : ["documented_unspecified"];
-  }
-
-  return ["not_recorded"];
-}
-
 function buildCategoryData(
   slug: AnalyticsCategorySlug,
   characters: CharacterRecord[],
   systems: SystemRecord[],
+  readings: ReadingRecord[],
 ) {
   const buckets = new Map<string, ExampleRecord[]>();
   const characterField = (getValues: (character: CharacterRecord) => string[]) =>
@@ -219,12 +254,18 @@ function buildCategoryData(
     systems.forEach((system) =>
       addToBuckets(buckets, getValues(system), systemExample(system)),
     );
+  const readingField = (getValues: (reading: ReadingRecord) => string[]) =>
+    readings.forEach((reading) =>
+      addToBuckets(buckets, getValues(reading), readingExample(reading)),
+    );
   const combinedField = (
     characterValues: (character: CharacterRecord) => string[],
     systemValues: (system: SystemRecord) => string[],
+    readingValues: (reading: ReadingRecord) => string[],
   ) => {
     characterField(characterValues);
     systemField(systemValues);
+    readingField(readingValues);
   };
 
   switch (slug) {
@@ -237,13 +278,35 @@ function buildCategoryData(
       characterField((character) => splitValues(character.gender));
       break;
     case "sexuality":
-      characterField((character) => splitValues(character.sexuality));
+      characters.forEach((character) => {
+        const values = splitValues(character.sexuality);
+        const normalizedValues = values.map(normalize);
+        const identityCategories = (character.identity_category || []).map(normalize);
+        const queerStatus = normalize(character.queer_status);
+        const hasSexualityContext =
+          identityCategories.includes("sexual_orientation") ||
+          normalizedValues.some(
+            (value) =>
+              !["", "none", "unknown", "not_provided", "not_recorded"].includes(
+                value,
+              ),
+          );
+        const isConditional =
+          normalizedValues.includes("player_defined") ||
+          (hasSexualityContext && queerStatus !== "confirmed");
+
+        addToBuckets(
+          buckets,
+          isConditional ? [CONDITIONAL_SEXUALITY_KEY] : values,
+          characterExample(character),
+        );
+      });
       break;
     case "identity-categories":
       characterField((character) => character.identity_category || []);
       break;
     case "intersectionality":
-      characterField(intersectionValues);
+      characterField(getIntersectionalityMarkers);
       break;
     case "game-scale":
       characterField((character) => splitValues(character.game_scale));
@@ -260,29 +323,30 @@ function buildCategoryData(
     case "availability":
       systemField((system) => splitValues(system.availability));
       break;
+    case "queer-readings":
+      readingField((reading) => splitValues(reading.reading_type));
+      break;
     case "research-status":
       combinedField(
         (character) => splitValues(character.research_status),
         (system) => splitValues(system.research_status),
+        (reading) => splitValues(reading.research_status),
       );
       break;
     case "evidence-confidence":
       combinedField(
         (character) => splitValues(character.evidence_confidence),
         (system) => splitValues(system.evidence_confidence),
-      );
-      break;
-    case "source-languages":
-      combinedField(
-        (character) => splitValues(character.source_language),
-        (system) => splitValues(system.source_language),
+        (reading) => splitValues(reading.evidence_confidence),
       );
       break;
   }
 
   const denominator =
-    slug === "research-status" || slug === "evidence-confidence" || slug === "source-languages"
-      ? characters.length + systems.length
+    slug === "research-status" || slug === "evidence-confidence"
+      ? characters.length + systems.length + readings.length
+      : slug === "queer-readings"
+        ? readings.length
       : slug === "system-types" || slug === "affected-scopes" || slug === "player-dependency" || slug === "availability"
         ? systems.length
         : characters.length;
@@ -294,7 +358,15 @@ function buildCategoryData(
       entries,
       percentage: denominator ? (entries.length / denominator) * 100 : 0,
     }))
-    .sort((a, b) => b.entries.length - a.entries.length || a.label.localeCompare(b.label));
+    .sort((a, b) => {
+      const rank = (key: string) =>
+        key === CONDITIONAL_SEXUALITY_KEY ? 1 : key === "not_recorded" ? 2 : 0;
+      return (
+        rank(a.key) - rank(b.key) ||
+        b.entries.length - a.entries.length ||
+        a.label.localeCompare(b.label)
+      );
+    });
 
   return {
     buckets: result,
@@ -311,6 +383,7 @@ export default function AnalyticsCategoryDetail({
   const category = getAnalyticsCategory(slug);
   const [characters, setCharacters] = useState<CharacterRecord[]>([]);
   const [systems, setSystems] = useState<SystemRecord[]>([]);
+  const [readings, setReadings] = useState<ReadingRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [visibleCounts, setVisibleCounts] = useState<Record<string, number>>({});
@@ -320,20 +393,23 @@ export default function AnalyticsCategoryDetail({
 
     async function load() {
       try {
-        const [characterResponse, systemResponse] = await Promise.all([
+        const [characterResponse, systemResponse, readingResponse] = await Promise.all([
           fetch("/api/characters", { cache: "no-store" }),
           fetch("/api/systems", { cache: "no-store" }),
+          fetch("/api/queer-readings", { cache: "no-store" }),
         ]);
-        if (!characterResponse.ok || !systemResponse.ok) {
+        if (!characterResponse.ok || !systemResponse.ok || !readingResponse.ok) {
           throw new Error("The analytics data could not be loaded.");
         }
-        const [characterData, systemData] = await Promise.all([
+        const [characterData, systemData, readingData] = await Promise.all([
           characterResponse.json(),
           systemResponse.json(),
+          readingResponse.json(),
         ]);
         if (!active) return;
         setCharacters(characterData.characters || []);
         setSystems(systemData.systems || []);
+        setReadings(readingData.readings || []);
       } catch (loadError) {
         if (!active) return;
         setError(loadError instanceof Error ? loadError.message : "The analytics data could not be loaded.");
@@ -349,8 +425,8 @@ export default function AnalyticsCategoryDetail({
   }, []);
 
   const data = useMemo(
-    () => buildCategoryData(slug, characters, systems),
-    [slug, characters, systems],
+    () => buildCategoryData(slug, characters, systems, readings),
+    [slug, characters, systems, readings],
   );
 
   if (!category) return null;
@@ -399,6 +475,20 @@ export default function AnalyticsCategoryDetail({
           </article>
         </div>
 
+        {slug === "queer-readings" ? (
+          <div className="rounded-[1.5rem] border border-[#8291ff]/25 bg-[#eef0ff] px-5 py-5 sm:px-7">
+            <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#4f5fe7]">
+              Separate research unit
+            </p>
+            <h2 className="mt-2 text-xl font-black text-[#15183a] sm:text-2xl">
+              Interpretation is not identity confirmation
+            </h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-[#5f688e]">
+              These records document reception, debate, and creator responses. They never contribute to the gender or sexuality percentages for characters.
+            </p>
+          </div>
+        ) : null}
+
         {loading ? (
           <div className="analytics-category-state">Loading detailed analytics…</div>
         ) : error ? (
@@ -414,9 +504,28 @@ export default function AnalyticsCategoryDetail({
               const visible = visibleCounts[bucket.key] || 3;
               const shown = bucket.entries.slice(0, visible);
               const allVisible = visible >= bucket.entries.length;
+              const bucketDefinition = getAnalyticsBucketDefinition(
+                slug,
+                bucket.key,
+              );
 
               return (
-                <article key={bucket.key} className="analytics-category-bucket">
+                <div key={bucket.key} className="space-y-6">
+                  {slug === "sexuality" && bucket.key === CONDITIONAL_SEXUALITY_KEY ? (
+                    <div className="rounded-[1.5rem] border border-[#8291ff]/25 bg-[#eef0ff] px-5 py-5 sm:px-7">
+                      <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#4f5fe7]">
+                        Separate evidence track
+                      </p>
+                      <h2 className="mt-2 text-xl font-black text-[#15183a] sm:text-2xl">
+                        Conditional or player-defined representation
+                      </h2>
+                      <p className="mt-2 max-w-4xl text-sm leading-6 text-[#5f688e]">
+                        These records remain visible for research, but their possible labels do not count as confirmed character identities.
+                      </p>
+                    </div>
+                  ) : null}
+
+                  <article className="analytics-category-bucket">
                   <div className="analytics-category-bucket-heading">
                     <div>
                       <p>Category {String(index + 1).padStart(2, "0")}</p>
@@ -437,6 +546,29 @@ export default function AnalyticsCategoryDetail({
                       <i style={{ width: `${Math.min(100, bucket.percentage)}%` }} />
                     </div>
                   </div>
+
+                  <section className="mt-6 rounded-[1.5rem] border border-[#dfe3f3] bg-[#f7f8ff] p-4 sm:p-6">
+                    <p className="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
+                      Category explanation
+                    </p>
+                    <div className="mt-4 grid gap-4 md:grid-cols-2">
+                      {[
+                        ["Definition", bucketDefinition.definition],
+                        ["Included when", bucketDefinition.included],
+                        ["What it does not establish", bucketDefinition.doesNotMean],
+                        ["How to interpret the number", bucketDefinition.interpretation],
+                      ].map(([heading, text]) => (
+                        <div key={heading} className="rounded-2xl bg-white p-4">
+                          <h3 className="text-sm font-black text-[#171b42]">
+                            {heading}
+                          </h3>
+                          <p className="mt-2 text-sm leading-6 text-[#626b91]">
+                            {text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
 
                   <div className="mt-6">
                     <p className="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
@@ -471,25 +603,34 @@ export default function AnalyticsCategoryDetail({
                       </button>
                     ) : null}
                   </div>
-                </article>
+                  </article>
+                </div>
               );
             })}
           </div>
         )}
 
-        <section className="analytics-related-categories">
-          <div>
-            <p>Continue exploring</p>
-            <h2>Related {category.group.toLowerCase()} categories</h2>
-          </div>
-          <div>
-            {related.map((item) => (
-              <Link key={item.slug} href={`/analytics/${item.slug}`}>
-                {item.menuLabel} →
-              </Link>
-            ))}
-          </div>
-        </section>
+        <ResearchReferences
+          ids={category.sourceIds}
+          theme="light"
+          title={`Research basis for ${category.menuLabel.toLowerCase()}`}
+        />
+
+        {related.length ? (
+          <section className="analytics-related-categories">
+            <div>
+              <p>Continue exploring</p>
+              <h2>Related {category.group.toLowerCase()} categories</h2>
+            </div>
+            <div>
+              {related.map((item) => (
+                <Link key={item.slug} href={`/analytics/${item.slug}`}>
+                  {item.menuLabel} →
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </div>
     </section>
   );

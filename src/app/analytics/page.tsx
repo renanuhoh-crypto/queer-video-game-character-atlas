@@ -5,27 +5,32 @@ import AnalyticsPageHero from "@/components/AnalyticsPageHero";
 import VisualAnalytics from "@/components/VisualAnalytics";
 import type {
   AnalyticsCharacter,
+  AnalyticsReading,
   AnalyticsSystem,
 } from "@/components/VisualAnalytics";
 
 export default function AnalyticsPage() {
   const [characters, setCharacters] = useState<AnalyticsCharacter[]>([]);
   const [systems, setSystems] = useState<AnalyticsSystem[]>([]);
+  const [readings, setReadings] = useState<AnalyticsReading[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadAnalytics() {
       try {
-        const [charactersResponse, systemsResponse] = await Promise.all([
+        const [charactersResponse, systemsResponse, readingsResponse] = await Promise.all([
           fetch("/api/characters"),
           fetch("/api/systems"),
+          fetch("/api/queer-readings"),
         ]);
-        const [charactersData, systemsData] = await Promise.all([
+        const [charactersData, systemsData, readingsData] = await Promise.all([
           charactersResponse.json(),
           systemsResponse.json(),
+          readingsResponse.json(),
         ]);
         setCharacters(charactersData.characters || []);
         setSystems(systemsData.systems || []);
+        setReadings(readingsData.readings || []);
       } catch (error) {
         console.error("Failed loading analytics data:", error);
       } finally {
@@ -41,6 +46,7 @@ export default function AnalyticsPage() {
       <AnalyticsPageHero
         characterCount={characters.length}
         systemCount={systems.length}
+        readingCount={readings.length}
         loading={loading}
       />
 
@@ -53,7 +59,11 @@ export default function AnalyticsPage() {
               Loading Press Q dataset analytics...
             </div>
           ) : (
-            <VisualAnalytics characters={characters} systems={systems} />
+            <VisualAnalytics
+              characters={characters}
+              systems={systems}
+              readings={readings}
+            />
           )}
         </div>
       </section>

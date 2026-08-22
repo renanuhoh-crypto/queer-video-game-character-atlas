@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ContributionForm from "@/components/ContributionForm";
 import PrismPageHero from "@/components/PrismPageHero";
 
@@ -28,6 +29,14 @@ const guidelines = [
     title: "Credit images",
     text: "If you suggest an image, include the original source and credit. Press Q should prefer contextual screenshots, official material, or clearly cited source images over uncited uploads.",
   },
+];
+
+const evidenceChecklist = [
+  "Identify the exact game, release, platform, localization, patch, chapter, route, or expansion when it changes the evidence.",
+  "Separate what appears in the game from what a developer, publisher, critic, community, or wiki says about it.",
+  "Provide a stable URL, publication details, transcript, timestamp, screenshot context, or quotation that a reviewer can verify.",
+  "Include ambiguity, conflicting sources, creator responses, and known limitations rather than arguing only for one interpretation.",
+  "Use the character’s or source’s specific identity language; do not infer identity from appearance, name, voice, pronouns alone, or stereotype.",
 ];
 
 export default function ContributePage() {
@@ -79,6 +88,38 @@ export default function ContributePage() {
                 </p>
               </section>
             ))}
+
+            <section className={PANEL}>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-yellow-200" />
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-yellow-200 sm:text-xs sm:tracking-[0.34em]">
+                Evidence checklist
+              </p>
+              <h3 className="mt-4 text-xl font-black italic text-white sm:text-2xl">
+                Make the proposed claim reviewable
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-300">
+                {evidenceChecklist.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="font-black text-cyan-300">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/methodology"
+                  className="border border-cyan-300/45 px-4 py-3 font-mono text-[10px] font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+                >
+                  Read methodology →
+                </Link>
+                <Link
+                  href="/ethics"
+                  className="border border-fuchsia-300/45 px-4 py-3 font-mono text-[10px] font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+                >
+                  Ethics & limitations →
+                </Link>
+              </div>
+            </section>
           </aside>
 
           <section className={PANEL}>

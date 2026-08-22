@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import HolographicCharacterCard from "@/components/HolographicCharacterCard";
 import PrismPageHero from "@/components/PrismPageHero";
@@ -247,6 +248,16 @@ export default function Home() {
             <p className="mt-1 text-2xl font-black">{playableCount}</p>
             <p className="text-sm text-[#646b89]">playable characters</p>
           </div>
+
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[#4f5fe7]">
+              Research boundary
+            </p>
+            <p className="mt-1 text-lg font-black">3 separate units</p>
+            <p className="text-sm text-[#646b89]">
+              characters, systems, and queer readings
+            </p>
+          </div>
         </div>
       </section>
 
@@ -289,12 +300,12 @@ export default function Home() {
               </p>
             </div>
 
-            <a
+            <Link
               href="/analytics"
               className="mt-8 block border border-[#4f5fe7] bg-[#4f5fe7] p-5 text-center text-base font-black text-white transition hover:bg-[#3545d3]"
             >
               View Visual Analytics
-            </a>
+            </Link>
           </div>
         </aside>
 
@@ -308,6 +319,11 @@ export default function Home() {
               <h2 className="mt-2 text-xl font-black text-[#12152b] sm:text-2xl">
                 Ask Quiu about queer game representation
               </h2>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-[#646b89]">
+                Quiu summarizes the current Press Q datasets. Answers describe
+                documented records rather than all games and should be checked
+                against the evidence before publication.
+              </p>
             </div>
 
             <div

@@ -124,11 +124,11 @@ const fieldGroups: FieldGroup[] = [
           { label: "Genderfluid", value: "genderfluid" },
           { label: "Agender", value: "agender" },
           { label: "Genderqueer", value: "genderqueer" },
-          { label: "Intersex", value: "intersex" },
           { label: "Other / self-described term", value: "other" },
-          { label: "Not provided", value: "unknown" },
+          { label: "Unknown / inconclusive", value: "unknown" },
+          { label: "Not recorded", value: "not_recorded" },
         ],
-        help: "Select every explicitly documented identity.",
+        help: "Select every explicitly documented gender identity. Use Unknown only when the evidence is inconclusive; use Not recorded when the field has not been documented. Intersex variation belongs in Identity categories and should be described precisely in the notes.",
       },
       {
         id: "sexuality",
@@ -143,10 +143,15 @@ const fieldGroups: FieldGroup[] = [
           { label: "Aromantic", value: "aromantic" },
           { label: "Queer", value: "queer" },
           { label: "Heterosexual", value: "heterosexual" },
+          {
+            label: "Player-defined / conditional",
+            value: "player_defined",
+          },
           { label: "Other / self-described term", value: "other" },
-          { label: "Not provided", value: "unknown" },
+          { label: "Unknown / inconclusive", value: "unknown" },
+          { label: "Not recorded", value: "not_recorded" },
         ],
-        help: "Multiple selection preserves composite identities.",
+        help: "Use player-defined when mutually exclusive outcomes depend on player choices. Use Unknown only when sexuality evidence is inconclusive; use Not recorded when sexuality has not been documented. Multiple selection is reserved for composite identities.",
       },
       {
         id: "identity_category",
@@ -180,7 +185,7 @@ const fieldGroups: FieldGroup[] = [
       },
       {
         id: "queer_status",
-        label: "Status queer",
+        label: "Queer status",
         type: "select",
         options: [
           { label: "Select", value: "" },
@@ -288,12 +293,6 @@ const fieldGroups: FieldGroup[] = [
           { label: "Medium", value: "medium" },
           { label: "High", value: "high" },
         ],
-      },
-      {
-        id: "source_language",
-        label: "Source language",
-        placeholder: "e.g., en, pt-BR, ja",
-        help: "Use the language code to map language gaps.",
       },
       {
         id: "platform_version",

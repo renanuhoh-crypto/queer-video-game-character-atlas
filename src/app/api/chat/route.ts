@@ -7,6 +7,14 @@ import {
   QueerSystemRow,
   readQueerSystemRows,
 } from "@/lib/queerSystemDataset";
+import {
+  QueerReadingRow,
+  readQueerReadingRows,
+} from "@/lib/queerReadingDataset";
+import {
+  chatLanguageDirective,
+  detectChatLanguage,
+} from "@/lib/chatLanguage";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -40,7 +48,6 @@ type Character = {
   character_image?: string;
   image_credit?: string;
   image_source_url?: string;
-  source_language?: string;
   discovery_source?: string;
   research_status?: string;
   evidence_confidence?: string;
@@ -155,7 +162,6 @@ function loadCharactersFromCSV(): Character[] {
     character_image: row.character_image || "",
     image_credit: row.image_credit || "",
     image_source_url: row.image_source_url || "",
-    source_language: row.source_language || "",
     discovery_source: row.discovery_source || "",
     research_status: row.research_status || "",
     evidence_confidence: row.evidence_confidence || "",
@@ -190,7 +196,6 @@ Evidence Source: ${character.evidence_source || "Not registered"}
 Image Available: ${character.character_image ? "Yes" : "No"}
 Image Credit: ${character.image_credit || "Not registered"}
 Image Source URL: ${character.image_source_url || "Not registered"}
-Source Language: ${character.source_language || "Not registered"}
 Discovery Source: ${character.discovery_source || "Not registered"}
 Research Status: ${formatLabel(character.research_status)}
 Evidence Confidence: ${formatLabel(character.evidence_confidence)}
@@ -215,7 +220,6 @@ Availability: ${formatLabel(system.availability)}
 System Description: ${system.system_description || "Not registered"}
 Limitations: ${system.limitations || "Not registered"}
 Evidence Source: ${system.evidence_source || "Not registered"}
-Source Language: ${system.source_language || "Not registered"}
 Discovery Source: ${system.discovery_source || "Not registered"}
 Research Status: ${formatLabel(system.research_status)}
 Evidence Confidence: ${formatLabel(system.evidence_confidence)}
@@ -230,15 +234,60 @@ function buildQueerSystemsContext(systems: QueerSystemRow[]) {
   return systems.map(queerSystemToContext).join("\n---\n");
 }
 
+function queerReadingToContext(reading: QueerReadingRow) {
+  return `
+Subject: ${reading.subject || "Not registered"}
+Game: ${reading.game_title || "Not registered"}
+Release Year: ${reading.release_year || "Not registered"}
+Subject Type: ${formatLabel(reading.subject_type)}
+Reading Type: ${formatLabel(reading.reading_type)}
+Reading Status: ${formatLabel(reading.reading_status)}
+Reading Summary: ${reading.reading_summary || "Not registered"}
+Counterevidence: ${reading.counterevidence || "Not registered"}
+Evidence Source: ${reading.evidence_source || "Not registered"}
+Discovery Source: ${reading.discovery_source || "Not registered"}
+Research Status: ${formatLabel(reading.research_status)}
+Evidence Confidence: ${formatLabel(reading.evidence_confidence)}
+Platform or Version: ${reading.platform_version || "Not registered"}
+Last Reviewed: ${reading.last_reviewed || "Not registered"}
+Notes: ${reading.notes || "Not registered"}
+`;
+}
+
+function buildQueerReadingsContext(readings: QueerReadingRow[]) {
+  if (readings.length === 0) return "No queer-reading records registered yet.";
+  return readings.map(queerReadingToContext).join("\n---\n");
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const messages: ChatMessage[] = body.messages || [];
     const characters = loadCharactersFromCSV();
     const queerSystems = readQueerSystemRows();
+    const queerReadings = readQueerReadingRows();
 
     const datasetContext = buildDatasetContext(characters);
     const queerSystemsContext = buildQueerSystemsContext(queerSystems);
+    const queerReadingsContext = buildQueerReadingsContext(queerReadings);
+    const responseLanguage = detectChatLanguage(messages);
+    const latestUserIndex = messages.findLastIndex(
+      (message) => message.role === "user",
+    );
+    const conversationMessages: Array<{
+      role: "user" | "assistant" | "system";
+      content: string;
+    }> = messages.map((message) => ({
+      role: message.role,
+      content: message.content,
+    }));
+
+    if (latestUserIndex >= 0) {
+      conversationMessages.splice(latestUserIndex, 0, {
+        role: "system",
+        content: chatLanguageDirective(responseLanguage),
+      });
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1-mini",
@@ -252,6 +301,7 @@ You are Quiu, the conversational AI guide for Press Q, an AI-Assisted Queer Game
 You are not a general chatbot. You are a conversational research assistant connected to the structured Press Q dataset.
 
 Language rule:
+- A separate turn-level system instruction declares the mandatory response language. Follow it exactly.
 - Always respond in the same language as the user's latest message.
 - If the latest message is in Portuguese, respond in Portuguese.
 - If the latest message is short or informal, infer the language from its words; for example, "quantas lesbicas" is Portuguese and must receive a Portuguese answer.
@@ -261,11 +311,20 @@ Language rule:
 Grounding rules:
 - Use only information explicitly present in the provided Press Q dataset contexts.
 - Do not invent facts.
-- Keep character records and game-system records as distinct units of analysis.
+- Keep character records, game-system records, and queer-reading records as distinct units of analysis.
 - A game-system record describes what a game permits a player to do or construct. It is not evidence that a specific character has a canonical queer identity.
+- A queer-reading record documents critical or audience interpretation, debate, or reception. It is not evidence that its subject has a canonical queer identity.
+- Never count queer-reading records in character gender or sexuality totals. Report their counts separately and preserve reading_status, counterevidence, and evidence_confidence.
+- If a reading is creator_refuted or contested, state that qualification clearly rather than repeating the interpretation as fact.
 - Gender-independent romance must not be used to infer that every compatible NPC is canonically bisexual or pansexual.
+- A character sexuality value of "player_defined" describes mutually exclusive outcomes controlled by player choice, not a fixed orientation. Explain the documented possibilities from the notes and never count each possible route as a simultaneous canonical identity.
 - Counts describe documented Press Q records only. Never present them as the percentage or prevalence of LGBTQ+ content across all published games.
-- When research_status, evidence_confidence, source_language, platform_version, or limitations qualify an entry, preserve those qualifications in the answer.
+- When the user asks what a category or number means, identify the unit of analysis, define the term, state the denominator, explain the inclusion boundary, and name what the number cannot establish. Mention overlapping categories when relevant.
+- Treat "unknown", "not recorded", and "none documented" as research limitations, not presumed cisgender, heterosexual, white, able-bodied, or otherwise default identities.
+- Distinguish those limitations precisely: "unknown" means the relevant evidence was considered but remains inconclusive; "not recorded" means Press Q currently has no documented value for the field; "none documented" means the current research found no supported marker. None proves absence.
+- General labels such as man and woman do not establish cisgender status. Trans men are men and trans women are women; specific trans labels preserve a documented trans dimension rather than defining an opposing gender.
+- Keep gender identity, gender expression, sexual orientation, and romantic orientation distinct. Do not infer one from another.
+- When research_status, evidence_confidence, platform_version, or limitations qualify an entry, preserve those qualifications in the answer.
 - Do not infer race, ethnicity, religion, disability, nationality, sexuality, gender identity, or representation quality unless it appears in the Press Q dataset context.
 - Always analyze intersectionality_details when identifying race, ethnicity, religion, disability, or intersectional identities.
 - If a character contains "Black" inside intersectionality_details, they should be recognized as a Black character.
@@ -285,6 +344,7 @@ Tone:
 - Keep responses concise but human.
 - When useful, you may use short lists, but avoid overly mechanical formatting.
 - When possible, explain why the representation matters, but only using the information present in the Press Q dataset.
+- If asked for methodological support beyond what is present in the dataset contexts, direct the user to the Press Q Methodology and Ethics pages instead of inventing a citation.
 - If you use emphasis for game titles or character names, use Markdown emphasis consistently.
 
 Examples of preferred style:
@@ -299,12 +359,12 @@ ${datasetContext}
 
 Press Q game/system-level context:
 ${queerSystemsContext}
+
+Press Q queer-reading context:
+${queerReadingsContext}
 `,
         },
-        ...messages.map((message) => ({
-          role: message.role,
-          content: message.content,
-        })),
+        ...conversationMessages,
       ],
     });
 

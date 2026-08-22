@@ -1,4 +1,10 @@
-export type AnalyticsCategoryGroup = "Characters" | "Queer systems" | "Research coverage";
+import type { ResearchReferenceId } from "@/lib/researchReferences";
+
+export type AnalyticsCategoryGroup =
+  | "Characters"
+  | "Queer systems"
+  | "Queer readings"
+  | "Research coverage";
 
 export type AnalyticsCategorySlug =
   | "playability"
@@ -11,9 +17,9 @@ export type AnalyticsCategorySlug =
   | "affected-scopes"
   | "player-dependency"
   | "availability"
+  | "queer-readings"
   | "research-status"
-  | "evidence-confidence"
-  | "source-languages";
+  | "evidence-confidence";
 
 export type AnalyticsCategory = {
   slug: AnalyticsCategorySlug;
@@ -27,6 +33,7 @@ export type AnalyticsCategory = {
   interpretation: string;
   denominator: string;
   multiple: boolean;
+  sourceIds: ResearchReferenceId[];
 };
 
 export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
@@ -42,6 +49,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "A higher playable share suggests more opportunities to inhabit a queer character, but it does not by itself measure narrative depth, agency, or quality of representation.",
     denominator: "all documented character records",
     multiple: false,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
   },
   {
     slug: "gender",
@@ -55,6 +63,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "Percentages describe the documented character corpus, not the prevalence of an identity across games. Multi-identity records can make the percentages add up to more than 100%.",
     denominator: "all documented character records",
     multiple: true,
+    sourceIds: ["lgbtq-archive", "glaad-terms", "data-feminism"],
   },
   {
     slug: "sexuality",
@@ -62,12 +71,13 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     menuLabel: "Sexuality",
     group: "Characters",
     eyebrow: "Documented identity",
-    summary: "The sexual-orientation and sexuality terms documented for characters.",
-    meaning: "Sexuality records how a character’s sexual orientation is described or evidenced. A label may be explicit in the game, confirmed externally, inferred from relationships, or unavailable in the current evidence.",
-    calculation: "Each character contributes once to every recorded sexuality tag. Missing, none, and unknown values are kept visible as Not recorded rather than silently removed.",
-    interpretation: "The chart measures documentation within Press Q. It should not be read as a demographic estimate, and the same character may appear in more than one category when a composite identity is documented.",
+    summary: "Confirmed sexuality terms, with conditional and player-defined representation kept separate.",
+    meaning: "Sexuality records how a character’s sexual orientation is described or evidenced. Fixed, confirmed identities are distinguished from identities that depend on player choices, remain implicit, or are not confirmed by the current evidence.",
+    calculation: "Characters with confirmed queer status contribute to their recorded sexuality tags. Player-defined, ambiguous, and not-confirmed sexual-orientation records are grouped under Conditional or player-defined representation instead of being counted as fixed identities. Missing or none values appear as Not recorded, while an explicit unknown remains visible as Unknown.",
+    interpretation: "The chart measures documentation within Press Q, not demographic prevalence. A possible heterosexual, bisexual, or asexual route is not treated as several simultaneous identities, and conditional cases remain available for research without inflating confirmed categories.",
     denominator: "all documented character records",
     multiple: true,
+    sourceIds: ["lgbtq-archive", "glaad-terms", "data-feminism"],
   },
   {
     slug: "identity-categories",
@@ -81,6 +91,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "Use this view to understand the archive’s structure and research coverage. Do not treat an analytical category as a personal identity label.",
     denominator: "all documented character records",
     multiple: true,
+    sourceIds: ["glaad-terms", "data-feminism"],
   },
   {
     slug: "intersectionality",
@@ -90,10 +101,11 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     eyebrow: "Context and overlap",
     summary: "Documented social and cultural markers that shape how queer representation is situated.",
     meaning: "Intersectionality considers how sexuality and gender interact with race, ethnicity, disability, religion, class, age, nationality, migration, and other contexts. Press Q records only markers supported by evidence.",
-    calculation: "Explicit marker values are counted directly. For older yes/no records, detailed marker text is used when it contains structured terms. Records marked no are shown as None documented.",
+    calculation: "Structured values and supported terms in older evidence notes are normalized to controlled axes such as race/ethnicity, nationality/migration, religion, class, and disability. Specific community details remain in the record cards. Records marked no are shown as None documented.",
     interpretation: "None documented means the field currently lacks a supported marker; it does not prove that the character has no intersectional identity. Percentages may overlap because one character can carry several markers.",
     denominator: "all documented character records",
     multiple: true,
+    sourceIds: ["crenshaw-intersectionality", "data-feminism"],
   },
   {
     slug: "game-scale",
@@ -107,6 +119,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "This is not a unique-game distribution. Use the examples to see which characters and titles create each count, and note that hybrid scale labels can overlap.",
     denominator: "all documented character records",
     multiple: true,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
   },
   {
     slug: "system-types",
@@ -120,6 +133,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "Counts describe documented affordances, not how prominently they appear or how well they are implemented. Character representation and systemic possibility remain separate units.",
     denominator: "all documented queer-system records",
     multiple: false,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
   },
   {
     slug: "affected-scopes",
@@ -133,6 +147,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "Because scopes can overlap, their percentages may exceed 100% when added together. The measure describes reach within game structures, not the quality of the experience.",
     denominator: "all documented queer-system records",
     multiple: true,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
   },
   {
     slug: "player-dependency",
@@ -146,6 +161,7 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "Dependency is not inherently positive or negative. It helps distinguish authored representation from optional or player-created representation.",
     denominator: "all documented queer-system records",
     multiple: false,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
   },
   {
     slug: "availability",
@@ -159,6 +175,21 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     interpretation: "Availability reveals access conditions but does not indicate discoverability, cost, regional access, or how easy a condition is to satisfy unless those details are documented separately.",
     denominator: "all documented queer-system records",
     multiple: false,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
+  },
+  {
+    slug: "queer-readings",
+    title: "Queer readings",
+    menuLabel: "Reading types",
+    group: "Queer readings",
+    eyebrow: "Reception and interpretation",
+    summary: "Critical and audience interpretations preserved separately from canonical character identities.",
+    meaning: "Queer readings document how critics, fans, or communities have interpreted a character, group, or theme when the available evidence does not establish a canonical LGBTQ+ identity. A reading may be open, contested, or explicitly refuted by a creator.",
+    calculation: "Each queer-reading row contributes once to its documented reading type, such as sexuality, gender identity, gender expression, or queer theme. These records use only the queer-readings dataset and never enter character-identity denominators.",
+    interpretation: "A count shows that an interpretation has been documented, not that the proposed identity is true. Read each card together with its status, counterevidence, confidence, and notes.",
+    denominator: "all documented queer-reading records",
+    multiple: false,
+    sourceIds: ["lgbtq-archive", "data-feminism"],
   },
   {
     slug: "research-status",
@@ -166,12 +197,13 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     menuLabel: "Research status",
     group: "Research coverage",
     eyebrow: "Workflow transparency",
-    summary: "Where character and system records currently sit in the Press Q research workflow.",
+    summary: "Where character, system, and queer-reading records currently sit in the Press Q research workflow.",
     meaning: "Research status makes unfinished work visible through stages such as identified or queued, in research, reviewed, and needs verification.",
-    calculation: "Character and queer-system records are combined only for this workflow view. Each record contributes to one status, with blank or unrecognized values shown as Not recorded.",
+    calculation: "Character, queer-system, and queer-reading records are combined only for this workflow view. Each record contributes to one status, with blank or unrecognized values shown as Not recorded.",
     interpretation: "Reviewed means the record passed the project’s current review stage; it does not mean the evidence can never change or that the archive is complete.",
-    denominator: "all character and queer-system records",
+    denominator: "all character, queer-system, and queer-reading records",
     multiple: false,
+    sourceIds: ["lgbtq-archive", "fair-principles"],
   },
   {
     slug: "evidence-confidence",
@@ -181,28 +213,21 @@ export const ANALYTICS_CATEGORIES: AnalyticsCategory[] = [
     eyebrow: "Evidence quality",
     summary: "The curator’s recorded confidence in the evidence supporting each entry.",
     meaning: "Confidence summarizes how strongly the available sources support an entry. Low, medium, and high describe evidence quality and clarity, not the value or importance of a character or system.",
-    calculation: "Character and queer-system records are counted by their single confidence value. Blank or unrecognized values appear as Not recorded.",
+    calculation: "Character, queer-system, and queer-reading records are counted by their single confidence value. For queer readings, confidence describes documentation of the interpretation and its context, not the truth of an identity claim.",
     interpretation: "Confidence is a curatorial assessment that can change when better sources are found. Compare it with research status rather than treating it as a permanent score.",
-    denominator: "all character and queer-system records",
+    denominator: "all character, queer-system, and queer-reading records",
     multiple: false,
-  },
-  {
-    slug: "source-languages",
-    title: "Source languages",
-    menuLabel: "Source languages",
-    group: "Research coverage",
-    eyebrow: "Language gaps",
-    summary: "The languages of sources used to document character and system records.",
-    meaning: "Source language helps reveal which linguistic communities are represented in the research process and where the archive may be relying too heavily on a narrow set of sources.",
-    calculation: "Each record contributes once to every source-language code attached to it. Records without a language code are shown as Not recorded.",
-    interpretation: "This measures records by source language, not the number of individual sources or the language in which a game was originally released. Multi-language records can overlap.",
-    denominator: "all character and queer-system records",
-    multiple: true,
+    sourceIds: ["fair-principles", "data-feminism"],
   },
 ];
 
 export const ANALYTICS_CATEGORY_GROUPS = (
-  ["Characters", "Queer systems", "Research coverage"] as AnalyticsCategoryGroup[]
+  [
+    "Characters",
+    "Queer systems",
+    "Queer readings",
+    "Research coverage",
+  ] as AnalyticsCategoryGroup[]
 ).map((group) => ({
   group,
   categories: ANALYTICS_CATEGORIES.filter((category) => category.group === group),

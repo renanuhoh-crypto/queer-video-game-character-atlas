@@ -33,7 +33,6 @@ export async function GET() {
       character_image: row.character_image || "",
       image_credit: row.image_credit || "",
       image_source_url: row.image_source_url || "",
-      source_language: row.source_language || "",
       discovery_source: row.discovery_source || "",
       research_status: row.research_status || "",
       evidence_confidence: row.evidence_confidence || "",

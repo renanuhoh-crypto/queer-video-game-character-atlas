@@ -159,12 +159,6 @@ const fields: Field[] = [
     ],
   },
   {
-    id: "source_language",
-    label: "Source language",
-    placeholder: "e.g., en, pt-BR, ja",
-    help: "Record the language to make language gaps measurable.",
-  },
-  {
     id: "platform_version",
     label: "Platform / version researched",
     placeholder: "e.g., PC, patch 1.108, or specific expansion",
