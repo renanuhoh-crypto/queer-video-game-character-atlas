@@ -23,7 +23,12 @@ coding can be supported independently.
 
 This schema responds to limitations articulated by Adrienne Shaw and the
 [LGBTQ Video Game Archive](https://lgbtqgamearchive.com/about/about-archive/),
-while addressing a complementary research question about game systems.
+and uses the historical [Represent Me queer games database](https://representme.charity/projects/queer/database/about/)
+as an additional discovery source, while addressing a complementary research
+question about game systems. Represent Me describes its database as covering
+queer game content from 1974–2020 and notes that some of its contributors also
+volunteered with the LGBTQ Video Game Archive. Overlap between the two sources
+therefore does not automatically constitute independent corroboration.
 
 1. **Documented cases are not prevalence estimates.** Press Q counts what has
    been identified and researched. It does not use its corpus to claim what
@@ -48,6 +53,15 @@ while addressing a complementary research question about game systems.
    character, the character uses `player_defined`, keeps the possible outcomes
    in its evidence notes, and remains separate from confirmed identity counts.
    The corresponding choice structure belongs in the queer-systems dataset.
+8. **Cross-source overlap is reconciled, not double-counted.** Candidate records
+   from Represent Me and the LGBTQ Video Game Archive are matched using the
+   normalized subject or character name, game title, and platform/version. A
+   single Press Q research unit retains every discovery source and underlying
+   evidence URL instead of becoming multiple rows.
+9. **Divergence triggers review.** If the sources disagree about identity,
+   canonicity, release/version, unit type, or evidentiary status, Press Q keeps
+   both claims in notes or counterevidence, marks the record
+   `needs_verification`, and requires human review before analytics use.
 
 ## Queer readings and boundaries
 
@@ -87,6 +101,25 @@ presenting different kinds of evidence as equivalent.
 6. **Review and revise.** Internal review checks required fields and consistency,
    but reviewed records remain correctable as new sources, translations,
    releases, or community knowledge become available.
+
+## Cross-source reconciliation
+
+Represent Me is used for discovery, historical coverage, and source tracing;
+its presence is not itself proof of a character identity. During import or
+manual review, Press Q checks candidate records against existing character,
+system, and queer-reading units before adding a row.
+
+- Exact or normalized matches are merged into one research unit and retain both
+  source names and URLs.
+- A shared listing is treated as one lead when the two archives rely on the same
+  underlying page, contributor, citation, or assertion.
+- Independent in-game text, official material, creator statements, scholarship,
+  or separately documented reporting may raise confidence after human review.
+- Material disagreement is never resolved by majority vote. The competing
+  claims, access dates, platform/version, and available counterevidence remain
+  visible until reviewed.
+- Import reviews should produce a duplicate/divergence report before changing
+  the public datasets.
 
 ## Controlled categories and identity terms
 
@@ -184,6 +217,10 @@ accountability, and human oversight.
 - Shaw, Adrienne, et al.
   [“About (Please Read First!).”](https://lgbtqgamearchive.com/about/about-archive/)
   *LGBTQ Video Game Archive*.
+- Queerly Represent Me Ltd.
+  [“About the Database.”](https://representme.charity/projects/queer/database/about/)
+  *Represent Me*. See also the organization’s
+  [history and operating status](https://representme.charity/about/about/).
 - D’Ignazio, Catherine, and Lauren F. Klein.
   [*Data Feminism*](https://data-feminism.mitpress.mit.edu/). MIT Press, 2020.
 - Crenshaw, Kimberlé.

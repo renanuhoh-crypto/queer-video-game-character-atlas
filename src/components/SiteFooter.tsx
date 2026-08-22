@@ -5,6 +5,7 @@ const mainLinks = [
   { label: "About", href: "/about" },
   { label: "Methodology", href: "/methodology" },
   { label: "Analytics", href: "/analytics" },
+  { label: "Rainbow Road", href: "/rainbowroad" },
   { label: "Chat", href: "/chat" },
   { label: "Contribute", href: "/contribute" },
   { label: "Ethics", href: "/ethics" },
@@ -14,6 +15,7 @@ const supportLinks = [
   { label: "Press Q Dataset Signal", href: "/" },
   { label: "Research Console", href: "/chat" },
   { label: "Visual Analytics", href: "/analytics" },
+  { label: "Rainbow Road", href: "/rainbowroad" },
   { label: "Contribute Characters", href: "/contribute" },
   { label: "Press Q Archive", href: "/" },
 ];

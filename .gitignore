@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local recovery and audit artifacts
+/_recovery_backups/
+/.codex_*audit*.json
+/.publish-worktree/

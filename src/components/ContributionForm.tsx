@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
+import GalaxyButton from "@/components/GalaxyButton";
 
 type FieldId =
   | "characterName"
@@ -66,6 +67,8 @@ export default function ContributionForm() {
   const [step, setStep] = useState(0);
   const [draft, setDraft] = useState("");
   const [copied, setCopied] = useState(false);
+  const [sourceConfirmed, setSourceConfirmed] = useState(false);
+  const [reviewConfirmed, setReviewConfirmed] = useState(false);
 
   function updateValue(id: FieldId, value: string) {
     setValues((current) => ({ ...current, [id]: value }));
@@ -216,6 +219,22 @@ export default function ContributionForm() {
                   <span className="mt-2 block text-xs leading-5 text-slate-400">Used only for possible research follow-up.</span>
                 </label>
               </div>
+
+              <fieldset className="mt-5 grid gap-3 sm:grid-cols-2">
+                <legend className="sr-only">Contribution confirmations</legend>
+                <PoppingCheckbox
+                  checked={sourceConfirmed}
+                  onChange={setSourceConfirmed}
+                  label="Source included"
+                  description="I included a link or enough context for the research team to trace the claim."
+                />
+                <PoppingCheckbox
+                  checked={reviewConfirmed}
+                  onChange={setReviewConfirmed}
+                  label="Human review required"
+                  description="I understand this submission is a research lead and will not be published automatically."
+                />
+              </fieldset>
             </section>
           ) : null}
         </div>
@@ -229,12 +248,11 @@ export default function ContributionForm() {
           >
             ← Back
           </button>
-          <button
+          <GalaxyButton
             type="submit"
-            className="space-hero-button space-hero-button--primary px-7 py-3 text-xs"
           >
             {step === steps.length - 1 ? "Build contribution draft" : "Continue →"}
-          </button>
+          </GalaxyButton>
         </div>
       </form>
 
@@ -286,6 +304,43 @@ function TextField({
         required={required}
         className="pq-contribution-input"
       />
+    </label>
+  );
+}
+
+function PoppingCheckbox({
+  checked,
+  onChange,
+  label,
+  description,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label: string;
+  description: string;
+}) {
+  return (
+    <label className="pq-pop-control">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(event) => onChange(event.target.checked)}
+        required
+      />
+      <span className="pq-pop-control-box" aria-hidden="true">
+        <span className="pq-pop-control-check">✓</span>
+        <span className="pq-pop-control-burst">
+          {Array.from({ length: 8 }, (_, index) => (
+            <span key={index} />
+          ))}
+        </span>
+      </span>
+      <span className="min-w-0">
+        <strong className="block text-sm font-black text-white">{label}</strong>
+        <span className="mt-1 block text-xs leading-5 text-slate-400">
+          {description}
+        </span>
+      </span>
     </label>
   );
 }

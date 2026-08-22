@@ -1,5 +1,6 @@
 export type ResearchReferenceId =
   | "lgbtq-archive"
+  | "represent-me"
   | "glaad-terms"
   | "data-feminism"
   | "crenshaw-intersectionality"
@@ -27,6 +28,15 @@ export const RESEARCH_REFERENCES: Record<
     url: "https://lgbtqgamearchive.com/about/about-archive/",
     relevance:
       "Supports the distinction between explicitly coded content, creator statements, queer readings, and incomplete research coverage.",
+  },
+  "represent-me": {
+    id: "represent-me",
+    shortTitle: "Represent Me queer games database",
+    citation:
+      "Queerly Represent Me Ltd. “About the Database” and “About the Site.” Represent Me.",
+    url: "https://representme.charity/projects/queer/database/about/",
+    relevance:
+      "Provides a near-comprehensive historical discovery source for queer content in games from 1974–2020. Because Represent Me identifies collaboration with the LGBTQ Video Game Archive, overlapping records are reconciled as potentially related evidence rather than assumed independent confirmation.",
   },
   "glaad-terms": {
     id: "glaad-terms",

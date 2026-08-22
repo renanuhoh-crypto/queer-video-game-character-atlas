@@ -283,9 +283,17 @@ export default function MethodologyPage() {
               contested readings remain visible with their qualification.
             </p>
             <p>
-              Corrections can change labels, status, evidence, or inclusion.
-              Future versions should retain a change history so researchers can
-              understand why a record changed.
+              Represent Me and the LGBTQ Video Game Archive are discovery
+              sources with documented contributor overlap. Matching entries are
+              deduplicated by subject, game, and version, retain both
+              provenances, and are not counted as independent corroboration
+              without separate underlying evidence.
+            </p>
+            <p>
+              When sources disagree, Press Q preserves each claim and its date,
+              flags the record for human review, and avoids silently choosing or
+              averaging labels. Corrections can change labels, status, evidence,
+              or inclusion while retaining a change history.
             </p>
           </div>
         </section>
@@ -294,6 +302,7 @@ export default function MethodologyPage() {
           <ResearchReferences
             ids={[
               "lgbtq-archive",
+              "represent-me",
               "glaad-terms",
               "data-feminism",
               "crenshaw-intersectionality",

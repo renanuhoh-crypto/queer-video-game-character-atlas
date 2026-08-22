@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { GalaxyLink } from "@/components/GalaxyButton";
 import { useEffect, useMemo, useState } from "react";
 import PressQTubesBackdrop from "@/components/PressQTubesBackdrop";
 import QuiuFlightGame from "@/components/QuiuFlightGame";
@@ -234,12 +235,12 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/analytics" className="space-hero-button space-hero-button--primary w-full px-7 py-4 text-sm sm:w-auto">
+              <GalaxyLink href="/analytics" className="w-full sm:w-auto">
                 Explore the archive
-              </Link>
-              <Link href="/chat" className="space-hero-button space-hero-button--secondary w-full px-7 py-4 text-sm sm:w-auto">
+              </GalaxyLink>
+              <GalaxyLink href="/chat" className="w-full sm:w-auto">
                 Ask Quiu
-              </Link>
+              </GalaxyLink>
             </div>
 
             <div className="mt-10 grid grid-cols-3 gap-2 sm:gap-3">

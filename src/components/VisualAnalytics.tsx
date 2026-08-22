@@ -368,9 +368,13 @@ function BarPanel({
                   return (
                     <div
                       role="tooltip"
-                      className="max-w-[min(24rem,calc(100vw-2rem))] rounded-2xl border border-[#83e9f5]/35 bg-[#111743]/98 p-4 text-left text-white shadow-[0_18px_55px_rgba(4,8,35,.5)] backdrop-blur-md"
+                      className="pq-analytics-glitch-tooltip max-w-[min(24rem,calc(100vw-2rem))] p-4 text-left text-white"
                     >
-                      <p className="text-base font-black leading-5 text-white">
+                      <span className="pq-analytics-glitch-noise" aria-hidden="true" />
+                      <p
+                        className="pq-analytics-glitch-title text-base font-black leading-5 text-white"
+                        data-text={datum.name}
+                      >
                         {datum.name}
                       </p>
                       <p className="mt-1 font-mono text-[10px] font-black uppercase tracking-[.16em] text-[#83e9f5]">
