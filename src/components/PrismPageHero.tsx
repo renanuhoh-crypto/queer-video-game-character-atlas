@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AnalyticsMenu from "@/components/AnalyticsMenu";
 
 type PrismPageHeroProps = {
   eyebrow: string;
@@ -17,7 +18,7 @@ export default function PrismPageHero({
   hideIntro = false,
 }: PrismPageHeroProps) {
   return (
-    <section className="pq-page-hero relative overflow-hidden border-b border-[#dfe3f3]">
+    <section className={`pq-page-hero relative border-b border-[#dfe3f3] ${hideIntro ? "overflow-visible" : "overflow-hidden"}`}>
       <header className="relative z-20 px-4 pt-4 sm:px-7 sm:pt-6 lg:px-10">
         <div className="pq-topbar mx-auto flex max-w-[1700px] items-center justify-between gap-4 px-4 py-3 sm:px-5">
           <Link href="/" aria-label="Press Q home" className="flex items-center gap-3">
@@ -36,7 +37,7 @@ export default function PrismPageHero({
           <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#3b405f] md:flex xl:gap-8">
             <Link href="/about">About</Link>
             <Link href="/methodology">Methodology</Link>
-            <Link href="/analytics">Analytics</Link>
+            <AnalyticsMenu />
             <Link href="/contribute">Contribute</Link>
             <Link href="/ethics">Ethics</Link>
           </nav>

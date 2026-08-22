@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
+import AnalyticsCategorySelector from "@/components/AnalyticsCategorySelector";
 import {
   Bar,
   BarChart,
@@ -615,7 +616,24 @@ export default function VisualAnalytics({ characters, systems }: Props) {
   );
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-6 py-4 sm:py-7">
+    <div className="analytics-data-library mx-auto w-full max-w-7xl space-y-6 py-4 sm:py-7">
+      <section className="rounded-[1.5rem] border border-[#8291ff]/20 bg-[#111743] p-5 sm:p-6">
+        <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)]">
+          <div>
+            <p className={EYEBROW}>Detailed analytics library</p>
+            <h2 className="mt-2 text-2xl font-black italic text-white sm:text-3xl">
+              Open one category at a time
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
+              Each category has its own page with definitions, percentages,
+              counting rules, limitations, and expandable examples from the
+              Press Q dataset.
+            </p>
+          </div>
+          <AnalyticsCategorySelector />
+        </div>
+      </section>
+
       <OrbitOverview
         characters={characters.length}
         systems={systems.length}

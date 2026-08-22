@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AnalyticsMenu from "@/components/AnalyticsMenu";
 
 type AnalyticsPageHeroProps = {
   characterCount: number;
@@ -39,7 +40,7 @@ export default function AnalyticsPageHero({
           <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#dbe2ff] md:flex xl:gap-8">
             <Link href="/about">About</Link>
             <Link href="/methodology">Methodology</Link>
-            <Link href="/analytics" aria-current="page">Analytics</Link>
+            <AnalyticsMenu dark />
             <Link href="/contribute">Contribute</Link>
             <Link href="/ethics">Ethics</Link>
           </nav>
