@@ -248,11 +248,15 @@ function ExportControls({
 function BarPanel({
   eyebrow,
   title,
+  description,
+  countingNote,
   data,
   filename,
 }: {
   eyebrow: string;
   title: string;
+  description: string;
+  countingNote?: string;
   data: ReturnType<typeof sortedData>;
   filename: string;
 }) {
@@ -268,6 +272,9 @@ function BarPanel({
           <h3 className="mt-2 text-xl font-black italic text-white sm:text-2xl">
             {title}
           </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
+            {description}
+          </p>
         </div>
         <ExportControls targetRef={ref} filename={filename} />
       </div>
@@ -308,6 +315,13 @@ function BarPanel({
           No data has been documented for this view yet.
         </p>
       )}
+
+      <p className="mt-4 border-t border-white/10 pt-4 text-xs leading-5 text-[#9da8d1]">
+        <strong className="text-[#83e9f5]">How to read:</strong>{" "}
+        Each bar shows the number of documented records in that category.
+        {countingNote ? ` ${countingNote}` : ""} Empty, unknown, and explicitly
+        undocumented values are not shown.
+      </p>
     </section>
   );
 }
@@ -328,6 +342,8 @@ function OrbitOverview({
       id: "characters",
       label: "Characters",
       value: characters,
+      description:
+        "Character-level records in the Press Q dataset. A character appearing in one game counts as one unit.",
       x: "50%",
       y: "4%",
       color: "#8291ff",
@@ -336,6 +352,8 @@ function OrbitOverview({
       id: "systems",
       label: "Systems",
       value: systems,
+      description:
+        "Documented queer affordances or game systems. One game can contribute several separate system records.",
       x: "88%",
       y: "44%",
       color: "#59d8ef",
@@ -344,6 +362,8 @@ function OrbitOverview({
       id: "reviewed",
       label: "Reviewed",
       value: reviewed,
+      description:
+        "Character and system records whose research status is marked Reviewed.",
       x: "67%",
       y: "84%",
       color: "#f8d86f",
@@ -352,6 +372,8 @@ function OrbitOverview({
       id: "languages",
       label: "Source languages",
       value: languages,
+      description:
+        "Distinct non-empty language codes recorded for the sources used across both datasets.",
       x: "13%",
       y: "61%",
       color: "#ff6fae",
@@ -464,6 +486,9 @@ function OrbitOverview({
             {active.value}
           </p>
           <p className="mt-1 font-bold text-slate-300">{active.label}</p>
+          <p className="mt-3 text-sm leading-6 text-slate-400">
+            {active.description}
+          </p>
         </div>
       </div>
     </section>
@@ -598,6 +623,33 @@ export default function VisualAnalytics({ characters, systems }: Props) {
         languages={Object.keys(data.maps.language).length}
       />
 
+      <section className="rounded-[1.5rem] border border-[#8291ff]/20 bg-[#111743] p-5 text-[#d9def5] sm:p-6">
+        <p className={EYEBROW}>How to read this page</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4">
+            <h3 className="font-black text-white">Counts, not prevalence</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-300">
+              Every number describes records currently documented by Press Q.
+              It is not an estimate of all queer games or characters.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4">
+            <h3 className="font-black text-white">Different units stay separate</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-300">
+              A character is one representation record; a system is one game
+              affordance. A single game may contain several of either.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4">
+            <h3 className="font-black text-white">Multiple tags can overlap</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-300">
+              A record with several identities, markers, scopes, or languages
+              is counted once in every relevant bar.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div className="flex flex-col gap-4 rounded-[1.5rem] border border-white/10 bg-[#111743] p-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid gap-2 sm:grid-cols-3">
           {(["characters", "systems", "coverage"] as Lens[]).map((item) => (
@@ -655,47 +707,57 @@ export default function VisualAnalytics({ characters, systems }: Props) {
             <MetricCard
               label="Characters"
               value={characters.length}
-              note="character-level records"
+              definition="Character-level records currently documented in the Press Q dataset. This is not a count of unique games."
             />
             <MetricCard
               label="Playable"
               value={data.playable}
-              note="within the documented character corpus"
+              definition="Character records marked playable through either the playable flag or the playable-status field."
             />
             <MetricCard
               label="Games"
               value={data.uniqueGames}
-              note="unique titles across both datasets"
+              definition="Distinct normalized game titles found across both the character and queer-system datasets."
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <BarPanel
               eyebrow="Identity"
               title="Gender / gender identity"
+              description="Counts character records by their documented gender or gender identity tags."
+              countingNote="A character with more than one documented identity appears in each applicable bar."
               data={sortedData(data.maps.gender)}
               filename="pressq-gender"
             />
             <BarPanel
               eyebrow="Identity"
               title="Sexuality"
+              description="Counts character records by documented sexual-orientation or sexuality tags."
+              countingNote="Composite identities contribute once to every selected category."
               data={sortedData(data.maps.sexuality)}
               filename="pressq-sexuality"
             />
             <BarPanel
               eyebrow="Categories"
               title="Identity categories"
+              description="Groups records by broad analytical dimensions such as gender identity, sexual orientation, or romantic orientation. These categories do not replace a character’s own identity terms."
+              countingNote="One record can belong to several analytical categories."
               data={sortedData(data.maps.identity)}
               filename="pressq-identity-categories"
             />
             <BarPanel
               eyebrow="Intersectionality"
               title="Documented markers"
+              description="Counts explicitly recorded contextual markers such as race, ethnicity, disability, class, religion, or nationality and migration."
+              countingNote="Absence from the chart means not documented in the field, not that the marker is absent from the character."
               data={sortedData(data.maps.intersectionality)}
               filename="pressq-intersectionality"
             />
             <BarPanel
               eyebrow="Production"
               title="Game scale"
+              description="Counts character records by the recorded production scale of their game, such as AAA, AA, independent, mobile, browser, or student/amateur."
+              countingNote="This counts character records, so a game with several documented characters contributes several times."
               data={sortedData(data.maps.scale)}
               filename="pressq-game-scale"
             />
@@ -709,7 +771,7 @@ export default function VisualAnalytics({ characters, systems }: Props) {
             <MetricCard
               label="Systems"
               value={systems.length}
-              note="queer affordance records"
+              definition="Individual records of queer possibilities or affordances provided by a game. A game may have several system records."
             />
             <MetricCard
               label="Games"
@@ -718,36 +780,41 @@ export default function VisualAnalytics({ characters, systems }: Props) {
                   systems.map((system) => normalize(system.game_title)),
                 ).size
               }
-              note="titles with documented systems"
+              definition="Distinct game titles that currently have at least one documented queer-system record."
             />
             <MetricCard
               label="Types"
               value={Object.keys(data.maps.systemType).length}
-              note="distinct possibilities"
+              definition="Distinct system-type categories represented in the current queer-systems dataset."
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <BarPanel
               eyebrow="Affordances"
               title="System types"
+              description="Counts records by what the game allows, such as character creation, pronoun selection, same-gender romance, or queer family creation."
               data={sortedData(data.maps.systemType)}
               filename="pressq-system-types"
             />
             <BarPanel
               eyebrow="Multiple choice"
               title="Affected scopes"
+              description="Counts which parts of the game are affected: the player avatar, NPCs, relationships, family systems, or the wider game world."
+              countingNote="A system that affects several scopes contributes once to each selected scope."
               data={sortedData(data.maps.scope)}
               filename="pressq-scopes"
             />
             <BarPanel
               eyebrow="Agency"
               title="Player dependency"
+              description="Shows how much the queer experience depends on player choice: none, partial, or full dependency."
               data={sortedData(data.maps.dependency)}
               filename="pressq-player-dependency"
             />
             <BarPanel
               eyebrow="Access"
               title="Availability"
+              description="Shows how the system becomes available: by default, optionally, conditionally, through an expansion or DLC, or only through mods."
               data={sortedData(data.maps.availability)}
               filename="pressq-availability"
             />
@@ -761,12 +828,12 @@ export default function VisualAnalytics({ characters, systems }: Props) {
             <MetricCard
               label="Reviewed"
               value={data.reviewed}
-              note="characters + systems"
+              definition="Character and system records marked Reviewed in the research-status field."
             />
             <MetricCard
               label="Source languages"
               value={Object.keys(data.maps.language).length}
-              note="visible language gaps"
+              definition="Distinct non-empty source-language codes across both datasets. This measures language variety, not the number of sources."
             />
             <MetricCard
               label="No status"
@@ -778,25 +845,29 @@ export default function VisualAnalytics({ characters, systems }: Props) {
                   0,
                 )
               }
-              note="records awaiting classification"
+              definition="Character and system records without a recognized research-status value. These records still require workflow classification."
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <BarPanel
               eyebrow="Progress"
               title="Research status"
+              description="Counts records at each workflow stage: identified or queued, in research, reviewed, or needing verification."
               data={sortedData(data.maps.status)}
               filename="pressq-research-status"
             />
             <BarPanel
               eyebrow="Evidence"
               title="Recorded confidence"
+              description="Counts records by the curator’s confidence in the available evidence: low, medium, or high. Confidence describes evidence quality, not the importance of the representation."
               data={sortedData(data.maps.confidence)}
               filename="pressq-evidence-confidence"
             />
             <BarPanel
               eyebrow="Gaps"
               title="Source languages"
+              description="Counts records by the language of the source used to document them. This makes language concentration and under-researched languages visible."
+              countingNote="A record with more than one source language contributes to each listed language."
               data={sortedData(data.maps.language)}
               filename="pressq-source-languages"
             />
@@ -805,9 +876,10 @@ export default function VisualAnalytics({ characters, systems }: Props) {
       ) : null}
 
       <p className="rounded-2xl border border-[#8291ff]/25 bg-[#111743] px-5 py-4 text-xs font-medium leading-6 text-[#b5bee3]">
-        Percentages and counts describe only the corpus documented by Press Q.
-        A composite identity is counted in each selected category, while still
-        remaining a single character in the overall total.
+        All counts describe only the corpus documented by Press Q. Bar charts
+        omit empty, unknown, and explicitly undocumented values. Composite or
+        multi-select records are counted in every applicable category while
+        remaining one record in the overall total.
       </p>
     </div>
   );
@@ -816,18 +888,18 @@ export default function VisualAnalytics({ characters, systems }: Props) {
 function MetricCard({
   label,
   value,
-  note,
+  definition,
 }: {
   label: string;
   value: number;
-  note: string;
+  definition: string;
 }) {
   return (
     <article className={`${PANEL} min-h-44`}>
       <div className="pq-data-prism" aria-hidden="true" />
       <p className={EYEBROW}>{label}</p>
       <p className="mt-4 text-5xl font-black italic text-white">{value}</p>
-      <p className="mt-3 text-sm text-slate-400">{note}</p>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{definition}</p>
     </article>
   );
 }
