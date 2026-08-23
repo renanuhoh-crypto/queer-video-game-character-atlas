@@ -13,6 +13,11 @@ type Explosion = { id: number; x: number; y: number; life: number; boss?: boolea
 type Score = { name: string; score: number };
 type Model = { status: Status; x: number; y: number; direction: "idle" | "left" | "right"; shield: number; score: number; wave: number; enemies: Enemy[]; shots: Shot[]; powers: Power[]; sparks: Spark[]; explosions: Explosion[]; spawn: number; fire: number; trailClock: number; kills: number; bossHp: number; bossMax: number; multi: number; flash: number; levelFlash: number };
 const labels = ["CENSOR", "ERASURE", "HATE"];
+const RENDER_INTERVAL = 1000 / 30;
+const MAX_SHOTS = 80;
+const MAX_SPARKS = 48;
+const MAX_EXPLOSIONS = 10;
+const MAX_POWERS = 8;
 const fresh = (): Model => ({ status: "ready", x: 50, y: 82, direction: "idle", shield: 100, score: 0, wave: 1, enemies: [], shots: [], powers: [], sparks: [], explosions: [], spawn: 0, fire: 0, trailClock: 0, kills: 0, bossHp: 0, bossMax: 0, multi: 0, flash: 0, levelFlash: 0 });
 
 export default function QuiuFlightGame() {
@@ -20,8 +25,10 @@ export default function QuiuFlightGame() {
   const keys = useRef({ left: false, right: false, fire: false });
   const ids = useRef(1);
   const last = useRef<number | null>(null);
+  const lastPublished = useRef(0);
   const frame = useRef<number | null>(null);
   const audio = useRef<AudioContext | null>(null);
+  const audioVoices = useRef(0);
   const soundEnabled = useRef(true);
   const [view, setView] = useState<Model>(fresh);
   const [best, setBest] = useState(0);
@@ -43,21 +50,30 @@ export default function QuiuFlightGame() {
   }, []);
 
   const playTone = useCallback((frequency: number, duration: number, type: OscillatorType = "sine", volume = .05) => {
-    if (!soundEnabled.current || !audio.current) return;
+    if (!soundEnabled.current || !audio.current || audioVoices.current >= 8) return;
     const oscillator = audio.current.createOscillator();
     const gain = audio.current.createGain();
+    audioVoices.current++;
     oscillator.type = type; oscillator.frequency.value = frequency;
     gain.gain.setValueAtTime(volume, audio.current.currentTime);
     gain.gain.exponentialRampToValueAtTime(.001, audio.current.currentTime + duration);
     oscillator.connect(gain); gain.connect(audio.current.destination);
+    oscillator.addEventListener("ended", () => {
+      oscillator.disconnect();
+      gain.disconnect();
+      audioVoices.current = Math.max(0, audioVoices.current - 1);
+    }, { once: true });
     oscillator.start(); oscillator.stop(audio.current.currentTime + duration);
   }, []);
 
   const shoot = useCallback(() => {
     const m = model.current;
-    if (m.status !== "playing" || m.fire > 0) return;
+    if (m.status !== "playing" || m.fire > 0 || m.shots.length >= MAX_SHOTS) return;
     m.fire = m.multi > 0 ? .1 : .2;
-    (m.multi > 0 ? [-3, 0, 3] : [0]).forEach((offset) => m.shots.push({ id: ids.current++, x: m.x + offset, y: m.y - 5 }));
+    for (const offset of m.multi > 0 ? [-3, 0, 3] : [0]) {
+      if (m.shots.length >= MAX_SHOTS) break;
+      m.shots.push({ id: ids.current++, x: m.x + offset, y: m.y - 5 });
+    }
     playTone(760, .055, "sawtooth", .035);
   }, [playTone]);
 
@@ -67,6 +83,7 @@ export default function QuiuFlightGame() {
     model.current = { ...fresh(), status: "playing" };
     keys.current = { left: false, right: false, fire: false };
     last.current = null;
+    lastPublished.current = performance.now();
     publish();
     setScoreSaved(false);
   }, [publish]);
@@ -74,8 +91,12 @@ export default function QuiuFlightGame() {
   useEffect(() => {
     function loop(time: number) {
       const m = model.current;
-      const dt = Math.min((time - (last.current ?? time)) / 1000, .035);
+      const dt = Math.min((time - (last.current ?? time)) / 1000, .05);
       last.current = time;
+      if (document.hidden) {
+        frame.current = requestAnimationFrame(loop);
+        return;
+      }
       if (m.status === "playing") {
         const speed = 46 * dt;
         const horizontal = (keys.current.right ? 1 : 0) - (keys.current.left ? 1 : 0);
@@ -83,13 +104,15 @@ export default function QuiuFlightGame() {
         m.x = Math.max(6, Math.min(94, m.x + horizontal * speed));
         m.trailClock -= dt;
         if (horizontal !== 0 && m.trailClock <= 0) {
-          m.trailClock = .075;
+          m.trailClock = .1;
           m.sparks.push({ id: ids.current++, x: m.x - horizontal * 4 + (Math.random() - .5) * 3, y: m.y + 1 + (Math.random() - .5) * 5, dx: -horizontal * (7 + Math.random() * 8), life: .5 + Math.random() * .35, glyph: (["✦", "★", "·"] as const)[Math.floor(Math.random() * 3)], trail: true });
         }
         m.fire = Math.max(0, m.fire - dt); m.multi = Math.max(0, m.multi - dt); m.flash = Math.max(0, m.flash - dt); m.levelFlash = Math.max(0, m.levelFlash - dt);
         m.enemies.forEach((enemy) => { enemy.hit = Math.max(0, (enemy.hit || 0) - dt); enemy.shooting = Math.max(0, (enemy.shooting || 0) - dt); });
-        m.sparks = m.sparks.map((spark) => ({ ...spark, x: spark.x + spark.dx * dt, y: spark.y - 22 * dt, life: spark.life - dt })).filter((spark) => spark.life > 0);
-        m.explosions = m.explosions.map((explosion) => ({ ...explosion, life: explosion.life - dt })).filter((explosion) => explosion.life > 0);
+        for (const spark of m.sparks) { spark.x += spark.dx * dt; spark.y -= 22 * dt; spark.life -= dt; }
+        m.sparks = m.sparks.filter((spark) => spark.life > 0).slice(-MAX_SPARKS);
+        for (const explosion of m.explosions) explosion.life -= dt;
+        m.explosions = m.explosions.filter((explosion) => explosion.life > 0).slice(-MAX_EXPLOSIONS);
         if (keys.current.fire || m.multi > 0) shoot();
         m.spawn -= dt;
         const waveTarget = m.wave % 5 === 0 ? 1 : 10 + m.wave * 2;
@@ -112,44 +135,65 @@ export default function QuiuFlightGame() {
             m.spawn = Math.max(.65, 1.5 - m.wave * .06);
           }
         }
-        m.shots = m.shots.map((shot) => {
-          const age = (shot.age || 0) + dt;
-          return { ...shot, age, ammo: shot.ammo && age >= .16 ? 2 : shot.ammo, y: shot.y + (shot.enemy ? 33 : -66) * dt };
-        }).filter((shot) => shot.y > -8 && shot.y < 108);
+        for (const shot of m.shots) {
+          shot.age = (shot.age || 0) + dt;
+          if (shot.ammo && shot.age >= .16) shot.ammo = 2;
+          shot.y += (shot.enemy ? 33 : -66) * dt;
+        }
+        m.shots = m.shots.filter((shot) => shot.y > -8 && shot.y < 108).slice(-MAX_SHOTS);
         m.enemies.forEach((enemy) => {
           if (!enemy.boss) enemy.y += (9 + m.wave * .55) * dt;
           if (enemy.boss) enemy.x = 50 + Math.sin(time / 650) * 31;
           else if (m.wave % 3 === 2) enemy.x = Math.max(7, Math.min(93, enemy.baseX + Math.sin(time / 520 + enemy.id) * 18));
           else if (m.wave % 3 === 0) enemy.x = Math.max(7, Math.min(93, enemy.baseX + Math.sin(time / 310 + enemy.id * .55) * 9));
-          if (Math.random() < (enemy.boss ? .018 : .0025 * m.wave) && enemy.y > 5) {
+          if (m.shots.length < MAX_SHOTS && Math.random() < (enemy.boss ? 1.08 : .15 * m.wave) * dt && enemy.y > 5) {
             enemy.shooting = .28;
             m.shots.push({ id: ids.current++, x: enemy.x, y: enemy.y + 5, enemy: true, ammo: 1, age: 0 });
           }
-          if (enemy.boss && Math.random() < .0035) {
+          if (enemy.boss && m.shots.length < MAX_SHOTS && Math.random() < .21 * dt) {
             m.shots.push({ id: ids.current++, x: enemy.x, y: enemy.y + 7, enemy: true, fireball: true });
             playTone(72, .55, "sawtooth", .13);
           }
         });
-        for (const shot of m.shots.filter((item) => !item.enemy)) for (const enemy of m.enemies) {
-          if (Math.abs(shot.x - enemy.x) < (enemy.boss ? 10 : 5) && Math.abs(shot.y - enemy.y) < (enemy.boss ? 7 : 5)) {
-            shot.y = -20; enemy.hp--; enemy.hit = .22;
-            playTone(enemy.hp <= 0 ? 150 : 330, enemy.hp <= 0 ? .18 : .055, enemy.hp <= 0 ? "square" : "triangle", enemy.hp <= 0 ? .09 : .025);
-            for (let spark = 0; spark < 7; spark++) m.sparks.push({ id: ids.current++, x: enemy.x, y: enemy.y, dx: (Math.random() - .5) * 24, life: .45 + Math.random() * .3, glyph: (["✦", "★", "·"] as const)[spark % 3] });
-            if (enemy.boss) m.bossHp = Math.max(0, enemy.hp);
-            if (enemy.hp <= 0) { m.score += enemy.boss ? 2500 : 100 * m.wave; m.kills++; m.explosions.push({ id: ids.current++, x: enemy.x, y: enemy.y, life: enemy.boss ? .9 : .58, boss: enemy.boss }); if (Math.random() < .18) m.powers.push({ id: ids.current++, x: enemy.x, y: enemy.y, kind: Math.random() > .5 ? "shield" : "super" }); }
+        for (const shot of m.shots) {
+          if (shot.enemy || shot.y < -8) continue;
+          for (const enemy of m.enemies) {
+            if (enemy.hp <= 0) continue;
+            if (Math.abs(shot.x - enemy.x) < (enemy.boss ? 10 : 5) && Math.abs(shot.y - enemy.y) < (enemy.boss ? 7 : 5)) {
+              shot.y = -20;
+              enemy.hp--;
+              enemy.hit = .22;
+              const destroyed = enemy.hp === 0;
+              playTone(destroyed ? 150 : 330, destroyed ? .18 : .055, destroyed ? "square" : "triangle", destroyed ? .09 : .025);
+              for (let spark = 0; spark < 5; spark++) m.sparks.push({ id: ids.current++, x: enemy.x, y: enemy.y, dx: (Math.random() - .5) * 24, life: .45 + Math.random() * .3, glyph: (["✦", "★", "·"] as const)[spark % 3] });
+              if (enemy.boss) m.bossHp = Math.max(0, enemy.hp);
+              if (destroyed) {
+                m.score += enemy.boss ? 2500 : 100 * m.wave;
+                m.kills++;
+                m.explosions.push({ id: ids.current++, x: enemy.x, y: enemy.y, life: enemy.boss ? .9 : .58, boss: enemy.boss });
+                if (m.powers.length < MAX_POWERS && Math.random() < .18) m.powers.push({ id: ids.current++, x: enemy.x, y: enemy.y, kind: Math.random() > .5 ? "shield" : "super" });
+              }
+              break;
+            }
           }
         }
+        m.sparks = m.sparks.slice(-MAX_SPARKS);
+        m.explosions = m.explosions.slice(-MAX_EXPLOSIONS);
         m.enemies = m.enemies.filter((enemy) => enemy.hp > 0 && enemy.y < 104);
         const hitShot = m.shots.find((shot) => shot.enemy && Math.abs(shot.x - m.x) < (shot.fireball ? 9 : 5) && Math.abs(shot.y - m.y) < (shot.fireball ? 9 : 5));
         const hitEnemy = m.enemies.find((enemy) => Math.abs(enemy.x - m.x) < (enemy.boss ? 11 : 6) && Math.abs(enemy.y - m.y) < 7);
         if ((hitShot || hitEnemy) && m.flash <= 0) { m.shield -= hitShot?.fireball ? 50 : 25; m.flash = 1; if (hitShot) hitShot.y = 120; }
-        m.powers = m.powers.map((power) => ({ ...power, y: power.y + 15 * dt })).filter((power) => {
+        for (const power of m.powers) power.y += 15 * dt;
+        m.powers = m.powers.filter((power) => {
           if (Math.abs(power.x - m.x) < 6 && Math.abs(power.y - m.y) < 7) { if (power.kind === "shield") m.shield = Math.min(100, m.shield + 40); else m.multi = 8; m.score += 250; playTone(power.kind === "super" ? 980 : 620, .32, "sine", .1); return false; }
           return power.y < 105;
         });
         if (m.kills >= waveTarget && m.enemies.length === 0) { const bossDefeated = m.wave % 5 === 0; m.wave++; m.kills = 0; m.spawn = .8; m.bossHp = 0; m.bossMax = 0; m.shots = []; if (bossDefeated) { m.levelFlash = 2.6; m.shield = Math.min(100, m.shield + 35); playTone(880, .65, "sine", .12); } }
         if (m.shield <= 0) { m.status = "gameover"; playTone(90, .8, "sawtooth", .12); const next = Math.max(best, m.score); setBest(next); localStorage.setItem("press-q-ultimate-ride-best", String(next)); }
-        publish();
+        if (m.status !== "playing" || time - lastPublished.current >= RENDER_INTERVAL) {
+          lastPublished.current = time;
+          publish();
+        }
       }
       frame.current = requestAnimationFrame(loop);
     }
@@ -165,8 +209,19 @@ export default function QuiuFlightGame() {
       if (key === " ") { event.preventDefault(); keys.current.fire = value; if (value) shoot(); }
     };
     const down = (event: KeyboardEvent) => change(event, true), up = (event: KeyboardEvent) => change(event, false);
+    const releaseControls = () => {
+      keys.current = { left: false, right: false, fire: false };
+      last.current = null;
+    };
     window.addEventListener("keydown", down); window.addEventListener("keyup", up);
-    return () => { window.removeEventListener("keydown", down); window.removeEventListener("keyup", up); };
+    window.addEventListener("blur", releaseControls);
+    document.addEventListener("visibilitychange", releaseControls);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+      window.removeEventListener("blur", releaseControls);
+      document.removeEventListener("visibilitychange", releaseControls);
+    };
   }, [shoot]);
 
   const hold = (key: keyof typeof keys.current, value: boolean) => { keys.current[key] = value; if (key === "fire" && value) shoot(); };
