@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:game-catalog": "node scripts/sync-lgbtq-game-catalog.mjs",
+    "audit:character-links": "node scripts/audit-lgbtq-character-links.mjs",
+    "import:archive-characters": "node scripts/import-lgbtq-archive-characters.mjs"
   },
   "dependencies": {
     "csv-parser": "^3.2.1",

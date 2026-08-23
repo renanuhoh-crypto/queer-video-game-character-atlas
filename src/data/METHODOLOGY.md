@@ -6,6 +6,12 @@ canonical character identity.
 
 ## Data units
 
+- `lgbtq_game_catalog.csv` records games identified by the LGBTQ Video Game
+  Archive, their release year, source link, and whether the source marks them as
+  researched. It is a discovery inventory, not a list of confirmed queer
+  characters. Repeated title-and-year pairs in the source list are
+  consolidated; releases with the same title in different years remain
+  distinct historical entries.
 - `pressq_seed_dataset.csv` records identifiable characters and their coded
   gender, sexuality, narrative role, evidence, and intersectional context.
 - `game_queer_systems.csv` records game-level affordances: character creation,
@@ -13,7 +19,11 @@ canonical character identity.
   related systems.
 - `queer_readings.csv` records critical and audience interpretations that are
   documented as queerly read, contested, or creator-refuted. These rows preserve
-  reception history without turning speculation into canonical identity.
+reception history without turning speculation into canonical identity.
+
+The Rainbow Road compares the game inventory with verified character records.
+The two totals remain separate: the presence of a game in the source catalog
+does not establish the identity of any particular character.
 
 One system affordance occupies one row. A customizable avatar is not entered as
 a canonical character unless the game provides an identifiable character whose
@@ -101,6 +111,33 @@ presenting different kinds of evidence as equivalent.
 6. **Review and revise.** Internal review checks required fields and consistency,
    but reviewed records remain correctable as new sources, translations,
    releases, or community knowledge become available.
+
+### LGBTQ Video Game Archive link audit
+
+The archive catalog is also checked for reference links within each game's
+“LGBTQ References” section. `lgbtq_archive_link_audit.csv` preserves the parent
+game, linked page, archive categories, excerpt, and current Press Q disposition.
+This is an audit trail and candidate queue, not a character count.
+
+- Direct character pages with an explicit identity category can enter
+  `pressq_seed_dataset.csv` as confirmed when the page text does not materially
+  contradict that classification.
+- Categories explicitly marked implicit enter as ambiguous, medium-confidence,
+  and not explicit in game. An implicit alternative never overrides an
+  explicit identity; it remains visible in the evidence notes.
+- Optional romance pages do not assign one fixed orientation to every possible
+  partner. They remain player-defined or ambiguous unless independent evidence
+  establishes the character's identity.
+- Pages about mechanics, ambient references, stereotypes, groups, creators, or
+  critical interpretation are routed to the appropriate system, queer-reading,
+  or pending-review unit instead of becoming confirmed characters.
+- Linked pages without sufficient identity evidence and games without a usable
+  character link remain in the audit queue for later verification. Their
+  presence never contributes to confirmed-character analytics.
+
+`lgbtq_archive_character_import_preview.csv` records the rows that pass these
+rules before import. `lgbtq_archive_character_import_skipped.csv` preserves
+excluded or unresolved candidates and the reason for each decision.
 
 ## Cross-source reconciliation
 

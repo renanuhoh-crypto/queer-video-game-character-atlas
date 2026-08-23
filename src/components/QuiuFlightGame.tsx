@@ -1,6 +1,7 @@
 "use client";
 
-import type { FormEvent } from "react";
+import Image from "next/image";
+import type { FormEvent, PointerEvent as ReactPointerEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Status = "ready" | "playing" | "gameover";
@@ -169,6 +170,20 @@ export default function QuiuFlightGame() {
   }, [shoot]);
 
   const hold = (key: keyof typeof keys.current, value: boolean) => { keys.current[key] = value; if (key === "fire" && value) shoot(); };
+  const beginHold = (event: ReactPointerEvent<HTMLButtonElement>, key: keyof typeof keys.current) => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    hold(key, true);
+  };
+  const endHold = (event: ReactPointerEvent<HTMLButtonElement>, key: keyof typeof keys.current) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    hold(key, false);
+  };
   const saveScore = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = playerName.trim();
@@ -218,14 +233,20 @@ export default function QuiuFlightGame() {
           aria-hidden="true"
         />
       </div>
-      <div className="quiu-ride-pad">{(["left", "right"] as const).map((key) => <button key={key} aria-label={`Move ${key}`} onPointerDown={() => hold(key, true)} onPointerUp={() => hold(key, false)}>{key === "left" ? "←" : "→"}</button>)}</div>
-      <button className="quiu-ride-fire" onPointerDown={() => hold("fire", true)} onPointerUp={() => hold("fire", false)} aria-label="Fire rainbow hearts">♥<small>Fire</small></button>
+      <div className="quiu-ride-pad">{(["left", "right"] as const).map((key) => <button type="button" key={key} aria-label={`Move ${key}`} onPointerDown={(event) => beginHold(event, key)} onPointerUp={(event) => endHold(event, key)} onPointerCancel={(event) => endHold(event, key)} onLostPointerCapture={() => hold(key, false)}><span aria-hidden="true">{key === "left" ? "←" : "→"}</span><small>{key}</small></button>)}</div>
+      <button type="button" className="quiu-ride-fire" onPointerDown={(event) => beginHold(event, "fire")} onPointerUp={(event) => endHold(event, "fire")} onPointerCancel={(event) => endHold(event, "fire")} onLostPointerCapture={() => hold("fire", false)} aria-label="Fire rainbow hearts"><span aria-hidden="true">♥</span><small>Fire</small></button>
       <button className="quiu-ride-sound" type="button" onPointerDown={(event)=>event.stopPropagation()} onClick={() => { const next=!soundOn; setSoundOn(next); soundEnabled.current=next; if(next){ audio.current ??= new AudioContext(); void audio.current.resume(); playTone(540,.14); } }}>Sound: {soundOn ? "on" : "off"}</button>
       {view.levelFlash > 0 ? <div className="quiu-ride-level-up" role="status"><small>Trump Boss defeated</small><strong>Level {Math.floor((view.wave - 1) / 5) + 1}</strong><span>Stronger waves incoming</span></div> : null}
-      {view.status !== "playing" ? <div className="quiu-ride-overlay"><h2>QUIU<br/><span>ULTIMATE RIDE</span></h2><p>{view.status === "gameover" ? `Signal lost · Score ${view.score}` : "Defend queer stories through escalating waves of censorship, erasure, and harassment."}</p>
+      {view.status !== "playing" ? <div className="quiu-ride-overlay"><Image className="quiu-ride-logo" src="/quiu-ultimate-ride-logo.png" alt="Quiu Ultimate Ride" width={1664} height={936} priority sizes="(max-width: 640px) 92vw, 50rem"/><p>{view.status === "gameover" ? `Signal lost · Score ${view.score}` : "Defend queer stories through escalating waves of censorship, erasure, and harassment."}</p>
         {view.status === "gameover" ? <><form className="quiu-ride-score-form" onSubmit={saveScore}><input value={playerName} onChange={(event) => { setPlayerName(event.target.value); setScoreSaved(false); }} maxLength={18} placeholder="Your name" required/><button type="submit">{scoreSaved ? "Saved" : "Save score"}</button></form><ol className="quiu-ride-leaderboard">{scores.map((entry,index)=><li key={entry.name.toLowerCase()}><span>{index+1}. {entry.name}</span><strong>{entry.score}</strong></li>)}</ol></> : null}
         <button type="button" onClick={start}>{view.status === "gameover" ? "Try again" : "Play game"}</button></div> : null}
-    </div>
+      </div>
+    {view.status === "playing" ? <div className="quiu-ride-mobile-controls" aria-label="Mobile game controls" onContextMenu={(event) => event.preventDefault()}>
+      <div className="quiu-ride-mobile-directions">
+        {(["left", "right"] as const).map((key) => <button type="button" key={key} aria-label={`Move ${key}`} onPointerDown={(event) => beginHold(event, key)} onPointerUp={(event) => endHold(event, key)} onPointerCancel={(event) => endHold(event, key)} onLostPointerCapture={() => hold(key, false)}><span aria-hidden="true">{key === "left" ? "←" : "→"}</span><small>{key}</small></button>)}
+      </div>
+      <button type="button" className="quiu-ride-mobile-fire" aria-label="Fire rainbow hearts" onPointerDown={(event) => beginHold(event, "fire")} onPointerUp={(event) => endHold(event, "fire")} onPointerCancel={(event) => endHold(event, "fire")} onLostPointerCapture={() => hold("fire", false)}><span aria-hidden="true">♥</span><small>Fire</small></button>
+    </div> : null}
     <p className="quiu-ride-help">A/D or ←/→ moves · Mouse click or Space fires Quiu’s heart cannon · Super Q = 8s automatic triple fire</p>
   </section>;
 }

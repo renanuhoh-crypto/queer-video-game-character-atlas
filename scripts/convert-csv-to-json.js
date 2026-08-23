@@ -1,29 +1,10 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require("fs");
 const path = require("path");
+const Papa = require("papaparse");
 
 const inputPath = path.join(__dirname, "../src/data/pressq_seed_dataset.csv");
 const outputPath = path.join(__dirname, "../src/data/characters.json");
-
-function splitCSVLine(line) {
-  const result = [];
-  let current = "";
-  let insideQuotes = false;
-
-  for (let char of line) {
-    if (char === '"') {
-      insideQuotes = !insideQuotes;
-    } else if (char === "," && !insideQuotes) {
-      result.push(current.trim());
-      current = "";
-    } else {
-      current += char;
-    }
-  }
-
-  result.push(current.trim());
-  return result;
-}
 
 function toArray(value) {
   if (!value) return [];
@@ -41,31 +22,36 @@ function toNumber(value) {
 }
 
 const csv = fs.readFileSync(inputPath, "utf8");
-const lines = csv.trim().split(/\r?\n/);
+const parsed = Papa.parse(csv, {
+  header: true,
+  skipEmptyLines: true,
+});
 
-const headers = splitCSVLine(lines[0]);
+if (parsed.errors.length) {
+  throw new Error(`Could not parse character CSV: ${parsed.errors[0].message}`);
+}
 
-const characters = lines.slice(1).map((line) => {
-  const values = splitCSVLine(line);
-  const row = {};
-
-  headers.forEach((header, index) => {
-    row[header] = values[index] || "";
-  });
+const characters = parsed.data.map((row) => {
+  const identityLabels = [
+    ...toArray(row.gender),
+    ...toArray(row.sexuality),
+  ].filter((value) => value && value !== "not_recorded");
 
   return {
+    ...row,
     character_id: row.character_id,
     character_name: row.character_name,
     game_title: row.game_title,
     release_year: toNumber(row.release_year),
     developer: row.developer,
+    publisher: row.publisher,
     game_scale: row.game_scale,
     genre: row.genre,
     narrative_role: row.narrative_role,
     playable: row.playable_status === "playable",
     playable_status: row.playable_status,
 
-    identity_label: toArray(row.identity_label),
+    identity_label: identityLabels,
     identity_category: toArray(row.identity_category),
     identity_confirmation: row.identity_confirmation,
     queer_status: row.queer_status,

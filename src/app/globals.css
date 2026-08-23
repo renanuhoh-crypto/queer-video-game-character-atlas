@@ -4897,9 +4897,15 @@ textarea {
 
 .rainbow-road-card { margin-top: 2.5rem; border: 1px solid rgba(131,233,245,.26); border-radius: 2rem; padding: clamp(1.4rem,4vw,2.5rem); background: rgba(8,13,49,.72); backdrop-filter: blur(14px); }
 .rainbow-road-card h2 { margin-top: .55rem; font-size: clamp(1.5rem,4vw,2.5rem); font-weight: 1000; font-style: italic; }
+.rainbow-road-card h3 { margin-top: 2rem; color: #83e9f5; font-size: .8rem; font-weight: 1000; letter-spacing: .12em; text-transform: uppercase; }
 .rainbow-road-card ul { display: grid; grid-template-columns: repeat(auto-fit,minmax(13rem,1fr)); gap: .75rem; margin-top: 1.5rem; }
 .rainbow-road-card li { display: flex; flex-direction: column; border-left: 3px solid #ff7ca4; padding: .65rem .8rem; background: rgba(255,255,255,.045); }
 .rainbow-road-card li span { margin-top: .2rem; color: #aeb6db; font-size: .78rem; }
+.rainbow-road-card li a { font-weight: 850; text-decoration: none; }
+.rainbow-road-card li a:hover { color: #ffde59; text-decoration: underline; }
+.rainbow-road-game-list li { border-left-color: #83e9f5; }
+.rainbow-road-empty, .rainbow-road-more { margin-top: 1rem; color: #aeb6db; font-size: .88rem; }
+.rainbow-road-more { color: #ffde59; font-weight: 850; }
 .rainbow-road-loading { padding-block: 12rem; text-align: center; font-weight: 900; }
 .rainbow-road-note { max-width: 70rem; margin: 0 auto; padding: 3rem clamp(1rem,5vw,4rem); color: #adb5db; line-height: 1.7; }
 .rainbow-road-note strong { color: #83e9f5; }
@@ -4989,14 +4995,16 @@ textarea {
 .quiu-ride-trump-face i:first-child { left:10px; }.quiu-ride-trump-face i:nth-child(2) { right:10px; }
 .quiu-ride-trump-face em { position:absolute; right:15px; bottom:10px; width:18px; height:5px; border-radius:50%; border-bottom:3px solid #9e3f37; }
 .quiu-ride-pad { position:absolute; z-index:40; bottom:1.2rem; left:1.2rem; display:flex; gap:.45rem; }
-.quiu-ride-pad button { width:42px; height:42px; border:1px solid rgba(131,233,245,.4); border-radius:50%; background:rgba(7,30,48,.72); color:#83e9f5; font-size:1.1rem; }
+.quiu-ride-pad button { display:grid; width:48px; height:48px; place-items:center; border:1px solid rgba(131,233,245,.4); border-radius:50%; background:rgba(7,30,48,.72); color:#83e9f5; font-size:1.1rem; }
+.quiu-ride-pad button small { display:block; margin-top:-10px; font-size:.38rem; font-weight:1000; letter-spacing:.08em; text-transform:uppercase; }
+.quiu-ride-pad button,.quiu-ride-fire,.quiu-ride-mobile-controls button { -webkit-tap-highlight-color:transparent; -webkit-touch-callout:none; touch-action:none; user-select:none; }
+.quiu-ride-pad button:active,.quiu-ride-fire:active,.quiu-ride-mobile-controls button:active { filter:brightness(1.4); transform:scale(.94); }
 .quiu-ride-fire { position:absolute; z-index:40; right:2rem; bottom:2rem; display:grid; width:78px; height:78px; place-items:center; border:3px solid rgba(255,71,126,.65); border-radius:50%; background:rgba(255,30,93,.14); color:#ff477e; font-size:1.7rem; box-shadow:0 0 26px rgba(255,71,126,.4); }
 .quiu-ride-sound { position:absolute; z-index:41; right:1rem; top:5.5rem; border:1px solid rgba(131,233,245,.3); border-radius:.25rem; padding:.42rem .7rem; background:rgba(2,5,18,.58); color:#83e9f5; font:900 .58rem ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase; }
 .quiu-ride-fire small { display:block; margin-top:-18px; font-size:.5rem; font-weight:1000; letter-spacing:.12em; text-transform:uppercase; }
-.quiu-ride-overlay { position:absolute; z-index:45; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; background:rgba(0,2,12,.84); text-align:center; backdrop-filter:blur(8px); }
-.quiu-ride-overlay h2 { color:white; font-size:clamp(2.7rem,8vw,5.5rem); font-weight:1000; font-style:italic; letter-spacing:-.06em; line-height:.72; text-shadow:3px 3px #00eaff,-3px -3px #ff47e6; }
-.quiu-ride-overlay h2 span { color:#ff47e6; font-size:.43em; letter-spacing:.03em; text-shadow:none; }
-.quiu-ride-overlay p { max-width:32rem; margin-top:1.6rem; color:#bfc7e9; line-height:1.6; }
+.quiu-ride-overlay { position:absolute; z-index:45; inset:0; display:flex; overflow-y:auto; flex-direction:column; align-items:center; justify-content:center; padding:2rem; background:rgba(0,2,12,.84); text-align:center; backdrop-filter:blur(8px); }
+.quiu-ride-logo { width:min(82%,46rem); height:auto; max-height:42%; object-fit:contain; filter:drop-shadow(0 0 22px rgba(255,35,204,.32)); }
+.quiu-ride-overlay p { max-width:32rem; margin-top:.75rem; color:#bfc7e9; line-height:1.6; }
 .quiu-ride-overlay button { margin-top:1.4rem; border:2px solid #83e9f5; border-radius:.2rem; padding:.8rem 2rem; color:#83e9f5; font-size:.85rem; font-weight:1000; letter-spacing:.12em; text-transform:uppercase; box-shadow:0 0 16px rgba(131,233,245,.45); }
 .quiu-ride-level-up { position:absolute; z-index:44; top:50%; left:50%; display:flex; width:min(86%,30rem); flex-direction:column; align-items:center; border:1px solid rgba(131,233,245,.65); padding:1.4rem; background:rgba(6,10,42,.88); text-align:center; box-shadow:-7px 7px rgba(255,71,126,.2),7px -7px rgba(131,233,245,.18),0 25px 60px rgba(0,0,0,.45); transform:translate(-50%,-50%); animation:quiu-ride-level-enter .35s ease-out; }
 .quiu-ride-level-up small,.quiu-ride-level-up span { color:#83e9f5; font:900 .62rem ui-monospace,monospace; letter-spacing:.16em; text-transform:uppercase; }
@@ -5008,6 +5016,7 @@ textarea {
 .quiu-ride-leaderboard li { display:flex; justify-content:space-between; gap:1rem; padding:.28rem 0; color:#cbd1ee; font-size:.75rem; }
 .quiu-ride-leaderboard strong { color:#ffde59; }
 .quiu-ride-game.is-hit { animation:quiu-ride-hit .18s steps(2) 2; }
+.quiu-ride-mobile-controls { display:none; }
 .quiu-ride-help { padding:.8rem .5rem 0; color:rgba(255,255,255,.58); font-size:.7rem; font-weight:800; letter-spacing:.08em; text-align:center; text-transform:uppercase; }
 @keyframes quiu-ride-stars { to { transform:translateY(33.333%); } }
 @keyframes quiu-ride-drift { to { translate:15% 8%; rotate:8deg; } }
@@ -5024,5 +5033,24 @@ textarea {
 @keyframes quiu-shot-tile { 0%,32% { background-position:0 center; } 33%,65% { background-position:50% center; } 66%,100% { background-position:100% center; } }
 @keyframes quiu-enemy-destroyed { 0%,30% { background-position:0 center; transform:translate(-50%,-50%) scale(.72); } 31%,64% { background-position:50% center; transform:translate(-50%,-50%) scale(.9); } 65%,100% { background-position:100% center; transform:translate(-50%,-50%) scale(1.16); opacity:0; } }
 @keyframes quiu-ride-hit { 50% { transform:translateX(5px); filter:hue-rotate(120deg); } }
-@media(max-width:640px){.quiu-ride-shell{padding:.65rem;border-radius:1.7rem}.quiu-ride-game{min-height:540px;aspect-ratio:3/4;border-radius:1.2rem}.quiu-ride-hud{inset:.7rem .5rem auto}.quiu-ride-hud small{font-size:.47rem}.quiu-ride-hud strong{font-size:.85rem}.quiu-ride-pad{left:.55rem;bottom:.55rem}.quiu-ride-fire{right:1rem;bottom:1.2rem}}
+@media(max-width:800px),(hover:none) and (pointer:coarse){
+  .quiu-ride-pad,.quiu-ride-fire{display:none}
+  .quiu-ride-mobile-controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem .35rem max(.35rem,env(safe-area-inset-bottom))}
+  .quiu-ride-mobile-directions{display:flex;gap:.7rem}
+  .quiu-ride-mobile-controls button{display:grid;width:68px;height:68px;place-items:center;border:2px solid rgba(131,233,245,.62);border-radius:50%;background:linear-gradient(160deg,rgba(13,34,67,.96),rgba(5,11,35,.96));color:#83e9f5;box-shadow:0 0 18px rgba(131,233,245,.22);font-size:1.5rem}
+  .quiu-ride-mobile-controls button small{display:block;margin-top:-14px;font-size:.48rem;font-weight:1000;letter-spacing:.12em;text-transform:uppercase}
+  .quiu-ride-mobile-controls .quiu-ride-mobile-fire{width:82px;height:82px;border-color:rgba(255,71,126,.78);background:linear-gradient(160deg,rgba(104,12,57,.96),rgba(27,4,32,.96));color:#ff6da2;box-shadow:0 0 22px rgba(255,71,126,.3);font-size:1.9rem}
+  .quiu-ride-help{padding-top:.3rem}
+}
+@media(max-width:640px){
+  .quiu-ride-shell{padding:.65rem;border-radius:1.7rem}
+  .quiu-ride-game{width:100%;min-width:0;min-height:540px;aspect-ratio:auto;border-radius:1.2rem}
+  .quiu-ride-hud{inset:.7rem .5rem auto}
+  .quiu-ride-hud small{font-size:.47rem}
+  .quiu-ride-hud strong{font-size:.85rem}
+  .quiu-ride-overlay{justify-content:flex-start;padding:1rem}
+  .quiu-ride-logo{width:100%;max-height:34%}
+  .quiu-ride-overlay p{margin-top:.35rem;font-size:.85rem;line-height:1.45}
+  .quiu-ride-overlay button{margin-top:1rem}
+}
 @media(prefers-reduced-motion:reduce){.quiu-ride-stars,.quiu-ride-game.is-hit,.quiu-ride-aurora,.quiu-ride-cloud,.quiu-ride-power.is-super,.quiu-ride-rainbow-aura,.quiu-ride-heart-cannon,.quiu-ride-galaxy,.quiu-ride-planet,.quiu-ride-meteors i,.quiu-ride-level-up{animation:none}}
