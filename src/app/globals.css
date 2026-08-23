@@ -4920,8 +4920,24 @@ textarea {
 }
 /* Quiu Ultimate Ride — vertical arcade shooter */
 .quiu-ride-shell { border: 1px solid rgba(255,255,255,.14); border-radius: 2.5rem; padding: 1rem; background: rgba(8,12,42,.36); box-shadow: 0 30px 90px rgba(8,11,43,.3); }
-.quiu-ride-game { position: relative; min-height: 620px; aspect-ratio: 4/3; overflow: hidden; border: 1px solid rgba(131,233,245,.22); border-radius: 1.8rem; background: radial-gradient(circle at 50% 80%,rgba(118,78,255,.25),transparent 35%),#020512; touch-action: none; }
-.quiu-ride-stars { position:absolute; inset:-50% 0 0; background-image: linear-gradient(90deg,transparent 49.8%,rgba(131,233,245,.12) 50%,transparent 50.2%),radial-gradient(circle,#fff 0 1px,transparent 1.5px); background-size: 70px 70px,34px 34px; animation: quiu-ride-stars 3s linear infinite; }
+.quiu-ride-game { position: relative; min-height: 620px; aspect-ratio: 4/3; overflow: hidden; border: 1px solid rgba(131,233,245,.22); border-radius: 1.8rem; background:#020512; touch-action: none; }
+.quiu-ride-stars { position:absolute; inset:-50% 0 0; opacity:.64; background-image:radial-gradient(circle at center,#fff 0 1px,transparent 1.6px),radial-gradient(circle at center,#83e9f5 0 1px,transparent 1.8px); background-position:0 0,71px 43px; background-size:96px 96px,143px 143px; animation: quiu-ride-stars 5s linear infinite; }
+.quiu-ride-galaxy { position:absolute; inset:-10%; background-image:linear-gradient(rgba(2,5,18,.08),rgba(2,5,18,.2)),url("/quiu-galaxy-background.png"); background-position:center; background-size:cover; filter:saturate(1.08) contrast(1.06); transform:scale(1.12); animation:quiu-ride-galaxy 26s ease-in-out infinite alternate; }
+.quiu-ride-planet { position:absolute; z-index:2; border-radius:50%; pointer-events:none; box-shadow:inset -18px -15px 30px rgba(3,5,25,.55),0 0 28px rgba(131,233,245,.12); animation:quiu-ride-planet-drift 13s ease-in-out infinite alternate; }
+.quiu-ride-planet--one { top:18%; right:-4%; width:clamp(78px,14%,130px); aspect-ratio:1; background:linear-gradient(145deg,#83e9f5,#765cff 58%,#25275f); }
+.quiu-ride-planet--one i { position:absolute; top:44%; left:-28%; width:155%; height:18%; border:3px solid rgba(255,222,89,.48); border-radius:50%; transform:rotate(-18deg); }
+.quiu-ride-planet--two { top:52%; left:5%; width:clamp(34px,6%,58px); aspect-ratio:1; opacity:.55; background:linear-gradient(145deg,#ffde59,#ff477e); animation-duration:18s; animation-delay:-6s; }
+.quiu-ride-planet--three { top:72%; right:22%; width:clamp(24px,4%,42px); aspect-ratio:1; opacity:.42; background:linear-gradient(145deg,#61ff83,#176bad); animation-duration:22s; animation-delay:-11s; }
+.quiu-ride-meteors { position:absolute; z-index:4; inset:0; overflow:hidden; pointer-events:none; }
+.quiu-ride-meteors i { position:absolute; top:-12%; left:18%; width:2px; height:72px; background:linear-gradient(transparent,#fff,#83e9f5); transform:rotate(-42deg); filter:drop-shadow(0 0 5px #83e9f5); animation:quiu-ride-meteor 5.5s linear infinite; }
+.quiu-ride-meteors i:nth-child(2) { left:57%; animation-delay:-2.2s; animation-duration:7s; }
+.quiu-ride-meteors i:nth-child(3) { left:84%; animation-delay:-4.1s; animation-duration:6.2s; }
+.quiu-ride-aurora { position:absolute; z-index:1; width:70%; height:45%; border-radius:50%; filter:blur(48px); opacity:.2; animation:quiu-ride-drift 8s ease-in-out infinite alternate; }
+.quiu-ride-aurora--one { top:12%; left:-18%; background:linear-gradient(90deg,#00eaff,#765cff); transform:rotate(18deg); }
+.quiu-ride-aurora--two { top:38%; right:-20%; background:linear-gradient(90deg,#ff477e,#ffde59); animation-delay:-4s; }
+.quiu-ride-cloud { position:absolute; z-index:2; width:190px; height:65px; border-radius:50%; opacity:.15; background:radial-gradient(ellipse at 20% 70%,#fff 0 28%,transparent 30%),radial-gradient(ellipse at 48% 45%,#fff 0 38%,transparent 40%),radial-gradient(ellipse at 78% 72%,#fff 0 30%,transparent 32%); animation:quiu-ride-clouds 14s linear infinite; }
+.quiu-ride-cloud--one { top:28%; left:-210px; }
+.quiu-ride-cloud--two { top:57%; left:-210px; animation-delay:-7s; animation-duration:19s; transform:scale(.72); }
 .quiu-ride-crt { position:absolute; z-index:50; inset:0; pointer-events:none; background:radial-gradient(circle,transparent 48%,rgba(0,0,0,.7)),repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.18) 3px); }
 .quiu-ride-hud { position:absolute; z-index:30; inset:1rem 1rem auto; display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; }
 .quiu-ride-hud div { text-align:center; text-shadow:0 0 10px #08e8ff; }
@@ -4930,30 +4946,83 @@ textarea {
 .quiu-ride-boss { position:absolute; z-index:31; top:4.8rem; left:15%; width:70%; height:.55rem; border:1px solid #ff477e; background:rgba(255,71,126,.15); box-shadow:0 0 15px #ff477e; }
 .quiu-ride-boss span { display:block; height:100%; background:#ff477e; transition:width .12s; }
 .quiu-ride-player,.quiu-ride-enemy,.quiu-ride-shot,.quiu-ride-power { position:absolute; z-index:15; transform:translate(-50%,-50%); }
-.quiu-ride-player { width:clamp(54px,10%,84px); filter:drop-shadow(0 0 18px #83e9f5); transition:filter .12s; }
-.quiu-ride-player img { width:100%; height:auto; }
-.quiu-ride-player.is-powered { filter:drop-shadow(0 0 26px #ff47e6) drop-shadow(0 0 10px #83e9f5); }
-.quiu-ride-enemy { display:grid; width:52px; height:42px; place-items:center; border:2px solid #ff477e; clip-path:polygon(14% 0,86% 0,100% 72%,70% 100%,30% 100%,0 72%); background:#2b0924; box-shadow:0 0 16px rgba(255,71,126,.7); }
-.quiu-ride-enemy span { font:900 .48rem ui-monospace,monospace; color:#fff; }
-.quiu-ride-enemy i { position:absolute; bottom:-7px; width:16px; height:10px; background:#ff477e; filter:blur(4px); }
-.quiu-ride-enemy.is-boss { width:clamp(110px,20%,170px); height:78px; border-width:4px; box-shadow:0 0 35px #ff204e; }
+.quiu-ride-player { width:clamp(150px,21%,200px); transition:filter .12s; }
+.quiu-ride-player-sprite { display:block; width:100%; aspect-ratio:1; background-position:center; background-repeat:no-repeat; background-size:contain; filter:drop-shadow(0 0 7px rgba(0,234,255,.38)); }
+.quiu-ride-player.is-powered { filter:drop-shadow(0 0 8px rgba(131,233,245,.72)); }
+.quiu-ride-rainbow-aura { position:absolute; z-index:-1; inset:-8%; border-radius:50%; background:conic-gradient(from 0deg,#ff477e,#ffde59,#61ff83,#00eaff,#765cff,#ff47e6,#ff477e); box-shadow:0 0 9px rgba(131,233,245,.46); mask:radial-gradient(circle,transparent 0 68%,#000 70% 100%); animation:quiu-ride-q-spin 3s linear infinite; }
+.quiu-ride-heart-cannon { position:absolute; z-index:3; top:-22px; left:50%; display:grid; width:40px; height:45px; place-items:center; border:2px solid rgba(255,255,255,.75); border-radius:999px 999px 45% 45%; background:rgba(7,10,35,.2); color:#ff477e; box-shadow:0 0 9px rgba(131,233,245,.6); transform:translateX(-50%); backdrop-filter:blur(2px); }
+.quiu-ride-heart-cannon::after { position:absolute; top:-9px; width:14px; height:16px; border-radius:4px 4px 0 0; background:linear-gradient(#83e9f5,#765cff); content:""; box-shadow:0 0 12px #83e9f5; }
+.quiu-ride-heart-cannon i { position:relative; z-index:2; font-size:.7rem; font-style:normal; font-weight:1000; }
+.quiu-ride-player.is-powered .quiu-ride-heart-cannon { color:#fff; background:linear-gradient(160deg,#ff47e6,#765cff); animation:quiu-ride-cannon-pulse .35s ease-in-out infinite alternate; }
+.quiu-ride-enemy { display:grid; width:clamp(56px,7%,74px); aspect-ratio:1; place-items:center; }
+.quiu-ride-enemy span { position:absolute; z-index:2; bottom:-.7rem; padding:.12rem .3rem; border-radius:.2rem; background:rgba(18,2,15,.7); color:#ffd8e7; font:900 .42rem ui-monospace,monospace; letter-spacing:.05em; }
+.quiu-ride-enemy-sprite { position:absolute; inset:-18%; display:block; background-position:center; background-repeat:no-repeat; background-size:contain; filter:drop-shadow(0 0 8px rgba(255,40,96,.7)); }
+.quiu-ride-enemy.is-boss { width:clamp(150px,23%,215px); aspect-ratio:358/533; }
+.quiu-ride-boss-sprite { position:absolute; inset:0; display:block; background-image:url("/trump-boss-sprite-sheet.png"); background-repeat:no-repeat; background-size:400% 200%; filter:drop-shadow(0 0 16px rgba(255,48,59,.8)); }
 .quiu-ride-shot { color:#83e9f5; font-size:1rem; font-style:normal; text-shadow:0 0 12px #83e9f5; }
+.quiu-ride-shot.is-quiu-shot { width:46px; height:46px; background-image:url("/quiu-shot-sprite.png"); background-repeat:no-repeat; background-position:0 center; background-size:300% 100%; filter:drop-shadow(0 0 5px rgba(0,234,255,.72)); transform:translate(-50%,-50%) rotate(-90deg); animation:quiu-shot-tile .24s steps(1,end) infinite; }
 .quiu-ride-shot.is-enemy { color:#ff354f; text-shadow:0 0 12px #ff354f; }
+.quiu-ride-shot.is-ammo-1,.quiu-ride-shot.is-ammo-2 { width:clamp(25px,4vw,38px); aspect-ratio:1; background-position:center; background-repeat:no-repeat; background-size:contain; filter:drop-shadow(0 0 8px rgba(255,35,72,.85)); }
+.quiu-ride-shot.is-ammo-1 { background-image:url("/enemy1-ammo-1.png"); }
+.quiu-ride-shot.is-ammo-2 { width:clamp(31px,5vw,46px); background-image:url("/enemy1-ammo-2.png"); }
+.quiu-ride-shot.is-fireball { z-index:24; display:grid; width:clamp(38px,6vw,64px); aspect-ratio:1; place-items:center; border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff 0 5%,#ffde59 14%,#ff6b27 43%,#a60031 72%); color:#fff; font-size:.4rem; box-shadow:0 0 12px #ffde59,0 0 28px #ff4726,0 -18px 32px rgba(255,55,30,.55); animation:quiu-ride-fireball .35s ease-in-out infinite alternate; }
 .quiu-ride-power { display:grid; width:34px; height:34px; place-items:center; border:2px solid currentColor; border-radius:50%; background:#050817; color:#61ff83; font-weight:1000; box-shadow:0 0 18px currentColor; }
-.quiu-ride-power.is-multi { color:#ff47e6; }
-.quiu-ride-pad { position:absolute; z-index:40; bottom:1.2rem; left:1.2rem; display:grid; grid-template-columns:repeat(3,42px); grid-template-areas:". up ." "left down right"; gap:3px; }
+.quiu-ride-power.is-super { width:42px; height:42px; color:#ff47e6; font-size:.72rem; animation:quiu-ride-super 1s ease-in-out infinite alternate; }
+.quiu-ride-power > i { font-style:normal; font-weight:1000; }
+.quiu-ride-power > strong,.quiu-ride-power > small { position:absolute; left:50%; width:max-content; transform:translateX(-50%); text-shadow:0 1px 5px #020512; }
+.quiu-ride-power > strong { top:45px; color:#fff; font-size:.55rem; }
+.quiu-ride-power > small { top:57px; color:#ff9ae9; font-size:.42rem; font-weight:900; }
+.quiu-ride-shield strong { color:transparent; background:linear-gradient(90deg,#ff477e,#ffde59,#61ff83,#83e9f5,#a99ff4); background-clip:text; }
+.quiu-ride-shield > i { display:block; width:70%; height:3px; margin:.2rem auto 0; overflow:hidden; border-radius:999px; background:rgba(255,255,255,.12); }
+.quiu-ride-shield > i span { display:block; height:100%; background:linear-gradient(90deg,#ff477e,#ffde59,#61ff83,#83e9f5,#a99ff4); transition:width .2s; }
+.quiu-ride-impact-star { position:absolute; z-index:25; color:#fff; font-size:1.1rem; font-style:normal; pointer-events:none; text-shadow:0 0 8px #83e9f5,0 0 16px #ff47e6; transform:translate(-50%,-50%); }
+.quiu-ride-impact-star.is-trail { font-size:.8rem; color:#ffde59; text-shadow:0 0 7px #ff477e,0 0 13px #83e9f5; }
+.quiu-ride-impact-star.is-trail:nth-of-type(3n) { color:#83e9f5; }
+.quiu-ride-impact-star.is-trail:nth-of-type(4n) { color:#ff7ca4; }
+.quiu-ride-explosion { position:absolute; z-index:29; width:clamp(72px,11vw,118px); aspect-ratio:1; background-image:url("/enemy-destroyed-sprite.png"); background-repeat:no-repeat; background-position:0 center; background-size:300% 100%; filter:drop-shadow(0 0 10px rgba(255,71,230,.7)); pointer-events:none; transform:translate(-50%,-50%); animation:quiu-enemy-destroyed .58s steps(1,end) forwards; }
+.quiu-ride-explosion.is-boss { width:clamp(150px,25vw,260px); animation-duration:.9s; }
+.quiu-ride-enemy.is-hit { animation:quiu-ride-enemy-hit .22s steps(2); filter:brightness(2.3) saturate(1.6); }
+.quiu-ride-enemy.is-trump { overflow:visible; }
+.quiu-ride-trump-face { position:absolute; top:16px; display:block; width:48px; height:50px; border-radius:42% 42% 48% 48%; background:#efaa78; box-shadow:inset 0 -7px rgba(205,104,65,.2); }
+.quiu-ride-trump-face::before { position:absolute; top:-10px; left:-6px; width:55px; height:20px; border-radius:80% 30% 50% 20%; background:#f2b52c; content:""; transform:skewX(-18deg); box-shadow:8px 4px #df8f17; }
+.quiu-ride-trump-face i { position:absolute; top:21px; width:7px; height:3px; background:#233; }
+.quiu-ride-trump-face i:first-child { left:10px; }.quiu-ride-trump-face i:nth-child(2) { right:10px; }
+.quiu-ride-trump-face em { position:absolute; right:15px; bottom:10px; width:18px; height:5px; border-radius:50%; border-bottom:3px solid #9e3f37; }
+.quiu-ride-pad { position:absolute; z-index:40; bottom:1.2rem; left:1.2rem; display:flex; gap:.45rem; }
 .quiu-ride-pad button { width:42px; height:42px; border:1px solid rgba(131,233,245,.4); border-radius:50%; background:rgba(7,30,48,.72); color:#83e9f5; font-size:1.1rem; }
-.quiu-ride-pad button:nth-child(1){grid-area:up}.quiu-ride-pad button:nth-child(2){grid-area:left}.quiu-ride-pad button:nth-child(3){grid-area:down}.quiu-ride-pad button:nth-child(4){grid-area:right}
 .quiu-ride-fire { position:absolute; z-index:40; right:2rem; bottom:2rem; display:grid; width:78px; height:78px; place-items:center; border:3px solid rgba(255,71,126,.65); border-radius:50%; background:rgba(255,30,93,.14); color:#ff477e; font-size:1.7rem; box-shadow:0 0 26px rgba(255,71,126,.4); }
+.quiu-ride-sound { position:absolute; z-index:41; right:1rem; top:5.5rem; border:1px solid rgba(131,233,245,.3); border-radius:.25rem; padding:.42rem .7rem; background:rgba(2,5,18,.58); color:#83e9f5; font:900 .58rem ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase; }
 .quiu-ride-fire small { display:block; margin-top:-18px; font-size:.5rem; font-weight:1000; letter-spacing:.12em; text-transform:uppercase; }
 .quiu-ride-overlay { position:absolute; z-index:45; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; background:rgba(0,2,12,.84); text-align:center; backdrop-filter:blur(8px); }
 .quiu-ride-overlay h2 { color:white; font-size:clamp(2.7rem,8vw,5.5rem); font-weight:1000; font-style:italic; letter-spacing:-.06em; line-height:.72; text-shadow:3px 3px #00eaff,-3px -3px #ff47e6; }
 .quiu-ride-overlay h2 span { color:#ff47e6; font-size:.43em; letter-spacing:.03em; text-shadow:none; }
 .quiu-ride-overlay p { max-width:32rem; margin-top:1.6rem; color:#bfc7e9; line-height:1.6; }
 .quiu-ride-overlay button { margin-top:1.4rem; border:2px solid #83e9f5; border-radius:.2rem; padding:.8rem 2rem; color:#83e9f5; font-size:.85rem; font-weight:1000; letter-spacing:.12em; text-transform:uppercase; box-shadow:0 0 16px rgba(131,233,245,.45); }
+.quiu-ride-level-up { position:absolute; z-index:44; top:50%; left:50%; display:flex; width:min(86%,30rem); flex-direction:column; align-items:center; border:1px solid rgba(131,233,245,.65); padding:1.4rem; background:rgba(6,10,42,.88); text-align:center; box-shadow:-7px 7px rgba(255,71,126,.2),7px -7px rgba(131,233,245,.18),0 25px 60px rgba(0,0,0,.45); transform:translate(-50%,-50%); animation:quiu-ride-level-enter .35s ease-out; }
+.quiu-ride-level-up small,.quiu-ride-level-up span { color:#83e9f5; font:900 .62rem ui-monospace,monospace; letter-spacing:.16em; text-transform:uppercase; }
+.quiu-ride-level-up strong { margin:.4rem 0; font-size:clamp(2.5rem,8vw,5rem); font-style:italic; line-height:1; background:linear-gradient(90deg,#ff477e,#ffde59,#61ff83,#83e9f5,#a99ff4); color:transparent; background-clip:text; }
+.quiu-ride-score-form { display:flex; width:min(100%,25rem); gap:.5rem; margin-top:1.2rem; }
+.quiu-ride-score-form input { min-width:0; flex:1; border:1px solid rgba(131,233,245,.4); border-radius:.3rem; background:#090e31; padding:.75rem; color:white; }
+.quiu-ride-score-form button { flex:none; margin:0; padding:.7rem 1rem; }
+.quiu-ride-leaderboard { width:min(100%,25rem); margin-top:1rem; padding:.7rem 1rem; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04); }
+.quiu-ride-leaderboard li { display:flex; justify-content:space-between; gap:1rem; padding:.28rem 0; color:#cbd1ee; font-size:.75rem; }
+.quiu-ride-leaderboard strong { color:#ffde59; }
 .quiu-ride-game.is-hit { animation:quiu-ride-hit .18s steps(2) 2; }
 .quiu-ride-help { padding:.8rem .5rem 0; color:rgba(255,255,255,.58); font-size:.7rem; font-weight:800; letter-spacing:.08em; text-align:center; text-transform:uppercase; }
 @keyframes quiu-ride-stars { to { transform:translateY(33.333%); } }
+@keyframes quiu-ride-drift { to { translate:15% 8%; rotate:8deg; } }
+@keyframes quiu-ride-clouds { to { translate:calc(100vw + 430px) 0; } }
+@keyframes quiu-ride-super { to { transform:translate(-50%,-50%) scale(1.18) rotate(8deg); box-shadow:0 0 30px currentColor; } }
+@keyframes quiu-ride-q-spin { to { rotate:360deg; } }
+@keyframes quiu-ride-cannon-pulse { to { scale:1.13; box-shadow:0 0 28px #ff47e6; } }
+@keyframes quiu-ride-enemy-hit { 33% { transform:translate(-50%,-50%) translateX(-6px) rotate(-4deg); } 66% { transform:translate(-50%,-50%) translateX(6px) rotate(4deg); } }
+@keyframes quiu-ride-galaxy { from { transform:translate3d(-1.5%,-1%,0) scale(1.12); } to { transform:translate3d(1.5%,1%,0) scale(1.18); } }
+@keyframes quiu-ride-planet-drift { to { transform:translate3d(-18px,24px,0) rotate(8deg); } }
+@keyframes quiu-ride-meteor { 0%,64% { translate:-20vw -20vh; opacity:0; } 68% { opacity:1; } 82%,100% { translate:70vw 110vh; opacity:0; } }
+@keyframes quiu-ride-level-enter { from { opacity:0; transform:translate(-50%,-45%) scale(.88); } }
+@keyframes quiu-ride-fireball { to { scale:1.12; filter:hue-rotate(-12deg) brightness(1.18); } }
+@keyframes quiu-shot-tile { 0%,32% { background-position:0 center; } 33%,65% { background-position:50% center; } 66%,100% { background-position:100% center; } }
+@keyframes quiu-enemy-destroyed { 0%,30% { background-position:0 center; transform:translate(-50%,-50%) scale(.72); } 31%,64% { background-position:50% center; transform:translate(-50%,-50%) scale(.9); } 65%,100% { background-position:100% center; transform:translate(-50%,-50%) scale(1.16); opacity:0; } }
 @keyframes quiu-ride-hit { 50% { transform:translateX(5px); filter:hue-rotate(120deg); } }
 @media(max-width:640px){.quiu-ride-shell{padding:.65rem;border-radius:1.7rem}.quiu-ride-game{min-height:540px;aspect-ratio:3/4;border-radius:1.2rem}.quiu-ride-hud{inset:.7rem .5rem auto}.quiu-ride-hud small{font-size:.47rem}.quiu-ride-hud strong{font-size:.85rem}.quiu-ride-pad{left:.55rem;bottom:.55rem}.quiu-ride-fire{right:1rem;bottom:1.2rem}}
-@media(prefers-reduced-motion:reduce){.quiu-ride-stars,.quiu-ride-game.is-hit{animation:none}}
+@media(prefers-reduced-motion:reduce){.quiu-ride-stars,.quiu-ride-game.is-hit,.quiu-ride-aurora,.quiu-ride-cloud,.quiu-ride-power.is-super,.quiu-ride-rainbow-aura,.quiu-ride-heart-cannon,.quiu-ride-galaxy,.quiu-ride-planet,.quiu-ride-meteors i,.quiu-ride-level-up{animation:none}}
