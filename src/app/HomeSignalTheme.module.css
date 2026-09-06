@@ -296,7 +296,7 @@
   min-height: calc(max(760px, 100svh) - 112px);
   grid-template-columns: minmax(0, 1.05fr) minmax(400px, 0.95fr);
   align-items: center;
-  gap: clamp(3rem, 6vw, 7rem);
+  gap: clamp(2.5rem, 4vw, 4.5rem);
   margin: 0 auto;
   padding: clamp(4rem, 8vh, 6.8rem) 0 clamp(5.2rem, 10vh, 8rem);
 }
@@ -344,7 +344,7 @@
   padding: 0.04em 0 0.08em;
   color: var(--signal-copy);
   font-family: var(--font-airstrip-four), "Arial Black", Arial, sans-serif;
-  font-size: clamp(4.25rem, 7.4vw, 7.75rem);
+  font-size: clamp(3.75rem, 5.6vw, 5.75rem);
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 0.96;
@@ -354,6 +354,7 @@
 
 .home :global(.pressq-studio-hero h1 > span) {
   display: block;
+  white-space: nowrap;
 }
 
 .home :global(.pressq-studio-title-accent) {
@@ -1584,7 +1585,7 @@
   }
 
   .home :global(.pressq-studio-hero h1) {
-    font-size: clamp(3.15rem, 15.7vw, 5.1rem);
+    font-size: clamp(2.95rem, 12.5vw, 4.75rem);
     line-height: 0.98;
   }
 
@@ -1751,7 +1752,7 @@
 
 @media (max-width: 460px) {
   .home :global(.pressq-studio-hero h1) {
-    font-size: clamp(2.95rem, 15.3vw, 4rem);
+    font-size: clamp(2.95rem, 12.5vw, 3.6rem);
   }
 
   .home :global(.pressq-studio-hero-stats) {
@@ -1830,6 +1831,12 @@
 
   .modelFrame {
     inset-block: 34px 46px;
+  }
+}
+
+@media (min-width: 981px) {
+  .home :global(.pressq-studio-hero-inner) {
+    align-items: start;
   }
 }
 
