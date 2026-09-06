@@ -268,7 +268,7 @@ export default function Home() {
       >
         {/* SIDEBAR */}
         <aside className="lg:col-span-3">
-          <div className="pq-panel p-5 sm:p-6 lg:sticky lg:top-6">
+          <div className="pq-panel p-4 sm:p-5 lg:sticky lg:top-6">
             <h2 className="text-2xl font-black italic sm:text-3xl">Archive Tools</h2>
 
             <div className="mt-6 space-y-3">
@@ -282,14 +282,14 @@ export default function Home() {
                 <button
                   key={item}
                   onClick={() => setInput(item)}
-                  className="w-full border border-[#dfe3f3] bg-white px-4 py-4 text-left text-sm font-bold text-[#3d4361] transition hover:border-[#4f5fe7] hover:bg-[#eef0ff] sm:text-base"
+                    className="w-full border border-[#dfe3f3] bg-white px-4 py-3 text-left text-sm font-bold text-[#3d4361] transition hover:border-[#4f5fe7] hover:bg-[#eef0ff]"
                 >
                   {item}
                 </button>
               ))}
             </div>
 
-            <div className="mt-8 border border-[#ccd2f4] bg-[#eef0ff] p-5">
+            <div className="mt-6 border border-[#ccd2f4] bg-[#eef0ff] p-4">
               <p className="mb-2 text-xs font-black uppercase tracking-[0.25em] text-[#4f5fe7]">
                 Suggested Prompt
               </p>
@@ -302,7 +302,7 @@ export default function Home() {
 
             <Link
               href="/analytics"
-              className="mt-8 block border border-[#4f5fe7] bg-[#4f5fe7] p-5 text-center text-base font-black text-white transition hover:bg-[#3545d3]"
+              className="mt-6 block border border-[#4f5fe7] bg-[#4f5fe7] p-4 text-center text-sm font-black text-white transition hover:bg-[#3545d3]"
             >
               View Visual Analytics
             </Link>
@@ -348,7 +348,7 @@ export default function Home() {
                   return (
                     <div key={index} className="contents">
                       <div
-                        className={`max-w-[92%] rounded-3xl border p-5 sm:max-w-[78%] sm:p-6 ${
+                        className={`max-w-[92%] rounded-xl border p-4 sm:max-w-[78%] ${
                           message.role === "user"
                             ? "ml-auto border-[#ccd2f4] bg-[#eef0ff] text-[#12152b]"
                             : "border-[#dfe3f3] bg-white text-[#12152b]"
@@ -368,13 +368,13 @@ export default function Home() {
                             <span className="h-4 w-4 rounded-full bg-[#8192ef]" />
                           )}
 
-                          <p className="text-lg font-black italic sm:text-xl">
+                          <p className="text-base font-black italic sm:text-lg">
                             {message.role === "user" ? "You" : "Quiu"}
                           </p>
                         </div>
 
                         <div
-                          className={`whitespace-pre-wrap text-base leading-relaxed md:text-lg ${
+                          className={`whitespace-pre-wrap text-sm leading-relaxed sm:text-base ${
                             message.role === "user"
                               ? "text-[#12152b]"
                               : "text-[#39405f]"
@@ -393,7 +393,7 @@ export default function Home() {
                 })}
 
                 {loading && (
-                  <div className="quiu-thinking-card max-w-[92%] border border-[#dfe3f3] bg-white p-5 sm:max-w-[78%] sm:p-6">
+                  <div className="quiu-thinking-card max-w-[92%] border border-[#dfe3f3] bg-white p-4 sm:max-w-[78%]">
                     <div className="flex items-center gap-4 sm:gap-5">
                       <span className="quiu-thinking-avatar" aria-hidden="true">
                         <Image

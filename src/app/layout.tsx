@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteBetaNotice from "@/components/SiteBetaNotice";
 import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
+import "./signal-site-theme.css";
 
 export const metadata: Metadata = {
   applicationName: "Press Q",
@@ -53,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#f7f7fb] text-[#12152b] antialiased">
+      <body className="bg-[#030817] text-[#f5fbff] antialiased">
         <SiteBetaNotice />
         {children}
         <SiteFooter />

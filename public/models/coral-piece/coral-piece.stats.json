@@ -1,0 +1,115 @@
+{
+  "source": {
+    "archive": "coral-piece.zip",
+    "archiveBytes": 3146458,
+    "archiveSha256": "34f90492b72d6d836d746f9a13e432f1670285ceb31b5db3148f181c848b0fef",
+    "fbx": "source/coral fbx finished.fbx",
+    "fbxBytes": 261360,
+    "fbxSha256": "040daa00f66bb8ed9a78fa57f8f5e9b1cb54cf7b3332dcba6940619c9ccc454c",
+    "format": "Autodesk FBX 7.5 binary (Maya 2018 export)",
+    "orientation": {
+      "up": "+Y",
+      "front": "+Z"
+    },
+    "unitScaleFactor": 1,
+    "bounds": {
+      "min": [
+        -1.6010820865631104,
+        -0.28026267886161804,
+        -1.5270733833312988
+      ],
+      "max": [
+        1.4918224811553955,
+        3.778409957885742,
+        1.109336018562317
+      ],
+      "size": [
+        3.092904567718506,
+        4.05867263674736,
+        2.6364094018936157
+      ]
+    },
+    "animations": [],
+    "license": {
+      "status": "not-provided",
+      "files": [],
+      "publicationNote": "The archive contains no license or attribution document; confirm publication rights with the asset source."
+    }
+  },
+  "output": {
+    "file": "coral-piece.glb",
+    "bytes": 3129420,
+    "sha256": "f4d3417421e3c5e123a2022f8e1421343de8bbbc7a95c79eadcdc0bbde46a659",
+    "scale": 1,
+    "orientation": {
+      "up": "+Y",
+      "front": "+Z"
+    },
+    "origin": "centered in X/Z with the lowest vertex at Y=0",
+    "geometry": "exact source topology; lossless vertex deduplication and meshoptimizer reordering only",
+    "textures": [
+      {
+        "role": "baseColor",
+        "source": "textures/coral_fbx_lambert1_BaseColor.png",
+        "bytes": 879035,
+        "embedded": true
+      },
+      {
+        "role": "roughness",
+        "source": "textures/coral_fbx_lambert1_Roughness.png",
+        "bytes": 55390,
+        "embedded": true
+      },
+      {
+        "role": "normal",
+        "source": "textures/inverted.png",
+        "bytes": 1313188,
+        "embedded": true
+      },
+      {
+        "role": "planes",
+        "source": "textures/Planes.png",
+        "bytes": 635507,
+        "embedded": true
+      }
+    ],
+    "omittedTexture": {
+      "source": "textures/coral_fbx_lambert1_Metallic.png",
+      "reason": "Uniform black map is represented exactly by metallicFactor=0."
+    },
+    "meshes": [
+      {
+        "name": "CoralFoliageCards",
+        "sourceName": "polySurface223",
+        "sourceMaterialNames": [
+          "planes"
+        ],
+        "sourceVertices": 72,
+        "outputVertices": 48,
+        "triangles": 24
+      },
+      {
+        "name": "CoralBody",
+        "sourceName": "polySurface267",
+        "sourceMaterialNames": [
+          "lambert3"
+        ],
+        "sourceVertices": 22125,
+        "outputVertices": 6113,
+        "triangles": 7375
+      }
+    ],
+    "triangles": 7399,
+    "animations": 0
+  },
+  "validation": {
+    "valid": true,
+    "version": "2.0",
+    "scenes": 1,
+    "nodes": 3,
+    "meshes": 2,
+    "materials": 2,
+    "embeddedImages": 4,
+    "externalUris": 0
+  }
+}

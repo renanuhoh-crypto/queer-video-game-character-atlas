@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import RainbowRoadTimeline from "@/components/RainbowRoadTimeline";
+import RainbowRoadDriveGame from "@/components/RainbowRoadDriveGame";
 
 export const metadata: Metadata = {
-  title: "Rainbow Road",
-  description: "Explore the growth of documented queer video game characters across release years with Quiu.",
+  title: "Rainbow Road Wii · Quiu Explorer",
+  description: "Continue Quiu's movement-focused journey across the cosmic Rainbow Road Wii stage.",
 };
 
 export default function RainbowRoadPage() {
-  return <RainbowRoadTimeline />;
+  return <RainbowRoadDriveGame />;
 }

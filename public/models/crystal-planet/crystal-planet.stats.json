@@ -1,0 +1,2710 @@
+{
+  "source": {
+    "archive": "crystal-planet.zip",
+    "archiveBytes": 48346487,
+    "archiveSha256": "caabea4f55eb14d8453f9ede2f86108acdf5f4ebf6f0179ac7e5b622ad84ce28",
+    "fbx": "source/Crystals.fbx",
+    "fbxBytes": 8387280,
+    "fbxSha256": "5e42d08f9e28f44b8dfe9c5fd8298885c513644a9d2ae5492e749917f6a22e60",
+    "format": "Autodesk FBX 7.5 binary",
+    "orientation": {
+      "up": "+Y",
+      "front": "+Z"
+    },
+    "unitScaleFactor": 1,
+    "bounds": {
+      "min": [
+        -441.24879805852515,
+        -111.29190921783447,
+        -338.15812050270034
+      ],
+      "max": [
+        132.67568735552746,
+        368.12923874012944,
+        190.3921979394913
+      ],
+      "size": [
+        573.9244854140526,
+        479.4211479579639,
+        528.5503184421916
+      ]
+    },
+    "meshes": 104,
+    "triangles": 111998,
+    "animations": [],
+    "license": {
+      "status": "not-provided",
+      "files": [],
+      "publicationNote": "The archive contains no license or attribution document; confirm publication rights with the asset source."
+    }
+  },
+  "output": {
+    "file": "crystal-planet.glb",
+    "bytes": 10104412,
+    "sha256": "02e7dac0848aa1aa696d9ce446e86e0260b6210d4696fe9a4cd8800213c3d739",
+    "orientation": {
+      "up": "+Y",
+      "front": "+Z"
+    },
+    "origin": "centered in X/Z with the lowest source point at Y=0",
+    "geometry": "exact source topology; repeated geometry instanced; lossless vertex deduplication and meshoptimizer reordering",
+    "sourceMeshInstances": 104,
+    "uniqueMeshes": 73,
+    "triangles": 111998,
+    "animations": 0,
+    "textures": {
+      "format": "WebP",
+      "maximumSize": 1024,
+      "embedded": 36
+    }
+  },
+  "integration": {
+    "recommendedWorldScale": 0.02,
+    "scaledSize": [
+      11.478489708281051,
+      9.588422959159278,
+      10.571006368843832
+    ],
+    "placement": "Place near a stage corner/boundary, inset by at least half scaled X/Z footprint plus 1 world unit.",
+    "recommendedFormula": "x = stageBounds.max.x - scaledSize.x / 2 - 1; z = stageBounds.max.z - scaledSize.z / 2 - 1",
+    "platformMeshNames": [
+      "MainPlanet",
+      "SmallCrystalPlanet",
+      "TreePlanet",
+      "SaturnBody",
+      "SmallRocks"
+    ],
+    "collisionProxies": [
+      {
+        "name": "MainPlanetSurface",
+        "node": "MainPlanet",
+        "shape": "ellipsoid",
+        "center": [
+          154.94772348944738,
+          65.36295711994171,
+          72.62550196584397
+        ],
+        "size": [
+          264.02903843515793,
+          130.72591423988342,
+          263.69473157407606
+        ],
+        "topY": 130.72591423988342,
+        "radii": [
+          132.01451921757896,
+          65.36295711994171,
+          131.84736578703803
+        ]
+      },
+      {
+        "name": "SmallCrystalPlanetSurface",
+        "node": "SmallCrystalPlanet",
+        "shape": "ellipsoid",
+        "center": [
+          154.2865718417492,
+          241.66607493681533,
+          215.01278884115226
+        ],
+        "size": [
+          69.1651064955895,
+          69.16512807317201,
+          69.16514868598222
+        ],
+        "topY": 276.24863897340134,
+        "radii": [
+          34.58255324779475,
+          34.58256403658601,
+          34.58257434299111
+        ]
+      },
+      {
+        "name": "TreePlanetSurface",
+        "node": "TreePlanet",
+        "shape": "ellipsoid",
+        "center": [
+          -74.01281761955903,
+          147.60001286082667,
+          -41.21240117396083
+        ],
+        "size": [
+          95.687136054039,
+          98.7137429590775,
+          84.06050327590589
+        ],
+        "topY": 196.95688434036543,
+        "radii": [
+          47.8435680270195,
+          49.35687147953875,
+          42.030251637952944
+        ]
+      },
+      {
+        "name": "SaturnSurface",
+        "node": "SaturnBody",
+        "shape": "ellipsoid",
+        "center": [
+          175.83799294598296,
+          204.67853950701982,
+          -127.60465476111148
+        ],
+        "size": [
+          126.11797218344365,
+          69.16512665440749,
+          125.10938203192619
+        ],
+        "topY": 239.26110283422355,
+        "radii": [
+          63.05898609172183,
+          34.582563327203744,
+          62.554691015963094
+        ]
+      },
+      {
+        "name": "SmallRocksSurface",
+        "node": "SmallRocks",
+        "shape": "box",
+        "center": [
+          15.229497255566855,
+          158.4098935198371,
+          6.792871348769587
+        ],
+        "size": [
+          95.30383348464966,
+          59.45433799063673,
+          76.36719243658972
+        ],
+        "topY": 188.1370625151555
+      }
+    ],
+    "note": "Proxy coordinates and sizes are in model space after recentering; multiply by the root world scale and add root position."
+  },
+  "meshes": [
+    {
+      "nodeName": "Crystal_000",
+      "sourceName": "Cube",
+      "materialRole": "crystals",
+      "meshIndex": 0,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          90.98024055762059,
+          127.05842754935156,
+          48.10505517178836
+        ],
+        "max": [
+          136.384217807334,
+          154.80708566019007,
+          94.46045094721222
+        ]
+      }
+    },
+    {
+      "nodeName": "MainPlanet",
+      "sourceName": "main_planet",
+      "materialRole": "main_planet",
+      "meshIndex": 1,
+      "sourceVertices": 3132,
+      "sourceTriangles": 1044,
+      "normalizedBounds": {
+        "min": [
+          22.93320427186842,
+          0,
+          -59.22186382119408
+        ],
+        "max": [
+          286.96224270702635,
+          130.72591423988342,
+          204.472867752882
+        ]
+      }
+    },
+    {
+      "nodeName": "MainCrystal",
+      "sourceName": "main_crystal",
+      "materialRole": "main_crystal",
+      "meshIndex": 2,
+      "sourceVertices": 1500,
+      "sourceTriangles": 500,
+      "normalizedBounds": {
+        "min": [
+          143.8849895425224,
+          130.34127422998608,
+          64.79052576607425
+        ],
+        "max": [
+          171.44228320128298,
+          188.9742909044253,
+          92.27847572596079
+        ]
+      }
+    },
+    {
+      "nodeName": "SaturnBody",
+      "sourceName": "saturn",
+      "materialRole": "saturn",
+      "meshIndex": 3,
+      "sourceVertices": 2880,
+      "sourceTriangles": 960,
+      "normalizedBounds": {
+        "min": [
+          112.77900685426114,
+          170.09597617981606,
+          -190.15934577707458
+        ],
+        "max": [
+          238.8969790377048,
+          239.26110283422355,
+          -65.04996374514839
+        ]
+      }
+    },
+    {
+      "nodeName": "SaturnRing",
+      "sourceName": "saturn",
+      "materialRole": "ring_saturn",
+      "meshIndex": 4,
+      "sourceVertices": 1536,
+      "sourceTriangles": 512,
+      "normalizedBounds": {
+        "min": [
+          112.77900685426114,
+          195.4909895814993,
+          -190.15934577707458
+        ],
+        "max": [
+          238.8969790377048,
+          214.28261253118785,
+          -65.04996374514839
+        ]
+      }
+    },
+    {
+      "nodeName": "SmallCrystalPlanet",
+      "sourceName": "Sphere002",
+      "materialRole": "small_crystal_planet",
+      "meshIndex": 5,
+      "sourceVertices": 2880,
+      "sourceTriangles": 960,
+      "normalizedBounds": {
+        "min": [
+          119.70401859395446,
+          207.08351090022933,
+          180.43021449816115
+        ],
+        "max": [
+          188.86912508954396,
+          276.24863897340134,
+          249.59536318414337
+        ]
+      }
+    },
+    {
+      "nodeName": "TreePlanet",
+      "sourceName": "tree_planet",
+      "materialRole": "tree_planet",
+      "meshIndex": 6,
+      "sourceVertices": 3162,
+      "sourceTriangles": 1054,
+      "normalizedBounds": {
+        "min": [
+          -121.85638564657853,
+          98.24314138128793,
+          -83.24265281191377
+        ],
+        "max": [
+          -26.16924959253953,
+          196.95688434036543,
+          0.8178504639921158
+        ]
+      }
+    },
+    {
+      "nodeName": "SmallRocks",
+      "sourceName": "small_rocks",
+      "materialRole": "small_rocks",
+      "meshIndex": 7,
+      "sourceVertices": 2574,
+      "sourceTriangles": 858,
+      "normalizedBounds": {
+        "min": [
+          -32.422419486757974,
+          128.68272452451876,
+          -31.390724869525272
+        ],
+        "max": [
+          62.881413997891684,
+          188.1370625151555,
+          44.97646756706445
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_001",
+      "sourceName": "Cube002",
+      "materialRole": "crystals",
+      "meshIndex": 8,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          229.6909818947128,
+          111.0891840412322,
+          28.371029984348496
+        ],
+        "max": [
+          260.1942938147371,
+          147.02833161497756,
+          63.099914156379576
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_002",
+      "sourceName": "Cube004",
+      "materialRole": "crystals",
+      "meshIndex": 9,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          197.226594474669,
+          52.76423016808891,
+          47.37997798223484
+        ],
+        "max": [
+          200.82226521930144,
+          56.39294206313542,
+          50.19796350486736
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_003",
+      "sourceName": "Cube005",
+      "materialRole": "crystals",
+      "meshIndex": 10,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          164.13006265036222,
+          31.9232837404832,
+          83.56540474534872
+        ],
+        "max": [
+          205.9585764313641,
+          75.89702225159792,
+          130.5971333485297
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_004",
+      "sourceName": "Cube006",
+      "materialRole": "crystals",
+      "meshIndex": 11,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          153.22576113547555,
+          51.69725481286409,
+          116.84114046601114
+        ],
+        "max": [
+          164.53605930090296,
+          65.80203897718108,
+          131.38624796396573
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_005",
+      "sourceName": "Cube007",
+      "materialRole": "crystals",
+      "meshIndex": 12,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          136.47364623538564,
+          90.18127149959864,
+          131.44932607438128
+        ],
+        "max": [
+          164.52567207728342,
+          121.31486609764372,
+          158.81410827356711
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_006",
+      "sourceName": "Cube008",
+      "materialRole": "crystals",
+      "meshIndex": 13,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          113.27288629775327,
+          9.746429903961996,
+          70.86607855317762
+        ],
+        "max": [
+          149.5950597868937,
+          57.325252953713324,
+          111.67340735485432
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_007",
+      "sourceName": "Cube009",
+      "materialRole": "crystals",
+      "meshIndex": 14,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          99.03256256869635,
+          103.1061264772142,
+          123.40694251350065
+        ],
+        "max": [
+          115.47131473943622,
+          119.57800574490668,
+          140.34093474278535
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_008",
+      "sourceName": "Cube010",
+      "materialRole": "crystals",
+      "meshIndex": 15,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          79.39367357877916,
+          64.2642481687322,
+          79.174148804422
+        ],
+        "max": [
+          98.23543168138698,
+          82.57869039515646,
+          93.69149547918931
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_009",
+      "sourceName": "Cube011",
+      "materialRole": "crystals",
+      "meshIndex": 16,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          68.13678315403222,
+          104.41774998246441,
+          60.05688847995651
+        ],
+        "max": [
+          86.74225367466286,
+          123.26015280478586,
+          72.69424743541607
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_010",
+      "sourceName": "Cube012",
+      "materialRole": "crystals",
+      "meshIndex": 17,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          67.56147738028525,
+          32.85716123562412,
+          47.41801375974328
+        ],
+        "max": [
+          105.57514133158759,
+          72.28894297802644,
+          77.77785780357364
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_011",
+      "sourceName": "Cube013",
+      "materialRole": "crystals",
+      "meshIndex": 18,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          66.54539534481326,
+          119.13142443651664,
+          73.22851782129445
+        ],
+        "max": [
+          102.68037717235968,
+          144.499072192882,
+          115.31171403945785
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_012",
+      "sourceName": "Cube014",
+      "materialRole": "crystals",
+      "meshIndex": 19,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          97.40462665138126,
+          98.1567935426407,
+          33.70527480324338
+        ],
+        "max": [
+          101.93983211272726,
+          103.3269726688931,
+          38.28325738780697
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_013",
+      "sourceName": "Cube015",
+      "materialRole": "crystals",
+      "meshIndex": 20,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          114.26185077927482,
+          30.13543416118901,
+          28.489847371421064
+        ],
+        "max": [
+          141.8065980452479,
+          60.42033514115529,
+          56.8124939514273
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_014",
+      "sourceName": "Cube016",
+      "materialRole": "crystals",
+      "meshIndex": 21,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          120.49238125422625,
+          122.03525610960945,
+          -20.027719671262346
+        ],
+        "max": [
+          150.51409904062805,
+          147.16555857200711,
+          9.703243376043602
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_015",
+      "sourceName": "Cube017",
+      "materialRole": "crystals",
+      "meshIndex": 22,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          116.62983564357936,
+          30.32825566482252,
+          15.64522679098225
+        ],
+        "max": [
+          149.40304075306778,
+          62.70399962704434,
+          49.796661170453746
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_016",
+      "sourceName": "Cube018",
+      "materialRole": "crystals",
+      "meshIndex": 23,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          124.3777276296891,
+          130.72262137457673,
+          26.106748210654693
+        ],
+        "max": [
+          124.62882852443317,
+          130.87365581557447,
+          26.322468358832957
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_017",
+      "sourceName": "Cube019",
+      "materialRole": "crystals",
+      "meshIndex": 24,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          122.37959953451133,
+          122.85897075642232,
+          49.69101594311397
+        ],
+        "max": [
+          152.75048300432576,
+          140.29872383447676,
+          78.6471545352663
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_018",
+      "sourceName": "Cube020",
+      "materialRole": "crystals",
+      "meshIndex": 25,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          100.14991535986539,
+          95.70123710661224,
+          -18.712332531508352
+        ],
+        "max": [
+          141.9885756591915,
+          135.11951784744153,
+          25.824199952105985
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_019",
+      "sourceName": "Cube021",
+      "materialRole": "crystals",
+      "meshIndex": 26,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          138.52611860801142,
+          127.83054165836464,
+          152.82828797724102
+        ],
+        "max": [
+          148.2924311607283,
+          133.77015277333865,
+          161.76442931510007
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_020",
+      "sourceName": "Cube022",
+      "materialRole": "crystals",
+      "meshIndex": 27,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          163.30214810920458,
+          125.59813331540921,
+          105.07928318706257
+        ],
+        "max": [
+          182.4083235348296,
+          136.7085992801627,
+          123.76199429886952
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_021",
+      "sourceName": "Cube023",
+      "materialRole": "crystals",
+      "meshIndex": 28,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          153.71533266750595,
+          111.21550903275316,
+          155.96684444404627
+        ],
+        "max": [
+          179.53563782333586,
+          137.28511364867705,
+          176.5511429084438
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_022",
+      "sourceName": "Cube024",
+      "materialRole": "crystals",
+      "meshIndex": 29,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          132.16213559866372,
+          122.96050927418194,
+          17.2628725361797
+        ],
+        "max": [
+          159.76980530461398,
+          140.15756484503362,
+          40.04832685063948
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_023",
+      "sourceName": "Cube025",
+      "materialRole": "crystals",
+      "meshIndex": 30,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          157.1478802297902,
+          125.56503278746762,
+          50.340012355792766
+        ],
+        "max": [
+          176.40570009670108,
+          136.88962218724845,
+          67.93963231278826
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_024",
+      "sourceName": "Cube026",
+      "materialRole": "crystals",
+      "meshIndex": 31,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          126.47526560622093,
+          118.63430279321115,
+          53.404550057286315
+        ],
+        "max": [
+          172.9607767462582,
+          145.39055150014104,
+          97.99764358309471
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_025",
+      "sourceName": "Cube027",
+      "materialRole": "crystals",
+      "meshIndex": 32,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          169.21433940372705,
+          125.78259032183146,
+          41.44455507951639
+        ],
+        "max": [
+          185.85041363278353,
+          135.9554753152437,
+          56.10605488114785
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_026",
+      "sourceName": "Cube028",
+      "materialRole": "crystals",
+      "meshIndex": 33,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          209.785792300436,
+          125.03829343249416,
+          23.26620338656064
+        ],
+        "max": [
+          222.86980848712687,
+          132.71746172810543,
+          35.21790157631007
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_027",
+      "sourceName": "Cube029",
+      "materialRole": "crystals",
+      "meshIndex": 34,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          201.66815673369035,
+          126.37673638906774,
+          106.41372354916061
+        ],
+        "max": [
+          218.47199604233225,
+          136.04850891150755,
+          122.54212958961037
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_028",
+      "sourceName": "Cube030",
+      "materialRole": "crystals",
+      "meshIndex": 35,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          169.52002911889775,
+          46.92747571640379,
+          37.77675741548069
+        ],
+        "max": [
+          171.1352356494956,
+          48.54894280789788,
+          39.55152251133421
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_029",
+      "sourceName": "Cube031",
+      "materialRole": "crystals",
+      "meshIndex": 36,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          201.06265608151648,
+          99.20076531916585,
+          21.16857979882316
+        ],
+        "max": [
+          207.72016359770083,
+          106.30821660956491,
+          27.763151605700173
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_030",
+      "sourceName": "Cube032",
+      "materialRole": "crystals",
+      "meshIndex": 37,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          205.05263420129583,
+          97.26108788828043,
+          10.122292093697013
+        ],
+        "max": [
+          233.80901995749005,
+          125.64045464461107,
+          40.30027222460647
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_031",
+      "sourceName": "Cube033",
+      "materialRole": "crystals",
+      "meshIndex": 38,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          139.20087622257566,
+          22.016065657738608,
+          74.63195509889172
+        ],
+        "max": [
+          159.15937091008638,
+          47.14658501513317,
+          100.53482413111401
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_032",
+      "sourceName": "Cube034",
+      "materialRole": "crystals",
+      "meshIndex": 8,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          229.6909818947128,
+          111.0891840412322,
+          28.371029984348496
+        ],
+        "max": [
+          260.1942938147371,
+          147.02833161497756,
+          63.099914156379576
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_033",
+      "sourceName": "Cube035",
+      "materialRole": "crystals",
+      "meshIndex": 9,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          197.226594474669,
+          52.76423016808891,
+          47.37997798223484
+        ],
+        "max": [
+          200.82226521930144,
+          56.39294206313542,
+          50.19796350486736
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_034",
+      "sourceName": "Cube036",
+      "materialRole": "crystals",
+      "meshIndex": 10,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          164.13006265036222,
+          31.9232837404832,
+          83.56540474534872
+        ],
+        "max": [
+          205.9585764313641,
+          75.89702225159792,
+          130.5971333485297
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_035",
+      "sourceName": "Cube037",
+      "materialRole": "crystals",
+      "meshIndex": 11,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          153.22576113547555,
+          51.69725481286409,
+          116.84114046601114
+        ],
+        "max": [
+          164.53605930090296,
+          65.80203897718108,
+          131.38624796396573
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_036",
+      "sourceName": "Cube038",
+      "materialRole": "crystals",
+      "meshIndex": 12,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          136.47364623538564,
+          90.18127149959864,
+          131.44932607438128
+        ],
+        "max": [
+          164.52567207728342,
+          121.31486609764372,
+          158.81410827356711
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_037",
+      "sourceName": "Cube039",
+      "materialRole": "crystals",
+      "meshIndex": 13,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          113.27288629775327,
+          9.746429903961996,
+          70.86607855317762
+        ],
+        "max": [
+          149.5950597868937,
+          57.325252953713324,
+          111.67340735485432
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_038",
+      "sourceName": "Cube040",
+      "materialRole": "crystals",
+      "meshIndex": 14,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          99.03256256869635,
+          103.1061264772142,
+          123.40694251350065
+        ],
+        "max": [
+          115.47131473943622,
+          119.57800574490668,
+          140.34093474278535
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_039",
+      "sourceName": "Cube041",
+      "materialRole": "crystals",
+      "meshIndex": 15,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          79.39367357877916,
+          64.2642481687322,
+          79.174148804422
+        ],
+        "max": [
+          98.23543168138698,
+          82.57869039515646,
+          93.69149547918931
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_040",
+      "sourceName": "Cube042",
+      "materialRole": "crystals",
+      "meshIndex": 16,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          68.13678315403222,
+          104.41774998246441,
+          60.05688847995651
+        ],
+        "max": [
+          86.74225367466286,
+          123.26015280478586,
+          72.69424743541607
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_041",
+      "sourceName": "Cube043",
+      "materialRole": "crystals",
+      "meshIndex": 17,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          67.56147738028525,
+          32.85716123562412,
+          47.41801375974328
+        ],
+        "max": [
+          105.57514133158759,
+          72.28894297802644,
+          77.77785780357364
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_042",
+      "sourceName": "Cube044",
+      "materialRole": "crystals",
+      "meshIndex": 18,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          66.54539534481326,
+          119.13142443651664,
+          73.22851782129445
+        ],
+        "max": [
+          102.68037717235968,
+          144.499072192882,
+          115.31171403945785
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_043",
+      "sourceName": "Cube045",
+      "materialRole": "crystals",
+      "meshIndex": 19,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          97.40462665138126,
+          98.1567935426407,
+          33.70527480324338
+        ],
+        "max": [
+          101.93983211272726,
+          103.3269726688931,
+          38.28325738780697
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_044",
+      "sourceName": "Cube046",
+      "materialRole": "crystals",
+      "meshIndex": 20,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          114.26185077927482,
+          30.13543416118901,
+          28.489847371421064
+        ],
+        "max": [
+          141.8065980452479,
+          60.42033514115529,
+          56.8124939514273
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_045",
+      "sourceName": "Cube047",
+      "materialRole": "crystals",
+      "meshIndex": 21,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          120.49238125422625,
+          122.03525610960945,
+          -20.027719671262346
+        ],
+        "max": [
+          150.51409904062805,
+          147.16555857200711,
+          9.703243376043602
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_046",
+      "sourceName": "Cube048",
+      "materialRole": "crystals",
+      "meshIndex": 22,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          116.62983564357936,
+          30.32825566482252,
+          15.64522679098225
+        ],
+        "max": [
+          149.40304075306778,
+          62.70399962704434,
+          49.796661170453746
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_047",
+      "sourceName": "Cube049",
+      "materialRole": "crystals",
+      "meshIndex": 23,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          124.3777276296891,
+          130.72262137457673,
+          26.106748210654693
+        ],
+        "max": [
+          124.62882852443317,
+          130.87365581557447,
+          26.322468358832957
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_048",
+      "sourceName": "Cube050",
+      "materialRole": "crystals",
+      "meshIndex": 24,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          122.37959953451133,
+          122.85897075642232,
+          49.69101594311397
+        ],
+        "max": [
+          152.75048300432576,
+          140.29872383447676,
+          78.6471545352663
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_049",
+      "sourceName": "Cube051",
+      "materialRole": "crystals",
+      "meshIndex": 25,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          100.14991535986539,
+          95.70123710661224,
+          -18.712332531508352
+        ],
+        "max": [
+          141.9885756591915,
+          135.11951784744153,
+          25.824199952105985
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_050",
+      "sourceName": "Cube052",
+      "materialRole": "crystals",
+      "meshIndex": 26,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          138.52611860801142,
+          127.83054165836464,
+          152.82828797724102
+        ],
+        "max": [
+          148.2924311607283,
+          133.77015277333865,
+          161.76442931510007
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_051",
+      "sourceName": "Cube053",
+      "materialRole": "crystals",
+      "meshIndex": 27,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          163.30214810920458,
+          125.59813331540921,
+          105.07928318706257
+        ],
+        "max": [
+          182.4083235348296,
+          136.7085992801627,
+          123.76199429886952
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_052",
+      "sourceName": "Cube054",
+      "materialRole": "crystals",
+      "meshIndex": 28,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          153.71533266750595,
+          111.21550903275316,
+          155.96684444404627
+        ],
+        "max": [
+          179.53563782333586,
+          137.28511364867705,
+          176.5511429084438
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_053",
+      "sourceName": "Cube055",
+      "materialRole": "crystals",
+      "meshIndex": 29,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          132.16213559866372,
+          122.96050927418194,
+          17.2628725361797
+        ],
+        "max": [
+          159.76980530461398,
+          140.15756484503362,
+          40.04832685063948
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_054",
+      "sourceName": "Cube056",
+      "materialRole": "crystals",
+      "meshIndex": 30,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          157.1478802297902,
+          125.56503278746762,
+          50.340012355792766
+        ],
+        "max": [
+          176.40570009670108,
+          136.88962218724845,
+          67.93963231278826
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_055",
+      "sourceName": "Cube057",
+      "materialRole": "crystals",
+      "meshIndex": 31,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          126.47526560622093,
+          118.63430279321115,
+          53.404550057286315
+        ],
+        "max": [
+          172.9607767462582,
+          145.39055150014104,
+          97.99764358309471
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_056",
+      "sourceName": "Cube058",
+      "materialRole": "crystals",
+      "meshIndex": 32,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          169.21433940372705,
+          125.78259032183146,
+          41.44455507951639
+        ],
+        "max": [
+          185.85041363278353,
+          135.9554753152437,
+          56.10605488114785
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_057",
+      "sourceName": "Cube059",
+      "materialRole": "crystals",
+      "meshIndex": 33,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          209.785792300436,
+          125.03829343249416,
+          23.26620338656064
+        ],
+        "max": [
+          222.86980848712687,
+          132.71746172810543,
+          35.21790157631007
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_058",
+      "sourceName": "Cube060",
+      "materialRole": "crystals",
+      "meshIndex": 34,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          201.66815673369035,
+          126.37673638906774,
+          106.41372354916061
+        ],
+        "max": [
+          218.47199604233225,
+          136.04850891150755,
+          122.54212958961037
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_059",
+      "sourceName": "Cube061",
+      "materialRole": "crystals",
+      "meshIndex": 35,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          169.52002911889775,
+          46.92747571640379,
+          37.77675741548069
+        ],
+        "max": [
+          171.1352356494956,
+          48.54894280789788,
+          39.55152251133421
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_060",
+      "sourceName": "Cube062",
+      "materialRole": "crystals",
+      "meshIndex": 36,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          201.06265608151648,
+          99.20076531916585,
+          21.16857979882316
+        ],
+        "max": [
+          207.72016359770083,
+          106.30821660956491,
+          27.763151605700173
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_061",
+      "sourceName": "Cube063",
+      "materialRole": "crystals",
+      "meshIndex": 37,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          205.05263420129583,
+          97.26108788828043,
+          10.122292093697013
+        ],
+        "max": [
+          233.80901995749005,
+          125.64045464461107,
+          40.30027222460647
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_062",
+      "sourceName": "Cube064",
+      "materialRole": "crystals",
+      "meshIndex": 38,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          139.20087622257566,
+          22.016065657738608,
+          74.63195509889172
+        ],
+        "max": [
+          159.15937091008638,
+          47.14658501513317,
+          100.53482413111401
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_063",
+      "sourceName": "Cube065",
+      "materialRole": "crystals",
+      "meshIndex": 39,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          157.4835735232253,
+          229.54728217287953,
+          170.87427270437155
+        ],
+        "max": [
+          179.08972363669253,
+          255.33663303447932,
+          192.5043742053441
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_064",
+      "sourceName": "Cube066",
+      "materialRole": "crystals",
+      "meshIndex": 40,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          159.04847484060954,
+          267.04526527401663,
+          192.72000960174194
+        ],
+        "max": [
+          162.17615435873822,
+          270.522428833285,
+          196.68932302531198
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_065",
+      "sourceName": "Cube067",
+      "materialRole": "crystals",
+      "meshIndex": 41,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          168.01155486657694,
+          232.74161035764624,
+          184.51833224421358
+        ],
+        "max": [
+          207.7298201125358,
+          271.2739825823718,
+          222.3757787397014
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_066",
+      "sourceName": "Cube068",
+      "materialRole": "crystals",
+      "meshIndex": 42,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          172.50974914550255,
+          210.63318568963442,
+          214.0107471644863
+        ],
+        "max": [
+          185.10714588450654,
+          223.1592242616647,
+          221.644872648028
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_067",
+      "sourceName": "Cube069",
+      "materialRole": "crystals",
+      "meshIndex": 43,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          173.5178223435043,
+          215.20085967767056,
+          207.41476072971403
+        ],
+        "max": [
+          205.52223333451136,
+          251.4746858659287,
+          232.38261037100057
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_068",
+      "sourceName": "Cube070",
+      "materialRole": "crystals",
+      "meshIndex": 44,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          157.7801553525166,
+          237.13718156890644,
+          217.13374580881754
+        ],
+        "max": [
+          201.94440813564617,
+          280.16312532162004,
+          254.95806390011393
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_069",
+      "sourceName": "Cube071",
+      "materialRole": "crystals",
+      "meshIndex": 45,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          175.23014649269592,
+          247.60131771665834,
+          223.82921885534546
+        ],
+        "max": [
+          190.43313482648378,
+          262.456835125289,
+          237.0386650230538
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_070",
+      "sourceName": "Cube072",
+      "materialRole": "crystals",
+      "meshIndex": 46,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          170.4835138335839,
+          224.76952639025376,
+          230.76983819999458
+        ],
+        "max": [
+          186.27937620972463,
+          240.4953186244791,
+          246.56305335386116
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_071",
+      "sourceName": "Cube073",
+      "materialRole": "crystals",
+      "meshIndex": 47,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          156.83118901958784,
+          209.66852030652427,
+          228.65430078992352
+        ],
+        "max": [
+          175.13760701830893,
+          227.20345065622092,
+          248.70465376491433
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_072",
+      "sourceName": "Cube074",
+      "materialRole": "crystals",
+      "meshIndex": 48,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          148.9047687304565,
+          239.3370639036645,
+          228.7544908945559
+        ],
+        "max": [
+          182.19182013981933,
+          272.9796541512992,
+          264.2751592210958
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_073",
+      "sourceName": "Cube075",
+      "materialRole": "crystals",
+      "meshIndex": 49,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          131.93568045100469,
+          254.85230421024517,
+          207.64135423846903
+        ],
+        "max": [
+          159.27292229279487,
+          294.803821129196,
+          251.34479392034746
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_074",
+      "sourceName": "Cube076",
+      "materialRole": "crystals",
+      "meshIndex": 50,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          145.96958772592916,
+          247.5782415312894,
+          245.85860060467826
+        ],
+        "max": [
+          149.49407121999695,
+          252.1697701563459,
+          249.97615294815233
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_075",
+      "sourceName": "Cube077",
+      "materialRole": "crystals",
+      "meshIndex": 51,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          132.3007654750809,
+          231.26401824355344,
+          239.24707442499397
+        ],
+        "max": [
+          150.6313721752607,
+          253.1437097906232,
+          257.5979918141108
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_076",
+      "sourceName": "Cube078",
+      "materialRole": "crystals",
+      "meshIndex": 52,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          118.74596643902655,
+          226.54573395636857,
+          229.85904895743732
+        ],
+        "max": [
+          144.72859699004522,
+          253.7830542246151,
+          256.16591228137906
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_077",
+      "sourceName": "Cube079",
+      "materialRole": "crystals",
+      "meshIndex": 53,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          109.3233518235082,
+          222.8383336716267,
+          219.9780095653087
+        ],
+        "max": [
+          139.48721249889243,
+          252.45329916124726,
+          250.20336941199838
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_078",
+      "sourceName": "Cube080",
+      "materialRole": "crystals",
+      "meshIndex": 54,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          144.4171396695733,
+          273.1392925678586,
+          224.81119527187093
+        ],
+        "max": [
+          144.70659970676357,
+          273.36432812559974,
+          225.10149647122813
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_079",
+      "sourceName": "Cube081",
+      "materialRole": "crystals",
+      "meshIndex": 55,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          117.40531812154944,
+          200.1310478523102,
+          211.6913338222638
+        ],
+        "max": [
+          150.85725834186852,
+          230.3650601054997,
+          245.83455868729334
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_080",
+      "sourceName": "Cube082",
+      "materialRole": "crystals",
+      "meshIndex": 56,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          114.54075266058213,
+          193.0854364457458,
+          198.55198017803295
+        ],
+        "max": [
+          157.6990123577806,
+          227.0740787552193,
+          242.00796837585307
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_081",
+      "sourceName": "Cube083",
+      "materialRole": "crystals",
+      "meshIndex": 57,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          125.43005877778228,
+          212.0491502812138,
+          217.8799395164014
+        ],
+        "max": [
+          136.55188391080713,
+          221.65453181917206,
+          226.94529461695873
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_082",
+      "sourceName": "Cube084",
+      "materialRole": "crystals",
+      "meshIndex": 58,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          112.2439841338713,
+          231.35752606009228,
+          214.45541148162914
+        ],
+        "max": [
+          127.53421456242972,
+          247.83516701451396,
+          228.8991431510005
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_083",
+      "sourceName": "Cube085",
+      "materialRole": "crystals",
+      "meshIndex": 59,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          110.44708349180397,
+          218.55750872808642,
+          202.50906331876274
+        ],
+        "max": [
+          131.2630468453405,
+          242.45521164343793,
+          217.66796034013396
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_084",
+      "sourceName": "Cube086",
+      "materialRole": "crystals",
+      "meshIndex": 60,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          115.20665265663692,
+          252.4873208872135,
+          199.1261555362728
+        ],
+        "max": [
+          144.37289148455548,
+          281.88786442578987,
+          216.93526611114635
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_085",
+      "sourceName": "Cube087",
+      "materialRole": "crystals",
+      "meshIndex": 61,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          121.67679422316687,
+          205.70401230155463,
+          201.7002981844019
+        ],
+        "max": [
+          142.07716484188046,
+          224.85843419751853,
+          215.7103383217056
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_086",
+      "sourceName": "Cube088",
+      "materialRole": "crystals",
+      "meshIndex": 62,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          108.83915742422722,
+          191.88877853757265,
+          182.4203878111543
+        ],
+        "max": [
+          159.0555716499904,
+          235.94706663883792,
+          217.70964210105905
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_087",
+      "sourceName": "Cube089",
+      "materialRole": "crystals",
+      "meshIndex": 63,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          123.56631872442867,
+          258.2407061776442,
+          194.52634232850897
+        ],
+        "max": [
+          142.2476786016829,
+          274.64463300058475,
+          209.7186700924393
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_088",
+      "sourceName": "Cube090",
+      "materialRole": "crystals",
+      "meshIndex": 64,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          119.58115655460797,
+          226.2733575253008,
+          191.4643490321236
+        ],
+        "max": [
+          131.97558219375858,
+          238.76980602655465,
+          203.1796416645986
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_089",
+      "sourceName": "Cube091",
+      "materialRole": "crystals",
+      "meshIndex": 65,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          130.3403664312372,
+          236.8078910542139,
+          177.39210995612288
+        ],
+        "max": [
+          144.24904732929048,
+          250.73425345686144,
+          191.4134815040464
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_090",
+      "sourceName": "Cube092",
+      "materialRole": "crystals",
+      "meshIndex": 66,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          137.76078283965666,
+          221.10147065218015,
+          190.64904562201227
+        ],
+        "max": [
+          139.3316848833225,
+          222.6484033364232,
+          192.36572212244312
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_091",
+      "sourceName": "Cube093",
+      "materialRole": "crystals",
+      "meshIndex": 67,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          143.1522828346321,
+          222.06254226820982,
+          181.32929528390247
+        ],
+        "max": [
+          149.33700314012884,
+          229.89924734862063,
+          189.25050262319064
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_092",
+      "sourceName": "Cube094",
+      "materialRole": "crystals",
+      "meshIndex": 68,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          151.8165063886745,
+          205.1600087869645,
+          175.00166998306366
+        ],
+        "max": [
+          168.21769766177573,
+          232.00531655793702,
+          201.56825443599033
+        ]
+      }
+    },
+    {
+      "nodeName": "Crystal_093",
+      "sourceName": "Cube095",
+      "materialRole": "crystals",
+      "meshIndex": 69,
+      "sourceVertices": 2754,
+      "sourceTriangles": 918,
+      "normalizedBounds": {
+        "min": [
+          152.54024692057322,
+          243.98525706453933,
+          172.66358415141963
+        ],
+        "max": [
+          166.89289398369505,
+          267.0611898141465,
+          192.6606464631945
+        ]
+      }
+    },
+    {
+      "nodeName": "TreeBark",
+      "sourceName": "tree_bark",
+      "materialRole": "tree_bark",
+      "meshIndex": 70,
+      "sourceVertices": 25770,
+      "sourceTriangles": 8590,
+      "normalizedBounds": {
+        "min": [
+          -249.1729543334274,
+          189.13360564768453,
+          -228.57260704874494
+        ],
+        "max": [
+          115.23502355662197,
+          396.24653500262514,
+          153.8418576425163
+        ]
+      }
+    },
+    {
+      "nodeName": "TreeTwigs",
+      "sourceName": "leaves",
+      "materialRole": "tree_bark",
+      "meshIndex": 71,
+      "sourceVertices": 7218,
+      "sourceTriangles": 2406,
+      "normalizedBounds": {
+        "min": [
+          -286.9622427070263,
+          119.6863458907811,
+          -264.2751592210958
+        ],
+        "max": [
+          191.48020768560377,
+          479.4211479579639,
+          177.2237799235428
+        ]
+      }
+    },
+    {
+      "nodeName": "TreeLeaves",
+      "sourceName": "leaves",
+      "materialRole": "leaves",
+      "meshIndex": 72,
+      "sourceVertices": 26466,
+      "sourceTriangles": 8822,
+      "normalizedBounds": {
+        "min": [
+          -286.9622427070263,
+          119.6863458907811,
+          -264.2751592210958
+        ],
+        "max": [
+          191.48020768560377,
+          479.4211479579639,
+          177.2237799235428
+        ]
+      }
+    }
+  ],
+  "images": [
+    {
+      "materialRole": "crystals",
+      "kind": "baseColor",
+      "source": "textures/space_scene_crystals_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 107968,
+      "embedded": true
+    },
+    {
+      "materialRole": "crystals",
+      "kind": "emissive",
+      "source": "textures/space_scene_crystals_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 94958,
+      "embedded": true
+    },
+    {
+      "materialRole": "crystals",
+      "kind": "normal",
+      "source": "textures/space_scene_crystals_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 9812,
+      "embedded": true
+    },
+    {
+      "materialRole": "crystals",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_crystals_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 497230,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_planet",
+      "kind": "baseColor",
+      "source": "textures/space_scene_main_planet_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 76390,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_planet",
+      "kind": "emissive",
+      "source": "textures/space_scene_main_planet_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 111946,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_planet",
+      "kind": "normal",
+      "source": "textures/space_scene_main_planet_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 432732,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_planet",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_main_planet_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 577170,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_crystal",
+      "kind": "baseColor",
+      "source": "textures/space_scene_main_crystal_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 44768,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_crystal",
+      "kind": "emissive",
+      "source": "textures/space_scene_main_crystal_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 66918,
+      "embedded": true
+    },
+    {
+      "materialRole": "main_crystal",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_main_crystal_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 455448,
+      "embedded": true
+    },
+    {
+      "materialRole": "saturn",
+      "kind": "baseColor",
+      "source": "textures/space_scene_saturn_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 32134,
+      "embedded": true
+    },
+    {
+      "materialRole": "saturn",
+      "kind": "emissive",
+      "source": "textures/space_scene_saturn_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 5846,
+      "embedded": true
+    },
+    {
+      "materialRole": "saturn",
+      "kind": "normal",
+      "source": "textures/space_scene_saturn_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 200406,
+      "embedded": true
+    },
+    {
+      "materialRole": "saturn",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_saturn_Roughness.png",
+      "additionalSource": "textures/space_scene_saturn_Metallic.png",
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 73920,
+      "embedded": true
+    },
+    {
+      "materialRole": "ring_saturn",
+      "kind": "baseColor",
+      "source": "textures/space_scene_ring_saturn_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 27316,
+      "embedded": true
+    },
+    {
+      "materialRole": "ring_saturn",
+      "kind": "emissive",
+      "source": "textures/space_scene_ring_saturn_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 40380,
+      "embedded": true
+    },
+    {
+      "materialRole": "ring_saturn",
+      "kind": "normal",
+      "source": "textures/space_scene_ring_saturn_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 245922,
+      "embedded": true
+    },
+    {
+      "materialRole": "ring_saturn",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_ring_saturn_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 27346,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_crystal_planet",
+      "kind": "baseColor",
+      "source": "textures/space_scene_small_crystal_planet_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 45254,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_crystal_planet",
+      "kind": "emissive",
+      "source": "textures/space_scene_small_crystal_planet_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 81798,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_crystal_planet",
+      "kind": "normal",
+      "source": "textures/space_scene_small_crystal_planet_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 132196,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_crystal_planet",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_small_crystal_planet_Roughness.png",
+      "additionalSource": "textures/space_scene_small_crystal_planet_Metallic.png",
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 609442,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_planet",
+      "kind": "baseColor",
+      "source": "textures/space_scene_tree_planet_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 64972,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_planet",
+      "kind": "emissive",
+      "source": "textures/space_scene_tree_planet_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 114210,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_planet",
+      "kind": "normal",
+      "source": "textures/space_scene_tree_planet_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 297554,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_planet",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_tree_planet_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 525192,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_rocks",
+      "kind": "baseColor",
+      "source": "textures/space_scene_small_rocks_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 87492,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_rocks",
+      "kind": "emissive",
+      "source": "textures/space_scene_small_rocks_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 87522,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_rocks",
+      "kind": "normal",
+      "source": "textures/space_scene_small_rocks_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 307438,
+      "embedded": true
+    },
+    {
+      "materialRole": "small_rocks",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_small_rocks_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 88,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_bark",
+      "kind": "baseColor",
+      "source": "textures/space_scene_tree_bark_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 23032,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_bark",
+      "kind": "normal",
+      "source": "textures/space_scene_tree_bark_Normal.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 27150,
+      "embedded": true
+    },
+    {
+      "materialRole": "tree_bark",
+      "kind": "metallicRoughness",
+      "source": "textures/space_scene_tree_bark_Roughness.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 290516,
+      "embedded": true
+    },
+    {
+      "materialRole": "leaves",
+      "kind": "baseColor",
+      "source": "textures/space_scene_leaves_BaseColor.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 51094,
+      "embedded": true
+    },
+    {
+      "materialRole": "leaves",
+      "kind": "emissive",
+      "source": "textures/space_scene_leaves_Emissive.png",
+      "additionalSource": null,
+      "outputSize": [
+        1024,
+        1024
+      ],
+      "bytes": 52104,
+      "embedded": true
+    }
+  ],
+  "validation": {
+    "valid": true,
+    "version": "2.0",
+    "scenes": 1,
+    "nodes": 105,
+    "meshes": 73,
+    "materials": 10,
+    "embeddedImages": 36,
+    "externalUris": 0,
+    "extensionsRequired": [
+      "EXT_texture_webp"
+    ]
+  }
+}

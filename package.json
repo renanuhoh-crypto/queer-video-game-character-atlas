@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "data:characters-json": "node scripts/convert-csv-to-json.js",
     "sync:game-catalog": "node scripts/sync-lgbtq-game-catalog.mjs",
     "audit:character-links": "node scripts/audit-lgbtq-character-links.mjs",
-    "import:archive-characters": "node scripts/import-lgbtq-archive-characters.mjs"
+    "import:archive-characters": "node scripts/import-lgbtq-archive-characters.mjs",
+    "import:representme-characters": "node scripts/import-represent-me-characters.mjs",
+    "model:rig-quiu": "node scripts/rig-quiu-glb.mjs",
+    "model:rig-quiu-world": "node scripts/rig-quiu-glb.mjs assets/models/quiu-world/quiu-world-web.glb public/models/quiu-world/quiu-world-rigged.glb world"
   },
   "dependencies": {
     "csv-parser": "^3.2.1",
@@ -18,7 +22,8 @@
     "papaparse": "^5.5.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "recharts": "^3.8.1"
+    "recharts": "^3.8.1",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -26,6 +31,7 @@
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.185.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",

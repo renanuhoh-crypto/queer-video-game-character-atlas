@@ -1,0 +1,1855 @@
+.home {
+  --signal-bg: #02040a;
+  --signal-bg-raised: #050914;
+  --signal-panel: rgba(7, 12, 25, 0.86);
+  --signal-panel-solid: #080d1b;
+  --signal-line: rgba(139, 217, 235, 0.16);
+  --signal-line-strong: rgba(139, 235, 246, 0.34);
+  --signal-copy: #f2f7fb;
+  --signal-muted: rgba(205, 224, 235, 0.62);
+  --signal-faint: rgba(205, 224, 235, 0.38);
+  --signal-cyan: #65efff;
+  --signal-pink: #f15bcf;
+  --signal-violet: #8a7dff;
+  --signal-green: #69f1bd;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--signal-bg);
+  color: var(--signal-copy);
+}
+
+.home,
+.home * {
+  box-sizing: border-box;
+}
+
+.home a:focus-visible,
+.home button:focus-visible {
+  outline: 2px solid var(--signal-cyan);
+  outline-offset: 4px;
+}
+
+:global(body):has(> .home) > :global(aside) {
+  border-bottom-color: rgba(139, 217, 235, 0.13);
+  background: #03060d;
+}
+
+:global(body):has(> .home) > :global(aside) :global(span) {
+  color: #f15bcf;
+}
+
+:global(body):has(> .home) > :global(aside) :global(a) {
+  color: #65efff;
+}
+
+:global(body):has(> .home) > :global(footer) {
+  border-top-color: rgba(139, 217, 235, 0.13);
+  background: #02040a;
+}
+
+.home :global(.pressq-studio-hero) {
+  position: relative;
+  min-height: max(760px, 100svh);
+  overflow: hidden;
+  border-bottom: 1px solid var(--signal-line);
+  background:
+    radial-gradient(circle at 77% 36%, rgba(61, 213, 240, 0.1), transparent 26%),
+    radial-gradient(circle at 8% 82%, rgba(241, 91, 207, 0.08), transparent 27%),
+    linear-gradient(142deg, #02040a 0%, #050914 58%, #03050c 100%);
+  isolation: isolate;
+}
+
+.home :global(.pressq-studio-hero)::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, transparent 0 7.9%, rgba(101, 239, 255, 0.06) 8%, transparent 8.1%),
+    linear-gradient(180deg, transparent 0 87%, rgba(101, 239, 255, 0.05) 87.1%, transparent 87.2%);
+  content: "";
+  pointer-events: none;
+}
+
+.home :global(.pressq-studio-hero)::after {
+  position: absolute;
+  top: 50%;
+  right: -12vw;
+  bottom: auto;
+  left: auto;
+  z-index: 0;
+  width: min(48vw, 760px);
+  height: auto;
+  aspect-ratio: 1;
+  border: 1px solid rgba(101, 239, 255, 0.1);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    0 0 0 52px rgba(101, 239, 255, 0.018),
+    0 0 0 104px rgba(241, 91, 207, 0.012);
+  clip-path: none;
+  content: "";
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.home :global(.pressq-studio-stars) {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.62;
+  background-image:
+    radial-gradient(circle at 12% 21%, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 37% 61%, rgba(101, 239, 255, 0.65) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 68% 13%, rgba(241, 91, 207, 0.68) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 88% 74%, rgba(255, 255, 255, 0.5) 0 1px, transparent 1.5px);
+  background-size: 290px 260px, 390px 340px, 330px 310px, 430px 380px;
+  pointer-events: none;
+}
+
+.home :global(.pressq-studio-grid) {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.52;
+  background-image:
+    linear-gradient(rgba(132, 222, 239, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(132, 222, 239, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, #000 0 77%, transparent 100%);
+  pointer-events: none;
+}
+
+.home :global(.pressq-studio-bolt) {
+  position: absolute;
+  z-index: 0;
+  width: 280px;
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(101, 239, 255, 0.24), transparent);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.home :global(.pressq-studio-bolt--one) {
+  top: 28%;
+  right: -62px;
+  transform: rotate(-34deg);
+}
+
+.home :global(.pressq-studio-bolt--two) {
+  bottom: 19%;
+  left: -68px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(241, 91, 207, 0.2), transparent);
+  transform: rotate(28deg);
+}
+
+.home :global(.pressq-studio-header) {
+  position: relative;
+  z-index: 20;
+  width: min(1500px, calc(100% - 48px));
+  margin: 0 auto;
+  padding-top: 22px;
+}
+
+.home :global(.pressq-studio-nav-shell) {
+  display: grid;
+  min-height: 68px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 3.5rem);
+  padding: 0.7rem 0.85rem 0.7rem 1.15rem;
+  border: 1px solid var(--signal-line);
+  border-radius: 0;
+  background: rgba(3, 7, 16, 0.76);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(18px) saturate(125%);
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.home :global(.pressq-studio-brand) {
+  display: inline-flex;
+  min-width: max-content;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--signal-copy);
+}
+
+.home :global(.pressq-studio-brand img) {
+  width: 39px;
+  height: 42px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(101, 239, 255, 0.18));
+}
+
+.home :global(.pressq-studio-brand span) {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.home :global(.pressq-studio-brand strong) {
+  color: var(--signal-copy);
+  font-size: 0.86rem;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-brand small) {
+  color: var(--signal-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-desktop-nav) {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 1.8vw, 1.85rem);
+}
+
+.home :global(.pressq-studio-desktop-nav a) {
+  position: relative;
+  padding-block: 0.55rem;
+  color: var(--signal-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: color 160ms ease;
+}
+
+.home :global(.pressq-studio-desktop-nav a)::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: 0;
+  height: 1px;
+  background: var(--signal-cyan);
+  content: "";
+  transition: width 180ms ease;
+}
+
+.home :global(.pressq-studio-desktop-nav a:hover) {
+  color: var(--signal-copy);
+}
+
+.home :global(.pressq-studio-desktop-nav a:hover)::after {
+  right: auto;
+  left: 0;
+  width: 100%;
+}
+
+.home :global(.pressq-studio-nav-cta),
+.home :global(.pressq-studio-button) {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  border: 1px solid var(--signal-line-strong);
+  border-radius: 0;
+  padding: 0.78rem 1.15rem;
+  color: var(--signal-copy);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.61rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.home :global(.pressq-studio-nav-cta) {
+  min-width: 132px;
+  border-color: rgba(101, 239, 255, 0.54);
+  background: rgba(101, 239, 255, 0.08);
+}
+
+.home :global(.pressq-studio-nav-cta:hover),
+.home :global(.pressq-studio-button:hover) {
+  border-color: var(--signal-cyan);
+  background: var(--signal-cyan);
+  color: #02040a;
+  transform: translateY(-2px);
+}
+
+.home :global(.pressq-studio-mobile-nav) {
+  display: none;
+}
+
+.home :global(.pressq-studio-hero-inner) {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  width: min(1440px, calc(100% - 64px));
+  min-height: calc(max(760px, 100svh) - 112px);
+  grid-template-columns: minmax(0, 1.05fr) minmax(400px, 0.95fr);
+  align-items: center;
+  gap: clamp(3rem, 6vw, 7rem);
+  margin: 0 auto;
+  padding: clamp(4rem, 8vh, 6.8rem) 0 clamp(5.2rem, 10vh, 8rem);
+}
+
+.home :global(.pressq-studio-hero-copy) {
+  position: relative;
+  z-index: 4;
+  min-width: 0;
+  max-width: 760px;
+  text-align: left;
+}
+
+.home :global(.pressq-studio-kicker),
+.home :global(.pressq-studio-section-heading > p),
+.home :global(.pressq-studio-game-info > p),
+.home :global(.pressq-studio-record-copy > p),
+.home :global(.pressq-studio-method-copy > p),
+.home :global(.pressq-studio-ranking-card > h3),
+.home :global(.pressq-studio-query-card > p) {
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-kicker) {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 2.2rem;
+}
+
+.home :global(.pressq-studio-kicker > span) {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--signal-cyan), var(--signal-pink));
+  box-shadow: 0 0 10px rgba(101, 239, 255, 0.42);
+}
+
+.home :global(.pressq-studio-hero h1) {
+  margin: 0;
+  padding: 0.04em 0 0.08em;
+  color: var(--signal-copy);
+  font-family: var(--font-airstrip-four), "Arial Black", Arial, sans-serif;
+  font-size: clamp(4.25rem, 7.4vw, 7.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.96;
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-hero h1 > span) {
+  display: block;
+}
+
+.home :global(.pressq-studio-title-accent) {
+  width: fit-content;
+  margin: 0;
+  background: linear-gradient(90deg, var(--signal-cyan), #a3a8ff 48%, var(--signal-pink));
+  background-clip: text;
+  color: transparent;
+  filter: none;
+}
+
+.home :global(.pressq-studio-lede) {
+  max-width: 620px;
+  margin: 2rem 0 0;
+  color: var(--signal-muted);
+  font-size: clamp(0.96rem, 1.4vw, 1.15rem);
+  font-weight: 520;
+  line-height: 1.75;
+}
+
+.home :global(.pressq-studio-actions) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.home :global(.pressq-studio-button) {
+  min-width: 188px;
+}
+
+.home :global(.pressq-studio-button--primary) {
+  border-color: var(--signal-cyan);
+  background: var(--signal-cyan);
+  color: #02040a;
+  box-shadow: 0 0 26px rgba(101, 239, 255, 0.1);
+}
+
+.home :global(.pressq-studio-button--primary:hover) {
+  border-color: #fff;
+  background: #fff;
+}
+
+.home :global(.pressq-studio-button--ghost) {
+  border-color: var(--signal-line);
+  background: rgba(255, 255, 255, 0.018);
+  color: var(--signal-copy);
+}
+
+.home :global(.pressq-studio-hero-stats) {
+  display: grid;
+  max-width: 640px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 3.2rem 0 0;
+  border-top: 1px solid var(--signal-line);
+  border-bottom: 1px solid var(--signal-line);
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.home :global(.pressq-studio-hero-stats > div) {
+  min-width: 0;
+  padding: 1.05rem 1.1rem;
+}
+
+.home :global(.pressq-studio-hero-stats > div + div) {
+  border-left: 1px solid var(--signal-line);
+}
+
+.home :global(.pressq-studio-hero-stats dt) {
+  color: var(--signal-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-hero-stats dd) {
+  margin: 0.55rem 0 0;
+  color: var(--signal-copy);
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.home :global(.pressq-studio-hero-art) {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  min-width: 0;
+  min-height: 560px;
+  margin: 0;
+}
+
+.modelFrame {
+  position: absolute;
+  inset: 44px 0 58px;
+  border: 1px solid rgba(101, 239, 255, 0.12);
+  background: rgba(3, 8, 20, 0.32);
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+}
+
+.modelFrame::before,
+.modelFrame::after {
+  position: absolute;
+  z-index: 5;
+  content: "";
+  pointer-events: none;
+}
+
+.modelFrame::before {
+  inset: 18px;
+  border-top: 1px solid rgba(101, 239, 255, 0.2);
+  border-bottom: 1px solid rgba(241, 91, 207, 0.18);
+}
+
+.modelFrame::after {
+  top: 18px;
+  bottom: 18px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(101, 239, 255, 0.12), transparent);
+}
+
+.modelFrame > * {
+  min-height: 100%;
+  border: 0;
+  background-color: transparent;
+}
+
+.modelIndex,
+.modelTelemetry {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--signal-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5rem;
+  font-weight: 850;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.modelIndex {
+  top: 20px;
+  right: 4px;
+  left: 4px;
+}
+
+.modelIndex span:first-child {
+  color: var(--signal-cyan);
+}
+
+.modelTelemetry {
+  right: 4px;
+  bottom: 24px;
+  left: 4px;
+  gap: 1rem;
+}
+
+.modelTelemetry span:nth-child(2) {
+  color: var(--signal-green);
+}
+
+.home :global(.pressq-studio-float-card) {
+  position: absolute;
+  z-index: 8;
+  display: grid;
+  min-width: 152px;
+  gap: 0.3rem;
+  border: 1px solid var(--signal-line);
+  border-radius: 0;
+  padding: 0.8rem 0.95rem;
+  background: rgba(3, 7, 17, 0.84);
+  box-shadow: none;
+  backdrop-filter: blur(14px);
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+}
+
+.home :global(.pressq-studio-float-card span) {
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.48rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-float-card strong) {
+  color: var(--signal-copy);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+}
+
+.home :global(.pressq-studio-float-card--top) {
+  top: 23%;
+  right: -18px;
+}
+
+.home :global(.pressq-studio-float-card--bottom) {
+  bottom: 20%;
+  left: -18px;
+}
+
+.home :global(.pressq-studio-scroll) {
+  position: absolute;
+  bottom: 26px;
+  left: max(32px, calc((100% - 1440px) / 2));
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--signal-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-scroll > span) {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 1px;
+  border: 0;
+  border-radius: 0;
+  background: var(--signal-line-strong);
+}
+
+.home :global(.pressq-studio-scroll > span)::after {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  left: auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--signal-cyan);
+  box-shadow: 0 0 10px var(--signal-cyan);
+  content: "";
+  animation: signal-scan 2s ease-in-out infinite;
+}
+
+.home :global(.pressq-studio-routes),
+.home :global(.pressq-studio-play),
+.home :global(.pressq-studio-record),
+.home :global(.pressq-studio-method),
+.home :global(.pressq-studio-signals) {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--signal-line);
+  border-radius: 0;
+  padding: clamp(5rem, 9vw, 8.5rem) max(24px, calc((100% - 1440px) / 2));
+  color: var(--signal-copy);
+}
+
+.home :global(.pressq-studio-routes),
+.home :global(.pressq-studio-record),
+.home :global(.pressq-studio-signals) {
+  background:
+    linear-gradient(rgba(116, 213, 230, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 213, 230, 0.035) 1px, transparent 1px),
+    var(--signal-bg);
+  background-size: 64px 64px;
+}
+
+.home :global(.pressq-studio-play),
+.home :global(.pressq-studio-method) {
+  background:
+    radial-gradient(circle at 90% 18%, rgba(101, 239, 255, 0.07), transparent 24%),
+    linear-gradient(140deg, #050914, #02040a 72%);
+}
+
+.home :global(.pressq-studio-routes)::after,
+.home :global(.pressq-studio-play)::after,
+.home :global(.pressq-studio-record)::after,
+.home :global(.pressq-studio-method)::after,
+.home :global(.pressq-studio-signals)::after {
+  position: absolute;
+  top: 2rem;
+  right: max(24px, calc((100% - 1440px) / 2));
+  z-index: 1;
+  color: var(--signal-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-routes)::after { content: "01 / Archive paths"; }
+.home :global(.pressq-studio-record)::after { content: "02 / Dataset signal"; }
+.home :global(.pressq-studio-method)::after { content: "03 / Evidence protocol"; }
+.home :global(.pressq-studio-signals)::after { content: "04 / Live index"; }
+
+.home :global(.pressq-studio-routes)::before,
+.home :global(.pressq-studio-play)::before,
+.home :global(.pressq-studio-record)::before,
+.home :global(.pressq-studio-method)::before,
+.home :global(.pressq-studio-signals)::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: max(24px, calc((100% - 1440px) / 2));
+  z-index: 0;
+  width: 1px;
+  background: linear-gradient(transparent, var(--signal-line), transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.home :global(.pressq-studio-section-heading) {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, 1440px);
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
+  align-items: end;
+  gap: 1.5rem 4rem;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  padding: 0 0 1.6rem;
+  border-bottom: 1px solid var(--signal-line);
+  text-align: left;
+}
+
+.home :global(.pressq-studio-section-heading)::before {
+  display: none;
+}
+
+.home :global(.pressq-studio-section-heading > p) {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.home :global(.pressq-studio-section-heading h2) {
+  margin: 0;
+  color: var(--signal-copy);
+  font-size: clamp(2.9rem, 6.2vw, 6rem);
+  font-weight: 950;
+  letter-spacing: -0.065em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.home :global(.pressq-studio-section-heading > span) {
+  display: block;
+  max-width: 390px;
+  margin: 0;
+  color: var(--signal-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.home :global(.pressq-studio-route-grid) {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, 1440px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 auto;
+  border: 1px solid var(--signal-line);
+  background: var(--signal-line);
+}
+
+.home :global(.pressq-studio-route-card),
+.home :global(.pressq-studio-route-card:last-child) {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-column: auto;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: var(--signal-bg-raised);
+  box-shadow: none;
+  transition: background 180ms ease, transform 180ms ease;
+  clip-path: none;
+}
+
+.home :global(.pressq-studio-route-card:hover) {
+  border-color: transparent;
+  background: #080e1c;
+  box-shadow: none;
+  transform: translateY(-4px);
+}
+
+.home :global(.pressq-studio-route-visual),
+.home :global(.pressq-studio-route-visual.is-chat) {
+  position: relative;
+  display: grid;
+  min-height: 270px;
+  place-items: center;
+  overflow: hidden;
+  border: 0;
+  border-bottom: 1px solid var(--signal-line);
+  background:
+    linear-gradient(rgba(101, 239, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 239, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 55%, rgba(101, 239, 255, 0.12), transparent 42%),
+    #040817;
+  background-size: 34px 34px, 34px 34px, 100% 100%, 100% 100%;
+}
+
+.home :global(.pressq-studio-route-visual.is-analytics) {
+  background:
+    linear-gradient(rgba(241, 91, 207, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(241, 91, 207, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 62% 24%, rgba(241, 91, 207, 0.12), transparent 34%),
+    #070717;
+  background-size: 34px 34px, 34px 34px, 100% 100%, 100% 100%;
+}
+
+.home :global(.pressq-studio-route-visual.is-chat) {
+  background:
+    linear-gradient(rgba(138, 125, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 125, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 45% 45%, rgba(138, 125, 255, 0.14), transparent 40%),
+    #050612;
+  background-size: 34px 34px, 34px 34px, 100% 100%, 100% 100%;
+}
+
+.home :global(.pressq-studio-route-visual)::after {
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(101, 239, 255, 0.1);
+  border-radius: 0;
+  content: "";
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  transform: none;
+}
+
+.home :global(.pressq-studio-route-number) {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.2rem;
+  z-index: 4;
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.17em;
+}
+
+.home :global(.pressq-studio-route-character) {
+  position: relative;
+  z-index: 2;
+  width: min(66%, 290px);
+  height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.38));
+}
+
+.home :global(.pressq-studio-route-visual.is-chat .pressq-studio-route-character) {
+  height: 240px;
+}
+
+.home :global(.pressq-studio-chart) {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(70%, 260px);
+  height: 150px;
+  align-items: end;
+  justify-content: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--signal-line-strong);
+}
+
+.home :global(.pressq-studio-chart > span) {
+  width: clamp(21px, 4vw, 35px);
+  border: 1px solid rgba(101, 239, 255, 0.22);
+  border-radius: 0;
+  background: linear-gradient(to top, rgba(138, 125, 255, 0.48), rgba(101, 239, 255, 0.88));
+  box-shadow: none;
+}
+
+.home :global(.pressq-studio-chart > i) {
+  position: absolute;
+  inset: 22% -8% auto 3%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--signal-pink), var(--signal-cyan), transparent);
+  box-shadow: 0 0 10px rgba(101, 239, 255, 0.32);
+  transform: rotate(-11deg);
+}
+
+.home :global(.pressq-studio-route-content),
+.home :global(.pressq-studio-route-card:last-child .pressq-studio-route-content) {
+  position: relative;
+  z-index: 4;
+  display: block;
+  margin: 0;
+  padding: 1.6rem 1.55rem 1.75rem;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.home :global(.pressq-studio-route-content > p) {
+  margin: 0;
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-route-content h3) {
+  margin: 0.75rem 0 0;
+  color: var(--signal-copy);
+  font-size: clamp(1.5rem, 2.6vw, 2.05rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-route-content > span) {
+  display: block;
+  min-height: 5.1em;
+  margin: 0.85rem 0 0;
+  color: var(--signal-muted);
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+.home :global(.pressq-studio-route-content a) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.15rem;
+  color: var(--signal-copy);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.56rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-route-content a b) {
+  color: var(--signal-cyan);
+}
+
+.home :global(.pressq-studio-game-layout) {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, 1440px);
+  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.55fr);
+  align-items: stretch;
+  gap: 1px;
+  margin: 0 auto;
+  border: 1px solid var(--signal-line);
+  background: var(--signal-line);
+}
+
+.home :global(.pressq-studio-game-frame) {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0.5rem;
+  background: #02040a;
+  box-shadow: none;
+}
+
+.home :global(.pressq-studio-game-frame .quiu-ride-shell) {
+  border-radius: 0;
+}
+
+.home :global(.pressq-studio-game-info) {
+  width: auto;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: clamp(1.8rem, 3vw, 3rem);
+  background:
+    linear-gradient(rgba(101, 239, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 239, 255, 0.04) 1px, transparent 1px),
+    var(--signal-panel-solid);
+  background-size: 32px 32px;
+  box-shadow: none;
+}
+
+.home :global(.pressq-studio-game-info h3) {
+  margin: 1rem 0 0;
+  color: var(--signal-copy);
+  font-size: clamp(1.7rem, 3.1vw, 2.7rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-game-info > span) {
+  display: block;
+  margin: 1.15rem 0 0;
+  color: var(--signal-muted);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+.home :global(.pressq-studio-game-info ol) {
+  display: grid;
+  gap: 0;
+  margin: 1.7rem 0 0;
+  border-top: 1px solid var(--signal-line);
+}
+
+.home :global(.pressq-studio-game-info li) {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.55rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--signal-line);
+  color: var(--signal-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.home :global(.pressq-studio-game-info li b) {
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+}
+
+.home :global(.pressq-studio-record) {
+  border-radius: 0;
+}
+
+.home :global(.pressq-studio-record-orbit) {
+  position: absolute;
+  top: 8%;
+  right: -15%;
+  z-index: 0;
+  width: min(44vw, 600px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(101, 239, 255, 0.08);
+  border-radius: 50%;
+  box-shadow: 0 0 0 48px rgba(101, 239, 255, 0.012);
+}
+
+.home :global(.pressq-studio-record-inner) {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, 1440px);
+  grid-template-columns: minmax(260px, 0.56fr) minmax(0, 1.44fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7rem);
+  margin: 0 auto;
+}
+
+.home :global(.pressq-studio-record-copy h2),
+.home :global(.pressq-studio-method-copy h2) {
+  max-width: 650px;
+  margin: 1rem 0 0;
+  color: var(--signal-copy);
+  font-size: clamp(2.6rem, 4.8vw, 4.7rem);
+  font-weight: 950;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.home :global(.pressq-studio-record-copy > span),
+.home :global(.pressq-studio-method-copy > span) {
+  display: block;
+  max-width: 620px;
+  margin: 1.25rem 0 0;
+  color: var(--signal-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.home :global(.pressq-studio-record-copy a) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  color: var(--signal-copy);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.56rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-record-copy a b) {
+  color: var(--signal-cyan);
+}
+
+.home :global(.pressq-studio-record-grid) {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--signal-line);
+  background: var(--signal-line);
+}
+
+.home :global(.pressq-studio-record-grid > div),
+.home :global(.pressq-studio-record-grid > div:nth-child(4)) {
+  grid-column: span 2;
+  min-height: 160px;
+  border: 0;
+  border-radius: 0;
+  padding: 1.2rem;
+  background: rgba(5, 10, 21, 0.96);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.home :global(.pressq-studio-record-grid > div:nth-child(4)) {
+  grid-column: 2 / span 2;
+}
+
+.home :global(.pressq-studio-record-grid dt) {
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-record-grid dd) {
+  margin: 0.8rem 0 0;
+  color: var(--signal-copy);
+  font-size: clamp(2.1rem, 4vw, 3.3rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.home :global(.pressq-studio-record-detail) {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--signal-muted);
+  font-size: 0.66rem;
+  font-weight: 520;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.home :global(.pressq-studio-method) {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 9rem);
+}
+
+.home :global(.pressq-studio-method-art),
+.home :global(.pressq-studio-method-copy) {
+  position: relative;
+  z-index: 2;
+}
+
+.home :global(.pressq-studio-method-art) {
+  display: grid;
+  min-height: 470px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--signal-line);
+  background:
+    linear-gradient(rgba(101, 239, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 239, 255, 0.04) 1px, transparent 1px),
+    rgba(4, 8, 18, 0.72);
+  background-size: 36px 36px;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+}
+
+.home :global(.pressq-studio-method-ring) {
+  position: absolute;
+  width: min(78%, 390px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(101, 239, 255, 0.13);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 30px rgba(101, 239, 255, 0.018),
+    0 0 0 62px rgba(241, 91, 207, 0.012);
+}
+
+.home :global(.pressq-studio-method-ring)::after {
+  position: absolute;
+  right: 7%;
+  bottom: 10%;
+  width: 13px;
+  aspect-ratio: 1;
+  border-radius: 0;
+  background: var(--signal-pink);
+  box-shadow: 0 0 18px rgba(241, 91, 207, 0.5);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.home :global(.pressq-studio-method-icon) {
+  position: relative;
+  width: min(57%, 255px);
+  height: auto;
+  filter: grayscale(0.15) drop-shadow(0 22px 30px rgba(0, 0, 0, 0.42));
+  animation: none;
+}
+
+.home :global(.pressq-studio-method-tag) {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid var(--signal-line);
+  border-radius: 0;
+  padding: 0.7rem 0.85rem;
+  background: rgba(4, 8, 18, 0.88);
+  color: var(--signal-cyan);
+  box-shadow: none;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.51rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.home :global(.pressq-studio-method-copy > p) {
+  color: var(--signal-pink);
+}
+
+.home :global(.pressq-studio-method-copy ul) {
+  display: grid;
+  gap: 0;
+  margin: 1.8rem 0 0;
+  border-top: 1px solid var(--signal-line);
+}
+
+.home :global(.pressq-studio-method-copy li) {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  align-items: start;
+  gap: 0.65rem;
+  padding: 0.78rem 0;
+  border-bottom: 1px solid var(--signal-line);
+  color: var(--signal-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.home :global(.pressq-studio-method-copy li i) {
+  display: grid;
+  width: 1.35rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--signal-line-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--signal-cyan);
+  font-size: 0.62rem;
+  font-style: normal;
+}
+
+.home :global(.pressq-studio-method-copy .pressq-studio-actions) {
+  margin-top: 2rem;
+}
+
+.home :global(.pressq-studio-text-link) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.8rem 0.4rem;
+  color: var(--signal-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.56rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-signal-grid) {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, 1440px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 auto;
+  border: 1px solid var(--signal-line);
+  background: var(--signal-line);
+}
+
+.home :global(.pressq-studio-ranking-card),
+.home :global(.pressq-studio-query-card) {
+  border: 0;
+  border-radius: 0;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  background: rgba(5, 10, 21, 0.97);
+  box-shadow: none;
+}
+
+.home :global(.pressq-studio-ranking-card > div) {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.7rem;
+}
+
+.home :global(.pressq-studio-ranking-row) {
+  display: grid;
+  grid-template-columns: 2rem minmax(100px, 0.68fr) minmax(100px, 1fr) 2rem;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.home :global(.pressq-studio-ranking-index) {
+  color: var(--signal-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.54rem;
+  font-weight: 900;
+}
+
+.home :global(.pressq-studio-ranking-label) {
+  overflow: hidden;
+  color: var(--signal-muted);
+  font-size: 0.76rem;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home :global(.pressq-studio-ranking-track) {
+  display: block;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home :global(.pressq-studio-ranking-track i) {
+  display: block;
+  height: 100%;
+  border-radius: 0;
+  background: linear-gradient(90deg, var(--signal-violet), var(--signal-pink), var(--signal-cyan));
+}
+
+.home :global(.pressq-studio-ranking-row strong) {
+  color: var(--signal-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.home :global(.pressq-studio-query-card) {
+  position: relative;
+  min-height: 300px;
+  grid-column: 1 / -1;
+  overflow: hidden;
+  padding-right: min(42%, 490px);
+  background:
+    linear-gradient(rgba(101, 239, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 239, 255, 0.035) 1px, transparent 1px),
+    #060b19;
+  background-size: 38px 38px;
+}
+
+.home :global(.pressq-studio-query-card h3) {
+  max-width: 680px;
+  margin: 1rem 0 0;
+  color: var(--signal-copy);
+  font-size: clamp(2.2rem, 4.5vw, 4.4rem);
+  font-weight: 950;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.home :global(.pressq-studio-query-card > span:not(.pressq-studio-query-orbit)) {
+  display: block;
+  max-width: 660px;
+  margin: 1rem 0 0;
+  color: var(--signal-muted);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+.home :global(.pressq-studio-query-card > a) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  border: 1px solid var(--signal-line-strong);
+  border-radius: 0;
+  padding: 0.8rem 1rem;
+  background: transparent;
+  color: var(--signal-copy);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.56rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.home :global(.pressq-studio-query-orbit) {
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  width: min(30vw, 330px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(101, 239, 255, 0.2);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 28px rgba(101, 239, 255, 0.018),
+    0 0 0 56px rgba(241, 91, 207, 0.012);
+  transform: translateY(-50%);
+}
+
+.home :global(.pressq-studio-query-orbit)::before {
+  position: absolute;
+  inset: 29%;
+  border: 1px solid rgba(241, 91, 207, 0.3);
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #fff 0 2%, var(--signal-cyan) 4%, var(--signal-pink) 33%, #090d25 70%);
+  box-shadow: 0 0 34px rgba(101, 239, 255, 0.16);
+  content: "";
+}
+
+@keyframes signal-scan {
+  0%, 100% { opacity: 0.25; transform: translateX(-20px); }
+  50% { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 1180px) {
+  .home :global(.pressq-studio-header) {
+    width: min(1500px, calc(100% - 32px));
+  }
+
+  .home :global(.pressq-studio-nav-shell) {
+    gap: 1.1rem;
+  }
+
+  .home :global(.pressq-studio-desktop-nav) {
+    gap: 0.85rem;
+  }
+
+  .home :global(.pressq-studio-desktop-nav a) {
+    font-size: 0.52rem;
+  }
+
+  .home :global(.pressq-studio-hero-inner) {
+    width: min(1440px, calc(100% - 48px));
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+    gap: 2.8rem;
+  }
+
+  .home :global(.pressq-studio-record-inner) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-record-copy) {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 980px) {
+  .home :global(.pressq-studio-hero) {
+    min-height: auto;
+  }
+
+  .home :global(.pressq-studio-nav-shell) {
+    grid-template-columns: 1fr auto;
+  }
+
+  .home :global(.pressq-studio-desktop-nav) {
+    display: none;
+  }
+
+  .home :global(.pressq-studio-mobile-nav) {
+    display: flex;
+    gap: 1.15rem;
+    overflow-x: auto;
+    margin-top: 0.6rem;
+    padding: 0.7rem 0.2rem 0.55rem;
+    scrollbar-width: none;
+  }
+
+  .home :global(.pressq-studio-mobile-nav::-webkit-scrollbar) {
+    display: none;
+  }
+
+  .home :global(.pressq-studio-mobile-nav a) {
+    flex: none;
+    color: var(--signal-muted);
+    font-family: var(--font-mono), monospace;
+    font-size: 0.54rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .home :global(.pressq-studio-hero-inner) {
+    width: min(760px, calc(100% - 48px));
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    padding: 4.5rem 0 6.5rem;
+  }
+
+  .home :global(.pressq-studio-hero-copy) {
+    max-width: 760px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .home :global(.pressq-studio-kicker),
+  .home :global(.pressq-studio-actions) {
+    justify-content: flex-start;
+  }
+
+  .home :global(.pressq-studio-lede),
+  .home :global(.pressq-studio-hero-stats),
+  .home :global(.pressq-studio-title-accent) {
+    margin-inline: 0;
+  }
+
+  .home :global(.pressq-studio-hero-art) {
+    width: 100%;
+    min-height: 520px;
+    margin: 0;
+  }
+
+  .home :global(.pressq-studio-scroll) {
+    display: none;
+  }
+
+  .home :global(.pressq-studio-route-grid) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-route-card),
+  .home :global(.pressq-studio-route-card:last-child) {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  .home :global(.pressq-studio-route-visual),
+  .home :global(.pressq-studio-route-visual.is-chat) {
+    min-height: 270px;
+    border-right: 1px solid var(--signal-line);
+    border-bottom: 0;
+  }
+
+  .home :global(.pressq-studio-route-content > span) {
+    min-height: 0;
+  }
+
+  .home :global(.pressq-studio-game-layout) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-game-info) {
+    width: auto;
+    margin: 0;
+  }
+
+  .home :global(.pressq-studio-method) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-method-art) {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 700px) {
+  .home :global(.pressq-studio-header) {
+    width: calc(100% - 24px);
+    padding-top: 12px;
+  }
+
+  .home :global(.pressq-studio-nav-shell) {
+    min-height: 62px;
+    padding: 0.55rem 0.6rem 0.55rem 0.8rem;
+    clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 11px 100%, 0 calc(100% - 11px));
+  }
+
+  .home :global(.pressq-studio-brand img) {
+    width: 34px;
+    height: 37px;
+  }
+
+  .home :global(.pressq-studio-brand strong) {
+    font-size: 0.71rem;
+  }
+
+  .home :global(.pressq-studio-brand small) {
+    display: none;
+  }
+
+  .home :global(.pressq-studio-nav-cta) {
+    min-width: 102px;
+    min-height: 40px;
+    padding: 0.65rem 0.7rem;
+    font-size: 0.52rem;
+  }
+
+  .home :global(.pressq-studio-mobile-nav) {
+    margin-top: 0.45rem;
+  }
+
+  .home :global(.pressq-studio-hero-inner) {
+    width: calc(100% - 32px);
+    gap: 2.8rem;
+    padding: 3.8rem 0 5.5rem;
+  }
+
+  .home :global(.pressq-studio-kicker) {
+    margin-bottom: 1.65rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.13em;
+  }
+
+  .home :global(.pressq-studio-hero h1) {
+    font-size: clamp(3.15rem, 15.7vw, 5.1rem);
+    line-height: 0.98;
+  }
+
+  .home :global(.pressq-studio-lede) {
+    margin-top: 1.5rem;
+    font-size: 0.91rem;
+    line-height: 1.65;
+  }
+
+  .home :global(.pressq-studio-actions) {
+    align-items: stretch;
+  }
+
+  .home :global(.pressq-studio-button) {
+    width: 100%;
+  }
+
+  .home :global(.pressq-studio-hero-stats) {
+    margin-top: 2.4rem;
+  }
+
+  .home :global(.pressq-studio-hero-stats > div) {
+    padding: 0.85rem 0.65rem;
+  }
+
+  .home :global(.pressq-studio-hero-stats dt) {
+    font-size: 0.42rem;
+  }
+
+  .home :global(.pressq-studio-hero-stats dd) {
+    font-size: 1rem;
+  }
+
+  .home :global(.pressq-studio-hero-art) {
+    min-height: 400px;
+  }
+
+  .modelFrame {
+    inset: 38px 0 50px;
+  }
+
+  .modelTelemetry {
+    display: none;
+  }
+
+  .home :global(.pressq-studio-float-card) {
+    min-width: 126px;
+    padding: 0.62rem 0.7rem;
+  }
+
+  .home :global(.pressq-studio-float-card strong) {
+    font-size: 0.61rem;
+  }
+
+  .home :global(.pressq-studio-float-card--top) {
+    top: 19%;
+    right: -5px;
+  }
+
+  .home :global(.pressq-studio-float-card--bottom) {
+    bottom: 14%;
+    left: -5px;
+  }
+
+  .home :global(.pressq-studio-routes),
+  .home :global(.pressq-studio-play),
+  .home :global(.pressq-studio-record),
+  .home :global(.pressq-studio-method),
+  .home :global(.pressq-studio-signals) {
+    padding: 5.5rem 16px 4.5rem;
+  }
+
+  .home :global(.pressq-studio-routes)::after,
+  .home :global(.pressq-studio-play)::after,
+  .home :global(.pressq-studio-record)::after,
+  .home :global(.pressq-studio-method)::after,
+  .home :global(.pressq-studio-signals)::after {
+    top: 1.5rem;
+    right: 16px;
+  }
+
+  .home :global(.pressq-studio-routes)::before,
+  .home :global(.pressq-studio-play)::before,
+  .home :global(.pressq-studio-record)::before,
+  .home :global(.pressq-studio-method)::before,
+  .home :global(.pressq-studio-signals)::before {
+    left: 16px;
+  }
+
+  .home :global(.pressq-studio-section-heading) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .home :global(.pressq-studio-section-heading h2) {
+    font-size: clamp(2.65rem, 13vw, 4.4rem);
+  }
+
+  .home :global(.pressq-studio-section-heading > span) {
+    font-size: 0.84rem;
+  }
+
+  .home :global(.pressq-studio-route-card),
+  .home :global(.pressq-studio-route-card:last-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-route-visual),
+  .home :global(.pressq-studio-route-visual.is-chat) {
+    min-height: 230px;
+    border-right: 0;
+    border-bottom: 1px solid var(--signal-line);
+  }
+
+  .home :global(.pressq-studio-route-character),
+  .home :global(.pressq-studio-route-visual.is-chat .pressq-studio-route-character) {
+    height: 190px;
+  }
+
+  .home :global(.pressq-studio-game-frame) {
+    margin: 0;
+    padding: 0.25rem;
+  }
+
+  .home :global(.pressq-studio-record-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home :global(.pressq-studio-record-grid > div),
+  .home :global(.pressq-studio-record-grid > div:nth-child(4)) {
+    min-height: 145px;
+    grid-column: auto;
+  }
+
+  .home :global(.pressq-studio-record-grid > div:last-child) {
+    grid-column: 1 / -1;
+  }
+
+  .home :global(.pressq-studio-method-art) {
+    min-height: 320px;
+  }
+
+  .home :global(.pressq-studio-signal-grid) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-query-card) {
+    min-height: 410px;
+    grid-column: auto;
+    padding-right: 1.5rem;
+    padding-bottom: 12rem;
+  }
+
+  .home :global(.pressq-studio-query-orbit) {
+    top: auto;
+    right: 50%;
+    bottom: -82px;
+    width: 230px;
+    transform: translateX(50%);
+  }
+}
+
+@media (max-width: 460px) {
+  .home :global(.pressq-studio-hero h1) {
+    font-size: clamp(2.95rem, 15.3vw, 4rem);
+  }
+
+  .home :global(.pressq-studio-hero-stats) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home :global(.pressq-studio-hero-stats > div:nth-child(3)) {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--signal-line);
+    border-left: 0;
+  }
+
+  .home :global(.pressq-studio-hero-stats dd) {
+    white-space: normal;
+  }
+
+  .home :global(.pressq-studio-record-grid) {
+    grid-template-columns: 1fr;
+  }
+
+  .home :global(.pressq-studio-record-grid > div),
+  .home :global(.pressq-studio-record-grid > div:nth-child(4)),
+  .home :global(.pressq-studio-record-grid > div:last-child) {
+    min-height: 126px;
+    grid-column: auto;
+  }
+
+  .home :global(.pressq-studio-ranking-row) {
+    grid-template-columns: 1.7rem minmax(90px, 1fr) 1.8rem;
+  }
+
+  .home :global(.pressq-studio-ranking-track) {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (max-height: 560px) and (min-width: 701px) {
+  .home :global(.pressq-studio-hero) {
+    min-height: auto;
+  }
+
+  .home :global(.pressq-studio-header) {
+    padding-top: 12px;
+  }
+
+  .home :global(.pressq-studio-nav-shell) {
+    min-height: 58px;
+  }
+
+  .home :global(.pressq-studio-hero-inner) {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+    gap: 2rem;
+    padding: 3rem 0 4.5rem;
+  }
+
+  .home :global(.pressq-studio-hero h1) {
+    font-size: clamp(3.6rem, 7vw, 5.2rem);
+  }
+
+  .home :global(.pressq-studio-kicker) {
+    margin-bottom: 1.2rem;
+  }
+
+  .home :global(.pressq-studio-lede) {
+    margin-top: 1.2rem;
+  }
+
+  .home :global(.pressq-studio-hero-stats) {
+    margin-top: 1.7rem;
+  }
+
+  .home :global(.pressq-studio-hero-art) {
+    min-height: 390px;
+  }
+
+  .modelFrame {
+    inset-block: 34px 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home *,
+  .home *::before,
+  .home *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .home :global(.pressq-studio-scroll > span)::after {
+    animation: none;
+    transform: none;
+  }
+
+  .home :global(.pressq-studio-route-card),
+  .home :global(.pressq-studio-button),
+  .home :global(.pressq-studio-nav-cta),
+  .home :global(.pressq-studio-desktop-nav a),
+  .home :global(.pressq-studio-desktop-nav a)::after {
+    transition: none;
+  }
+}

@@ -5,6 +5,7 @@ const mainLinks = [
   { label: "About", href: "/about" },
   { label: "Methodology", href: "/methodology" },
   { label: "Analytics", href: "/analytics" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Rainbow Road", href: "/rainbowroad" },
   { label: "Chat", href: "/chat" },
   { label: "Contribute", href: "/contribute" },
@@ -15,6 +16,7 @@ const supportLinks = [
   { label: "Press Q Dataset Signal", href: "/" },
   { label: "Research Console", href: "/chat" },
   { label: "Visual Analytics", href: "/analytics" },
+  { label: "Character Gallery", href: "/gallery" },
   { label: "Rainbow Road", href: "/rainbowroad" },
   { label: "Contribute Characters", href: "/contribute" },
   { label: "Press Q Archive", href: "/" },
@@ -24,8 +26,9 @@ const socialLinks = ["X (Twitter)", "Instagram", "LinkedIn"];
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#161c4e] px-5 py-12 text-white sm:px-8 md:px-14 md:py-16 lg:px-20">
+    <footer className="site-signal-footer px-5 py-12 text-white sm:px-8 md:px-14 md:py-16 lg:px-20">
       <div className="mx-auto max-w-[1700px]">
+        <p className="site-signal-footer-index" aria-hidden="true">09 / End of transmission</p>
         <div className="grid gap-8 md:grid-cols-[1fr_auto_1fr] md:items-center">
           <Link
             href="/"
@@ -42,7 +45,7 @@ export default function SiteFooter() {
             <span className="text-lg font-black uppercase tracking-[0.2em]">Press Q</span>
           </Link>
 
-          <nav className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold sm:gap-x-8 md:justify-center">
+          <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold sm:gap-x-8 md:justify-center">
             {mainLinks.map((link) => (
               <Link
                 key={link.label}
@@ -54,23 +57,23 @@ export default function SiteFooter() {
             ))}
           </nav>
 
-          <nav className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold sm:gap-x-8 md:justify-end">
+          <div aria-label="Social profiles coming soon" className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold sm:gap-x-8 md:justify-end">
             {socialLinks.map((label) => (
-              <a
+              <span
                 key={label}
-                href="#"
-                className="transition hover:text-[#ff7ca4]"
+                title={`${label} profile coming soon`}
+                className="text-white/45"
               >
                 {label}
-              </a>
+              </span>
             ))}
-          </nav>
+          </div>
         </div>
 
         <div className="pq-spectrum-rule my-8 sm:my-10" />
 
         <div className="grid gap-8 text-sm md:grid-cols-[1fr_auto] md:items-center">
-          <nav className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-8">
+          <nav aria-label="Research links" className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-8">
             {supportLinks.map((link) => (
               <Link
                 key={link.label}

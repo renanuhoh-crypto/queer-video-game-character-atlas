@@ -19,8 +19,8 @@ export default function ResearchReferences({
     <section
       className={
         light
-          ? "rounded-[1.75rem] border border-[#dfe3f3] bg-white p-5 shadow-[0_18px_50px_rgba(34,42,95,0.08)] sm:p-7"
-          : "pq-panel relative overflow-hidden p-5 sm:p-7"
+          ? "pq-reference-panel border border-[#dfe3f3] bg-white"
+          : "pq-panel pq-reference-panel relative overflow-hidden"
       }
     >
       {!light ? (
@@ -56,7 +56,7 @@ export default function ResearchReferences({
             key={reference.id}
             className={
               light
-                ? "rounded-2xl border border-[#dfe3f3] bg-[#f7f8ff] p-4"
+                ? "border border-[#dfe3f3] bg-[#f7f8ff] p-4"
                 : "border border-white/10 bg-black/25 p-4"
             }
           >

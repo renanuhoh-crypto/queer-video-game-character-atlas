@@ -31,6 +31,7 @@ type Character = {
   narrative_role?: string;
   playable: boolean;
   playable_status?: string;
+  content_availability?: string[];
   gender?: string;
   sexuality?: string;
   identity_label?: string[];
@@ -145,6 +146,7 @@ function loadCharactersFromCSV(): Character[] {
     narrative_role: row.narrative_role || "",
     playable: normalize(row.playable_status) === "playable",
     playable_status: row.playable_status || "",
+    content_availability: toArray(row.content_availability),
     gender: row.gender || "",
     sexuality: row.sexuality || "",
     identity_label: [row.gender, row.sexuality].filter(Boolean),
@@ -179,6 +181,7 @@ Release Year: ${character.release_year ?? "Not registered"}
 Genre: ${character.genre || "Not registered"}
 Narrative Role: ${formatLabel(character.narrative_role)}
 Playable Status: ${formatLabel(character.playable_status)}
+Where Character Appears: ${formatArray(character.content_availability)}
 Gender: ${formatLabel(character.gender)}
 Sexuality: ${formatLabel(character.sexuality)}
 Identity Labels: ${formatArray(character.identity_label)}
@@ -324,7 +327,7 @@ Grounding rules:
 - Distinguish those limitations precisely: "unknown" means the relevant evidence was considered but remains inconclusive; "not recorded" means Press Q currently has no documented value for the field; "none documented" means the current research found no supported marker. None proves absence.
 - General labels such as man and woman do not establish cisgender status. Trans men are men and trans women are women; specific trans labels preserve a documented trans dimension rather than defining an opposing gender.
 - Keep gender identity, gender expression, sexual orientation, and romantic orientation distinct. Do not infer one from another.
-- When research_status, evidence_confidence, platform_version, or limitations qualify an entry, preserve those qualifications in the answer.
+- When research_status, evidence_confidence, content_availability, platform_version, or limitations qualify an entry, preserve those qualifications in the answer.
 - Do not infer race, ethnicity, religion, disability, nationality, sexuality, gender identity, or representation quality unless it appears in the Press Q dataset context.
 - Always analyze intersectionality_details when identifying race, ethnicity, religion, disability, or intersectional identities.
 - If a character contains "Black" inside intersectionality_details, they should be recognized as a Black character.

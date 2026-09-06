@@ -1,0 +1,136 @@
+.scene {
+  position: relative;
+  width: 100%;
+  min-height: 330px;
+  overflow: hidden;
+  border: 1px solid rgba(111, 239, 255, 0.22);
+  background:
+    linear-gradient(rgba(94, 226, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 226, 255, 0.07) 1px, transparent 1px),
+    radial-gradient(circle at 50% 48%, rgba(45, 188, 255, 0.16), transparent 42%),
+    rgba(3, 8, 25, 0.64);
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+  isolation: isolate;
+  touch-action: pan-y;
+}
+
+.scene::before,
+.scene::after {
+  position: absolute;
+  z-index: 2;
+  width: 66px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: #63efff;
+  box-shadow: 0 0 18px rgba(99, 239, 255, 0.72);
+}
+
+.scene::before {
+  top: 18px;
+  left: 18px;
+}
+
+.scene::after {
+  right: 18px;
+  bottom: 18px;
+  background: #fd58da;
+  box-shadow: 0 0 18px rgba(253, 88, 218, 0.68);
+}
+
+.scene canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
+.poster {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: min(58%, 250px);
+  height: auto;
+  opacity: 0;
+  filter: saturate(0.7) brightness(1.25);
+  transform: translate(-50%, -50%);
+  transition: opacity 180ms ease;
+}
+
+.scene[data-fallback="true"] .poster {
+  opacity: 0.82;
+}
+
+.scene[data-loading="true"] .poster {
+  opacity: 0.76;
+  filter: saturate(0.9) brightness(1.12) drop-shadow(0 0 24px rgba(85, 226, 255, 0.2));
+  animation: quui-poster-breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes quui-poster-breathe {
+  50% {
+    opacity: 0.52;
+    transform: translate(-50%, -50%) scale(0.975);
+  }
+}
+
+.label,
+.status {
+  position: absolute;
+  z-index: 3;
+  margin: 0;
+  color: rgba(218, 248, 255, 0.76);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.label {
+  top: 17px;
+  right: 18px;
+}
+
+.status {
+  bottom: 16px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status::before {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #69f6c9;
+  box-shadow: 0 0 10px #69f6c9;
+  content: "";
+}
+
+@media (max-width: 1023px) {
+  .scene {
+    min-height: 290px;
+  }
+}
+
+@media (max-width: 640px) {
+  .scene {
+    min-height: 250px;
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene[data-loading="true"] .poster {
+    animation: none;
+  }
+}

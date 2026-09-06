@@ -71,3 +71,53 @@ export function getIntersectionalityMarkers(record: IntersectionalityRecord) {
   }
   return ["not_recorded"];
 }
+
+export function getEthnicityMarkers(record: IntersectionalityRecord) {
+  const evidenceText = normalize(
+    [
+      ...(record.intersectionality || []),
+      record.intersectionality_present,
+      record.intersectionality_details,
+    ]
+      .filter(Boolean)
+      .join("; "),
+  );
+  const paddedEvidence = `_${evidenceText}_`;
+  const markers = new Set<string>();
+  const includes = (term: string) =>
+    paddedEvidence.includes(`_${term}_`);
+
+  const compoundMarkers = [
+    "mexican_american",
+    "african_american",
+    "asian_american",
+    "afro_latino",
+  ];
+  compoundMarkers.forEach((marker) => {
+    if (includes(marker)) markers.add(marker);
+  });
+
+  [
+    "black",
+    "asian",
+    "indigenous",
+    "mexican",
+    "african",
+    "indian",
+    "arab",
+    "latino",
+    "latina",
+    "latine",
+    "latinx",
+    "hispanic",
+    "romani",
+  ].forEach((marker) => {
+    if (includes(marker)) markers.add(marker);
+  });
+
+  if (markers.has("mexican_american")) markers.delete("mexican");
+  if (markers.has("african_american")) markers.delete("african");
+  if (markers.has("asian_american")) markers.delete("asian");
+
+  return Array.from(markers);
+}

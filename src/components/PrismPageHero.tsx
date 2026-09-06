@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AnalyticsMenu from "@/components/AnalyticsMenu";
+import Quiu3DStage from "@/components/Quiu3DStage";
 
 type PrismPageHeroProps = {
   eyebrow: string;
@@ -18,26 +19,33 @@ export default function PrismPageHero({
   hideIntro = false,
 }: PrismPageHeroProps) {
   return (
-    <section className={`pq-page-hero relative border-b border-[#dfe3f3] ${hideIntro ? "overflow-visible" : "overflow-hidden"}`}>
+    <section className={`pq-page-hero relative ${hideIntro ? "overflow-visible" : "overflow-hidden"}`}>
+      <div className="pq-system-hero-grid" aria-hidden="true" />
+      <div className="pq-system-hero-glow pq-system-hero-glow--cyan" aria-hidden="true" />
+      <div className="pq-system-hero-glow pq-system-hero-glow--pink" aria-hidden="true" />
+
       <header className="relative z-20 px-4 pt-4 sm:px-7 sm:pt-6 lg:px-10">
-        <div className="pq-topbar mx-auto flex max-w-[1700px] items-center justify-between gap-4 px-4 py-3 sm:px-5">
+        <div className="pq-topbar mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-2.5 sm:px-5">
           <Link href="/" aria-label="Press Q home" className="flex items-center gap-3">
             <Image
               src="/press-q-icon.png"
               alt=""
               width={624}
               height={667}
-              className="h-10 w-auto sm:h-12"
+              loading="eager"
+              className="h-9 w-auto sm:h-10"
             />
             <span className="text-sm font-black uppercase tracking-[0.22em] sm:text-base">
               Press Q
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#3b405f] md:flex xl:gap-8">
+          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] xl:flex xl:gap-7">
             <Link href="/about">About</Link>
             <Link href="/methodology">Methodology</Link>
-            <AnalyticsMenu />
+            <AnalyticsMenu dark />
+            <Link href="/gallery">Gallery</Link>
+            <Link href="/quiu-world">Quiu World</Link>
             <Link href="/contribute">Contribute</Link>
             <Link href="/ethics">Ethics</Link>
           </nav>
@@ -46,37 +54,48 @@ export default function PrismPageHero({
             Ask Quiu
           </Link>
         </div>
+
+        <nav className="pq-system-mobile-nav mx-auto max-w-[1500px] xl:hidden" aria-label="Primary navigation">
+          <Link href="/about">About</Link>
+          <Link href="/methodology">Methodology</Link>
+          <Link href="/analytics">Analytics</Link>
+          <Link href="/gallery">Gallery</Link>
+          <Link href="/quiu-world">Quiu World</Link>
+          <Link href="/contribute">Contribute</Link>
+          <Link href="/ethics">Ethics</Link>
+        </nav>
       </header>
 
-      <div className="pq-spectrum-rule mx-auto mt-4 max-w-[1700px]" />
+      <div className="pq-spectrum-rule mx-auto mt-3 max-w-[1500px]" />
 
       {!hideIntro ? (
-        <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:grid-cols-[1fr_0.38fr] lg:px-20">
-          <div className="max-w-5xl">
-            <p className="pq-eyebrow">
-              {eyebrow}
-            </p>
+        <div className="pq-system-hero-layout relative z-10 mx-auto grid max-w-[1440px] items-center gap-9 px-5 py-9 sm:px-8 md:px-12 md:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.68fr)] lg:px-16">
+          <div className="pq-system-hero-copy max-w-5xl">
+            <div className="pq-system-hero-kicker" aria-hidden="true">
+              <span>00 / Press Q archive</span>
+              <span>Research interface</span>
+            </div>
 
-            <h1 className="mt-5 break-words text-5xl font-black uppercase leading-[0.88] tracking-[-0.055em] text-[#12152b] sm:text-6xl md:text-8xl">
+            <p className="pq-eyebrow">{eyebrow}</p>
+
+            <h1 className="pq-system-hero-title mt-4 break-words font-black uppercase">
               {title}{" "}
-              <span className="text-[#4f5fe7]">
-                {accent}
-              </span>
+              <span>{accent}</span>
             </h1>
 
-            <p className="mt-5 max-w-3xl text-base font-medium leading-relaxed text-[#5d6480] sm:text-lg md:mt-6 md:text-xl">
+            <p className="pq-system-hero-description mt-5 max-w-2xl text-sm font-medium leading-relaxed sm:text-base md:text-lg">
               {description}
             </p>
+
+            <div className="pq-system-hero-readout" aria-hidden="true">
+              <span><i /> Live archive</span>
+              <span>Three evidence layers</span>
+              <span>Human review</span>
+            </div>
           </div>
 
-          <div className="pq-page-emblem relative mx-auto hidden aspect-square w-full max-w-[240px] items-center justify-center lg:flex" aria-hidden="true">
-            <Image
-              src="/press-q-icon.png"
-              alt=""
-              width={624}
-              height={667}
-              className="h-auto w-[72%] opacity-90"
-            />
+          <div className="pq-system-hero-model relative mx-auto w-full max-w-[540px]">
+            <Quiu3DStage />
           </div>
         </div>
       ) : null}

@@ -27,6 +27,7 @@ export const CHARACTER_COLUMNS = [
   "evidence_confidence",
   "platform_version",
   "last_reviewed",
+  "content_availability",
 ] as const;
 
 export type CharacterColumn = (typeof CHARACTER_COLUMNS)[number];

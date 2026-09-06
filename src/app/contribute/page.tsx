@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const PANEL =
-  "pq-panel relative overflow-hidden p-5 sm:p-7";
+  "pq-panel pq-content-panel relative overflow-hidden";
 
 const guidelines = [
   {
@@ -49,7 +49,7 @@ export default function ContributePage() {
         description="Suggest queer video game characters for future Press Q review. During beta v1.0, contributions are treated as research leads while the Press Q dataset is still being populated."
       />
 
-      <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
+      <section className="pq-editorial-content relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(217,70,239,0.12),transparent_30%),radial-gradient(circle_at_88%_14%,rgba(34,211,238,0.1),transparent_28%)]" />
 
         <div className="relative z-10 mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[0.85fr_1.15fr]">

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AdminPage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_92%_5%,rgba(196,187,255,0.3),transparent_27%),linear-gradient(180deg,#fbfbfe_0%,#f1f3fb_100%)] px-5 py-10 sm:px-8 md:px-14 lg:px-20">
+    <main className="pq-admin min-h-screen bg-[radial-gradient(circle_at_92%_5%,rgba(196,187,255,0.3),transparent_27%),linear-gradient(180deg,#fbfbfe_0%,#f1f3fb_100%)] px-5 py-8 sm:px-8 md:px-14 lg:px-20">
       <div className="mx-auto max-w-[1600px]">
         <header className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>

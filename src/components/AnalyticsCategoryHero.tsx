@@ -30,10 +30,12 @@ export default function AnalyticsCategoryHero({
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#dbe2ff] md:flex xl:gap-8">
+          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#dbe2ff] xl:flex xl:gap-7">
             <Link href="/about">About</Link>
             <Link href="/methodology">Methodology</Link>
             <AnalyticsMenu dark />
+            <Link href="/gallery">Gallery</Link>
+            <Link href="/quiu-world">Quiu World</Link>
             <Link href="/contribute">Contribute</Link>
             <Link href="/ethics">Ethics</Link>
           </nav>
@@ -42,6 +44,16 @@ export default function AnalyticsCategoryHero({
             Ask Quiu
           </Link>
         </div>
+
+        <nav className="pq-system-mobile-nav mx-auto max-w-[1700px] xl:hidden" aria-label="Primary navigation">
+          <Link href="/about">About</Link>
+          <Link href="/methodology">Methodology</Link>
+          <Link href="/analytics">Analytics</Link>
+          <Link href="/gallery">Gallery</Link>
+          <Link href="/quiu-world">Quiu World</Link>
+          <Link href="/contribute">Contribute</Link>
+          <Link href="/ethics">Ethics</Link>
+        </nav>
       </header>
 
       <div className="relative z-10 mx-auto grid max-w-[1500px] items-end gap-8 px-5 pb-14 pt-10 sm:px-8 md:px-14 md:pb-16 md:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.45fr)] lg:px-20">

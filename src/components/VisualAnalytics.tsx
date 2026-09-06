@@ -5,7 +5,10 @@ import type { CSSProperties, RefObject } from "react";
 import AnalyticsCategorySelector from "@/components/AnalyticsCategorySelector";
 import { getAnalyticsBucketDefinition } from "@/lib/analyticsBucketDefinitions";
 import type { AnalyticsCategorySlug } from "@/lib/analyticsCategories";
-import { getIntersectionalityMarkers } from "@/lib/analyticsIntersectionality";
+import {
+  getEthnicityMarkers,
+  getIntersectionalityMarkers,
+} from "@/lib/analyticsIntersectionality";
 import {
   Bar,
   BarChart,
@@ -71,7 +74,7 @@ type CountMap = Record<string, number>;
 
 const COLORS = ["#8291ff", "#59d8ef", "#ff6fae", "#f8d86f", "#aa8cff"];
 const PANEL =
-  "pq-data-panel relative min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-[#111743]/92 p-5 shadow-[0_24px_70px_rgba(6,9,36,0.28)] sm:p-7";
+  "pq-data-panel relative min-w-0 overflow-hidden rounded-xl border border-white/10 bg-[#111743]/92 p-4 shadow-[0_14px_42px_rgba(6,9,36,0.24)] sm:p-5";
 const EYEBROW =
   "font-mono text-[10px] font-black uppercase tracking-[0.24em] text-[#83e9f5] sm:text-[11px]";
 const LABELS: Record<string, string> = {
@@ -341,7 +344,12 @@ function BarPanel({
 
       {data.length ? (
         <div ref={ref} className="mt-6" style={{ height }}>
-          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+            minWidth={0}
+            initialDimension={{ width: 320, height }}
+          >
             <BarChart
               data={data}
               layout="vertical"
@@ -644,6 +652,7 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
       sexuality: {} as CountMap,
       identity: {} as CountMap,
       intersectionality: {} as CountMap,
+      ethnicity: {} as CountMap,
       scale: {} as CountMap,
       systemType: {} as CountMap,
       scope: {} as CountMap,
@@ -661,6 +670,9 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
       incrementArray(maps.identity, character.identity_category);
       getIntersectionalityMarkers(character).forEach((marker) =>
         increment(maps.intersectionality, marker),
+      );
+      getEthnicityMarkers(character).forEach((marker) =>
+        increment(maps.ethnicity, marker),
       );
       increment(maps.scale, character.game_scale);
       increment(maps.status, character.research_status);
@@ -759,7 +771,7 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
 
   return (
     <div className="analytics-data-library mx-auto w-full max-w-7xl space-y-6 py-4 sm:py-7">
-      <section className="rounded-[1.5rem] border border-[#8291ff]/20 bg-[#111743] p-5 sm:p-6">
+      <section className="rounded-xl border border-[#8291ff]/20 bg-[#111743] p-4 sm:p-5">
         <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)]">
           <div>
             <p className={EYEBROW}>Detailed analytics library</p>
@@ -783,17 +795,17 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
         reviewed={data.reviewed}
       />
 
-      <section className="rounded-[1.5rem] border border-[#8291ff]/20 bg-[#111743] p-5 text-[#d9def5] sm:p-6">
+      <section className="rounded-xl border border-[#8291ff]/20 bg-[#111743] p-4 text-[#d9def5] sm:p-5">
         <p className={EYEBROW}>How to read this page</p>
         <div className="mt-4 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4">
+          <div className="rounded-lg border border-white/10 bg-white/[.04] p-4">
             <h3 className="font-black text-white">Counts, not prevalence</h3>
             <p className="mt-2 text-sm leading-6 text-slate-300">
               Every number describes records currently documented by Press Q.
               It is not an estimate of all queer games or characters.
             </p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4">
+          <div className="rounded-lg border border-white/10 bg-white/[.04] p-4">
             <h3 className="font-black text-white">Different units stay separate</h3>
             <p className="mt-2 text-sm leading-6 text-slate-300">
               A character is one representation record, a system is one game
@@ -801,7 +813,7 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
               substituted for another.
             </p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4">
+          <div className="rounded-lg border border-white/10 bg-white/[.04] p-4">
             <h3 className="font-black text-white">Multiple tags can overlap</h3>
             <p className="mt-2 text-sm leading-6 text-slate-300">
               A record with several identities, markers, or scopes
@@ -811,14 +823,14 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
         </div>
       </section>
 
-      <div className="flex flex-col gap-4 rounded-[1.5rem] border border-white/10 bg-[#111743] p-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 rounded-xl border border-white/10 bg-[#111743] p-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid gap-2 sm:grid-cols-4">
           {(["characters", "systems", "readings", "coverage"] as Lens[]).map((item) => (
             <button
               key={item}
               type="button"
               onClick={() => setLens(item)}
-              className={`rounded-2xl px-5 py-3 text-xs font-black uppercase tracking-[.12em] transition ${
+              className={`rounded-lg px-4 py-2.5 text-xs font-black uppercase tracking-[.12em] transition ${
                 lens === item
                   ? "bg-[#8291ff] text-white shadow-[0_8px_26px_rgba(79,95,231,.35)]"
                   : "text-[#b5bee3] hover:bg-white/[.06] hover:text-white"
@@ -928,6 +940,15 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
               countingNote="Absence from the chart means not documented in the field, not that the marker is absent from the character."
               data={sortedData(data.maps.intersectionality)}
               filename="pressq-intersectionality"
+              categorySlug="intersectionality"
+            />
+            <BarPanel
+              eyebrow="Intersectionality"
+              title="Characters by ethnicity"
+              description="Counts character records by specifically documented ethnic or racialized identities. Broad markers without a supported specific identity are not converted into an ethnicity."
+              countingNote="A character with more than one explicitly documented identity appears in each applicable bar; no identity is inferred from name or appearance."
+              data={sortedData(data.maps.ethnicity)}
+              filename="pressq-characters-by-ethnicity"
               categorySlug="intersectionality"
             />
             <BarPanel
@@ -1091,7 +1112,7 @@ export default function VisualAnalytics({ characters, systems, readings }: Props
         </>
       ) : null}
 
-      <p className="rounded-2xl border border-[#8291ff]/25 bg-[#111743] px-5 py-4 text-xs font-medium leading-6 text-[#b5bee3]">
+      <p className="rounded-lg border border-[#8291ff]/25 bg-[#111743] px-4 py-3 text-xs font-medium leading-6 text-[#b5bee3]">
         All counts describe only the corpus documented by Press Q. Bar charts
         omit empty and explicit Unknown values, while Not recorded may appear
         as a data-completeness category. Detailed pages show every category and

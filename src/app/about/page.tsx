@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const PANEL =
-  "pq-panel relative overflow-hidden p-5 sm:p-7";
+  "pq-panel pq-content-panel relative overflow-hidden";
 
 const goals = [
   {
@@ -90,7 +90,7 @@ export default function AboutPage() {
         description="Press Q is a digital humanities prototype for reading queer game representation through the Press Q dataset, visual analytics, and AI-assisted querying through Quiu."
       />
 
-      <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
+      <section className="pq-editorial-content relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(217,70,239,0.12),transparent_30%),radial-gradient(circle_at_88%_14%,rgba(34,211,238,0.1),transparent_28%)]" />
 
         <div className="relative z-10 mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[1.2fr_0.8fr]">

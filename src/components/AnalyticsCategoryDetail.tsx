@@ -436,7 +436,7 @@ export default function AnalyticsCategoryDetail({
   );
 
   return (
-    <section className="relative px-4 py-10 sm:px-6 md:px-10 md:py-14 lg:px-14">
+    <section className="analytics-category-content relative px-4 py-9 sm:px-6 md:px-10 md:py-12 lg:px-14">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgba(217,70,239,0.1),transparent_28%),radial-gradient(circle_at_88%_12%,rgba(34,211,238,0.1),transparent_26%)]" />
       <div className="relative z-10 mx-auto max-w-[1400px] space-y-7">
         <div className="grid gap-5 lg:grid-cols-3">
@@ -476,7 +476,7 @@ export default function AnalyticsCategoryDetail({
         </div>
 
         {slug === "queer-readings" ? (
-          <div className="rounded-[1.5rem] border border-[#8291ff]/25 bg-[#eef0ff] px-5 py-5 sm:px-7">
+          <div className="rounded-xl border border-[#8291ff]/25 bg-[#eef0ff] px-4 py-4 sm:px-5">
             <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#4f5fe7]">
               Separate research unit
             </p>
@@ -512,7 +512,7 @@ export default function AnalyticsCategoryDetail({
               return (
                 <div key={bucket.key} className="space-y-6">
                   {slug === "sexuality" && bucket.key === CONDITIONAL_SEXUALITY_KEY ? (
-                    <div className="rounded-[1.5rem] border border-[#8291ff]/25 bg-[#eef0ff] px-5 py-5 sm:px-7">
+                    <div className="rounded-xl border border-[#8291ff]/25 bg-[#eef0ff] px-4 py-4 sm:px-5">
                       <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#4f5fe7]">
                         Separate evidence track
                       </p>
@@ -547,7 +547,7 @@ export default function AnalyticsCategoryDetail({
                     </div>
                   </div>
 
-                  <section className="mt-6 rounded-[1.5rem] border border-[#dfe3f3] bg-[#f7f8ff] p-4 sm:p-6">
+                  <section className="mt-5 rounded-xl border border-[#dfe3f3] bg-[#f7f8ff] p-4 sm:p-5">
                     <p className="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-[#4f5fe7]">
                       Category explanation
                     </p>
@@ -558,7 +558,7 @@ export default function AnalyticsCategoryDetail({
                         ["What it does not establish", bucketDefinition.doesNotMean],
                         ["How to interpret the number", bucketDefinition.interpretation],
                       ].map(([heading, text]) => (
-                        <div key={heading} className="rounded-2xl bg-white p-4">
+                        <div key={heading} className="rounded-lg bg-white p-4">
                           <h3 className="text-sm font-black text-[#171b42]">
                             {heading}
                           </h3>

@@ -49,9 +49,11 @@ therefore does not automatically constitute independent corroboration.
 3. **Discovery is not limited to prior lists.** `discovery_source` records
    whether a case came from an existing archive, community contribution,
    targeted search, playthrough, or another path.
-4. **Games change across releases.** `platform_version` and `last_reviewed`
-   preserve the platform, patch, expansion, or edition that was actually
-   researched.
+4. **Games change across releases.** `content_availability` distinguishes the
+   main campaign from optional base-game content, expansions, DLC, special
+   editions, updates, platform-specific content, and mods. `platform_version`
+   preserves the exact named release or content researched, while
+   `last_reviewed` records when that evidence was last checked.
 5. **Uncertainty is data.** `evidence_confidence` records the strength of the
    available evidence. Ambiguous or queerly read content should not be silently
    converted into canonical identity.
@@ -138,6 +140,27 @@ This is an audit trail and candidate queue, not a character count.
 `lgbtq_archive_character_import_preview.csv` records the rows that pass these
 rules before import. `lgbtq_archive_character_import_skipped.csv` preserves
 excluded or unresolved candidates and the reason for each decision.
+
+### Represent Me character import
+
+`import-represent-me-characters.mjs` checks the Represent Me spreadsheet and
+its linked game entries without treating a game-level identity tag as a named
+character. Only direct name–identity associations that pass a high-precision
+text rule or a documented page review can become character candidates.
+
+- Every new Represent Me row enters with `research_status` set to
+  `needs_verification`, even when the source wording supports a confirmed queer
+  status. This keeps automated discovery separate from curatorial approval.
+- Interpretive, coded, implied, or expressly uncertain claims enter as
+  `ambiguous` with low evidence confidence.
+- Franchise, series, and developer collection pages remain queued until the
+  relevant game/version can be resolved.
+- `represent_me_game_review_queue.csv` preserves entries that did not yield a
+  safe named-character match. `represent_me_overlap_report.csv` records exact
+  duplicates, aliases, and potential source divergences.
+- Compatible normalized duplicates keep one character/game record and add
+  Represent Me to the evidence and discovery-source lists. Possible aliases or
+  disagreements are not merged automatically.
 
 ## Cross-source reconciliation
 

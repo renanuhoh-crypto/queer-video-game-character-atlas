@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function SiteBetaNotice() {
   return (
-    <aside className="border-b border-[#6271ed] bg-[#4f5fe7] px-5 py-2.5 text-white sm:px-8 md:px-14 lg:px-20">
+    <aside className="site-signal-beta px-5 py-2.5 text-white sm:px-8 md:px-14 lg:px-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-3 text-sm leading-relaxed sm:flex-row sm:items-center sm:justify-between">
         <p className="font-medium text-white/82">
           <span className="mr-2 font-mono text-[11px] font-black uppercase tracking-[0.22em] text-white sm:text-xs">

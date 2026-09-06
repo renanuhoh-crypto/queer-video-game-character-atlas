@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const PANEL =
-  "pq-panel relative overflow-hidden p-5 sm:p-7";
+  "pq-panel pq-content-panel relative overflow-hidden";
 
 const principles = [
   {
@@ -89,7 +89,7 @@ export default function EthicsPage() {
         description="Press Q treats the Press Q dataset as interpretive material: useful, partial, situated, and always in need of care."
       />
 
-      <section className="relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
+      <section className="pq-editorial-content relative px-5 py-12 sm:px-8 md:px-14 md:py-16 lg:px-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(217,70,239,0.12),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(34,211,238,0.1),transparent_28%)]" />
 
         <div className="relative z-10 mx-auto grid max-w-[1500px] gap-6 md:grid-cols-2">

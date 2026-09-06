@@ -1,0 +1,5 @@
+report_type,existing_character_id,character_name,game_title,existing_identity,represent_me_identity,represent_me_url,note
+possible_name_mismatch,,Peter,AI: The Somnium Files,,gay,https://representme.charity/projects/queer/database/title/ai-the-somnium-files,Represent Me writes Peter; the LGBTQ Video Game Archive record names Futa ‘Pewter’ Amanoma. This candidate was not imported automatically.
+duplicate_compatible,352,Dave,Firewatch,man; gay,gay,https://representme.charity/projects/queer/database/title/firewatch,The character/game pair already exists; write mode adds Represent Me to its evidence and discovery sources.
+possible_alias_duplicate,,Brian Falsworth,Marvel Avengers Academy,,gay,https://representme.charity/projects/queer/database/title/marvel-avengers-academy,Brian Falsworth is the Union Jack already registered for this game. This candidate was not imported as a second character.
+duplicate_compatible,335,Aaron Vanich,Yousei,man; gay,gay,https://representme.charity/projects/queer/database/title/yousei,The character/game pair already exists; write mode adds Represent Me to its evidence and discovery sources.

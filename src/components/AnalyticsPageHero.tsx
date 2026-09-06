@@ -39,10 +39,12 @@ export default function AnalyticsPageHero({
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#dbe2ff] md:flex xl:gap-8">
+          <nav className="hidden items-center gap-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#dbe2ff] xl:flex xl:gap-7">
             <Link href="/about">About</Link>
             <Link href="/methodology">Methodology</Link>
             <AnalyticsMenu dark />
+            <Link href="/gallery">Gallery</Link>
+            <Link href="/quiu-world">Quiu World</Link>
             <Link href="/contribute">Contribute</Link>
             <Link href="/ethics">Ethics</Link>
           </nav>
@@ -51,6 +53,16 @@ export default function AnalyticsPageHero({
             Ask Quiu
           </Link>
         </div>
+
+        <nav className="pq-system-mobile-nav mx-auto max-w-[1700px] xl:hidden" aria-label="Primary navigation">
+          <Link href="/about">About</Link>
+          <Link href="/methodology">Methodology</Link>
+          <Link href="/analytics">Analytics</Link>
+          <Link href="/gallery">Gallery</Link>
+          <Link href="/quiu-world">Quiu World</Link>
+          <Link href="/contribute">Contribute</Link>
+          <Link href="/ethics">Ethics</Link>
+        </nav>
       </header>
 
       <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-10 px-5 pb-16 pt-10 sm:px-8 md:px-14 md:pb-20 md:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.68fr)] lg:px-20">
@@ -94,6 +106,7 @@ export default function AnalyticsPageHero({
                 alt=""
                 width={624}
                 height={667}
+                loading="eager"
                 className="h-auto w-[72%]"
               />
             </div>

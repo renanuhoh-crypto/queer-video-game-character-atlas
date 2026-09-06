@@ -1,0 +1,906 @@
+{
+  "generator": "scripts/prepare-fantasy-elf-scene.mjs",
+  "profile": "mobile",
+  "sourceDirectory": ".tmp-quiu-interactives/elf-source",
+  "outputFile": "public/models/fantasy-elf/fantasy-elf-scene-mobile.glb",
+  "source": {
+    "title": "Fantasy Elf Scene",
+    "creator": "Sharon Kunne (@sharonkunne)",
+    "url": "https://sketchfab.com/3d-models/fantasy-elf-scene-329c4b91a8e4413e8896dbb1118fadc7",
+    "license": "Creative Commons Attribution (confirm the exact version at the source URL)",
+    "note": "The current Sketchfab listing is marked NoAI."
+  },
+  "geometry": {
+    "meshes": 18,
+    "sourceTriangles": 342597,
+    "outputTriangles": 84380,
+    "triangleReductionPercent": 75.37,
+    "sourceRenderVertices": 185055,
+    "outputVertices": 46455,
+    "bounds": {
+      "min": [
+        -1.2195489406585693,
+        -0.1997789740562439,
+        -1.260127305984497
+      ],
+      "max": [
+        1.2159311771392822,
+        3.211160898208618,
+        1.2244547605514526
+      ]
+    },
+    "alignment": "Original shared coordinates preserved; no per-mesh or root transforms",
+    "normals": "Area-weighted smooth normals recalculated after simplification"
+  },
+  "textures": {
+    "embeddedImages": 28,
+    "diffuseImages": 18,
+    "occlusionImages": 10,
+    "sourcePixels": 108003328,
+    "outputPixels": 3145728,
+    "pixelReductionPercent": 97.09,
+    "format": "Embedded progressive JPEG"
+  },
+  "glb": {
+    "bytes": 1764776,
+    "sha256": "52cb68b17a98196082e33753ce7299f598cedca09c6779c16b34eb740c5783d1",
+    "selfContained": true
+  },
+  "verification": {
+    "meshes": 18,
+    "materials": 18,
+    "images": 28,
+    "triangles": 84380,
+    "vertices": 46455,
+    "elfNode": "Elf",
+    "staticAsset": true,
+    "bufferViewsInBounds": true,
+    "accessorsInBounds": true
+  },
+  "meshes": [
+    {
+      "subTool": 0,
+      "name": "ScenePart_00",
+      "sourceFile": "SubTool-0-10233600.OBJ",
+      "sourceGroup": "Group25371",
+      "sourceTriangles": 75602,
+      "targetTriangles": 11340,
+      "outputTriangles": 11340,
+      "sourceRenderVertices": 38295,
+      "outputVertices": 5829,
+      "simplificationError": 0.0029290951788425446,
+      "bounds": {
+        "min": [
+          -1.2195489406585693,
+          -0.1997789740562439,
+          -1.2180240154266357
+        ],
+        "max": [
+          1.2159311771392822,
+          0.293575644493103,
+          1.2244547605514526
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 1,
+      "name": "ScenePart_01",
+      "sourceFile": "SubTool-1-15233867.OBJ",
+      "sourceGroup": "Group19302",
+      "sourceTriangles": 3008,
+      "targetTriangles": 902,
+      "outputTriangles": 902,
+      "sourceRenderVertices": 1625,
+      "outputVertices": 492,
+      "simplificationError": 0.0036723706871271133,
+      "bounds": {
+        "min": [
+          0.017705630511045456,
+          0.3637077808380127,
+          -0.5384259819984436
+        ],
+        "max": [
+          0.03638539835810661,
+          0.4537270963191986,
+          -0.4848552346229553
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 2,
+      "name": "ScenePart_02",
+      "sourceFile": "SubTool-2-9287720.OBJ",
+      "sourceGroup": "Group15650",
+      "sourceTriangles": 5519,
+      "targetTriangles": 1379,
+      "outputTriangles": 1379,
+      "sourceRenderVertices": 2855,
+      "outputVertices": 727,
+      "simplificationError": 0.0021784647833555937,
+      "bounds": {
+        "min": [
+          -0.0429651103913784,
+          0.0929214283823967,
+          -0.5068140029907227
+        ],
+        "max": [
+          0.05026109144091606,
+          0.8038118481636047,
+          -0.40190133452415466
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 3,
+      "name": "ScenePart_03",
+      "sourceFile": "SubTool-3-14655075.OBJ",
+      "sourceGroup": "Group31856",
+      "sourceTriangles": 1632,
+      "targetTriangles": 652,
+      "outputTriangles": 1350,
+      "sourceRenderVertices": 856,
+      "outputVertices": 697,
+      "simplificationError": 0.00994348805397749,
+      "bounds": {
+        "min": [
+          -0.032028261572122574,
+          0.7725557684898376,
+          -0.4730207622051239
+        ],
+        "max": [
+          0.0012069500517100096,
+          0.8227414488792419,
+          -0.42635035514831543
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 4,
+      "name": "ScenePart_04",
+      "sourceFile": "SubTool-4-551214.OBJ",
+      "sourceGroup": "Group19905",
+      "sourceTriangles": 10566,
+      "targetTriangles": 2958,
+      "outputTriangles": 2957,
+      "sourceRenderVertices": 6430,
+      "outputVertices": 1774,
+      "simplificationError": 0.004367299843579531,
+      "bounds": {
+        "min": [
+          -0.08694156259298325,
+          0.5968610048294067,
+          -0.6332151889801025
+        ],
+        "max": [
+          0.03752506896853447,
+          0.9999712109565735,
+          -0.26246213912963867
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 5,
+      "name": "ScenePart_05",
+      "sourceFile": "SubTool-5-1495755.OBJ",
+      "sourceGroup": "Group48021",
+      "sourceTriangles": 11062,
+      "targetTriangles": 2212,
+      "outputTriangles": 2212,
+      "sourceRenderVertices": 6194,
+      "outputVertices": 1377,
+      "simplificationError": 0.011698830872774124,
+      "bounds": {
+        "min": [
+          0.9624335169792175,
+          0.030034760013222694,
+          -0.3089175522327423
+        ],
+        "max": [
+          1.1575731039047241,
+          0.21601611375808716,
+          -0.11155647039413452
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 6,
+      "name": "ScenePart_06",
+      "sourceFile": "SubTool-6-2833939.OBJ",
+      "sourceGroup": "Group47821",
+      "sourceTriangles": 8364,
+      "targetTriangles": 1840,
+      "outputTriangles": 1840,
+      "sourceRenderVertices": 4547,
+      "outputVertices": 1084,
+      "simplificationError": 0.007170272991061211,
+      "bounds": {
+        "min": [
+          0.07876726984977722,
+          0.28098252415657043,
+          0.8067340850830078
+        ],
+        "max": [
+          0.21900774538516998,
+          0.38202425837516785,
+          0.9653015732765198
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 7,
+      "name": "ScenePart_07",
+      "sourceFile": "SubTool-7-15127032.OBJ",
+      "sourceGroup": "Group59236",
+      "sourceTriangles": 6668,
+      "targetTriangles": 1466,
+      "outputTriangles": 1792,
+      "sourceRenderVertices": 3778,
+      "outputVertices": 1106,
+      "simplificationError": 0.01593746989965439,
+      "bounds": {
+        "min": [
+          -0.39886778593063354,
+          0.15142354369163513,
+          0.4769294261932373
+        ],
+        "max": [
+          -0.2768450677394867,
+          0.2732722759246826,
+          0.5974707007408142
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 8,
+      "name": "ScenePart_08",
+      "sourceFile": "SubTool-8-2833939.OBJ",
+      "sourceGroup": "Group51452",
+      "sourceTriangles": 3174,
+      "targetTriangles": 888,
+      "outputTriangles": 888,
+      "sourceRenderVertices": 1940,
+      "outputVertices": 607,
+      "simplificationError": 0.009105154313147068,
+      "bounds": {
+        "min": [
+          -0.09781286865472794,
+          0.25174951553344727,
+          -1.260127305984497
+        ],
+        "max": [
+          0.1627708226442337,
+          0.4023895561695099,
+          -0.9841626286506653
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 9,
+      "name": "ScenePart_09",
+      "sourceFile": "SubTool-9-14143592.OBJ",
+      "sourceGroup": "Group44105",
+      "sourceTriangles": 1602,
+      "targetTriangles": 640,
+      "outputTriangles": 640,
+      "sourceRenderVertices": 1080,
+      "outputVertices": 494,
+      "simplificationError": 0.007982660084962845,
+      "bounds": {
+        "min": [
+          0.0874181017279625,
+          0.07599545270204544,
+          0.8299522399902344
+        ],
+        "max": [
+          0.1921621710062027,
+          0.36603906750679016,
+          0.9281483888626099
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 10,
+      "name": "ScenePart_10",
+      "sourceFile": "SubTool-10-14143592.OBJ",
+      "sourceGroup": "Group24199",
+      "sourceTriangles": 1602,
+      "targetTriangles": 640,
+      "outputTriangles": 640,
+      "sourceRenderVertices": 1098,
+      "outputVertices": 517,
+      "simplificationError": 0.009212845005095005,
+      "bounds": {
+        "min": [
+          -0.022905029356479645,
+          0.07845625281333923,
+          -1.1624850034713745
+        ],
+        "max": [
+          0.07687372714281082,
+          0.35598716139793396,
+          -1.014975666999817
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 11,
+      "name": "ScenePart_11",
+      "sourceFile": "SubTool-11-2391597.OBJ",
+      "sourceGroup": "Group10340",
+      "sourceTriangles": 26448,
+      "targetTriangles": 6876,
+      "outputTriangles": 6875,
+      "sourceRenderVertices": 13641,
+      "outputVertices": 3661,
+      "simplificationError": 0.000913300144020468,
+      "bounds": {
+        "min": [
+          -0.76960289478302,
+          -0.07270309329032898,
+          -0.24028855562210083
+        ],
+        "max": [
+          0.3188292682170868,
+          3.211160898208618,
+          1.1188147068023682
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 12,
+      "name": "ScenePart_12",
+      "sourceFile": "SubTool-12-2531915.OBJ",
+      "sourceGroup": "Group60161",
+      "sourceTriangles": 13940,
+      "targetTriangles": 2927,
+      "outputTriangles": 2927,
+      "sourceRenderVertices": 10428,
+      "outputVertices": 1653,
+      "simplificationError": 0.002003114204853773,
+      "bounds": {
+        "min": [
+          -0.001952340011484921,
+          0.44498372077941895,
+          -0.1452767252922058
+        ],
+        "max": [
+          0.12848280370235443,
+          1.8147011995315552,
+          -0.08263649791479111
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 13,
+      "name": "ScenePart_13",
+      "sourceFile": "SubTool-13-2531915.OBJ",
+      "sourceGroup": "Group40450",
+      "sourceTriangles": 8968,
+      "targetTriangles": 1972,
+      "outputTriangles": 1971,
+      "sourceRenderVertices": 6301,
+      "outputVertices": 1151,
+      "simplificationError": 0.002326834248378873,
+      "bounds": {
+        "min": [
+          -0.044188451021909714,
+          0.47800788283348083,
+          0.11402227729558945
+        ],
+        "max": [
+          0.09095294773578644,
+          1.7855727672576904,
+          0.16763551533222198
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 14,
+      "name": "ScenePart_14",
+      "sourceFile": "SubTool-14-7016900.OBJ",
+      "sourceGroup": "Group20907",
+      "sourceTriangles": 6424,
+      "targetTriangles": 1606,
+      "outputTriangles": 1606,
+      "sourceRenderVertices": 3579,
+      "outputVertices": 998,
+      "simplificationError": 0.00954402331262827,
+      "bounds": {
+        "min": [
+          -0.06126876920461655,
+          0.47049975395202637,
+          -0.19804519414901733
+        ],
+        "max": [
+          0.14482815563678741,
+          0.5502357482910156,
+          0.21254664659500122
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 15,
+      "name": "ScenePart_15",
+      "sourceFile": "SubTool-15-12130571.OBJ",
+      "sourceGroup": "Group55568",
+      "sourceTriangles": 1011,
+      "targetTriangles": 707,
+      "outputTriangles": 707,
+      "sourceRenderVertices": 987,
+      "outputVertices": 679,
+      "simplificationError": 0.0003274505434092134,
+      "bounds": {
+        "min": [
+          -0.7352631092071533,
+          1.1219570636749268,
+          0.32723167538642883
+        ],
+        "max": [
+          1.0762232542037964,
+          1.5482679605484009,
+          0.5731115341186523
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 16,
+      "name": "ScenePart_16",
+      "sourceFile": "SubTool-16-4713230.OBJ",
+      "sourceGroup": "Group19288",
+      "sourceTriangles": 1478,
+      "targetTriangles": 812,
+      "outputTriangles": 811,
+      "sourceRenderVertices": 970,
+      "outputVertices": 497,
+      "simplificationError": 0.005482291802763939,
+      "bounds": {
+        "min": [
+          0.016301540657877922,
+          0.9185555577278137,
+          -0.6949509978294373
+        ],
+        "max": [
+          0.03229660913348198,
+          1.0050379037857056,
+          -0.6120880842208862
+        ]
+      },
+      "interactive": false
+    },
+    {
+      "subTool": 17,
+      "name": "Elf",
+      "sourceFile": "SubTool-17-9567205.OBJ",
+      "sourceGroup": "Group56570",
+      "sourceTriangles": 155529,
+      "targetTriangles": 43548,
+      "outputTriangles": 43543,
+      "sourceRenderVertices": 80451,
+      "outputVertices": 23112,
+      "simplificationError": 0.0006338473176583648,
+      "bounds": {
+        "min": [
+          -0.45500344038009644,
+          0.10566648840904236,
+          -0.4181170165538788
+        ],
+        "max": [
+          0.5081082582473755,
+          0.9673745036125183,
+          0.16506153345108032
+        ]
+      },
+      "interactive": true
+    }
+  ],
+  "images": [
+    {
+      "subTool": 0,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-0-10233600.jpg",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "outputSize": [
+        512,
+        512
+      ],
+      "bytes": 9202
+    },
+    {
+      "subTool": 0,
+      "kind": "ao",
+      "sourceFile": "SubTool-0-10233600-AO.jpg",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 1495
+    },
+    {
+      "subTool": 1,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-1-15233867.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 4152
+    },
+    {
+      "subTool": 1,
+      "kind": "ao",
+      "sourceFile": "SubTool-1-15233867-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 2387
+    },
+    {
+      "subTool": 2,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-2-9287720.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 2983
+    },
+    {
+      "subTool": 2,
+      "kind": "ao",
+      "sourceFile": "SubTool-2-9287720-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 680
+    },
+    {
+      "subTool": 3,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-3-14655075.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 5839
+    },
+    {
+      "subTool": 3,
+      "kind": "ao",
+      "sourceFile": "SubTool-3-14655075-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 3827
+    },
+    {
+      "subTool": 4,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-4-551214.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        512,
+        512
+      ],
+      "bytes": 25601
+    },
+    {
+      "subTool": 4,
+      "kind": "ao",
+      "sourceFile": "SubTool-4-551214-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 3156
+    },
+    {
+      "subTool": 5,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-5-1495755.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 5901
+    },
+    {
+      "subTool": 5,
+      "kind": "ao",
+      "sourceFile": "SubTool-5-1495755-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 5273
+    },
+    {
+      "subTool": 6,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-6-2833939.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 3946
+    },
+    {
+      "subTool": 7,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-7-15127032.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 4981
+    },
+    {
+      "subTool": 8,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-8-2833939.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 3714
+    },
+    {
+      "subTool": 8,
+      "kind": "ao",
+      "sourceFile": "SubTool-8-2833939-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 566
+    },
+    {
+      "subTool": 9,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-9-14143592.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 5146
+    },
+    {
+      "subTool": 9,
+      "kind": "ao",
+      "sourceFile": "SubTool-9-14143592-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 2906
+    },
+    {
+      "subTool": 10,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-10-14143592.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 5146
+    },
+    {
+      "subTool": 10,
+      "kind": "ao",
+      "sourceFile": "SubTool-10-14143592-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 707
+    },
+    {
+      "subTool": 11,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-11-2391597.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        512,
+        512
+      ],
+      "bytes": 9662
+    },
+    {
+      "subTool": 11,
+      "kind": "ao",
+      "sourceFile": "SubTool-11-2391597-AO.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 553
+    },
+    {
+      "subTool": 12,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-12-2531915.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 2958
+    },
+    {
+      "subTool": 13,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-13-2531915.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 2177
+    },
+    {
+      "subTool": 14,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-14-7016900.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 4463
+    },
+    {
+      "subTool": 15,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-15-12130571.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        512,
+        512
+      ],
+      "bytes": 30593
+    },
+    {
+      "subTool": 16,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-16-4713230.jpg",
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "outputSize": [
+        256,
+        256
+      ],
+      "bytes": 8516
+    },
+    {
+      "subTool": 17,
+      "kind": "diffuse",
+      "sourceFile": "SubTool-17-9567205.jpg",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "outputSize": [
+        768,
+        768
+      ],
+      "bytes": 43950
+    }
+  ]
+}

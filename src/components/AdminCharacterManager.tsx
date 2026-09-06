@@ -22,6 +22,7 @@ type Field = {
     | "select"
     | "multiselect";
   options?: { label: string; value: string }[];
+  allowCustom?: boolean;
   wide?: boolean;
   rows?: number;
   help?: string;
@@ -58,27 +59,73 @@ const fieldGroups: FieldGroup[] = [
         placeholder: "2020",
         type: "number",
       },
-      { id: "developer", label: "Developer" },
-      { id: "publisher", label: "Publisher" },
+      {
+        id: "developer",
+        label: "Developer",
+        type: "multiselect",
+        allowCustom: true,
+        help: "Select every credited developer or add another studio.",
+      },
+      {
+        id: "publisher",
+        label: "Publisher",
+        type: "multiselect",
+        allowCustom: true,
+        help: "Select every credited publisher or add another company.",
+      },
       {
         id: "game_scale",
         label: "Game scale",
-        type: "select",
+        type: "multiselect",
         options: [
-          { label: "Select", value: "" },
           { label: "AAA", value: "AAA" },
           { label: "AA", value: "AA" },
-          { label: "Independent", value: "Indie" },
+          { label: "Independent", value: "Independent" },
           { label: "Mobile", value: "Mobile" },
           { label: "Browser", value: "Browser" },
+          { label: "Arcade", value: "Arcade" },
           { label: "Student / amateur", value: "Student / amateur" },
           { label: "Other", value: "Other" },
         ],
+        help: "Select more than one when production or distribution crosses scales.",
       },
       {
         id: "genre",
         label: "Game genre",
-        placeholder: "Separate multiple values with ;",
+        type: "multiselect",
+        options: [
+          { label: "Action", value: "Action" },
+          { label: "Action-adventure", value: "Action-adventure" },
+          { label: "Adventure", value: "Adventure" },
+          { label: "Arcade action", value: "Arcade action" },
+          { label: "Battle royale", value: "Battle royale" },
+          { label: "Beat 'em up", value: "Beat 'em up" },
+          { label: "Bullet hell", value: "Bullet hell" },
+          { label: "Card game", value: "Card game" },
+          { label: "Fighting", value: "Fighting" },
+          { label: "First-person shooter", value: "First-person shooter" },
+          { label: "Graphic adventure", value: "Graphic adventure" },
+          { label: "Horror", value: "Horror" },
+          { label: "Interactive fiction", value: "Interactive fiction" },
+          { label: "MMO", value: "MMO" },
+          { label: "Music / rhythm", value: "Music / rhythm" },
+          { label: "Narrative adventure", value: "Narrative adventure" },
+          { label: "Platformer", value: "Platformer" },
+          { label: "Puzzle", value: "Puzzle" },
+          { label: "Racing", value: "Racing" },
+          { label: "Role-playing game", value: "Role-playing game" },
+          { label: "Simulation", value: "Simulation" },
+          { label: "Sports", value: "Sports" },
+          { label: "Stealth", value: "Stealth" },
+          { label: "Strategy", value: "Strategy" },
+          { label: "Tactical role-playing", value: "Tactical role-playing" },
+          { label: "Third-person shooter", value: "Third-person shooter" },
+          { label: "Visual novel", value: "Visual novel" },
+          { label: "Other", value: "Other" },
+        ],
+        allowCustom: true,
+        wide: true,
+        help: "Select every genre that applies. Multiple selections are stored in the dataset separated by semicolons.",
       },
       {
         id: "narrative_role",
@@ -110,6 +157,42 @@ const fieldGroups: FieldGroup[] = [
           { label: "Optional", value: "optional" },
           { label: "Unknown", value: "unknown" },
         ],
+      },
+      {
+        id: "content_availability",
+        label: "Where the character appears",
+        type: "multiselect",
+        options: [
+          { label: "Main campaign / main story", value: "main_campaign" },
+          {
+            label: "Optional base-game content / side quest",
+            value: "base_game_optional",
+          },
+          { label: "Expansion", value: "expansion" },
+          { label: "DLC", value: "dlc" },
+          {
+            label: "Standalone expansion",
+            value: "standalone_expansion",
+          },
+          {
+            label: "Special / definitive edition or version",
+            value: "special_edition",
+          },
+          { label: "Remake / remaster", value: "remake_remaster" },
+          {
+            label: "Update / patch / live-service content",
+            value: "update_patch",
+          },
+          {
+            label: "Platform- or region-specific content",
+            value: "platform_region_specific",
+          },
+          { label: "Mod", value: "mod" },
+          { label: "Other", value: "other" },
+          { label: "Unknown / not recorded", value: "not_recorded" },
+        ],
+        wide: true,
+        help: "Select every place where the documented representation appears. Record the exact DLC, edition, mod, patch, or platform name under Platform / version researched.",
       },
       {
         id: "gender",
@@ -170,9 +253,8 @@ const fieldGroups: FieldGroup[] = [
       {
         id: "identity_confirmation",
         label: "Identity confirmation",
-        type: "select",
+        type: "multiselect",
         options: [
-          { label: "Select", value: "" },
           { label: "Explicit in game", value: "explicit_in_game" },
           {
             label: "Not explicit in game",
@@ -182,6 +264,7 @@ const fieldGroups: FieldGroup[] = [
           { label: "External source", value: "external_source" },
           { label: "Ambiguous", value: "ambiguous" },
         ],
+        help: "Select every confirmation channel supported by the evidence. Explicit and not explicit in game are mutually exclusive; Ambiguous is used alone when the evidence remains inconclusive.",
       },
       {
         id: "queer_status",
@@ -202,15 +285,11 @@ const fieldGroups: FieldGroup[] = [
     fields: [
       {
         id: "intersectionality_present",
-        label: "Intersectional markers",
+        label: "Intersectionality categories",
         type: "multiselect",
         options: [
           { label: "Race", value: "race" },
           { label: "Ethnicity", value: "ethnicity" },
-          { label: "Black", value: "black" },
-          { label: "Asian", value: "asian" },
-          { label: "Indigenous", value: "indigenous" },
-          { label: "Person of color", value: "person_of_color" },
           { label: "Disability", value: "disability" },
           { label: "Religion", value: "religion" },
           { label: "Class", value: "class" },
@@ -220,14 +299,36 @@ const fieldGroups: FieldGroup[] = [
           { label: "None documented", value: "no" },
         ],
         wide: true,
-        help: "Select only what the evidence supports; describe context and cultural terms below.",
+        help: "Select the broad categories supported by the evidence. Add the specific identities or context below.",
       },
       {
         id: "intersectionality_details",
-        label: "Intersectionality details",
-        type: "textarea",
-        rows: 3,
+        label: "Specific identities / context",
+        type: "multiselect",
+        options: [
+          { label: "Black", value: "Black" },
+          { label: "Asian", value: "Asian" },
+          { label: "Indigenous", value: "Indigenous" },
+          { label: "Two-Spirit", value: "Two-Spirit" },
+          { label: "Person of Color", value: "Person of Color" },
+          { label: "Mexican", value: "Mexican" },
+          { label: "Mexican-American", value: "Mexican-American" },
+          { label: "African", value: "African" },
+          { label: "Indian", value: "Indian" },
+          { label: "Disability", value: "Disability" },
+          { label: "Neurodivergence", value: "Neurodivergence" },
+          { label: "Religious context", value: "Religious context" },
+          { label: "Class / socioeconomic context", value: "Class / socioeconomic context" },
+          { label: "Nationality / cultural context", value: "Nationality / cultural context" },
+          { label: "Migration / refugee context", value: "Migration / refugee context" },
+          { label: "Family / community context", value: "Family / community context" },
+          { label: "Historical context", value: "Historical context" },
+          { label: "Fictional species / nonhuman context", value: "Fictional species / nonhuman context" },
+          { label: "None documented", value: "None documented" },
+        ],
+        allowCustom: true,
         wide: true,
+        help: "Select or add the specific identity, cultural term, disability, or social context supported by the evidence.",
       },
       {
         id: "evidence_source",
@@ -297,13 +398,49 @@ const fieldGroups: FieldGroup[] = [
       {
         id: "platform_version",
         label: "Platform / version researched",
-        placeholder: "e.g., PC, patch 1.108",
+        type: "multiselect",
+        allowCustom: true,
+        options: [
+          { label: "PC", value: "PC" },
+          { label: "Mac", value: "Mac" },
+          { label: "Linux", value: "Linux" },
+          { label: "Browser", value: "Browser" },
+          { label: "Mobile", value: "Mobile" },
+          { label: "Arcade", value: "Arcade" },
+          { label: "PlayStation", value: "PlayStation" },
+          { label: "Xbox", value: "Xbox" },
+          { label: "Nintendo", value: "Nintendo" },
+          { label: "Multiple platforms", value: "Multiple platforms" },
+          { label: "Various", value: "Various" },
+        ],
+        wide: true,
+        help: "Select platforms already used in the dataset or add a specific console, DLC, patch, localization, or version.",
       },
       {
         id: "discovery_source",
         label: "How the case was discovered",
-        placeholder: "Referral, existing list, independent search, community…",
+        type: "multiselect",
+        allowCustom: true,
+        options: [
+          {
+            label: "LGBTQ Video Game Archive",
+            value: "LGBTQ Video Game Archive",
+          },
+          { label: "Represent Me", value: "Represent Me" },
+          { label: "Official game material", value: "Official game material" },
+          {
+            label: "Developer / publisher statement",
+            value: "Developer / publisher statement",
+          },
+          { label: "Academic research", value: "Academic research" },
+          { label: "Press / media", value: "Press / media" },
+          { label: "Community submission", value: "Community submission" },
+          { label: "Independent research", value: "Independent research" },
+          { label: "Wikipedia / Wikidata", value: "Wikipedia / Wikidata" },
+          { label: "Other", value: "Other" },
+        ],
         wide: true,
+        help: "Select every source that led to the case; detailed citations remain in Source / evidence.",
       },
       {
         id: "last_reviewed",
@@ -339,6 +476,32 @@ export default function AdminCharacterManager() {
   >("characters");
   const [systemsDirty, setSystemsDirty] = useState(false);
   const [systemsCount, setSystemsCount] = useState(0);
+
+  const existingMultiValueOptions = useMemo(() => {
+    const fields: CharacterColumn[] = [
+      "developer",
+      "publisher",
+      "platform_version",
+      "discovery_source",
+    ];
+
+    return Object.fromEntries(
+      fields.map((field) => [
+        field,
+        Array.from(
+          new Set(
+            characters.flatMap((character) =>
+              splitMultiValue(character[field]),
+            ),
+          ),
+        )
+          .sort((left, right) => left.localeCompare(right))
+          .map((item) => ({ label: item, value: item })),
+      ]),
+    ) as Partial<
+      Record<CharacterColumn, { label: string; value: string }[]>
+    >;
+  }, [characters]);
 
   const selectedCharacter = useMemo(
     () =>
@@ -777,7 +940,13 @@ export default function AdminCharacterManager() {
                 {group.fields.map((field) => (
                   <CharacterField
                     key={field.id}
-                    field={field}
+                    field={{
+                      ...field,
+                      options: [
+                        ...(field.options || []),
+                        ...(existingMultiValueOptions[field.id] || []),
+                      ],
+                    }}
                     value={draft[field.id]}
                     onChange={(value) => updateField(field.id, value)}
                   />
@@ -910,9 +1079,13 @@ function CharacterField({
 
 function splitMultiValue(value: string) {
   return value
-    .split(/[;,]/)
+    .split(";")
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function isUndocumentedIntersectionalityDetail(value: string) {
+  return ["none", "none documented", "no details"].includes(normalize(value));
 }
 
 function CharacterMultiSelect({
@@ -924,16 +1097,31 @@ function CharacterMultiSelect({
   value: string;
   onChange: (value: string) => void;
 }) {
+  const [query, setQuery] = useState("");
   const selected = splitMultiValue(value);
-  const knownValues = new Set(field.options?.map((option) => option.value));
+  const uniqueOptions = new Map(
+    (field.options || [])
+      .filter((option) => option.value)
+      .map((option) => [option.value, option]),
+  );
+  const knownValues = new Set(uniqueOptions.keys());
   const legacyValues = selected.filter((item) => !knownValues.has(item));
   const allOptions = [
-    ...(field.options || []),
+    ...uniqueOptions.values(),
     ...legacyValues.map((item) => ({
       label: `${item} (current value)`,
       value: item,
     })),
   ];
+  const normalizedQuery = normalize(query.trim());
+  const matchingOption = allOptions.find(
+    (option) => normalize(option.value) === normalizedQuery,
+  );
+  const visibleOptions = normalizedQuery
+    ? allOptions.filter((option) =>
+        normalize(`${option.label} ${option.value}`).includes(normalizedQuery),
+      )
+    : allOptions;
 
   function toggle(optionValue: string) {
     const isSelected = selected.includes(optionValue);
@@ -948,7 +1136,62 @@ function CharacterMultiSelect({
       }
     }
 
+    if (field.id === "intersectionality_details") {
+      if (isUndocumentedIntersectionalityDetail(optionValue) && !isSelected) {
+        next = [optionValue];
+      }
+      if (!isUndocumentedIntersectionalityDetail(optionValue) && !isSelected) {
+        next = next.filter(
+          (item) => !isUndocumentedIntersectionalityDetail(item),
+        );
+      }
+    }
+
+    if (field.id === "identity_confirmation" && !isSelected) {
+      if (optionValue === "ambiguous") {
+        next = [optionValue];
+      } else {
+        next = next.filter((item) => item !== "ambiguous");
+      }
+
+      if (optionValue === "explicit_in_game") {
+        next = next.filter((item) => item !== "not_explicit_in_game");
+      }
+      if (optionValue === "not_explicit_in_game") {
+        next = next.filter((item) => item !== "explicit_in_game");
+      }
+    }
+
+    if (field.id === "content_availability" && !isSelected) {
+      if (optionValue === "not_recorded") {
+        next = [optionValue];
+      } else {
+        next = next.filter((item) => item !== "not_recorded");
+      }
+    }
+
     onChange(next.join("; "));
+  }
+
+  function addCustomValue() {
+    const nextValue = query.trim();
+    if (!nextValue) return;
+
+    const valueToAdd = matchingOption?.value || nextValue;
+    if (!selected.includes(valueToAdd)) {
+      const next =
+        field.id === "intersectionality_details"
+          ? isUndocumentedIntersectionalityDetail(valueToAdd)
+            ? [valueToAdd]
+            : selected
+                .filter(
+                  (item) => !isUndocumentedIntersectionalityDetail(item),
+                )
+                .concat(valueToAdd)
+          : [...selected, valueToAdd];
+      onChange(next.join("; "));
+    }
+    setQuery("");
   }
 
   return (
@@ -970,8 +1213,34 @@ function CharacterMultiSelect({
           </span>
         </summary>
 
-        <div className="grid gap-2 border-t border-[#e5e8f5] p-3 sm:grid-cols-2">
-          {allOptions.map((option) => {
+        {field.allowCustom ? (
+          <div className="flex flex-col gap-2 border-t border-[#e5e8f5] p-3 sm:flex-row">
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key !== "Enter") return;
+                event.preventDefault();
+                addCustomValue();
+              }}
+              placeholder="Search or type another value"
+              className="min-w-0 flex-1 rounded-xl border border-[#d3d8ed] px-3 py-2.5 text-sm text-[#12152b] outline-none placeholder:text-[#9da3b9] focus:border-[#4f5fe7]"
+            />
+            {query.trim() ? (
+              <button
+                type="button"
+                onClick={addCustomValue}
+                className="rounded-xl bg-[#171d52] px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.1em] text-white transition hover:bg-[#2636b5]"
+              >
+                {matchingOption ? "Select" : "Add value"}
+              </button>
+            ) : null}
+          </div>
+        ) : null}
+
+        <div className="grid max-h-72 gap-2 overflow-y-auto border-t border-[#e5e8f5] p-3 sm:grid-cols-2">
+          {visibleOptions.map((option) => {
             const checked = selected.includes(option.value);
             return (
               <label
@@ -992,6 +1261,11 @@ function CharacterMultiSelect({
               </label>
             );
           })}
+          {visibleOptions.length === 0 ? (
+            <p className="px-2 py-3 text-sm text-[#898fa8] sm:col-span-2">
+              No matching option. Add this value above.
+            </p>
+          ) : null}
         </div>
       </details>
 
